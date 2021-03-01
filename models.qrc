@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>models/court.dat</file>
+        <file>models/token.dat</file>
+        <file>models/tableplate.dat</file>
+    </qresource>
+</RCC>

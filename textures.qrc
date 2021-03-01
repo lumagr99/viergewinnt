@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>textures/face-smile.png</file>
+        <file>textures/table.JPG</file>
+        <file>textures/tokenred.JPG</file>
+        <file>textures/tokengreen.JPG</file>
+    </qresource>
+</RCC>

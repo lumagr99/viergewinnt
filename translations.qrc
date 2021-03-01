@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>translations/VierGewinnt_de_DE.qm</file>
+    </qresource>
+</RCC>
