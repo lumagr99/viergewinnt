@@ -1,4 +1,4 @@
-QT += core gui opengl quick
+QT += core gui opengl quick multimedia
 
 CONFIG += c++11
 
@@ -12,7 +12,6 @@ SOURCES += \
         src/glcolorrgba.cpp \
         src/glcourt.cpp \
         src/glesrenderer.cpp \
-        src/glhalma.cpp \
         src/glitem.cpp \
         src/glmouseray.cpp \
         src/glmultiplebody.cpp \
@@ -22,8 +21,10 @@ SOURCES += \
         src/gltokengreen.cpp \
         src/gltokenred.cpp \
         src/main.cpp \
-        src/myglitem.cpp \
-        src/shaderdebugger.cpp
+        src/shaderdebugger.cpp \
+        src/viergewinnt.cpp \
+        src/viergewinntscene.cpp \
+        src/soundengine.cpp
 
 HEADERS += \
         src/glbody.h \
@@ -31,7 +32,6 @@ HEADERS += \
         src/glcolorrgba.h \
         src/glcourt.h \
         src/glesrenderer.h \
-        src/glhalma.h \
         src/glitem.h \
         src/glmouseray.h \
         src/glmultiplebody.h \
@@ -40,9 +40,11 @@ HEADERS += \
         src/gltoken.h \
         src/gltokengreen.h \
         src/gltokenred.h \
-        src/myglitem.h \
         src/shaderdebugger.h \
-        src/gldefines.h
+        src/gldefines.h \
+        src/viergewinnt.h \
+        src/viergewinntscene.h \
+        src/soundengine.h
 
 RESOURCES += \
     models.qrc \

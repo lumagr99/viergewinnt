@@ -14,7 +14,7 @@ ApplicationWindow {
         currentIndex: tabBar.currentIndex
 
         GLPage {
-            myGLItem.viewportY: applicationWindow.height - mapToItem(applicationWindow.contentItem, x, y + height).y;
+            vierGewinntScene.viewportY: applicationWindow.height - mapToItem(applicationWindow.contentItem, x, y + height).y;
         }
 
         Page2Form {

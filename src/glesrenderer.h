@@ -78,6 +78,9 @@
   * and mouseIntersection() functions. These functions use the unproject functions and therefore do also need
   * valid model painting matrix settings.
   */
+
+//#define USE_QOPENGL_FUNCTIONS
+
 class GLESRenderer : public QObject
         #ifdef USE_QOPENGL_FUNCTIONS
         , public QOpenGLFunctions

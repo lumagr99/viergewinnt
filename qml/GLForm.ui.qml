@@ -8,11 +8,11 @@ Item {
     property alias buttonRotateLeft: buttonRotateLeft
     property alias buttonStop: buttonStop
     property alias buttonRotateRight: buttonRotateRight
-    property alias myGLItem: myGLItem
+    property alias vierGewinntScene: vierGewinntScene
     property alias mouseArea: mouseArea
 
-    MyGLItem {
-        id: myGLItem
+    VierGewinntScene {
+        id: vierGewinntScene
         anchors.fill: parent
         RowLayout {
             id: rowLayout
@@ -53,3 +53,4 @@ Designer {
     D{i:0;autoSize:true;height:480;width:640}
 }
 ##^##*/
+

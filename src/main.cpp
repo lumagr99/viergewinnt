@@ -2,7 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QTranslator>
 
-#include "myglitem.h"
+#include "viergewinntscene.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
         app.installTranslator(&translator);
 
     QQmlApplicationEngine engine;
-    qmlRegisterType<MyGLItem>("GlComponents", 1,0, "MyGLItem");
+    qmlRegisterType<VierGewinntScene>("GlComponents", 1,0, "VierGewinntScene");
 
     const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
