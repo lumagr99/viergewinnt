@@ -1,5 +1,6 @@
-#ifndef GLTOKENGREEN_H
-#define GLTOKENGREEN_H
+#ifndef GLTOKENRED_H
+#define GLTOKENRED_H
+
 #include "gltoken.h"
 
 class GLTokenRed : public GLToken

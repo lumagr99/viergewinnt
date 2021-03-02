@@ -9,6 +9,8 @@ VierGewinntScene::VierGewinntScene()
     m_backgroundColor = GLColorRgba::clBlack;
     m_timer->start(16);
     m_drawAxes = true;
+    m_loopMovement = true;
+    m_eye = 20.0 * v_XZ;
 }
 
 
@@ -20,7 +22,6 @@ void VierGewinntScene::paintUnderQmlScene()
 
 void VierGewinntScene::paintOnTopOfQmlScene()
 {
-    //qDebug() << "VierGewinntScene::paintOnTopOfQmlScene() called.";
     m_vierGewinnt->draw(m_renderer);
     m_renderer->setLightingEnabled(false);
     m_mouseRay->draw(m_renderer);
@@ -31,8 +32,8 @@ void VierGewinntScene::setupGeometry()
 {
     qDebug() << "VierGewinntScene::setupGeometry() called.";
     GLItem::setupGeometry();
+    m_mouseRay = new GLMouseRay("MouseRay", GLColorRgba::clGreen);
     m_vierGewinnt = new VierGewinnt(this);
-    m_mouseRay = new GLMouseRay("MouseRay", GLColorRgba::clRed);
 }
 
 void VierGewinntScene::doSynchronizeThreads()
@@ -42,8 +43,21 @@ void VierGewinntScene::doSynchronizeThreads()
         return;
     }
 
-    if(m_mousePressReceived) {
+    if(m_mouseReleaseReceived)
+    {
+        m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar, m_mouseReleasePosition);
+        m_vierGewinnt->deselectToken();
+    }
+    else if(m_mousePressReceived)
+    {
         m_mouseRay->setPoints(m_mouseNear, m_mouseFar);
+        m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar,  m_mousePressPosition);
+        m_renderer->mouseIntersection(&m_lastIntersection, v_Y, 0.0, m_mousePressPosition);
+        m_vierGewinnt->selectToken(m_mouseNear, m_mouseFar, m_eye);
+    }
+    else if (m_mousePositionChangedReceived)
+    {
+
     }
 
     m_mousePressReceived = false;
