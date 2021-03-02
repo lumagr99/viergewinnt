@@ -53,10 +53,9 @@ void MyGLItem::setupGeometry()
     m_renderer->setLightingEnabled(true);
     m_renderer->setTextureEnabled(true);
 
-    m_court = new GLCourt("court");
-    m_tableplate = new GLTablePlate("tableplate");
-
-    m_token = new GLTokenGreen("token");
+    m_court = new GLCourt("GLCourt");
+    m_tableplate = new GLTablePlate("GLTablePlate");
+    m_token = new GLTokenGreen("GLToken");
 
     m_vertexBuffer->bind();
     m_vertexBuffer->allocate(m_points.data(), m_points.size() *

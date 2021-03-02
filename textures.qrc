@@ -3,5 +3,6 @@
         <file>textures/table.JPG</file>
         <file>textures/tokenred.JPG</file>
         <file>textures/tokengreen.JPG</file>
+        <file>textures/face-smile.png</file>
     </qresource>
 </RCC>

@@ -41,7 +41,8 @@ HEADERS += \
         src/gltokengreen.h \
         src/gltokenred.h \
         src/myglitem.h \
-        src/shaderdebugger.h
+        src/shaderdebugger.h \
+        src/gldefines.h
 
 RESOURCES += \
     models.qrc \

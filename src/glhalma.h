@@ -9,7 +9,7 @@ class GLHalma : public GLBody
 public:
     GLHalma(const QString &name, float radius = 1.0, const GLColorRgba &color = GLColorRgba::clBlue, const QString textureFile = ":/textures/face-smile.png");
 
-    void makeSurface(QVector<GLPoint> *pointContainer, QVector<GLushort> *indexContainer) Q_DECL_OVERRIDE;
+    virtual void makeSurface(QVector<GLPoint> *pointContainer, QVector<GLushort> *indexContainer) Q_DECL_OVERRIDE;
 
 };
 

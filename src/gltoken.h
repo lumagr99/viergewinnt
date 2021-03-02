@@ -25,14 +25,14 @@ public:
      * @param pointContainer
      * @param indexContainer
      */
-    void makeSurface(QVector<GLPoint> * pointContainer, QVector<IndexType> *indexContainer)Q_DECL_OVERRIDE;
+    virtual void makeSurface(QVector<GLPoint> * pointContainer, QVector<IndexType> *indexContainer) Q_DECL_OVERRIDE;
 
      /**
       *  @brief draw the token.
       * @param renderer
       * @param useBuffers
       */
-    void draw(GLESRenderer * renderer, bool useBuffers = false) Q_DECL_OVERRIDE;
+    virtual void draw(GLESRenderer * renderer, bool useBuffers = false) Q_DECL_OVERRIDE;
 
 };
 

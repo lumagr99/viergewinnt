@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
     QTranslator translator;
-    if (translator.load("Julian_Witte_MM2020_de_DE.qm", ":/translations"))
+    if (translator.load("VierGewinnt_de_DE.qm", ":/translations"))
         app.installTranslator(&translator);
 
     QQmlApplicationEngine engine;

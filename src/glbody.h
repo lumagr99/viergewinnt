@@ -49,28 +49,28 @@ class GLBody
     static constexpr float fTwo = 2.0;
 
 public:
-     /**Constructor does NOT create the surface.
+    /**Constructor does NOT create the surface.
      */
-     GLBody(const QString & name, float radius = 1.0, const GLColorRgba & color = GLColorRgba::clBlue, const QString m_textureFile = "");
-     /**
+    GLBody(const QString & name, float radius = 1.0, const GLColorRgba & color = GLColorRgba::clBlue, const QString m_textureFile = "");
+    /**
       * @brief GLBody Constructor does NOT create the surface.
       * @param offset The offset from coordinate origin to modeldata zero.
       */
-     GLBody(QString  name, const QVector3D offset);
+    GLBody(QString  name, const QVector3D offset);
 
     /** Destructor will delete created containers.
      */
     virtual ~GLBody();
 
-     /** Set textures from files. Returns true on success. Needs a current OpenGL context.
+    /** Set textures from files. Returns true on success. Needs a current OpenGL context.
       */
-      bool createTextureObjects(                     GLenum minfilter = GL_LINEAR_MIPMAP_NEAREST,
-                                                     GLenum magfilter = GL_LINEAR ,
-                                                     GLenum wrapmode = GL_CLAMP_TO_EDGE);
-      /**
+    bool createTextureObjects(                     GLenum minfilter = GL_LINEAR_MIPMAP_NEAREST,
+                                                   GLenum magfilter = GL_LINEAR ,
+                                                   GLenum wrapmode = GL_CLAMP_TO_EDGE);
+    /**
        * @brief destroyTextureObjects delete all texture objects from m_textureIds
        */
-      virtual void destroyTextureObjects();
+    virtual void destroyTextureObjects();
 
     /** Creates the surface. Should be called, when a GL engine is already running.
       * To be overwritten by subclasses. GLESBody::createSurface should be called at the beginning
@@ -83,30 +83,30 @@ public:
       * Created containers will be deleted by destructor.
       */
     virtual void makeSurface(QVector<GLPoint> * pointContainer, QVector<IndexType> *indexContainer);
-     /**
+    /**
       * @brief shareGeometry copies container pointers and first and next point, index, normal
       * Sets m_ownContainers to false
       * @param other The GLBody to be copied
       */
-     virtual void shareGeometry(const GLBody *other);
-      /**
+    virtual void shareGeometry(const GLBody *other);
+    /**
        * @brief shareTextureObjects copy texture names (numbers) from other
        * and set m_ownTextures to false.
        * @param other
        */
-      virtual void shareTextureObjects(const GLBody *other);
-     /**
+    virtual void shareTextureObjects(const GLBody *other);
+    /**
       * @brief pointsSize Convenience function to avoid multiple casting
       * @return number of points
       */
-     IndexType pointsSize(){return static_cast<IndexType>(m_points->size());}
+    IndexType pointsSize(){return static_cast<IndexType>(m_points->size());}
 
-     /**
+    /**
       * @brief indicesSize Convenience function to avoid multiple casting
       * @return m_indices->size()
       */
-     IndexType indicesSize(){return static_cast<IndexType>(m_indices->size());}
-     /**
+    IndexType indicesSize(){return static_cast<IndexType>(m_indices->size());}
+    /**
      * @brief readBinaryFile Calls makeSurface and reads binary file.
      * File format: 4 bytes uint number of GlPoints, 4 bytes uint number of uint indices
      * number of points GlPoint objects followed by number of indices indices
@@ -117,24 +117,24 @@ public:
      */
     virtual bool readBinaryModelFile(const QString & dataFileName, QVector<GLPoint> *pointContainer = nullptr, QVector<GLushort> *indexContainer = nullptr);       // Binaere Datei
 
-     /**
+    /**
       * @brief rotateModelPoints Rotates model points around axis
       * @param axisCenter The center of the rotation axis
       * @param axisDirection Direction of rotation axis
       * @param angle Clockwise rotation angle.
       */
-     virtual void rotateModelPoints(const QVector3D &axisCenter, const QVector3D &axisDirection, float angle);
+    virtual void rotateModelPoints(const QVector3D &axisCenter, const QVector3D &axisDirection, float angle);
 
-     /**
+    /**
      * @brief calculateDrawMatrix Virtual function to calculate the final matrix to be used for drawing.
      * May be overwritten in subclasses. GLBody::calculateDrawMatrix simply copies m_transformationMatrix.
      */
     virtual void calculateDrawMatrix();
-   /** Draws the surface and calls makeSurface if required. Binds attributes and textures (!!slow!!), then calls drawGeometries().
+    /** Draws the surface and calls makeSurface if required. Binds attributes and textures (!!slow!!), then calls drawGeometries().
     * Needs an active (made current) GL-Context.
     */
     virtual void draw(GLESRenderer * renderer, bool useBuffers = false);
-     /**
+    /**
       * @brief drawGeometries Should be called from draw(). Sets uniforms and calls glDrawArray or glDrawElements.
       * Does NOT bind attribute arrays or buffers! Therefore it is very fast. Assumes bound attributes.
       * Binding is done in draw().
@@ -142,16 +142,16 @@ public:
       * @param useBuffers
       * @param index
       */
-     virtual void drawGeometries(GLESRenderer *renderer, bool useBuffers, int index = 0);
-     /**
+    virtual void drawGeometries(GLESRenderer *renderer, bool useBuffers, int index = 0);
+    /**
       * @brief bindTexture binds the texture at m_activeTextureIndex
       */
-     virtual void bindTexture(GLESRenderer *renderer);
-     /**
+    virtual void bindTexture(GLESRenderer *renderer);
+    /**
       * @brief bindTexture releases the texture at m_activeTextureIndex
       */
-     virtual void releaseTexture(GLESRenderer *renderer);
-     /**
+    virtual void releaseTexture(GLESRenderer *renderer);
+    /**
       * @brief drawDebugGeometries Should be called from draw().
       * Sets uniforms and calls glDrawArray or glDrawElements on debug geometries. Does NOT bind attribute arrays or buffers!!
       * Binding is done in draw().
@@ -159,7 +159,7 @@ public:
       * @param useBuffers
       * @param index
       */
-     virtual void drawDebugGeometries(GLESRenderer *renderer, bool useBuffers);
+    virtual void drawDebugGeometries(GLESRenderer *renderer, bool useBuffers);
 
     /**
       * Returns true, when line through p1 and p2 intersects body sphere
@@ -167,7 +167,7 @@ public:
       * To be overwritten by subclasses.
       */
     virtual bool isHit(QVector3D p1, QVector3D p2);
-     /**
+    /**
      * @brief isCubeHit
      * @param mouseNear Point 1 on line in model space
      * @param mouseFar Point 2 on line in model space
@@ -175,7 +175,7 @@ public:
      */
     virtual bool isCubeHit(QVector3D mouseNear, QVector3D mouseFar);
 
-     /**
+    /**
      * @brief isTriangleHit
      * @param p1 Triangle point 1
      * @param p2 Triangle point 2
@@ -186,7 +186,7 @@ public:
      * @return True, if plane defined by p1, p2, p3 is intersected by line inside the triangle formed by p1, p2, p3.
      */
     static bool isTriangleHit(const QVector3D & p1, const QVector3D & p2, const QVector3D & p3,
-                       const QVector3D & pLine, const QVector3D & lineDirection, QVector3D *intersection = nullptr);
+                              const QVector3D & pLine, const QVector3D & lineDirection, QVector3D *intersection = nullptr);
     /**
     * @brief isParallelogramHit
     * @param p1 Triangle point 1
@@ -197,13 +197,13 @@ public:
     * @param intersection If not nullptr, coordinates of intersection are written to *intersection.
     * @return True, if plane defined by p1, p2, p3 is intersected by line inside the parallelogram (rectangle) formed by p1, p2, p3.
     */
-   static bool isParallelogramHit(const QVector3D & p1, const QVector3D & p2, const QVector3D & p3,
-                      const QVector3D & pLine, const QVector3D & lineDirection, QVector3D *intersection = nullptr);
-     /**
+    static bool isParallelogramHit(const QVector3D & p1, const QVector3D & p2, const QVector3D & p3,
+                                   const QVector3D & pLine, const QVector3D & lineDirection, QVector3D *intersection = nullptr);
+    /**
       * @brief isHit
       * @return True if line defined by mousePos intersects cube defined by minCoordinates and maxCoordinates.
       */
-     virtual bool isHit(QPoint mousePos, GLESRenderer * renderer);
+    virtual bool isHit(QPoint mousePos, GLESRenderer * renderer);
 
     /**
       * Returns true, if enclosing spheres touch or intersect
@@ -279,7 +279,7 @@ public:
     const QMatrix4x4 & transformation()const{return m_transformationMatrix;}
     const GLColorRgba & color()const{return m_color;}
 
-   /**Simple setters
+    /**Simple setters
     */
     void setColor(const GLColorRgba & newVal){m_color = newVal;}
     void setSpecularColor(const GLColorRgba & newVal){m_specularColor = newVal;}
@@ -356,42 +356,42 @@ protected:
     /**
       * The center of the enclosing sphere
       */
-     QVector3D m_center;
+    QVector3D m_center;
 
-     /**
+    /**
       * @brief m_minCoordinate The left bottom back corner of the cube for frame and hit test.
       * Will be set by findMinMaxCoordinates, if not set by setMinMaxCoordinates
       */
-     QVector3D m_minCoordinate;
-     /**
+    QVector3D m_minCoordinate;
+    /**
       * @brief m_maxCoordinate The right top front corner of the cube  for frame and hit test.
       * Will be set by findMinMaxCoordinates, if not set by setMinMaxCoordinates
       */
-     QVector3D m_maxCoordinate;
+    QVector3D m_maxCoordinate;
 
-     /**
+    /**
        * The radius of the enclosing sphere
        */
-     GLfloat m_radius;
+    GLfloat m_radius;
 
-     /**
+    /**
        * The mode to be passed to glDrawArrays or glDrawElements e.g. GL_TRIANGLES, GL_TRIANGLE_STRIP
        */
-     GLuint m_drawingMode;
+    GLuint m_drawingMode;
 
-     /**
+    /**
       * @brief m_animationActive Flag for a running animation
       */
-     bool m_animationActive;
-     /**
+    bool m_animationActive;
+    /**
       * @brief m_animationStart The value of the animation state when this function is called.
       * e.g. 0.5 if the global animation process is already half finished.
       */
-     float m_animationStart;
-     /**
+    float m_animationStart;
+    /**
       * @brief m_animateForwards Animate to final state or back to start state
       */
-     bool m_animateForwards;
+    bool m_animateForwards;
 
     /** The array of points defining the surface.
      *  This *may be* a container not owned by this body.
@@ -413,7 +413,7 @@ protected:
      */
     GLushort m_nextPoint;
 
-   /** The array with the indices. May be left empty. 
+    /** The array with the indices. May be left empty.
     */
     QVector <GLushort> * m_indices;
 
@@ -425,27 +425,27 @@ protected:
     /**
     * @brief startIndex The first index for this body
     */
-   GLushort m_firstIndex;
+    GLushort m_firstIndex;
 
-   /**
+    /**
     * @brief indexCount The next index for this body. (last index + 1)
     */
-   GLushort m_nextIndex;
+    GLushort m_nextIndex;
 
-   /** The flag for a valid surface.
+    /** The flag for a valid surface.
     */
     bool m_surfaceIsValid;
     /**
     * @brief m_textures The textures to be used with this body
     */
-   QVector<QOpenGLTexture*> m_textures;
-   /**
+    QVector<QOpenGLTexture*> m_textures;
+    /**
     * @brief m_ownTextures true, if textures are owned by this GLBody
     */
-   bool m_ownTextures;
-   /** The textures to be used.
+    bool m_ownTextures;
+    /** The textures to be used.
     */
-  //  QVector<GLuint> m_textureIds;
+    //  QVector<GLuint> m_textureIds;
     /**
       * The index of the texture to be used in function draw()
       */
@@ -455,76 +455,76 @@ protected:
     QStringList m_textureFilenames;
 
 
-  /** The diffuse and ambient color for the body.
+    /** The diffuse and ambient color for the body.
    */
-   GLColorRgba m_color;
-   /**
+    GLColorRgba m_color;
+    /**
     * @brief m_frameColor the color for the frame from minCoordinate to maxCoordinate
     */
-   GLColorRgba m_frameColor;
+    GLColorRgba m_frameColor;
 
-  /**
+    /**
    * The specular color
    */
-   GLColorRgba m_specularColor;
+    GLColorRgba m_specularColor;
 
-  /**
+    /**
    * Shininess for specular color
    */
-   int m_shininess;
+    int m_shininess;
 
-   /**
+    /**
      *  Flag for selected mode.
      */
-   bool m_selected;
+    bool m_selected;
 
-   QVector3D m_modelOffset;//Offset of model vertices from origin.
+    QVector3D m_modelOffset;//Offset of model vertices from origin.
 
-   /**
+    /**
      * This matrix holds the basic transformation for the body and
      * should not be modified after first setting.
      */
-   QMatrix4x4 m_transformationMatrix;
+    QMatrix4x4 m_transformationMatrix;
 
-   /**
+    /**
     * @brief m_drawMatrix
      * This matrix is multiplied with the modelview matrix prior to
      * rendering the body.
     */
-   QMatrix4x4 m_drawMatrix;
-   /**
+    QMatrix4x4 m_drawMatrix;
+    /**
     * @brief m_scale
     */
-   float m_scale; //meters per logical unit
-   /**
+    float m_scale; //meters per logical unit
+    /**
     * @brief findMinMaxCoordinates Calculate m_minCoordinate an m_maxCoordinate from vertex data.
     * Creates frame from min/max coordinates if m_showFrame is set. Creates normals if m_showNormals is set.
     * Is called from readBinaryModelFile.
     * Does nothing, if setMinMaxCoordinates has been called. (m_hasCustomFrame is true)
     * Overwrite this function and set your own min/max coordinates to create a custom frame.
     */
-   virtual void findMinMaxCoordinates();
+    virtual void findMinMaxCoordinates();
 
-   IndexType m_firstNormalPoint;
-   IndexType m_nextNormalPoint;
-   IndexType m_firstFramePoint;
-   IndexType m_nextFramePoint;
-   IndexType m_firstNormalIndex;
-   IndexType m_nextNormalIndex;
-   IndexType m_firstFrameIndex;
-   IndexType m_nextFrameIndex;
-//   IndexType m_firstHitPoint;
-//   IndexType m_nextHitPoint;
-   //For debugging
-   bool m_showNormals;
+    IndexType m_firstNormalPoint;
+    IndexType m_nextNormalPoint;
+    IndexType m_firstFramePoint;
+    IndexType m_nextFramePoint;
+    IndexType m_firstNormalIndex;
+    IndexType m_nextNormalIndex;
+    IndexType m_firstFrameIndex;
+    IndexType m_nextFrameIndex;
+    //   IndexType m_firstHitPoint;
+    //   IndexType m_nextHitPoint;
+    //For debugging
+    bool m_showNormals;
 
-   bool m_hasCustomFrame;
-   bool m_showFrame;
+    bool m_hasCustomFrame;
+    bool m_showFrame;
 
-   bool m_textureEnabled;
+    bool m_textureEnabled;
 private:
-   bool m_lightingEnabled;
-   bool m_colorArrayEnabled;
+    bool m_lightingEnabled;
+    bool m_colorArrayEnabled;
 
 };
 

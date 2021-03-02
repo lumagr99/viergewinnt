@@ -15,6 +15,6 @@ void GLCourt::makeSurface(QVector<GLPoint> *pointContainer, QVector<GLushort> *i
 
 void GLCourt::draw(GLESRenderer *renderer, bool useBuffers)
 {
-    qDebug() << "GLCourt::draw() called.";
+    // qDebug() << "GLCourt::draw() called.";
     GLBody::draw(renderer,useBuffers);
 }
