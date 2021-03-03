@@ -10,7 +10,7 @@ VierGewinntScene::VierGewinntScene()
     m_timer->start(16);
     m_drawAxes = true;
     m_loopMovement = true;
-    m_eye = 20.0 * v_XZ;
+    m_eye = 20.0 * v_XYZ;
 }
 
 
@@ -57,7 +57,11 @@ void VierGewinntScene::doSynchronizeThreads()
     }
     else if (m_mousePositionChangedReceived)
     {
-
+        QVector3D oldIntersection = m_lastIntersection;
+        m_renderer->mouseIntersection(&m_lastIntersection, v_Y, 0, m_mousePositionChangedTo);
+        m_moveVector += m_lastIntersection - oldIntersection;
+        m_vierGewinnt->moveToken(m_moveVector);
+        m_moveVector = v_Zero;
     }
 
     m_mousePressReceived = false;

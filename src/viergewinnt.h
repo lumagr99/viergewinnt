@@ -36,6 +36,8 @@ public:
 
     void checkForSelection(const QVector3D &nearPoint, const QVector3D &farPoint, const QVector3D &camera, GLToken *token);
 
+    void moveToken(const QVector3D &vMove);
+
 private:
 
     VierGewinntScene *m_scene;

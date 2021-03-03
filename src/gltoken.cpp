@@ -9,7 +9,6 @@ GLToken::GLToken(const QString &name, float radius, const QString textureFile, c
 {
     qDebug() << "GLToken::GLToken() called.";
     setShowFrame(true);
-    setCenter(QVector3D(0, m_height / 2, 0));
     setMinMaxCoordinates(QVector3D(-m_radius, 0, -m_radius), QVector3D(m_radius, m_height, m_radius));
     GLBody::readBinaryModelFile(":/models/token.dat");
 }
@@ -29,6 +28,10 @@ void GLToken::findMinMaxCoordinates()
 {
     m_minCoordinate = m_center + QVector3D(-m_radius, -m_height/2, -m_radius);
     m_maxCoordinate = m_center + QVector3D(m_radius, m_height/2, m_radius);
+
+    qDebug() << m_center;
+    qDebug() << m_minCoordinate;
+    qDebug() << m_maxCoordinate;
 
     if(m_showNormals) {
         createNormals();

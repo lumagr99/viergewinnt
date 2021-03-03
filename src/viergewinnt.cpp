@@ -95,3 +95,11 @@ void VierGewinnt::checkForSelection(const QVector3D &nearPoint, const QVector3D 
         }
     }
 }
+
+void VierGewinnt::moveToken(const QVector3D &vMove)
+{
+    if(m_selectedToken == nullptr)  {
+        return;
+    }
+    m_selectedToken->move(vMove);
+}
