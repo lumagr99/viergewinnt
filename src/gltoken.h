@@ -19,6 +19,8 @@ public:
 
     bool isColliding(const GLToken *token) const;
 
+    void rotate();
+
     float getHeight() const;
 
     float getRadius() const;
@@ -27,9 +29,13 @@ public:
 
     void setSelected(bool selected);
 
-    static constexpr float HEIGHT = 0.325;
+    bool isRotated() const;
 
-    static constexpr float RADIUS = 0.625;
+    void setRotated(bool rotated);
+
+    static constexpr float HEIGHT = 0.325f;
+
+    static constexpr float RADIUS = 0.625f;
 
 private:
 
@@ -38,6 +44,8 @@ private:
     float m_height;
 
     bool m_selected;
+
+    bool m_rotated;
 };
 
 #endif // GLTOKEN_H

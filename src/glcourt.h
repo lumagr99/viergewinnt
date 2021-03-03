@@ -19,11 +19,11 @@ public:
 
     bool isColliding(const GLToken *token) const;
 
-    static constexpr float WIDTH = 10;
+    static constexpr float WIDTH = 10.0f;
 
-    static constexpr float HEIGHT = 8.5;
+    static constexpr float HEIGHT = 8.5f;
 
-    static constexpr float DEPTH = 0.65;
+    static constexpr float DEPTH = 0.65f;
 
 private:
     float m_width;

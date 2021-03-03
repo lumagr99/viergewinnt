@@ -8,9 +8,14 @@ VierGewinntScene::VierGewinntScene()
 {
     m_backgroundColor = GLColorRgba::clBlack;
     m_timer->start(16);
-    m_drawAxes = true;
+    //m_drawAxes = true;
     m_loopMovement = true;
-    m_eye = 20.0 * v_XYZ;
+    m_eye = 12.0f * v_Y + 20.0f * v_Z;
+
+    m_fovy = 45.0f;
+    m_aspect = 0.0f;
+    m_orthoMode = false;
+    m_orthoRange = 1.0f;
 }
 
 
@@ -52,13 +57,13 @@ void VierGewinntScene::doSynchronizeThreads()
     {
         m_mouseRay->setPoints(m_mouseNear, m_mouseFar);
         m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar,  m_mousePressPosition);
-        m_renderer->mouseIntersection(&m_lastIntersection, v_Y, 0.0, m_mousePressPosition);
+        m_renderer->mouseIntersection(&m_lastIntersection, v_Y, 0.0f, m_mousePressPosition);
         m_vierGewinnt->selectToken(m_mouseNear, m_mouseFar, m_eye);
     }
     else if (m_mousePositionChangedReceived)
     {
         QVector3D oldIntersection = m_lastIntersection;
-        m_renderer->mouseIntersection(&m_lastIntersection, v_Y, 0, m_mousePositionChangedTo);
+        m_renderer->mouseIntersection(&m_lastIntersection, v_Y, 0.0f, m_mousePositionChangedTo);
         m_moveVector += m_lastIntersection - oldIntersection;
         m_vierGewinnt->moveToken(m_moveVector);
         m_moveVector = v_Zero;
@@ -112,9 +117,9 @@ void VierGewinntScene::mouseReleased(int x, int y)
 void VierGewinntScene::handleWheelEvent(int angleDelta)
 {
     if(angleDelta < 0) {
-        m_eye *= 1.05;
+        m_eye *= 1.05f;
     }
     else {
-        m_eye /= 1.05;
+        m_eye /= 1.05f;
     }
 }

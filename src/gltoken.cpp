@@ -10,8 +10,8 @@ GLToken::GLToken(const QString &name, float radius, const QString textureFile, c
 {
     //qDebug() << "GLToken::GLToken() called.";
     setShowFrame(true);
-    setCenter(QVector3D(0, 0, 0));
-    setMinMaxCoordinates(QVector3D(-m_radius, 0, -m_radius), QVector3D(m_radius, m_height, m_radius));
+    setCenter(QVector3D(0.0f, 0.0f, 0.0f));
+    setMinMaxCoordinates(QVector3D(-m_radius, 0.0f, -m_radius), QVector3D(m_radius, m_height, m_radius));
     GLBody::readBinaryModelFile(":/models/token.dat");
 }
 
@@ -56,6 +56,17 @@ bool GLToken::isColliding(const GLToken *token) const
     }
 }
 
+void GLToken::rotate()
+{
+    if(!m_rotated) {
+         rotateModelPoints(m_center, v_X, 90.0f);
+         m_rotated = true;
+    } else {
+        rotateModelPoints(m_center, v_X, -90.0f);
+        m_rotated = false;
+    }
+}
+
 float GLToken::getHeight() const
 {
     return m_height;
@@ -74,4 +85,14 @@ bool GLToken::isSelected() const
 void GLToken::setSelected(bool selected)
 {
     m_selected = selected;
+}
+
+bool GLToken::isRotated() const
+{
+    return m_rotated;
+}
+
+void GLToken::setRotated(bool rotated)
+{
+    m_rotated = rotated;
 }

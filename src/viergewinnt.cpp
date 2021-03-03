@@ -7,15 +7,14 @@ VierGewinnt::VierGewinnt(VierGewinntScene *scene)
     m_scene = scene;
     m_tablePlate = new GLTablePlate("TablePlate");
     m_court = new GLCourt("Court");
-    m_court->setShowFrame(true);
 
     GLTokenRed *redToken = new GLTokenRed("RedToken1");
-    redToken->move(QVector3D(0, 0, -5));
+    redToken->move(QVector3D(0.0f, 0.0f, -5.0f));
     redToken->setShowFrame(false);
     m_redTokens.append(redToken);
 
     GLTokenGreen *greenToken = new GLTokenGreen("GreenToken1");
-    greenToken->move(QVector3D(0, 0, 5));
+    greenToken->move(QVector3D(0.0f, 0.0f, 5.0f));
     greenToken->setShowFrame(false);
     m_greenTokens.append(greenToken);
 
@@ -39,7 +38,6 @@ void VierGewinnt::draw(GLESRenderer *renderer)
 
     m_tablePlate->draw(renderer);
     m_court->draw(renderer);
-
 
     for(auto &token : m_greenTokens) {
         token->draw(renderer);
@@ -74,19 +72,22 @@ bool VierGewinnt::selectToken(const QVector3D &nearPoint, const QVector3D &farPo
 void VierGewinnt::deselectToken()
 {
     //qDebug() << "VierGewinnt::deselectToken() called.";
+    if(m_selectedToken == nullptr) {
+        return;
+    }
 }
 
 void VierGewinnt::checkForSelection(const QVector3D &nearPoint, const QVector3D &farPoint, const QVector3D &camera, GLToken *token)
 {
     //qDebug() << "VierGewinnt::checkForSelection() called.";
-    GLfloat lastDistance = 100000.0;
+    float lastDistance = 100000.0f;
     if(token->isHit(nearPoint, farPoint)) {
         if(m_selectedToken == nullptr) {
             token->setSelected(true);
             token->setShowFrame(true);
             m_selectedToken = token;
         } else {
-            GLfloat distance = (camera - token->getCenter()).length();
+            float distance = (camera - token->getCenter()).length();
             if(distance < lastDistance) {
                 m_selectedToken->setSelected(false);
                 m_selectedToken->setShowFrame(false);
@@ -108,6 +109,13 @@ void VierGewinnt::moveToken(const QVector3D &vMove)
 
     if(m_court->isColliding(m_selectedToken)) {
         m_selectedToken->move(-vMove);
+        if(!m_selectedToken->isRotated()) {
+            m_selectedToken->rotate();
+            m_selectedToken->move(v_Y * m_selectedToken->getRadius());
+        }
+    } else if(m_selectedToken->isRotated()){
+        m_selectedToken->rotate();
+        m_selectedToken->move(-v_Y * m_selectedToken->getRadius());
     }
 
     for(auto &token : m_redTokens) {

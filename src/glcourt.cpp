@@ -8,7 +8,7 @@ GLCourt::GLCourt(const QString &name, float radius, const QString textureFile, c
       m_depth(DEPTH)
 {
     //qDebug() << "GLCourt::GLCourt() called.";
-    setShowFrame(true);
+    //setShowFrame(true);
     setCenter(QVector3D(0, m_height/2, 0));
     setMinMaxCoordinates(QVector3D(-m_width/2, 0, -m_depth/2), QVector3D(m_width/2, m_height, m_depth/2));
     GLBody::readBinaryModelFile(":/models/court.dat");
@@ -42,7 +42,7 @@ void GLCourt::findMinMaxCoordinates()
 bool GLCourt::isColliding(const GLToken *token) const
 {
     QVector3D v = (m_center - token->getCenter());
-    if (fabs(v.z()) <= m_depth + token->getRadius() && fabs(v.x()) <= m_width/2 + token->getRadius()) {
+    if (fabs(v.z()) <= m_depth/2 + token->getRadius() && fabs(v.x()) <= m_width/2 + token->getRadius()) {
         return true;
     }
     return false;
