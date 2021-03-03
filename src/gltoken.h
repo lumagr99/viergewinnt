@@ -8,12 +8,8 @@ class GLToken: public GLBody
 
 public:
 
-    static constexpr float BASE_HEIGHT = 0.325;
-
-    static constexpr float BASE_RADIUS = 0.625;
-
-    GLToken(const QString & name, float radius = BASE_RADIUS, const QString textureFile = "",
-            const GLColorRgba & color = GLColorRgba::clBlue, float height = BASE_HEIGHT);
+    GLToken(const QString & name, float radius = RADIUS, const QString textureFile = "",
+            const GLColorRgba & color = GLColorRgba::clBlue, float height = HEIGHT);
 
     virtual void makeSurface(QVector<GLPoint> * pointContainer, QVector<IndexType> *indexContainer) Q_DECL_OVERRIDE;
 
@@ -21,13 +17,19 @@ public:
 
     virtual void findMinMaxCoordinates() Q_DECL_OVERRIDE;
 
-    float getHeight();
+    bool isColliding(const GLToken *token) const;
 
-    float getRadius();
+    float getHeight() const;
 
-    bool isSelected();
+    float getRadius() const;
+
+    bool isSelected() const;
 
     void setSelected(bool selected);
+
+    static constexpr float HEIGHT = 0.325;
+
+    static constexpr float RADIUS = 0.625;
 
 private:
 

@@ -12,6 +12,7 @@ ApplicationWindow {
         id: swipeView
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
+        Component.onCompleted: contentItem.interactive = false
 
         GLPage {
             vierGewinntScene.viewportY: applicationWindow.height - mapToItem(applicationWindow.contentItem, x, y + height).y;

@@ -37,7 +37,7 @@ void GLMouseRay::draw(GLESRenderer *renderer, bool useBuffers)
 
 void GLMouseRay::setPoints(const QVector3D &nearPoint, const QVector3D &farPoint)
 {
-    qDebug() << "GLMouseRay::setPoints running on thread: " << QThread::currentThreadId();
+    //qDebug() << "GLMouseRay::setPoints running on thread: " << QThread::currentThreadId();
     m_nearPoint = nearPoint;
     m_farPoint = farPoint;
 

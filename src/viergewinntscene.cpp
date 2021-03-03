@@ -30,7 +30,7 @@ void VierGewinntScene::paintOnTopOfQmlScene()
 
 void VierGewinntScene::setupGeometry()
 {
-    qDebug() << "VierGewinntScene::setupGeometry() called.";
+    //qDebug() << "VierGewinntScene::setupGeometry() called.";
     GLItem::setupGeometry();
     m_mouseRay = new GLMouseRay("MouseRay", GLColorRgba::clGreen);
     m_vierGewinnt = new VierGewinnt(this);
@@ -71,20 +71,20 @@ void VierGewinntScene::doSynchronizeThreads()
 
 void VierGewinntScene::rotateLeft(float increment)
 {
-    qDebug() << "VierGewinntScene::rotateLeft() with increment" << increment << "called.";
+    //qDebug() << "VierGewinntScene::rotateLeft() with increment" << increment << "called.";
     m_movementEnabled = true;
     m_rotationIncrement = -fabs(increment);
 }
 
 void VierGewinntScene::stopRotation()
 {
-    qDebug() << "VierGewinntScene::stopRotation() called.";
+    //qDebug() << "VierGewinntScene::stopRotation() called.";
     m_movementEnabled = false;
 }
 
 void VierGewinntScene::rotateRight(float increment)
 {
-    qDebug() << "VierGewinntScene::rotateRight() with increment" << increment << "called.";
+    //qDebug() << "VierGewinntScene::rotateRight() with increment" << increment << "called.";
     m_movementEnabled = true;
     m_rotationIncrement = fabs(increment);
 }

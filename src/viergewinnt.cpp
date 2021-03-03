@@ -7,6 +7,7 @@ VierGewinnt::VierGewinnt(VierGewinntScene *scene)
     m_scene = scene;
     m_tablePlate = new GLTablePlate("TablePlate");
     m_court = new GLCourt("Court");
+    m_court->setShowFrame(true);
 
     GLTokenRed *redToken = new GLTokenRed("RedToken1");
     redToken->move(QVector3D(0, 0, -5));
@@ -39,6 +40,7 @@ void VierGewinnt::draw(GLESRenderer *renderer)
     m_tablePlate->draw(renderer);
     m_court->draw(renderer);
 
+
     for(auto &token : m_greenTokens) {
         token->draw(renderer);
     }
@@ -51,7 +53,7 @@ void VierGewinnt::draw(GLESRenderer *renderer)
 
 bool VierGewinnt::selectToken(const QVector3D &nearPoint, const QVector3D &farPoint, const QVector3D &camera)
 {
-    qDebug() << "VierGewinnt::selectToken() called.";
+    //qDebug() << "VierGewinnt::selectToken() called.";
     if (m_player == RedPlayer) {
         for(auto &token : m_redTokens) {
             checkForSelection(nearPoint, farPoint, camera, token);
@@ -71,12 +73,12 @@ bool VierGewinnt::selectToken(const QVector3D &nearPoint, const QVector3D &farPo
 
 void VierGewinnt::deselectToken()
 {
-    qDebug() << "VierGewinnt::deselectToken() called.";
+    //qDebug() << "VierGewinnt::deselectToken() called.";
 }
 
 void VierGewinnt::checkForSelection(const QVector3D &nearPoint, const QVector3D &farPoint, const QVector3D &camera, GLToken *token)
 {
-    qDebug() << "VierGewinnt::checkForSelection() called.";
+    //qDebug() << "VierGewinnt::checkForSelection() called.";
     GLfloat lastDistance = 100000.0;
     if(token->isHit(nearPoint, farPoint)) {
         if(m_selectedToken == nullptr) {
@@ -101,5 +103,22 @@ void VierGewinnt::moveToken(const QVector3D &vMove)
     if(m_selectedToken == nullptr)  {
         return;
     }
+
     m_selectedToken->move(vMove);
+
+    if(m_court->isColliding(m_selectedToken)) {
+        m_selectedToken->move(-vMove);
+    }
+
+    for(auto &token : m_redTokens) {
+        if(m_selectedToken->isColliding(token)) {
+            m_selectedToken->move(-vMove);
+        }
+    }
+
+    for(auto &token : m_greenTokens) {
+        if(m_selectedToken->isColliding(token)) {
+            m_selectedToken->move(-vMove);
+        }
+    }
 }
