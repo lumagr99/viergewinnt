@@ -33,6 +33,7 @@ class GLBodyGroup: public GLBody
 {
 public:
     GLBodyGroup(const QString & name);
+
     ~GLBodyGroup()Q_DECL_OVERRIDE;
     /**
      * @brief deleteTextureObjects delete all texture objects from all objects in m_Objects

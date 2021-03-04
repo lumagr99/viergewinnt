@@ -6,12 +6,13 @@ GLToken::GLToken(const QString &name, float radius, const QString textureFile, c
     : GLBody(name, radius, color, textureFile),
       m_radius(radius),
       m_height(height),
-      m_selected(false)
+      m_selected(false),
+      m_rotated(false)
 {
     //qDebug() << "GLToken::GLToken() called.";
     setShowFrame(true);
     setCenter(QVector3D(0.0f, 0.0f, 0.0f));
-    setMinMaxCoordinates(QVector3D(-m_radius, 0.0f, -m_radius), QVector3D(m_radius, m_height, m_radius));
+    findMinMaxCoordinates();
     GLBody::readBinaryModelFile(":/models/token.dat");
 }
 
@@ -28,8 +29,13 @@ void GLToken::draw(GLESRenderer *renderer, bool useBuffers)
 
 void GLToken::findMinMaxCoordinates()
 {
-    m_minCoordinate = m_center + QVector3D(-m_radius, -m_height/2, -m_radius);
-    m_maxCoordinate = m_center + QVector3D(m_radius, m_height/2, m_radius);
+    if(isRotated()) {
+        m_minCoordinate = m_center + QVector3D(-m_radius, -m_radius, -m_height/2);
+        m_maxCoordinate = m_center + QVector3D(m_radius, m_radius, m_height/2);
+    } else {
+        m_minCoordinate = m_center + QVector3D(-m_radius, -m_height/2, -m_radius);
+        m_maxCoordinate = m_center + QVector3D(m_radius, m_height/2, m_radius);
+    }
 
     if(m_showNormals) {
         createNormals();
@@ -56,6 +62,11 @@ bool GLToken::isColliding(const GLToken *token) const
     }
 }
 
+void GLToken::moveToPosition(const QVector3D &position)
+{
+    move(position - m_center);
+}
+
 void GLToken::rotate()
 {
     if(!m_rotated) {
@@ -65,6 +76,7 @@ void GLToken::rotate()
         rotateModelPoints(m_center, v_X, -90.0f);
         m_rotated = false;
     }
+    findMinMaxCoordinates();
 }
 
 float GLToken::getHeight() const

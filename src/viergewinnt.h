@@ -38,6 +38,8 @@ public:
 
     void moveToken(const QVector3D &vMove);
 
+    void insertToken(const GLToken *token, int column);
+
 private:
 
     VierGewinntScene *m_scene;

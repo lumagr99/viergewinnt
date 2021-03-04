@@ -2,21 +2,42 @@
 #include "viergewinntscene.h"
 
 VierGewinnt::VierGewinnt(VierGewinntScene *scene)
+    : m_player(RedPlayer),
+      m_selectedToken(nullptr)
 {
     qDebug() << "VierGewinnt::VierGewinnt() called.";
+    qDebug() << m_player;
+    qDebug() << RedPlayer;
+    qDebug() << GreenPlayer;
+
+
+
     m_scene = scene;
     m_tablePlate = new GLTablePlate("TablePlate");
     m_court = new GLCourt("Court");
 
     GLTokenRed *redToken = new GLTokenRed("RedToken1");
-    redToken->move(QVector3D(0.0f, 0.0f, -5.0f));
+    redToken->move(QVector3D(0.0f, 0.0f, 5.0f));
     redToken->setShowFrame(false);
     m_redTokens.append(redToken);
 
     GLTokenGreen *greenToken = new GLTokenGreen("GreenToken1");
-    greenToken->move(QVector3D(0.0f, 0.0f, 5.0f));
+    greenToken->move(QVector3D(0.0f, 0.0f, -5.0f));
     greenToken->setShowFrame(false);
     m_greenTokens.append(greenToken);
+
+    /*
+    for(int i = 0; i < 7; i++) {
+        for(int j = 0; j < 6; j++) {
+            GLTokenGreen *greenToken = new GLTokenGreen("GreenToken" + QString(i*j));
+            greenToken->setShowFrame(false);
+            greenToken->rotate();
+            QVector3D pos = m_court->fieldToPosition(QPoint(i,j));
+            greenToken->move(pos);
+            m_greenTokens.append(greenToken);
+        }
+    }
+    */
 
 }
 
@@ -35,7 +56,6 @@ VierGewinnt::~VierGewinnt()
 void VierGewinnt::draw(GLESRenderer *renderer)
 {
     renderer->pushMvMatrix();
-
     m_tablePlate->draw(renderer);
     m_court->draw(renderer);
 
@@ -56,12 +76,10 @@ bool VierGewinnt::selectToken(const QVector3D &nearPoint, const QVector3D &farPo
         for(auto &token : m_redTokens) {
             checkForSelection(nearPoint, farPoint, camera, token);
         }
-        m_player = GreenPlayer;
     } else {
         for(auto &token : m_greenTokens) {
             checkForSelection(nearPoint, farPoint, camera, token);
         }
-        m_player = RedPlayer;
     }
     if(m_selectedToken != nullptr) {
         //emit Sound
@@ -71,10 +89,13 @@ bool VierGewinnt::selectToken(const QVector3D &nearPoint, const QVector3D &farPo
 
 void VierGewinnt::deselectToken()
 {
-    //qDebug() << "VierGewinnt::deselectToken() called.";
+    qDebug() << "VierGewinnt::deselectToken() called.";
     if(m_selectedToken == nullptr) {
         return;
     }
+    //QVector3D center = m_selectedToken->getCenter();
+    //int column = m_court->getColumnByPosition(center);
+    //insertToken(column);
 }
 
 void VierGewinnt::checkForSelection(const QVector3D &nearPoint, const QVector3D &farPoint, const QVector3D &camera, GLToken *token)
@@ -105,17 +126,31 @@ void VierGewinnt::moveToken(const QVector3D &vMove)
         return;
     }
 
-    m_selectedToken->move(vMove);
+    QVector3D newPos = m_selectedToken->getCenter() + vMove;
+    QVector3D vz = v_Zero;
+    float z = newPos.z();
 
+    if(m_player == RedPlayer && newPos.z() < 0) {
+        vz = v_Z * z;
+    }
+
+    if(m_player == GreenPlayer && newPos.z() > 0) {
+        vz = v_Z * z;
+    }
+    m_selectedToken->move(vMove - vz);
+
+
+    float radius = m_selectedToken->getRadius();
     if(m_court->isColliding(m_selectedToken)) {
-        m_selectedToken->move(-vMove);
         if(!m_selectedToken->isRotated()) {
             m_selectedToken->rotate();
-            m_selectedToken->move(v_Y * m_selectedToken->getRadius());
+            m_selectedToken->move(v_Y * (m_court->getHeight() + radius));
         }
-    } else if(m_selectedToken->isRotated()){
-        m_selectedToken->rotate();
-        m_selectedToken->move(-v_Y * m_selectedToken->getRadius());
+    } else  {
+        if(m_selectedToken->isRotated()) {
+            m_selectedToken->rotate();
+            m_selectedToken->move(-v_Y * (m_court->getHeight() + radius));
+        }
     }
 
     for(auto &token : m_redTokens) {
@@ -129,4 +164,11 @@ void VierGewinnt::moveToken(const QVector3D &vMove)
             m_selectedToken->move(-vMove);
         }
     }
+}
+
+void VierGewinnt::insertToken(const GLToken *token, int column)
+{
+    Q_UNUSED(token);
+    Q_UNUSED(column);
+
 }

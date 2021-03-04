@@ -8,6 +8,9 @@ class GLToken: public GLBody
 
 public:
 
+    static constexpr float HEIGHT = 0.325f;
+    static constexpr float RADIUS = 0.625f;
+
     GLToken(const QString & name, float radius = RADIUS, const QString textureFile = "",
             const GLColorRgba & color = GLColorRgba::clBlue, float height = HEIGHT);
 
@@ -18,6 +21,8 @@ public:
     virtual void findMinMaxCoordinates() Q_DECL_OVERRIDE;
 
     bool isColliding(const GLToken *token) const;
+
+    void moveToPosition(const QVector3D &position);
 
     void rotate();
 
@@ -32,10 +37,6 @@ public:
     bool isRotated() const;
 
     void setRotated(bool rotated);
-
-    static constexpr float HEIGHT = 0.325f;
-
-    static constexpr float RADIUS = 0.625f;
 
 private:
 

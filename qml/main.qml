@@ -6,10 +6,11 @@ ApplicationWindow {
     width: 640
     height: 480
     visible: true
-    title: qsTr("Tabs")
+    title: qsTr("Vier Gewinnt")
 
     SwipeView {
         id: swipeView
+        focus: true
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
         Component.onCompleted: contentItem.interactive = false

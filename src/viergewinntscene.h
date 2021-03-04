@@ -1,6 +1,8 @@
 #ifndef VIERGEWINNTSCENE_H
 #define VIERGEWINNTSCENE_H
 
+#include <QKeyEvent>
+
 #include "glitem.h"
 #include "viergewinnt.h"
 #include "soundengine.h"
@@ -13,6 +15,8 @@
 class VierGewinntScene : public GLItem
 {
     Q_OBJECT
+
+    static constexpr int KEY_OFFSET = Qt::Key_0;
 
 public:
 
@@ -45,6 +49,8 @@ public slots:
     void mouseReleased(int x, int y);
 
     void handleWheelEvent(int angleDelta);
+
+    void handleKeyEvent(int key);
 
 private:
 

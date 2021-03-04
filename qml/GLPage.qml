@@ -27,6 +27,10 @@ GLForm {
     mouseArea.onWheel: {
         vierGewinntScene.handleWheelEvent(wheel.angleDelta.y)
     }
+
+    Keys.onPressed: {
+        vierGewinntScene.handleKeyEvent(event.key);
+    }
 }
 
 /*##^##

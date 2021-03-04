@@ -6,7 +6,7 @@ GLTablePlate::GLTablePlate(const QString &name, float radius, const QString text
 {
     //qDebug() << "GLTablePlate::GLTablePlate() called.";
     GLBody::readBinaryModelFile(":/models/tableplate.dat");
-    move(QVector3D(0, -0.5, 0));
+    move(QVector3D(0, -0.2, 0));
 }
 
 void GLTablePlate::makeSurface(QVector<GLPoint> *pointContainer, QVector<GLushort> *indexContainer)

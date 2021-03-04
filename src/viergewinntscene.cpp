@@ -8,7 +8,7 @@ VierGewinntScene::VierGewinntScene()
 {
     m_backgroundColor = GLColorRgba::clBlack;
     m_timer->start(16);
-    //m_drawAxes = true;
+    m_drawAxes = true;
     m_loopMovement = true;
     m_eye = 12.0f * v_Y + 20.0f * v_Z;
 
@@ -121,5 +121,12 @@ void VierGewinntScene::handleWheelEvent(int angleDelta)
     }
     else {
         m_eye /= 1.05f;
+    }
+}
+
+void VierGewinntScene::handleKeyEvent(int key)
+{
+    if(key >= Qt::Key_1 && key <= Qt::Key_7) {
+        //m_vierGewinnt->insertToken(key - KEY_OFFSET);
     }
 }
