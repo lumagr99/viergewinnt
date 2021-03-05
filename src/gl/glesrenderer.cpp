@@ -23,21 +23,20 @@
 //#define DEBUG_GLESRENDERER
 
 //#ifdef DEBUG_GLESRENDERER
-#include "shaderdebugger.h"
 #include "glpoint.h"
+#include "shaderdebugger.h"
 //#endif
 
 #ifdef Q_OS_ANDROID
 #ifndef GLES
- #define GLES  //Android uses GLES 2.0
+#define GLES //Android uses GLES 2.0
 #endif
 #endif
 
-
-GLESRenderer::GLESRenderer(QObject *parent,
-                           const QString & vShaderFilename,
-                           const QString & fShaderFilename )
-    :QObject(parent)
+GLESRenderer::GLESRenderer(QObject* parent,
+    const QString& vShaderFilename,
+    const QString& fShaderFilename)
+    : QObject(parent)
 {
     this->m_vShaderFileName = vShaderFilename;
     this->m_fShaderFileName = fShaderFilename;
@@ -51,7 +50,7 @@ GLESRenderer::GLESRenderer(QObject *parent,
     m_textureEnabled = false;
     m_maskActive = false;
 
-    m_lightDirection = QVector3D(1.0,1.0,1.0); //position of directional light
+    m_lightDirection = QVector3D(1.0, 1.0, 1.0); //position of directional light
     m_pointSize = 4.0f;
     m_shininess = 200.0;
     m_sourceAlpha = 1.0f;
@@ -61,7 +60,7 @@ GLESRenderer::GLESRenderer(QObject *parent,
 
     m_vShader = nullptr; //vertex shader, render thread
     m_fShader = nullptr; // fragment shader, render thread
-    m_renderProgram = nullptr;// GUI-Thread
+    m_renderProgram = nullptr; // GUI-Thread
 
     // Locations of shader variables
     //attributes
@@ -103,7 +102,6 @@ GLESRenderer::GLESRenderer(QObject *parent,
     m_aspect = 1.0;
     m_nearClip = 1.0;
     m_farClip = 10.0;
-
 }
 /**
  * @brief GLESRenderer::~GLESRenderer
@@ -111,9 +109,9 @@ GLESRenderer::GLESRenderer(QObject *parent,
  */
 GLESRenderer::~GLESRenderer()
 {
-    if(m_vShader)
+    if (m_vShader)
         delete m_vShader;
-    if(m_fShader)
+    if (m_fShader)
         delete m_fShader;
 }
 
@@ -127,12 +125,12 @@ void GLESRenderer::setMvMatrix(const QMatrix4x4 newVal)
     m_normalMatrix = m_mvMatrix.normalMatrix(); //invert and transpose mvMatrix
     m_invertedMvpMatrixValid = false; //delay matrix inversion until it is really neccessary
 
-    if(m_bound && (m_location_uNormalMatrix != -1))
-       m_renderProgram->setUniformValue(m_location_uNormalMatrix, m_normalMatrix);
+    if (m_bound && (m_location_uNormalMatrix != -1))
+        m_renderProgram->setUniformValue(m_location_uNormalMatrix, m_normalMatrix);
 
     m_mvpMatrix = m_pMatrix * m_mvMatrix;
-    if(m_bound && (m_location_uMvpMatrix != -1))
-          m_renderProgram->setUniformValue(m_location_uMvpMatrix, m_mvpMatrix);
+    if (m_bound && (m_location_uMvpMatrix != -1))
+        m_renderProgram->setUniformValue(m_location_uMvpMatrix, m_mvpMatrix);
 #ifdef DEBUG_GLESRENDERER
     ShaderDebugger::debugMatrix4x4(m_mvMatrix, "GLESRenderer uses modelview matrix:");
     ShaderDebugger::debugMatrix3x3(m_normalMatrix, "GLESRenderer uses normal matrix:");
@@ -144,7 +142,7 @@ void GLESRenderer::setMvMatrix(const QMatrix4x4 newVal)
   * Sets mvMatrix to a lookAt transformation.
   * Call setPMatrix or setPerspective first.
   */
-void GLESRenderer::setLookAt(const QVector3D & eye,const QVector3D & center,const QVector3D & up )
+void GLESRenderer::setLookAt(const QVector3D& eye, const QVector3D& center, const QVector3D& up)
 {
     QMatrix4x4 m;
     m.setToIdentity();
@@ -160,8 +158,8 @@ void GLESRenderer::setPMatrix(const QMatrix4x4 newVal)
 {
     m_pMatrix = newVal;
     m_mvpMatrix = m_pMatrix * m_mvMatrix;
-    if(m_bound && (m_location_uMvpMatrix != -1))
-          m_renderProgram->setUniformValue(m_location_uMvpMatrix, m_mvpMatrix);
+    if (m_bound && (m_location_uMvpMatrix != -1))
+        m_renderProgram->setUniformValue(m_location_uMvpMatrix, m_mvpMatrix);
 }
 
 /**
@@ -176,8 +174,8 @@ void GLESRenderer::setPerspective(GLfloat fovy, GLfloat aspect, GLfloat nearClip
     m_pMatrix.setToIdentity();
     m_pMatrix.perspective(m_fovy, m_aspect, m_nearClip, m_farClip);
     m_mvpMatrix = m_pMatrix * m_mvMatrix;
-    if(m_bound && (m_location_uMvpMatrix != -1))
-          m_renderProgram->setUniformValue(m_location_uMvpMatrix, m_mvpMatrix);
+    if (m_bound && (m_location_uMvpMatrix != -1))
+        m_renderProgram->setUniformValue(m_location_uMvpMatrix, m_mvpMatrix);
 #ifdef DEBUG_GLESRENDERER
     ShaderDebugger::debugMatrix4x4(m_pMatrix, "GLESRenderer uses projection matrix:");
 #endif
@@ -192,8 +190,8 @@ void GLESRenderer::setOrtho(float left, float right, float bottom, float top, fl
     m_pMatrix.setToIdentity();
     m_pMatrix.ortho(left, right, bottom, top, nearPlane, farPlane);
     m_mvpMatrix = m_pMatrix * m_mvMatrix;
-    if(m_bound && (m_location_uMvpMatrix != -1))
-          m_renderProgram->setUniformValue(m_location_uMvpMatrix, m_mvpMatrix);
+    if (m_bound && (m_location_uMvpMatrix != -1))
+        m_renderProgram->setUniformValue(m_location_uMvpMatrix, m_mvpMatrix);
 #ifdef DEBUG_GLESRENDERER
     ShaderDebugger::debugMatrix4x4(m_pMatrix, "GLESRenderer uses projection matrix:");
 #endif
@@ -219,15 +217,14 @@ void GLESRenderer::setViewport(int x, int y, int w, int h)
   * Use a custom shader reverse function, if this is not true.
   * Returns coordinate in object space.
   */
-QVector3D GLESRenderer::unProjectViewportPoint(const QVector3D & vWin)
+QVector3D GLESRenderer::unProjectViewportPoint(const QVector3D& vWin)
 {
     QVector3D vClip = viewportToClip(vWin);
-//    QVector3D vWinBack = clipToViewport(vClip);
+    //    QVector3D vWinBack = clipToViewport(vClip);
     ShaderDebugger::debugVector3D(vClip, "Vector in clip space:");
-    if(!m_invertedMvpMatrixValid)
-    {
-       m_invertedMvpMatrix = m_mvpMatrix.inverted();
-       m_invertedMvpMatrixValid = true;
+    if (!m_invertedMvpMatrixValid) {
+        m_invertedMvpMatrix = m_mvpMatrix.inverted();
+        m_invertedMvpMatrixValid = true;
     }
     ShaderDebugger::debugMatrix4x4(m_mvpMatrix, "MVP Matrix:");
     ShaderDebugger::debugMatrix4x4(m_invertedMvpMatrix, "Inverted MVP Matrix:");
@@ -239,11 +236,11 @@ QVector3D GLESRenderer::unProjectViewportPoint(const QVector3D & vWin)
 /**
   * Performs inverse viewport transform.
   */
-QVector3D GLESRenderer::viewportToClip(const QVector3D & vWin)
+QVector3D GLESRenderer::viewportToClip(const QVector3D& vWin)
 {
     //reverse viewport transformation, for original code see below
-    float xClip = (vWin.x() - static_cast<float>(m_viewportX)) /static_cast<float>(m_viewportW) * 2.0f - 1.0f;
-    float yClip = (vWin.y() - static_cast<float>(m_viewportY)) /static_cast<float>(m_viewportH) * 2.0f - 1.0f;
+    float xClip = (vWin.x() - static_cast<float>(m_viewportX)) / static_cast<float>(m_viewportW) * 2.0f - 1.0f;
+    float yClip = (vWin.y() - static_cast<float>(m_viewportY)) / static_cast<float>(m_viewportH) * 2.0f - 1.0f;
     float zClip = 2.0f * vWin.z() - 1.0f;
 
     // original code from gluUnproject
@@ -263,12 +260,12 @@ QVector3D GLESRenderer::viewportToClip(const QVector3D & vWin)
   * mouseX and mouseY coordinates of a mouse click.
   * mouseX and mouseY are coordinates as delivered by QMouseEvent or QDeclarativeMouseEvent.
   */
-void GLESRenderer::calculateMousePoints(QVector3D * nearPoint, QVector3D * farPoint, const QPoint & mousePos)
+void GLESRenderer::calculateMousePoints(QVector3D* nearPoint, QVector3D* farPoint, const QPoint& mousePos)
 {
     float winX = m_viewportX + mousePos.x();
     float winY = m_viewportY + (m_viewportH - mousePos.y());
-    * nearPoint = unProjectViewportPoint(QVector3D(winX, winY, 0.0));
-    * farPoint = unProjectViewportPoint(QVector3D(winX, winY, 1.0));
+    *nearPoint = unProjectViewportPoint(QVector3D(winX, winY, 0.0));
+    *farPoint = unProjectViewportPoint(QVector3D(winX, winY, 1.0));
     //qDebug() << "nearPoint: " << *nearPoint << "  farPoint: " << *farPoint;
 }
 
@@ -277,7 +274,7 @@ void GLESRenderer::calculateMousePoints(QVector3D * nearPoint, QVector3D * farPo
   * mouseX, mouseY are the coordinates of the mouse click as delivered by QMouseEvent.
   * Returns distance.
   */
-float GLESRenderer::distanceToMouseClick(QVector3D p, const QPoint & mousePos)
+float GLESRenderer::distanceToMouseClick(QVector3D p, const QPoint& mousePos)
 {
     QVector3D nearPoint, farPoint;
     calculateMousePoints(&nearPoint, &farPoint, mousePos);
@@ -297,20 +294,20 @@ float GLESRenderer::distanceToMouseClick(QVector3D p, const QPoint & mousePos)
   * the plane normal*(x,y,z) + d = 0.
   * If return value is false, *intersection is not modified.
   */
-bool GLESRenderer::mouseIntersection(QVector3D * intersection, QVector3D normal, float d, const QPoint & mousePos)
+bool GLESRenderer::mouseIntersection(QVector3D* intersection, QVector3D normal, float d, const QPoint& mousePos)
 {
     float m0, m15;
     QVector3D pNear, pFar; //mouse intersections on near and far clipping plane
     calculateMousePoints(&pNear, &pFar, mousePos);
     QVector3D v = pFar - pNear; //vector from near to far clipping plane
     m15 = d + QVector3D::dotProduct(normal, pNear);
-    m0 = QVector3D::dotProduct( normal, v);
-    if(m0 == 0.0f)
+    m0 = QVector3D::dotProduct(normal, v);
+    if (m0 == 0.0f)
         return false;
-    float lambda = -m15  / m0;
-    if(lambda > 1.0f || lambda < 0.0f) //we have no intersection in frustum
+    float lambda = -m15 / m0;
+    if (lambda > 1.0f || lambda < 0.0f) //we have no intersection in frustum
         return false;
-    * intersection = pNear + lambda * v;
+    *intersection = pNear + lambda * v;
     return true;
 }
 
@@ -321,8 +318,8 @@ bool GLESRenderer::mouseIntersection(QVector3D * intersection, QVector3D normal,
 void GLESRenderer::setAmbientAndDiffuseColor(const GLColorRgba newVal)
 {
     m_ambientAndDiffuseColor = newVal;
-    if(m_bound && m_location_uAmbientAndDiffuseColor != -1)
-      m_renderProgram->setUniformValue(m_location_uAmbientAndDiffuseColor, m_ambientAndDiffuseColor);
+    if (m_bound && m_location_uAmbientAndDiffuseColor != -1)
+        m_renderProgram->setUniformValue(m_location_uAmbientAndDiffuseColor, m_ambientAndDiffuseColor);
 }
 
 /**
@@ -332,8 +329,8 @@ void GLESRenderer::setAmbientAndDiffuseColor(const GLColorRgba newVal)
 void GLESRenderer::setAmbientLightBrightness(float newVal)
 {
     m_ambientLightBrightness = newVal;
-    if(m_bound && m_location_uAmbientLightBrightness != -1)
-      m_renderProgram->setUniformValue(m_location_uAmbientLightBrightness, m_ambientLightBrightness);
+    if (m_bound && m_location_uAmbientLightBrightness != -1)
+        m_renderProgram->setUniformValue(m_location_uAmbientLightBrightness, m_ambientLightBrightness);
 }
 
 /**
@@ -341,13 +338,13 @@ void GLESRenderer::setAmbientLightBrightness(float newVal)
   */
 void GLESRenderer::setSpecularColor(const GLColorRgba newVal)
 {
-    if(newVal == m_specularColor)
+    if (newVal == m_specularColor)
         return;
     m_specularColor = newVal;
-    if(m_bound && (m_location_uSpecularColor != -1))
-     m_renderProgram->setUniformValue(m_location_uSpecularColor,
-                            m_specularColor.red(), m_specularColor.green(),
-                            m_specularColor.blue(), m_specularColor.alpha());
+    if (m_bound && (m_location_uSpecularColor != -1))
+        m_renderProgram->setUniformValue(m_location_uSpecularColor,
+            m_specularColor.red(), m_specularColor.green(),
+            m_specularColor.blue(), m_specularColor.alpha());
 }
 
 /**
@@ -356,14 +353,14 @@ void GLESRenderer::setSpecularColor(const GLColorRgba newVal)
 void GLESRenderer::setShininess(float newVal)
 {
     m_shininess = newVal;
-    if(m_bound && (m_location_uShininess != -1))
+    if (m_bound && (m_location_uShininess != -1))
         m_renderProgram->setUniformValue(m_location_uShininess, m_shininess);
 }
 
 void GLESRenderer::setSourceAlpha(float newVal)
 {
-   m_sourceAlpha = newVal;
-   if(m_bound && (m_location_uSourceAlpha != -1))
+    m_sourceAlpha = newVal;
+    if (m_bound && (m_location_uSourceAlpha != -1))
         m_renderProgram->setUniformValue(m_location_uSourceAlpha, m_sourceAlpha);
 }
 
@@ -372,11 +369,11 @@ void GLESRenderer::setSourceAlpha(float newVal)
   */
 void GLESRenderer::setLightingEnabled(bool newVal)
 {
-    if(newVal == m_lightingEnabled)
+    if (newVal == m_lightingEnabled)
         return;
     m_lightingEnabled = newVal;
-    if(m_bound && (m_location_uLightingEnabled != -1))
-      m_renderProgram->setUniformValue(m_location_uLightingEnabled, m_lightingEnabled);
+    if (m_bound && (m_location_uLightingEnabled != -1))
+        m_renderProgram->setUniformValue(m_location_uLightingEnabled, m_lightingEnabled);
 }
 
 /**
@@ -384,11 +381,11 @@ void GLESRenderer::setLightingEnabled(bool newVal)
   */
 void GLESRenderer::setColorArrayEnabled(bool newVal)
 {
-    if(newVal == m_colorArrayEnabled)
+    if (newVal == m_colorArrayEnabled)
         return;
     m_colorArrayEnabled = newVal;
-    if(m_bound && (m_location_uColorArrayEnabled != -1))
-      m_renderProgram->setUniformValue(m_location_uColorArrayEnabled, m_colorArrayEnabled);
+    if (m_bound && (m_location_uColorArrayEnabled != -1))
+        m_renderProgram->setUniformValue(m_location_uColorArrayEnabled, m_colorArrayEnabled);
 }
 
 /**
@@ -396,42 +393,42 @@ void GLESRenderer::setColorArrayEnabled(bool newVal)
   */
 void GLESRenderer::setTextureEnabled(bool newVal)
 {
-    if(newVal == m_textureEnabled)
+    if (newVal == m_textureEnabled)
         return;
     m_textureEnabled = newVal;
-    if(m_bound && (m_location_uTextureEnabled != -1))
+    if (m_bound && (m_location_uTextureEnabled != -1))
         m_renderProgram->setUniformValue(m_location_uTextureEnabled, m_textureEnabled);
 }
 
 void GLESRenderer::setMaskActive(bool newVal)
 {
-   if(newVal == m_maskActive)
-       return;
-   m_maskActive = newVal;
-   if(m_bound && (m_location_uMaskActive != -1))
-       m_renderProgram->setUniformValue(m_location_uMaskActive, m_maskActive);
+    if (newVal == m_maskActive)
+        return;
+    m_maskActive = newVal;
+    if (m_bound && (m_location_uMaskActive != -1))
+        m_renderProgram->setUniformValue(m_location_uMaskActive, m_maskActive);
 }
 
 /**
   * Set light direction.
   */
-void GLESRenderer::setLightDirection(const QVector3D & newVal)
+void GLESRenderer::setLightDirection(const QVector3D& newVal)
 {
     m_lightDirection = newVal;
 #ifdef DEBUG_GLESRENDERER
     ShaderDebugger::debugVector3D(m_lightDirection, "GLESRenderer uses lightDirection in object space:");
 #endif
     QMatrix4x4 nMatrix = QMatrix4x4(m_normalMatrix);
-    m_lightDirection = (nMatrix * m_lightDirection).normalized();//transform to eye space
-    m_halfPlaneVector = (m_lightDirection + QVector3D(0.0,0.0,1.0)).normalized();//eye direction is 0,0,1 in eye space
+    m_lightDirection = (nMatrix * m_lightDirection).normalized(); //transform to eye space
+    m_halfPlaneVector = (m_lightDirection + QVector3D(0.0, 0.0, 1.0)).normalized(); //eye direction is 0,0,1 in eye space
 #ifdef DEBUG_GLESRENDERER
     ShaderDebugger::debugVector3D(m_lightDirection, "GLESRenderer uses lightDirection in eye space:");
     ShaderDebugger::debugVector3D(m_lightDirection, "GLESRenderer uses halfplane vector in eye space:");
 #endif
-    if(m_bound && (m_location_uLightDirection != -1))
-      m_renderProgram->setUniformValue(m_location_uLightDirection, m_lightDirection);
-    if(m_bound && (m_location_uHalfPlaneVector != -1))
-      m_renderProgram->setUniformValue(m_location_uHalfPlaneVector, m_halfPlaneVector);
+    if (m_bound && (m_location_uLightDirection != -1))
+        m_renderProgram->setUniformValue(m_location_uLightDirection, m_lightDirection);
+    if (m_bound && (m_location_uHalfPlaneVector != -1))
+        m_renderProgram->setUniformValue(m_location_uHalfPlaneVector, m_halfPlaneVector);
 }
 
 /**
@@ -440,24 +437,24 @@ void GLESRenderer::setLightDirection(const QVector3D & newVal)
 void GLESRenderer::setPointSize(float newVal)
 {
     m_pointSize = newVal;
-    if(m_bound && (m_location_uPointSize != -1))
-     m_renderProgram->setUniformValue(m_location_uPointSize, m_pointSize);
+    if (m_bound && (m_location_uPointSize != -1))
+        m_renderProgram->setUniformValue(m_location_uPointSize, m_pointSize);
 #ifndef USE_QOPENGL_FUNCTIONS
-   glPointSize(m_pointSize); //set point size independent of vertex shader
+    glPointSize(m_pointSize); //set point size independent of vertex shader
 #endif
 }
 
-void GLESRenderer::setMaskCenter(const QPoint &newVal)
+void GLESRenderer::setMaskCenter(const QPoint& newVal)
 {
     m_maskCenter = newVal;
-    if(m_bound && m_location_uMaskCenter != -1)
+    if (m_bound && m_location_uMaskCenter != -1)
         m_renderProgram->setUniformValue(m_location_uMaskCenter, m_maskCenter);
 }
 
 void GLESRenderer::setMaskDiameter(float newVal)
 {
     m_maskDiameter = newVal;
-    if(m_bound && m_location_uMaskDiameter != -1)
+    if (m_bound && m_location_uMaskDiameter != -1)
         m_renderProgram->setUniformValue(m_location_uMaskDiameter, m_maskDiameter * m_maskDiameter);
 }
 
@@ -472,7 +469,7 @@ void GLESRenderer::popMvMatrix()
 /**
   * Translates mvMatrix by v
   */
-void GLESRenderer::translate(const QVector3D & v)
+void GLESRenderer::translate(const QVector3D& v)
 {
     m_mvMatrix.translate(v);
     setMvMatrix(m_mvMatrix); //update normalMatrix and mvpMatrix and copy to shader
@@ -481,7 +478,7 @@ void GLESRenderer::translate(const QVector3D & v)
 /**
   * Rotates mvMatrix by angle around axis
   */
-void GLESRenderer::rotate(GLfloat angle, const QVector3D & axis)
+void GLESRenderer::rotate(GLfloat angle, const QVector3D& axis)
 {
     m_mvMatrix.rotate(angle, axis);
     setMvMatrix(m_mvMatrix); //update normalMatrix and mvpMatrix and copy to shader
@@ -495,35 +492,37 @@ void GLESRenderer::addTransformation(const QMatrix4x4 additionalTransformation)
 /**
   * Scales mvMatrix.
   */
-void GLESRenderer::scale(const QVector3D & v )
+void GLESRenderer::scale(const QVector3D& v)
 {
     m_mvMatrix.scale(v);
-    setMvMatrix(m_mvMatrix);//update normalMatrix and mvpMatrix and copy to shader
+    setMvMatrix(m_mvMatrix); //update normalMatrix and mvpMatrix and copy to shader
 }
 
-void GLESRenderer::rotate( float angle, float x, float y, float z ) {
-    m_mvMatrix.rotate   ( angle, x, y, z );
-    setMvMatrix( m_mvMatrix );
+void GLESRenderer::rotate(float angle, float x, float y, float z)
+{
+    m_mvMatrix.rotate(angle, x, y, z);
+    setMvMatrix(m_mvMatrix);
 } /* ----- end of method mvRotate ----- */
 
-void GLESRenderer::zoom( float zoomFactor ) {
+void GLESRenderer::zoom(float zoomFactor)
+{
     // Es muss vor dem Zoom die Einheitsmatrix generiert werden. Ansonsten wird das vorherige Zoomen dazu addiert
     m_pMatrix.setToIdentity();
-    m_pMatrix.perspective  ( m_fovy * zoomFactor, m_aspect, m_nearClip, m_farClip );
+    m_pMatrix.perspective(m_fovy * zoomFactor, m_aspect, m_nearClip, m_farClip);
     // Auch hier muss die ProjectionModelView Matrix  neu berechnet werden
     m_mvpMatrix = m_pMatrix * m_mvMatrix;
 }
 
-void GLESRenderer::transform(const QMatrix4x4 &transformation)
+void GLESRenderer::transform(const QMatrix4x4& transformation)
 {
     setMvMatrix(m_mvMatrix * transformation);
 } /* ----- end of method zoomCamera ----- */
 
-void GLESRenderer::translate( float x, float y, float z ) {
-    m_mvMatrix.translate( x, y, z );
-    setMvMatrix( m_mvMatrix);
+void GLESRenderer::translate(float x, float y, float z)
+{
+    m_mvMatrix.translate(x, y, z);
+    setMvMatrix(m_mvMatrix);
 } /* ----- end of method translate ----- */
-
 
 /**
   * Compile shaders, get attribute and uniform locations.
@@ -531,26 +530,24 @@ void GLESRenderer::translate( float x, float y, float z ) {
   */
 bool GLESRenderer::initialize()
 {
-    if(m_initialized)
+    if (m_initialized)
         return true;
 #ifdef USE_QOPENGL_FUNCTIONS
     QOpenGLFunctions::initializeOpenGLFunctions();
 #endif
     //Setup shaders and program
-    m_vShader = new QOpenGLShader(QOpenGLShader::Vertex,this); //vertex shader
+    m_vShader = new QOpenGLShader(QOpenGLShader::Vertex, this); //vertex shader
     m_vShader->compileSourceFile(m_vShaderFileName);
-    if(!m_vShader->isCompiled())
-    {
+    if (!m_vShader->isCompiled()) {
         qDebug("GLESRenderer::initialize: Compiling vertex shader failed. Log follows:\n%s",
-               qPrintable(m_vShader->log()));
+            qPrintable(m_vShader->log()));
         return false;
     }
-    m_fShader = new QOpenGLShader(QOpenGLShader::Fragment,this); // fragment shader
+    m_fShader = new QOpenGLShader(QOpenGLShader::Fragment, this); // fragment shader
     m_fShader->compileSourceFile(m_fShaderFileName);
-    if(!m_fShader->isCompiled())
-    {
+    if (!m_fShader->isCompiled()) {
         qDebug("GLESRenderer::initialize: Compiling fragment shader failed. Log follows:\n%s",
-               qPrintable(m_fShader->log()));
+            qPrintable(m_fShader->log()));
         return false;
     }
 
@@ -558,10 +555,9 @@ bool GLESRenderer::initialize()
     m_renderProgram->addShader(m_vShader);
     m_renderProgram->addShader(m_fShader);
     m_renderProgram->link();
-    if(!m_renderProgram->isLinked())
-    {
+    if (!m_renderProgram->isLinked()) {
         qDebug("GLESRenderer::initialize: Linking program failed. Log follows:\n%s",
-               qPrintable(m_renderProgram->log()));
+            qPrintable(m_renderProgram->log()));
         return false;
     }
 
@@ -617,58 +613,58 @@ bool GLESRenderer::initialize()
 bool GLESRenderer::bind()
 {
     bool ok = true;
-    if(!m_initialized)
-       ok = initialize();
-    if(!ok)
+    if (!m_initialized)
+        ok = initialize();
+    if (!ok)
         return false;
     m_renderProgram->bind();
     //Activate uniforms
     //flags
-    if(m_location_uColorArrayEnabled != -1)
-      m_renderProgram->setUniformValue(m_location_uColorArrayEnabled, m_colorArrayEnabled);
-    if(m_location_uLightingEnabled != -1)
-      m_renderProgram->setUniformValue(m_location_uLightingEnabled, m_lightingEnabled);
-    if(m_location_uTextureEnabled != -1)
+    if (m_location_uColorArrayEnabled != -1)
+        m_renderProgram->setUniformValue(m_location_uColorArrayEnabled, m_colorArrayEnabled);
+    if (m_location_uLightingEnabled != -1)
+        m_renderProgram->setUniformValue(m_location_uLightingEnabled, m_lightingEnabled);
+    if (m_location_uTextureEnabled != -1)
         m_renderProgram->setUniformValue(m_location_uTextureEnabled, m_textureEnabled);
-    if(m_location_uMaskActive != -1)
+    if (m_location_uMaskActive != -1)
         m_renderProgram->setUniformValue(m_location_uMaskActive, m_maskActive);
     //matrices
-    if( m_location_uNormalMatrix != -1)
-       m_renderProgram->setUniformValue(m_location_uNormalMatrix, m_normalMatrix);
-    if(m_location_uMvpMatrix != -1)
-      m_renderProgram->setUniformValue(m_location_uMvpMatrix, m_mvpMatrix);
+    if (m_location_uNormalMatrix != -1)
+        m_renderProgram->setUniformValue(m_location_uNormalMatrix, m_normalMatrix);
+    if (m_location_uMvpMatrix != -1)
+        m_renderProgram->setUniformValue(m_location_uMvpMatrix, m_mvpMatrix);
     //lighting
-    if(m_location_uAmbientAndDiffuseColor != -1)
+    if (m_location_uAmbientAndDiffuseColor != -1)
         m_renderProgram->setUniformValue(m_location_uAmbientAndDiffuseColor,
-                        m_ambientAndDiffuseColor.red(), m_ambientAndDiffuseColor.green(),
-                        m_ambientAndDiffuseColor.blue(), m_ambientAndDiffuseColor.alpha());
-    if(m_location_uAmbientLightBrightness != -1)
+            m_ambientAndDiffuseColor.red(), m_ambientAndDiffuseColor.green(),
+            m_ambientAndDiffuseColor.blue(), m_ambientAndDiffuseColor.alpha());
+    if (m_location_uAmbientLightBrightness != -1)
         m_renderProgram->setUniformValue(m_location_uAmbientLightBrightness, m_ambientLightBrightness);
-    if(m_location_uLightDirection != -1)
+    if (m_location_uLightDirection != -1)
         m_renderProgram->setUniformValue(m_location_uLightDirection, m_lightDirection);
-    if(m_location_uSpecularColor != -1)
+    if (m_location_uSpecularColor != -1)
         m_renderProgram->setUniformValue(m_location_uSpecularColor,
-                        m_specularColor.red(), m_specularColor.green(),
-                        m_specularColor.blue(), m_specularColor.alpha());
-    if(m_location_uShininess != -1)
+            m_specularColor.red(), m_specularColor.green(),
+            m_specularColor.blue(), m_specularColor.alpha());
+    if (m_location_uShininess != -1)
         m_renderProgram->setUniformValue(m_location_uShininess, m_shininess);
-    if(m_location_uSourceAlpha != -1)
+    if (m_location_uSourceAlpha != -1)
         m_renderProgram->setUniformValue(m_location_uSourceAlpha, m_sourceAlpha);
-    if(m_location_uHalfPlaneVector != -1)
+    if (m_location_uHalfPlaneVector != -1)
         m_renderProgram->setUniformValue(m_location_uHalfPlaneVector, m_halfPlaneVector);
     //texture
-    if(m_location_uTextureSampler != -1)
+    if (m_location_uTextureSampler != -1)
         m_renderProgram->setUniformValue(m_location_uTextureSampler, 0); //set sampler to use texture unit 0
     //point size
-    if(m_location_uPointSize != -1)
+    if (m_location_uPointSize != -1)
         m_renderProgram->setUniformValue(m_location_uPointSize, m_pointSize);
 #ifndef GLES
-    //glPointSize(m_pointSize); //set point size independent of vertex shader
+        //glPointSize(m_pointSize); //set point size independent of vertex shader
 #endif
-    if(m_location_uMaskDiameter != -1)
-       m_renderProgram->setUniformValue(m_location_uMaskDiameter, m_maskDiameter * m_maskDiameter);
-    if(m_location_uMaskCenter != -1)
-        m_renderProgram->setUniformValue(m_location_uMaskCenter,QVector2D(m_viewportW / 2, m_viewportH /2));
+    if (m_location_uMaskDiameter != -1)
+        m_renderProgram->setUniformValue(m_location_uMaskDiameter, m_maskDiameter * m_maskDiameter);
+    if (m_location_uMaskCenter != -1)
+        m_renderProgram->setUniformValue(m_location_uMaskCenter, QVector2D(m_viewportW / 2, m_viewportH / 2));
 
     m_bound = true;
     return m_bound;
@@ -678,7 +674,7 @@ bool GLESRenderer::bind()
   * Enables Vertex, normal, color or texCoord arrays and sets start adresses of arrays
   * arrayLocation may be: VERTEX_LOCATION, NORMAL_LOCATION, COLOR_LOCATION, TEXCOORD_LOCATION
   */
-bool GLESRenderer::activateAttributeArray (AttributeLocation arrayLocation, const QVector2D *values, int stride )
+bool GLESRenderer::activateAttributeArray(AttributeLocation arrayLocation, const QVector2D* values, int stride)
 {
     return activateAttributeArray(arrayLocation, reinterpret_cast<const float*>(values), 2, stride);
 }
@@ -686,62 +682,80 @@ bool GLESRenderer::activateAttributeArray (AttributeLocation arrayLocation, cons
   * Enables Vertex, normal, color or texCoord arrays and sets start adresses of arrays
   * arrayLocation may be: VERTEX_LOCATION, NORMAL_LOCATION, COLOR_LOCATION, TEXCOORD_LOCATION
   */
-bool GLESRenderer::activateAttributeArray (AttributeLocation arrayLocation, const QVector3D *values, int stride )
+bool GLESRenderer::activateAttributeArray(AttributeLocation arrayLocation, const QVector3D* values, int stride)
 {
-    return activateAttributeArray(arrayLocation,reinterpret_cast<const float*>(values), 3, stride);
+    return activateAttributeArray(arrayLocation, reinterpret_cast<const float*>(values), 3, stride);
 }
 /**
   * Enables Vertex, normal, color or texCoord arrays and sets start adresses of arrays
   * arrayLocation may be: VERTEX_LOCATION, NORMAL_LOCATION, COLOR_LOCATION, TEXCOORD_LOCATION
   */
-bool GLESRenderer::activateAttributeArray (AttributeLocation arrayLocation, const GLColorRgba *values, int stride )
+bool GLESRenderer::activateAttributeArray(AttributeLocation arrayLocation, const GLColorRgba* values, int stride)
 {
-    return activateAttributeArray(arrayLocation,reinterpret_cast<const float*>(values), 4, stride);
+    return activateAttributeArray(arrayLocation, reinterpret_cast<const float*>(values), 4, stride);
 }
 
 /**
   * Enables Vertex, normal, color or texCoord arrays and sets start adresses of arrays
   * arrayLocation may be: VERTEX_LOCATION, NORMAL_LOCATION, COLOR_LOCATION, TEXCOORD_LOCATION
   */
-bool GLESRenderer::activateAttributeArray (AttributeLocation arrayLocation, const float * values, int tupleSize, int stride )
+bool GLESRenderer::activateAttributeArray(AttributeLocation arrayLocation, const float* values, int tupleSize, int stride)
 {
     int location = -1;
-    switch(arrayLocation){
-      case VERTEX_LOCATION: location = m_location_aVertex; break;
-      case NORMAL_LOCATION: location = m_location_aNormal; break;
-      case COLOR_LOCATION : location = m_location_aColor; break;
-      case TEXCOORD_LOCATION : location = m_location_aTexCoord; break;
-      default: return false;
+    switch (arrayLocation) {
+    case VERTEX_LOCATION:
+        location = m_location_aVertex;
+        break;
+    case NORMAL_LOCATION:
+        location = m_location_aNormal;
+        break;
+    case COLOR_LOCATION:
+        location = m_location_aColor;
+        break;
+    case TEXCOORD_LOCATION:
+        location = m_location_aTexCoord;
+        break;
+    default:
+        return false;
     }
 
-    if(values && (location != -1))
-    {
+    if (values && (location != -1)) {
         m_renderProgram->enableAttributeArray(location);
         m_renderProgram->setAttributeArray(location, values, tupleSize, stride);
         m_activeAttributeLocations.append(location);
         return true;
-    }
-    else return false;
+    } else
+        return false;
 }
-
 
 void GLESRenderer::activateAttributeBuffer(GLESRenderer::AttributeLocation bufferLocation)
 {
     int location = -1;
     int tupleSize = 3;
     int offset = 0;
-    switch(bufferLocation){
-      case VERTEX_LOCATION: location = m_location_aVertex; offset = 0; break;
-      case NORMAL_LOCATION: location = m_location_aNormal; offset = GLPoint::normalOffset(); break;
-      case COLOR_LOCATION : {
-                                location = m_location_aColor; offset = GLPoint::colorOffset();
-                                tupleSize = 4; //RGBA colors
-                             }break;
-      case TEXCOORD_LOCATION : location = m_location_aTexCoord; offset = GLPoint::texCoordOffset(); break;
-      default: qDebug() << "GLESRenderer::activateAttributeBuffer: Invalid location constant!";
+    switch (bufferLocation) {
+    case VERTEX_LOCATION:
+        location = m_location_aVertex;
+        offset = 0;
+        break;
+    case NORMAL_LOCATION:
+        location = m_location_aNormal;
+        offset = GLPoint::normalOffset();
+        break;
+    case COLOR_LOCATION: {
+        location = m_location_aColor;
+        offset = GLPoint::colorOffset();
+        tupleSize = 4; //RGBA colors
+    } break;
+    case TEXCOORD_LOCATION:
+        location = m_location_aTexCoord;
+        offset = GLPoint::texCoordOffset();
+        break;
+    default:
+        qDebug() << "GLESRenderer::activateAttributeBuffer: Invalid location constant!";
     }
-    m_renderProgram->enableAttributeArray( location );
-    m_renderProgram->setAttributeBuffer(location, GL_FLOAT, offset, tupleSize, sizeof (GLPoint));
+    m_renderProgram->enableAttributeArray(location);
+    m_renderProgram->setAttributeBuffer(location, GL_FLOAT, offset, tupleSize, sizeof(GLPoint));
 }
 
 /**
@@ -749,7 +763,7 @@ void GLESRenderer::activateAttributeBuffer(GLESRenderer::AttributeLocation buffe
   */
 void GLESRenderer::disableAttributeArrays()
 {
-    for(int i = 0; i < m_activeAttributeLocations.size(); i++)
+    for (int i = 0; i < m_activeAttributeLocations.size(); i++)
         m_renderProgram->disableAttributeArray(m_activeAttributeLocations[i]);
     m_activeAttributeLocations.clear();
 }
@@ -760,9 +774,10 @@ void GLESRenderer::disableAttributeArrays()
 void GLESRenderer::release()
 {
     disableAttributeArrays();
-    if(m_renderProgram)
-       m_renderProgram->release();
-    else qDebug() << "GLESRenderer::release() called without valid render program.";
+    if (m_renderProgram)
+        m_renderProgram->release();
+    else
+        qDebug() << "GLESRenderer::release() called without valid render program.";
     m_bound = false;
 }
 
@@ -782,7 +797,7 @@ void GLESRenderer::readGLViewportSettings()
 /**
   * Multiplies current mvp matrix with v. Mainly for debugging.
   */
-QVector3D GLESRenderer::modelToClip(const QVector3D & v)
+QVector3D GLESRenderer::modelToClip(const QVector3D& v)
 {
     ShaderDebugger::debugVector3D(v, "Vector in model space:");
     QVector3D result = m_mvpMatrix * v;
@@ -793,7 +808,7 @@ QVector3D GLESRenderer::modelToClip(const QVector3D & v)
 /**
   * Performs viewport transform. Mainly for debugging.
   */
-QVector3D GLESRenderer::clipToViewport(const QVector3D & v)
+QVector3D GLESRenderer::clipToViewport(const QVector3D& v)
 {
     float ox = m_viewportX + m_viewportW / 2.0f;
     float oy = m_viewportY + m_viewportH / 2.0f;
@@ -806,7 +821,7 @@ QVector3D GLESRenderer::clipToViewport(const QVector3D & v)
     return result;
 }
 
-QVector3D GLESRenderer::modelToViewport(const QVector3D &v)
+QVector3D GLESRenderer::modelToViewport(const QVector3D& v)
 {
     qDebug() << "GLESRenderer::modelToViewport vector in model space: " << v;
     QVector3D clipVector = modelToClip(v);
@@ -815,11 +830,9 @@ QVector3D GLESRenderer::modelToViewport(const QVector3D &v)
     return result;
 }
 
-QVector3D GLESRenderer::modelToMouse(const QVector3D &v)
+QVector3D GLESRenderer::modelToMouse(const QVector3D& v)
 {
     QVector3D vViewPort = modelToViewport(v);
     QVector3D result = QVector3D(vViewPort.x() - m_viewportX, -vViewPort.y() + m_viewportH + m_viewportY, 0.0);
     return result;
 }
-
-

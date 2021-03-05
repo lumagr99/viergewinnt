@@ -1,8 +1,7 @@
-#include <math.h>
 #include <QDebug>
+#include <math.h>
 
 #include "viergewinntscene.h"
-
 
 VierGewinntScene::VierGewinntScene()
 {
@@ -18,12 +17,10 @@ VierGewinntScene::VierGewinntScene()
     m_orthoRange = 1.0f;
 }
 
-
 void VierGewinntScene::paintUnderQmlScene()
 {
     //Do nothing
 }
-
 
 void VierGewinntScene::paintOnTopOfQmlScene()
 {
@@ -44,24 +41,19 @@ void VierGewinntScene::setupGeometry()
 void VierGewinntScene::doSynchronizeThreads()
 {
     GLItem::doSynchronizeThreads();
-    if(!m_renderer) {
+    if (!m_renderer) {
         return;
     }
 
-    if(m_mouseReleaseReceived)
-    {
+    if (m_mouseReleaseReceived) {
         m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar, m_mouseReleasePosition);
         m_vierGewinnt->deselectToken();
-    }
-    else if(m_mousePressReceived)
-    {
+    } else if (m_mousePressReceived) {
         m_mouseRay->setPoints(m_mouseNear, m_mouseFar);
-        m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar,  m_mousePressPosition);
+        m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar, m_mousePressPosition);
         m_renderer->mouseIntersection(&m_lastIntersection, v_Y, 0.0f, m_mousePressPosition);
         m_vierGewinnt->selectToken(m_mouseNear, m_mouseFar, m_eye);
-    }
-    else if (m_mousePositionChangedReceived)
-    {
+    } else if (m_mousePositionChangedReceived) {
         QVector3D oldIntersection = m_lastIntersection;
         m_renderer->mouseIntersection(&m_lastIntersection, v_Y, 0.0f, m_mousePositionChangedTo);
         m_moveVector += m_lastIntersection - oldIntersection;
@@ -116,17 +108,16 @@ void VierGewinntScene::mouseReleased(int x, int y)
 
 void VierGewinntScene::handleWheelEvent(int angleDelta)
 {
-    if(angleDelta < 0) {
+    if (angleDelta < 0) {
         m_eye *= 1.05f;
-    }
-    else {
+    } else {
         m_eye /= 1.05f;
     }
 }
 
 void VierGewinntScene::handleKeyEvent(int key)
 {
-    if(key >= Qt::Key_1 && key <= Qt::Key_7) {
+    if (key >= Qt::Key_1 && key <= Qt::Key_7) {
         //m_vierGewinnt->insertToken(key - KEY_OFFSET);
     }
 }

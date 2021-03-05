@@ -29,39 +29,38 @@
  * For body groups containg geometrically identical bodies use class GLMultipleBody e.g.  four wheels of a car, or 26 keys of a typewriter
  */
 
-class GLBodyGroup: public GLBody
-{
+class GLBodyGroup : public GLBody {
 public:
-    GLBodyGroup(const QString & name);
+    GLBodyGroup(const QString& name);
 
-    ~GLBodyGroup()Q_DECL_OVERRIDE;
+    ~GLBodyGroup() Q_DECL_OVERRIDE;
     /**
      * @brief deleteTextureObjects delete all texture objects from all objects in m_Objects
      */
-    void destroyTextureObjects()Q_DECL_OVERRIDE;
+    void destroyTextureObjects() Q_DECL_OVERRIDE;
     /**
      * @brief draw Draw all objects using renderer.
      * @param renderer
      */
-    virtual void draw(GLESRenderer *renderer, bool useBuffers = false)Q_DECL_OVERRIDE;
+    virtual void draw(GLESRenderer* renderer, bool useBuffers = false) Q_DECL_OVERRIDE;
     /**
      * @brief readModelsAndTextures Read all model files and set all textures.
      * To be overwritten by subclasses.
      */
-    virtual void readModelsAndTextures(QVector<GLPoint> * pointContainer, QVector<IndexType> *indexContainer);
+    virtual void readModelsAndTextures(QVector<GLPoint>* pointContainer, QVector<IndexType>* indexContainer);
 
     /**
      * @brief updateAnimatedProperties Call updateAnimatedProperties on all objects.
      */
-    void updateAnimatedProperties(float animationState)Q_DECL_OVERRIDE;
+    void updateAnimatedProperties(float animationState) Q_DECL_OVERRIDE;
     /**
      * @brief startAnimation Calls startAnimation on m_animatedObjects.
      */
-    void startAnimation(float animationState = 0.0)Q_DECL_OVERRIDE;
+    void startAnimation(float animationState = 0.0) Q_DECL_OVERRIDE;
     /**
      * @brief finishAnimation Calls finishAnimation on m_animatedObjects.
      */
-    void finishAnimation()Q_DECL_OVERRIDE;
+    void finishAnimation() Q_DECL_OVERRIDE;
 
 protected:
     QVector<GLBody*> m_Objects;

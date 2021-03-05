@@ -20,7 +20,7 @@ GLCourt::GLCourt(const QString& name, const GLColorRgba& color)
     GLBody::readBinaryModelFile(":/models/court.dat");
 
     for (int row = 0; row < m_rows; row++) {
-        m_court.append(QVector<int>(m_columns, Free));
+        m_court.append(QVector<Status>(m_columns, Status::Free));
     }
 }
 
@@ -43,18 +43,48 @@ int GLCourt::getColumnByPosition(const QVector3D& position) const
 QPoint GLCourt::getFreeField(int column)
 {
     for (int row = m_rows - 1; row >= 0; row--) {
-        if (m_court[row][column] == Free) {
+        if (m_court[row][column] == Status::Free) {
             return QPoint(row, column);
         }
     }
     return QPoint(-1, -1);
 }
 
+void GLCourt::setField(Player player, QPoint field)
+{
+    int x = field.x();
+    int y = field.y();
+    if (x < 0 || x >= m_rows) {
+        return;
+    }
+
+    if (y < 0 || y >= m_columns) {
+        return;
+    }
+
+    if (m_court[x][y] == Status::Free) {
+        if (player == Player::RedPlayer) {
+            m_court[x][y] = Status::RedPlayer;
+        } else {
+            m_court[x][y] = Status::GreenPlayer;
+        }
+    }
+}
+
 void GLCourt::printCourt()
 {
     for (int row = 0; row < m_rows; row++) {
         for (int col = 0; col < m_columns; col++) {
-            std::cout << m_court[row][col] << " ";
+            if (m_court[row][col] == Status::Free) {
+                std::cout << "F";
+
+            } else if (m_court[row][col] == Status::RedPlayer) {
+                std::cout << "R";
+
+            } else {
+                std::cout << "G";
+            }
+            std::cout << " ";
         }
         std::cout << '\n';
     }

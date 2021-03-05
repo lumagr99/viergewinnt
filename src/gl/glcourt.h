@@ -5,6 +5,7 @@
 
 #include "glbody.h"
 #include "gltoken.h"
+#include "../player.h"
 
 class GLCourt : public GLBody {
 
@@ -15,11 +16,11 @@ class GLCourt : public GLBody {
     static constexpr float DEPTH = 0.65f;
 
 public:
-    typedef enum {
+    enum class Status {
         Free,
         RedPlayer,
         GreenPlayer
-    } Status;
+    };
 
     GLCourt(const QString& name, const GLColorRgba& color = GLColorRgba::clBlue);
 
@@ -30,6 +31,8 @@ public:
     int getColumnByPosition(const QVector3D& position) const;
 
     QPoint getFreeField(int column);
+
+    void setField(Player player, QPoint field);
 
     void printCourt();
 
@@ -54,7 +57,7 @@ private:
 
     float m_depth;
 
-    QVector<QVector<int>> m_court;
+    QVector<QVector<Status>> m_court;
 
     QVector3D m_vRow;
     QVector3D m_vColumn;

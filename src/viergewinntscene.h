@@ -3,27 +3,24 @@
 
 #include <QKeyEvent>
 
-#include "glitem.h"
-#include "viergewinnt.h"
+#include "gl/glcourt.h"
+#include "gl/glitem.h"
+#include "gl/glmouseray.h"
+#include "gl/gltableplate.h"
+#include "gl/gltokengreen.h"
+#include "gl/gltokenred.h"
 #include "soundengine.h"
-#include "glcourt.h"
-#include "gltokengreen.h"
-#include "gltokenred.h"
-#include "gltableplate.h"
-#include "glmouseray.h"
+#include "viergewinnt.h"
 
-class VierGewinntScene : public GLItem
-{
+class VierGewinntScene : public GLItem {
     Q_OBJECT
 
     static constexpr int KEY_OFFSET = Qt::Key_0;
 
 public:
-
     explicit VierGewinntScene();
 
 protected:
-
     virtual void paintUnderQmlScene() Q_DECL_OVERRIDE;
 
     virtual void paintOnTopOfQmlScene() Q_DECL_OVERRIDE;
@@ -53,12 +50,11 @@ public slots:
     void handleKeyEvent(int key);
 
 private:
+    VierGewinnt* m_vierGewinnt;
 
-    VierGewinnt *m_vierGewinnt;
+    GLMouseRay* m_mouseRay;
 
-    GLMouseRay *m_mouseRay;
-
-    SoundEngine *m_sounds;
+    SoundEngine* m_sounds;
 
     QPoint m_mousePressPosition;
 
@@ -79,7 +75,6 @@ private:
     bool m_mouseReleaseReceived;
 
     bool m_mousePositionChangedReceived;
-
 };
 
 #endif // VIERGEWINNTSCENE_H

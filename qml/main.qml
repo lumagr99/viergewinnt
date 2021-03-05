@@ -3,8 +3,8 @@ import QtQuick.Controls 2.5
 
 ApplicationWindow {
     id: applicationWindow
-    width: 640
-    height: 480
+    width: 1024
+    height: 768
     visible: true
     title: qsTr("Vier Gewinnt")
 

@@ -19,9 +19,9 @@
 #ifndef GLESRENDERER_H
 #define GLESRENDERER_H
 
-#include <QOpenGLShaderProgram>
-#include <QOpenGLFunctions>
 #include <QList>
+#include <QOpenGLFunctions>
+#include <QOpenGLShaderProgram>
 #include <QStack>
 
 #include "glcolorrgba.h"
@@ -82,23 +82,24 @@
 //#define USE_QOPENGL_FUNCTIONS
 
 class GLESRenderer : public QObject
-        #ifdef USE_QOPENGL_FUNCTIONS
-        , public QOpenGLFunctions
-        #endif
+#ifdef USE_QOPENGL_FUNCTIONS
+    ,
+                     public QOpenGLFunctions
+#endif
 {
     Q_OBJECT
 public:
-    typedef enum{
+    typedef enum {
         INVALID_LOCATION,
         VERTEX_LOCATION,
         NORMAL_LOCATION,
         COLOR_LOCATION,
         TEXCOORD_LOCATION
-    }AttributeLocation;
+    } AttributeLocation;
 
-    explicit GLESRenderer(QObject *parent,
-                          const QString & vShaderFilename = ":/src/vshader.vsh",
-                          const QString & fShaderFilename = ":/src/fshader.fsh");
+    explicit GLESRenderer(QObject* parent,
+        const QString& vShaderFilename = ":/src/vshader.vsh",
+        const QString& fShaderFilename = ":/src/fshader.fsh");
 
     virtual ~GLESRenderer();
 
@@ -142,25 +143,25 @@ public:
       * Use a custom shader reverse function, if this is not true.
       * Returns coordinate in object space.
       */
-    QVector3D unProjectViewportPoint(const QVector3D & vWin);
+    QVector3D unProjectViewportPoint(const QVector3D& vWin);
 
     /**
       * Performs inverse viewport transform.
       */
-    QVector3D viewportToClip(const QVector3D & v);
+    QVector3D viewportToClip(const QVector3D& v);
     /**
       * Returns the points on near and far clipping plane, that correspond to the
       * mouseX and mouseY coordinates of a mouse click.
       * mouseX and mouseY are coordinates as delivered by QMouseEvent or QDeclarativeMouseEvent.
       */
-    void calculateMousePoints(QVector3D * nearPoint, QVector3D * farPoint, const QPoint &mousePos );
+    void calculateMousePoints(QVector3D* nearPoint, QVector3D* farPoint, const QPoint& mousePos);
 
     /**
       * Calculate the distance of the "mouse ray line" to point p in model space.
       * mouseX, mouseY are the coordinates of the mouse click as delivered by QMouseEvent.
       * Returns distance.
       */
-    float distanceToMouseClick(QVector3D p, const QPoint &mousePos);
+    float distanceToMouseClick(QVector3D p, const QPoint& mousePos);
 
     /**
       * Calculates intersection of "mouse ray line" with the plane defined by normal and d.
@@ -170,14 +171,13 @@ public:
       * the plane normal*(x,y,z) + d = 0.
       * If return value is false, *intersection is not modified.
       */
-    bool mouseIntersection(QVector3D * intersection, QVector3D normal, float d, const QPoint &mousePos);
+    bool mouseIntersection(QVector3D* intersection, QVector3D normal, float d, const QPoint& mousePos);
     ///@}
-
 
     //======================================================================================
     ///@{
 
-      /** Getters and setters for uniforms
+    /** Getters and setters for uniforms
        */
     /**
       * Set modelview matrix. Updates mvpMatrix and normalMatrix too.
@@ -187,22 +187,22 @@ public:
     /**
       * Getter for debugging.
       */
-    const QMatrix4x4 & getMvMatrix(){return m_mvMatrix;}
+    const QMatrix4x4& getMvMatrix() { return m_mvMatrix; }
 
     /**
       * Getter for debugging.
       */
-    const QMatrix4x4 getViewMatrix(){return m_viewMatrix;}
-     /**
+    const QMatrix4x4 getViewMatrix() { return m_viewMatrix; }
+    /**
        * Getter for debugging.
        */
-     const QMatrix3x3 & getNormalMatrix(){return m_normalMatrix;}
+    const QMatrix3x3& getNormalMatrix() { return m_normalMatrix; }
 
     /**
       * Sets mvMatrix to a lookAt transformation.
       * Call setPMatrix or setPerspective first.
       */
-    void setLookAt(const QVector3D & eye,const QVector3D & center,const QVector3D & up );
+    void setLookAt(const QVector3D& eye, const QVector3D& center, const QVector3D& up);
 
     /**
       * Set projection matrix. Call setMvMatrix after this.
@@ -211,7 +211,7 @@ public:
     /**
       * Getter for debugging.
       */
-    const QMatrix4x4 & getPMatrix(){return m_pMatrix;}
+    const QMatrix4x4& getPMatrix() { return m_pMatrix; }
     /**
       * Setup projection matrix. Call setMvMatrix after this.
       */
@@ -270,7 +270,7 @@ public:
      * @brief sourceAlpha The present source alpha value for blending
      * @return
      */
-    float sourceAlpha(){return m_sourceAlpha;}
+    float sourceAlpha() { return m_sourceAlpha; }
     /**
       * Enable / disable lighting.
       * Defaults to false.
@@ -279,7 +279,7 @@ public:
     /**
       * Returns lighting flag.
       */
-    bool isLightingEnabled(){return m_lightingEnabled;}
+    bool isLightingEnabled() { return m_lightingEnabled; }
     /**
       * Enable / disable color array.
       * Defaults to false.
@@ -288,7 +288,7 @@ public:
     /**
       * Returns lighting flag.
       */
-    bool isColorArrayEnabled(){return m_colorArrayEnabled;}
+    bool isColorArrayEnabled() { return m_colorArrayEnabled; }
     /**
       * Set the texture flag.
       * Defaults to false.
@@ -297,7 +297,7 @@ public:
     /**
       * Returns texture flag;
       */
-    bool isTextureEnabled(){return m_textureEnabled;}
+    bool isTextureEnabled() { return m_textureEnabled; }
     /**
      * @brief setMaskActive Set the fragment shader mask flag
      * @param newVal
@@ -307,16 +307,16 @@ public:
      * @brief isMaskActive
      * @return Returns mask flag.
      */
-    bool isMaskActive(){return m_maskActive;}
+    bool isMaskActive() { return m_maskActive; }
     /**
       * Set light direction.
       * Defaults to (1.0, 1.0, 1.0)
       */
-    void setLightDirection(const QVector3D & newVal);
+    void setLightDirection(const QVector3D& newVal);
     /**
       * Getter.
       */
-    const QVector3D lightDirection(){return m_lightDirection;}
+    const QVector3D lightDirection() { return m_lightDirection; }
 
     /**
       * Set size of points drawn with GL_POINTS.
@@ -327,7 +327,7 @@ public:
      * @brief setMaskCenter Set center of fragment shader mask
      * @param newVal New center in viewport coordinates
      */
-    void setMaskCenter(const QPoint &newVal);
+    void setMaskCenter(const QPoint& newVal);
 
     /**
      * @brief setMaskDiameter Set diameter of fragment shader mask
@@ -337,18 +337,18 @@ public:
     /**
       * Returns pointSize;
       */
-    float pointSize(){return m_pointSize;}
+    float pointSize() { return m_pointSize; }
 
     /**
       * Pushes mvMatrix.
       */
-    void pushMvMatrix(){m_mvMatrixStack.push(m_mvMatrix);}
+    void pushMvMatrix() { m_mvMatrixStack.push(m_mvMatrix); }
 
     /**
      * @brief matrixStackSize for debugging
      * @return
      */
-    int matrixStackSize(){return m_mvMatrixStack.size();}
+    int matrixStackSize() { return m_mvMatrixStack.size(); }
     /**
       * Pops mvMatrix from stack and updates normalMatrix and mvpMatrix.
       */
@@ -357,12 +357,12 @@ public:
     /**
       * Translates mvMatrix by v
       */
-    void translate(const QVector3D & v);
+    void translate(const QVector3D& v);
     void translate(float x, float y, float z);
     /**
       * Rotates mvMatrix by angle around axis
       */
-    void rotate(GLfloat angle, const QVector3D & axis);    
+    void rotate(GLfloat angle, const QVector3D& axis);
     /**
       * Rotates mvMatrix by angle around axis (x,y,z)
       */
@@ -373,7 +373,7 @@ public:
      * @brief transform Multiplies mvMatrix with transformation
      * @param transformation
      */
-    void transform(const QMatrix4x4 & transformation);
+    void transform(const QMatrix4x4& transformation);
 
     /**
      * @brief addTransformation
@@ -384,7 +384,7 @@ public:
     /**
       * Scales mvMatrix.
       */
-    void scale(const QVector3D & v );
+    void scale(const QVector3D& v);
 
     ///@}
 
@@ -399,17 +399,17 @@ public:
       * Enables 2D Vertex, normal, color or texCoord arrays and sets start adresses of arrays
       * Type may be: VERTEX_LOCATION, NORMAL_LOCATION, COLOR_LOCATION, TEXCOORD_LOCATION
       */
-    bool activateAttributeArray (AttributeLocation location, const QVector2D * values, int stride = 0 );
+    bool activateAttributeArray(AttributeLocation location, const QVector2D* values, int stride = 0);
     /**
       * Enables 3D Vertex, normal, color or texCoord arrays and sets start adresses of arrays
       * Type may be: VERTEX_LOCATION, NORMAL_LOCATION, COLOR_LOCATION, TEXCOORD_LOCATION
       */
-    bool activateAttributeArray (AttributeLocation location, const QVector3D * values, int stride = 0 );
-     /**
+    bool activateAttributeArray(AttributeLocation location, const QVector3D* values, int stride = 0);
+    /**
       * Enables 4D Vertex or color arrays and sets start adresses of arrays
       * Type may be: VERTEX_LOCATION, COLOR_LOCATION
       */
-    bool activateAttributeArray (AttributeLocation location, const GLColorRgba * values, int stride = 0 );
+    bool activateAttributeArray(AttributeLocation location, const GLColorRgba* values, int stride = 0);
     /**
       * To be used with arrays (e.g. QVector<GLPoint>) of GLPoint objects.
       * Enables 3D Vertex, normal, color or texCoord buffer
@@ -434,26 +434,25 @@ public:
     /**
       * Multiplies current mvp matrix with v. Mainly for debugging.
       */
-    QVector3D modelToClip(const QVector3D & v);
+    QVector3D modelToClip(const QVector3D& v);
     /**
       * Performs viewport transform. Mainly for debugging.
       */
-    QVector3D clipToViewport(const QVector3D & v);
+    QVector3D clipToViewport(const QVector3D& v);
     /**
      * @brief modelToViewport transform vector from model space to viewport
      * @param v
      * @return vieport coordinates
      */
-    QVector3D modelToViewport(const QVector3D & v);
+    QVector3D modelToViewport(const QVector3D& v);
     /**
      * @brief modelToMouse transform vector from model space to mouse coordinates
      * @param v
      * @return
      */
-    QVector3D modelToMouse(const QVector3D & v);
+    QVector3D modelToMouse(const QVector3D& v);
 
 protected:
-
     /**
      * @brief activateAttributeArray
      * Enables  Vertex, normal, color or texCoord arrays and sets start adresses of arrays
@@ -464,7 +463,7 @@ protected:
      * @param stride Distance to next tuple
      * @return
      */
-    bool activateAttributeArray (AttributeLocation location, const float * values, int tupleSize, int stride = 0 );
+    bool activateAttributeArray(AttributeLocation location, const float* values, int tupleSize, int stride = 0);
 
     bool m_initialized;
     bool m_bound;
@@ -482,14 +481,14 @@ protected:
     //The inverted mvp matrix for unproject purposes
     //Use the invertedMvpMatrixValid flag for calculating it when required.
     QMatrix4x4 m_invertedMvpMatrix;
-    QStack <QMatrix4x4>m_mvMatrixStack;
+    QStack<QMatrix4x4> m_mvMatrixStack;
     QMatrix4x4 m_mvMatrix; //modelview matrix
     QMatrix4x4 m_viewMatrix; //viewMatrix part of mvMatrix for debugging
-    QMatrix4x4 m_pMatrix;  //projection matrix
+    QMatrix4x4 m_pMatrix; //projection matrix
     float m_fovy;
     float m_aspect;
     float m_nearClip; //near clipping plane
-    float m_farClip;  //far clipping plane
+    float m_farClip; //far clipping plane
     bool m_OrthoMode;
     QMatrix3x3 m_normalMatrix; //matrix for normal transformation
 
@@ -511,9 +510,9 @@ protected:
     //Shaders and program
     QString m_vShaderFileName; //vertex shader
     QString m_fShaderFileName; //fragment shader
-    QOpenGLShader * m_vShader; //vertex shader
-    QOpenGLShader * m_fShader; // fragment shader
-    QOpenGLShaderProgram * m_renderProgram;
+    QOpenGLShader* m_vShader; //vertex shader
+    QOpenGLShader* m_fShader; // fragment shader
+    QOpenGLShaderProgram* m_renderProgram;
 
     // Locations of shader variables
     int m_location_aVertex;
@@ -539,7 +538,7 @@ protected:
     int m_location_uMaskActive;
 
     //The list of enabled attribute locations
-    QList<int>m_activeAttributeLocations;
+    QList<int> m_activeAttributeLocations;
     //viewport
     int m_viewportX;
     int m_viewportY;

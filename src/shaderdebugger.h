@@ -19,20 +19,19 @@
 #ifndef SHADERDEBUGGER_H
 #define SHADERDEBUGGER_H
 
-#include <QtOpenGL/QGLWidget>
 #include <QMatrix3x3>
 #include <QMatrix4x4>
+#include <QtOpenGL/QGLWidget>
 
 /** \brief A simple debugging tool for uniforms passed to a shader.
   *
   * There is no way to get the values of variables inside a shader, therefore you have to look
   * at the variables, before they are passed to the shader.
   */
-class ShaderDebugger
-{
+class ShaderDebugger {
 public:
     ShaderDebugger();
-    static void setEnabled(bool newVal){enabled = newVal;}
+    static void setEnabled(bool newVal) { enabled = newVal; }
     /**
       * Works on GLES platforms only.
       */
@@ -42,27 +41,28 @@ public:
      * @param m The matrix
      * @param caption
      */
-    static void debugMatrix4x4(const QMatrix4x4 & m, const QString & caption = "QMatrix4x4");
+    static void debugMatrix4x4(const QMatrix4x4& m, const QString& caption = "QMatrix4x4");
     /**
      * @brief debugMatrix3x3 Send debug output to stderr.
      * @param m The matrix
      * @param caption
      */
-    static void debugMatrix3x3(const QMatrix3x3 & m, const QString & caption = "QMatrix3x3");
+    static void debugMatrix3x3(const QMatrix3x3& m, const QString& caption = "QMatrix3x3");
     /**
      * @brief debugVector4D Send debug output to stderr.
      * @param m The vector
      * @param caption
      */
-    static void debugVector4D(const QVector4D & v, const QString & caption = "QVector4D");
+    static void debugVector4D(const QVector4D& v, const QString& caption = "QVector4D");
     /**
      * @brief debugVector4D Send debug output to stderr.
      * @param m The vector
      * @param caption
      */
-    static void debugVector3D(const QVector3D & v, const QString & caption = "QVector3D");
+    static void debugVector3D(const QVector3D& v, const QString& caption = "QVector3D");
+
 private:
-   static bool enabled;
+    static bool enabled;
 };
 
 #endif // SHADERDEBUGGER_H

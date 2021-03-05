@@ -7,19 +7,19 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        src/glbody.cpp \
-        src/glbodygroup.cpp \
-        src/glcolorrgba.cpp \
-        src/glcourt.cpp \
-        src/glesrenderer.cpp \
-        src/glitem.cpp \
-        src/glmouseray.cpp \
-        src/glmultiplebody.cpp \
-        src/glpoint.cpp \
-        src/gltableplate.cpp \
-        src/gltoken.cpp \
-        src/gltokengreen.cpp \
-        src/gltokenred.cpp \
+        src/gl/glbody.cpp \
+        src/gl/glbodygroup.cpp \
+        src/gl/glcolorrgba.cpp \
+        src/gl/glcourt.cpp \
+        src/gl/glesrenderer.cpp \
+        src/gl/glitem.cpp \
+        src/gl/glmouseray.cpp \
+        src/gl/glmultiplebody.cpp \
+        src/gl/glpoint.cpp \
+        src/gl/gltableplate.cpp \
+        src/gl/gltoken.cpp \
+        src/gl/gltokengreen.cpp \
+        src/gl/gltokenred.cpp \
         src/main.cpp \
         src/shaderdebugger.cpp \
         src/viergewinnt.cpp \
@@ -27,21 +27,22 @@ SOURCES += \
         src/soundengine.cpp
 
 HEADERS += \
-        src/glbody.h \
-        src/glbodygroup.h \
-        src/glcolorrgba.h \
-        src/glcourt.h \
-        src/glesrenderer.h \
-        src/glitem.h \
-        src/glmouseray.h \
-        src/glmultiplebody.h \
-        src/glpoint.h \
-        src/gltableplate.h \
-        src/gltoken.h \
-        src/gltokengreen.h \
-        src/gltokenred.h \
+        src/gl/glbody.h \
+        src/gl/glbodygroup.h \
+        src/gl/glcolorrgba.h \
+        src/gl/glcourt.h \
+        src/gl/glesrenderer.h \
+        src/gl/glitem.h \
+        src/gl/glmouseray.h \
+        src/gl/glmultiplebody.h \
+        src/gl/glpoint.h \
+        src/gl/gltableplate.h \
+        src/gl/gltoken.h \
+        src/gl/gltokengreen.h \
+        src/gl/gltokenred.h \
+        src/gl/gldefines.h \
+        src/player.h \
         src/shaderdebugger.h \
-        src/gldefines.h \
         src/viergewinnt.h \
         src/viergewinntscene.h \
         src/soundengine.h

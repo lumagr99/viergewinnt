@@ -19,13 +19,13 @@
 #ifndef GLBODY_H
 #define GLBODY_H
 
-#include <QVector>
-#include <QOpenGLTexture>
 #include <QOpenGLFunctions>
+#include <QOpenGLTexture>
+#include <QVector>
 
+#include "gldefines.h"
 #include "glesrenderer.h"
 #include "glpoint.h"
-#include "gldefines.h"
 
 /**
   * \brief A 3D body that uses a GLESRenderer for drawing and GLPoint objects for defining its surface.
@@ -38,12 +38,12 @@
   * Overwrite draw() if you do need special drawing procedures.
   */
 class GLBody
-        #ifdef USE_QOPENGL_FUNCTIONS
-        : protected QOpenGLFunctions
-        #endif
+#ifdef USE_QOPENGL_FUNCTIONS
+    : protected QOpenGLFunctions
+#endif
 {
     static uint BINARY_FORMAT_VERSION;
-    static constexpr float fZero =  0.0;
+    static constexpr float fZero = 0.0;
     static constexpr float fOne = 1.0;
     static constexpr float fHalf = 0.5;
     static constexpr float fTwo = 2.0;
@@ -51,12 +51,12 @@ class GLBody
 public:
     /**Constructor does NOT create the surface.
      */
-    GLBody(const QString & name, float radius = 1.0, const GLColorRgba & color = GLColorRgba::clBlue, const QString m_textureFile = "");
+    GLBody(const QString& name, float radius = 1.0, const GLColorRgba& color = GLColorRgba::clBlue, const QString m_textureFile = "");
     /**
       * @brief GLBody Constructor does NOT create the surface.
       * @param offset The offset from coordinate origin to modeldata zero.
       */
-    GLBody(QString  name, const QVector3D offset);
+    GLBody(QString name, const QVector3D offset);
 
     /** Destructor will delete created containers.
      */
@@ -64,9 +64,9 @@ public:
 
     /** Set textures from files. Returns true on success. Needs a current OpenGL context.
       */
-    bool createTextureObjects(                     GLenum minfilter = GL_LINEAR_MIPMAP_NEAREST,
-                                                   GLenum magfilter = GL_LINEAR ,
-                                                   GLenum wrapmode = GL_CLAMP_TO_EDGE);
+    bool createTextureObjects(GLenum minfilter = GL_LINEAR_MIPMAP_NEAREST,
+        GLenum magfilter = GL_LINEAR,
+        GLenum wrapmode = GL_CLAMP_TO_EDGE);
     /**
        * @brief destroyTextureObjects delete all texture objects from m_textureIds
        */
@@ -82,30 +82,30 @@ public:
       * @param indexContainer The container for the index data. If nullptr, a new one is created.
       * Created containers will be deleted by destructor.
       */
-    virtual void makeSurface(QVector<GLPoint> * pointContainer, QVector<IndexType> *indexContainer);
+    virtual void makeSurface(QVector<GLPoint>* pointContainer, QVector<IndexType>* indexContainer);
     /**
       * @brief shareGeometry copies container pointers and first and next point, index, normal
       * Sets m_ownContainers to false
       * @param other The GLBody to be copied
       */
-    virtual void shareGeometry(const GLBody *other);
+    virtual void shareGeometry(const GLBody* other);
     /**
        * @brief shareTextureObjects copy texture names (numbers) from other
        * and set m_ownTextures to false.
        * @param other
        */
-    virtual void shareTextureObjects(const GLBody *other);
+    virtual void shareTextureObjects(const GLBody* other);
     /**
       * @brief pointsSize Convenience function to avoid multiple casting
       * @return number of points
       */
-    IndexType pointsSize(){return static_cast<IndexType>(m_points->size());}
+    IndexType pointsSize() { return static_cast<IndexType>(m_points->size()); }
 
     /**
       * @brief indicesSize Convenience function to avoid multiple casting
       * @return m_indices->size()
       */
-    IndexType indicesSize(){return static_cast<IndexType>(m_indices->size());}
+    IndexType indicesSize() { return static_cast<IndexType>(m_indices->size()); }
     /**
      * @brief readBinaryFile Calls makeSurface and reads binary file.
      * File format: 4 bytes uint number of GlPoints, 4 bytes uint number of uint indices
@@ -115,7 +115,7 @@ public:
      * @param indexContainer To be used for indices. If nullptr, a new private container is created
      * @return
      */
-    virtual bool readBinaryModelFile(const QString & dataFileName, QVector<GLPoint> *pointContainer = nullptr, QVector<GLushort> *indexContainer = nullptr);       // Binaere Datei
+    virtual bool readBinaryModelFile(const QString& dataFileName, QVector<GLPoint>* pointContainer = nullptr, QVector<GLushort>* indexContainer = nullptr); // Binaere Datei
 
     /**
       * @brief rotateModelPoints Rotates model points around axis
@@ -123,7 +123,7 @@ public:
       * @param axisDirection Direction of rotation axis
       * @param angle Clockwise rotation angle.
       */
-    virtual void rotateModelPoints(const QVector3D &axisCenter, const QVector3D &axisDirection, float angle);
+    virtual void rotateModelPoints(const QVector3D& axisCenter, const QVector3D& axisDirection, float angle);
 
     /**
      * @brief calculateDrawMatrix Virtual function to calculate the final matrix to be used for drawing.
@@ -133,7 +133,7 @@ public:
     /** Draws the surface and calls makeSurface if required. Binds attributes and textures (!!slow!!), then calls drawGeometries().
     * Needs an active (made current) GL-Context.
     */
-    virtual void draw(GLESRenderer * renderer, bool useBuffers = false);
+    virtual void draw(GLESRenderer* renderer, bool useBuffers = false);
     /**
       * @brief drawGeometries Should be called from draw(). Sets uniforms and calls glDrawArray or glDrawElements.
       * Does NOT bind attribute arrays or buffers! Therefore it is very fast. Assumes bound attributes.
@@ -142,15 +142,15 @@ public:
       * @param useBuffers
       * @param index
       */
-    virtual void drawGeometries(GLESRenderer *renderer, bool useBuffers, int index = 0);
+    virtual void drawGeometries(GLESRenderer* renderer, bool useBuffers, int index = 0);
     /**
       * @brief bindTexture binds the texture at m_activeTextureIndex
       */
-    virtual void bindTexture(GLESRenderer *renderer);
+    virtual void bindTexture(GLESRenderer* renderer);
     /**
       * @brief bindTexture releases the texture at m_activeTextureIndex
       */
-    virtual void releaseTexture(GLESRenderer *renderer);
+    virtual void releaseTexture(GLESRenderer* renderer);
     /**
       * @brief drawDebugGeometries Should be called from draw().
       * Sets uniforms and calls glDrawArray or glDrawElements on debug geometries. Does NOT bind attribute arrays or buffers!!
@@ -159,7 +159,7 @@ public:
       * @param useBuffers
       * @param index
       */
-    virtual void drawDebugGeometries(GLESRenderer *renderer, bool useBuffers);
+    virtual void drawDebugGeometries(GLESRenderer* renderer, bool useBuffers);
 
     /**
       * Returns true, when line through p1 and p2 intersects body sphere
@@ -185,8 +185,8 @@ public:
      * @param intersection If not nullptr, coordinates of intersection are written to *intersection.
      * @return True, if plane defined by p1, p2, p3 is intersected by line inside the triangle formed by p1, p2, p3.
      */
-    static bool isTriangleHit(const QVector3D & p1, const QVector3D & p2, const QVector3D & p3,
-                              const QVector3D & pLine, const QVector3D & lineDirection, QVector3D *intersection = nullptr);
+    static bool isTriangleHit(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3,
+        const QVector3D& pLine, const QVector3D& lineDirection, QVector3D* intersection = nullptr);
     /**
     * @brief isParallelogramHit
     * @param p1 Triangle point 1
@@ -197,22 +197,22 @@ public:
     * @param intersection If not nullptr, coordinates of intersection are written to *intersection.
     * @return True, if plane defined by p1, p2, p3 is intersected by line inside the parallelogram (rectangle) formed by p1, p2, p3.
     */
-    static bool isParallelogramHit(const QVector3D & p1, const QVector3D & p2, const QVector3D & p3,
-                                   const QVector3D & pLine, const QVector3D & lineDirection, QVector3D *intersection = nullptr);
+    static bool isParallelogramHit(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3,
+        const QVector3D& pLine, const QVector3D& lineDirection, QVector3D* intersection = nullptr);
     /**
       * @brief isHit
       * @return True if line defined by mousePos intersects cube defined by minCoordinates and maxCoordinates.
       */
-    virtual bool isHit(QPoint mousePos, GLESRenderer * renderer);
+    virtual bool isHit(QPoint mousePos, GLESRenderer* renderer);
 
     /**
       * Returns true, if enclosing spheres touch or intersect
       */
-    virtual bool spheresAreColliding(const GLBody * other);
+    virtual bool spheresAreColliding(const GLBody* other);
 
     /** Set texture file. Needs a current OpenGL context.
      */
-    virtual bool setTextureFile(const QString & textureFile);
+    virtual bool setTextureFile(const QString& textureFile);
     /**
      * @brief setTextures Alle Texturen aus textureFiles laden.
      * @param minfilter
@@ -220,7 +220,7 @@ public:
      * @param wrapmode
      * @return true wenn ok.
      */
-    virtual bool setTextureFiles(const QStringList &textureFiles);
+    virtual bool setTextureFiles(const QStringList& textureFiles);
 
     /**
       * Moves the body by adding vMove to all vertices.
@@ -249,7 +249,7 @@ public:
      * @brief isAnaimationActive
      * @return True, if an animation is in progress.
      */
-    bool isAnimationActive(){return m_animationActive;}
+    bool isAnimationActive() { return m_animationActive; }
 
     /**
      * @brief localAnimationState
@@ -274,24 +274,24 @@ public:
     /**
       * Simple gettters
       */
-    bool isSelected(){return m_selected;}
-    const QVector3D & getCenter()const{return m_center;}
-    const QMatrix4x4 & transformation()const{return m_transformationMatrix;}
-    const GLColorRgba & color()const{return m_color;}
+    bool isSelected() { return m_selected; }
+    const QVector3D& getCenter() const { return m_center; }
+    const QMatrix4x4& transformation() const { return m_transformationMatrix; }
+    const GLColorRgba& color() const { return m_color; }
 
     /**Simple setters
     */
-    void setColor(const GLColorRgba & newVal){m_color = newVal;}
-    void setSpecularColor(const GLColorRgba & newVal){m_specularColor = newVal;}
-    void setShininess(int newVal){m_shininess = newVal;}
-    void setSelected(bool newVal){m_selected = newVal;}
-    void setDrawingMode(GLuint newVal){m_drawingMode = newVal;}
-    void setTransformation(const QMatrix4x4 & transformation){m_transformationMatrix = transformation;}
-    void setModelOffset(const QVector3D & offset){m_modelOffset = offset;}
-    const GLColorRgba & getColor()const{return m_color;}
-    const QMatrix4x4 & getTransformation()const{return m_transformationMatrix;}
-    const QString & name()const{ return m_name;}
-    float getRadius()const{return m_radius;}
+    void setColor(const GLColorRgba& newVal) { m_color = newVal; }
+    void setSpecularColor(const GLColorRgba& newVal) { m_specularColor = newVal; }
+    void setShininess(int newVal) { m_shininess = newVal; }
+    void setSelected(bool newVal) { m_selected = newVal; }
+    void setDrawingMode(GLuint newVal) { m_drawingMode = newVal; }
+    void setTransformation(const QMatrix4x4& transformation) { m_transformationMatrix = transformation; }
+    void setModelOffset(const QVector3D& offset) { m_modelOffset = offset; }
+    const GLColorRgba& getColor() const { return m_color; }
+    const QMatrix4x4& getTransformation() const { return m_transformationMatrix; }
+    const QString& name() const { return m_name; }
+    float getRadius() const { return m_radius; }
     /**
      * @brief setTextureIndex
      * @param i set m_activeTexture to m_textureIds[i]
@@ -301,11 +301,11 @@ public:
     /**
       * Set new center and invalidate surface.
       */
-    virtual void setCenter(const QVector3D & newVal);
+    virtual void setCenter(const QVector3D& newVal);
 
-    void setScale(float scale){m_scale = scale;}
+    void setScale(float scale) { m_scale = scale; }
 
-    virtual void setShowFrame(bool show){m_showFrame = show;}
+    virtual void setShowFrame(bool show) { m_showFrame = show; }
 
     /**
      * @brief setMinMaxCoordinates sets min/max coordinates and blocks automatic setting of min/max
@@ -315,7 +315,7 @@ public:
      */
     virtual void setMinMaxCoordinates(const QVector3D min, const QVector3D max);
     //for Debugging
-    void showNormals(bool show){m_showNormals = show;}
+    void showNormals(bool show) { m_showNormals = show; }
 
 protected:
     /**
@@ -332,9 +332,9 @@ protected:
      * @param intersection Coordinates of intersection
      * @return True if an intersection exists.
      */
-    static bool calculateIntersection(const QVector3D & p1, const QVector3D & p2, const QVector3D & p3,
-                                      const QVector3D & pLine, const QVector3D & lineDirection,
-                                      float * a, float * b, QVector3D *intersection = nullptr);
+    static bool calculateIntersection(const QVector3D& p1, const QVector3D& p2, const QVector3D& p3,
+        const QVector3D& pLine, const QVector3D& lineDirection,
+        float* a, float* b, QVector3D* intersection = nullptr);
 
     void createNormals(float length = 1.0);
     /**
@@ -347,8 +347,8 @@ protected:
      */
     void init();
 
-    void activateAttributeBuffers(GLESRenderer * renderer);
-    void activateAttributeArrays(GLESRenderer * renderer);
+    void activateAttributeBuffers(GLESRenderer* renderer);
+    void activateAttributeArrays(GLESRenderer* renderer);
     /**
       * The name  of this object for debugging messages.
       */
@@ -396,7 +396,7 @@ protected:
     /** The array of points defining the surface.
      *  This *may be* a container not owned by this body.
      */
-    QVector <GLPoint> * m_points;
+    QVector<GLPoint>* m_points;
 
     /**
      * @brief ownPointsContainer Set this Flag, if points container was created by this body.
@@ -415,7 +415,7 @@ protected:
 
     /** The array with the indices. May be left empty.
     */
-    QVector <GLushort> * m_indices;
+    QVector<GLushort>* m_indices;
 
     /**
      * @brief ownPointsContainer Set this Flag, if points container was created by this body.
@@ -454,7 +454,6 @@ protected:
      */
     QStringList m_textureFilenames;
 
-
     /** The diffuse and ambient color for the body.
    */
     GLColorRgba m_color;
@@ -478,7 +477,7 @@ protected:
      */
     bool m_selected;
 
-    QVector3D m_modelOffset;//Offset of model vertices from origin.
+    QVector3D m_modelOffset; //Offset of model vertices from origin.
 
     /**
      * This matrix holds the basic transformation for the body and
@@ -522,10 +521,10 @@ protected:
     bool m_showFrame;
 
     bool m_textureEnabled;
+
 private:
     bool m_lightingEnabled;
     bool m_colorArrayEnabled;
-
 };
 
 #endif

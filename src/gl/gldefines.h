@@ -16,9 +16,9 @@
 #ifndef GLDEFINES_H
 #define GLDEFINES_H
 
-#include <QVector3D>
-#include "glcolorrgba.h"
 #include "GL/gl.h"
+#include "glcolorrgba.h"
+#include <QVector3D>
 
 #define IndexType GLushort
 
@@ -37,20 +37,17 @@ const static QVector3D v_XZ = QVector3D(1.0, 0.0, 1.0);
 const static QVector3D v_YZ = QVector3D(0.0, 1.0, 1.0);
 const static QVector3D v_XYZ = QVector3D(1.0, 1.0, 1.0);
 
-
 /** Predefined global colors for convenience.
   */
-const static GLColorRgba cl_White      = GLColorRgba(1.0,1.0,1.0);
-const static GLColorRgba cl_Black      = GLColorRgba(0.0,0.0,0.0);
-const static GLColorRgba cl_Red        = GLColorRgba(1.0,0.0,0.0);
-const static GLColorRgba cl_Green      = GLColorRgba(0.0,1.0,0.0);
-const static GLColorRgba cl_Blue       = GLColorRgba(0.0,0.0,1.0);
-const static GLColorRgba cl_LightBlue  = GLColorRgba(0.5,0.5,1.0);
-const static GLColorRgba cl_Gray       = GLColorRgba(0.5,0.5,0.5);
-const static GLColorRgba cl_Yellow     = GLColorRgba(1.0,1.0,0.0);
-const static GLColorRgba cl_Magenta    = GLColorRgba(1.0,0.0,1.0);
-const static GLColorRgba cl_Cyan       = GLColorRgba(0.0,1.0,1.0);
-
-
+const static GLColorRgba cl_White = GLColorRgba(1.0, 1.0, 1.0);
+const static GLColorRgba cl_Black = GLColorRgba(0.0, 0.0, 0.0);
+const static GLColorRgba cl_Red = GLColorRgba(1.0, 0.0, 0.0);
+const static GLColorRgba cl_Green = GLColorRgba(0.0, 1.0, 0.0);
+const static GLColorRgba cl_Blue = GLColorRgba(0.0, 0.0, 1.0);
+const static GLColorRgba cl_LightBlue = GLColorRgba(0.5, 0.5, 1.0);
+const static GLColorRgba cl_Gray = GLColorRgba(0.5, 0.5, 0.5);
+const static GLColorRgba cl_Yellow = GLColorRgba(1.0, 1.0, 0.0);
+const static GLColorRgba cl_Magenta = GLColorRgba(1.0, 0.0, 1.0);
+const static GLColorRgba cl_Cyan = GLColorRgba(0.0, 1.0, 1.0);
 
 #endif // GLDEFINES_H

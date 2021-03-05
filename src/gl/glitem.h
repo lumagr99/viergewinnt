@@ -1,15 +1,14 @@
 #ifndef GLITEM_H
 #define GLITEM_H
 
-#include <QQuickItem>
-#include <QOpenGLShaderProgram>
 #include <QMatrix4x4>
-#include <QVector>
+#include <QOpenGLShaderProgram>
+#include <QQuickItem>
 #include <QTimer>
+#include <QVector>
 
-
-#include "glpoint.h"
 #include "glesrenderer.h"
+#include "glpoint.h"
 
 /**
  * @brief The GlItem class is a 3D-scene item designed for use in QML SceneGraphs.
@@ -31,33 +30,31 @@
  * Call isShuttingDown from top window (ApplicationWindow) to check for freed resources. If true is returned,
  * call Qt.quit() in QML or call QWindow::close() from QMainWindow.
  */
-class GLItem : public QQuickItem
-{
+class GLItem : public QQuickItem {
     Q_OBJECT
 
     Q_PROPERTY(QString vertexShaderFilename READ vertexShaderFilename WRITE setVertexShaderFilename NOTIFY vertexShaderFilenameChanged)
     Q_PROPERTY(QString fragmentShaderFilename READ fragmentShaderFilename WRITE setFragmentShaderFilename NOTIFY fragmentShaderFilenameChanged)
-    Q_PROPERTY(bool movementEnabled READ movementEnabled  WRITE setRotationEnabled NOTIFY movementEnabledChanged)
+    Q_PROPERTY(bool movementEnabled READ movementEnabled WRITE setRotationEnabled NOTIFY movementEnabledChanged)
     Q_PROPERTY(bool loopMovement READ loopMovement WRITE setLoopMovement NOTIFY loopMovementChanged)
     Q_PROPERTY(int viewportX READ viewportX WRITE setViewportX NOTIFY viewportXChanged)
     Q_PROPERTY(int viewportY READ viewportY WRITE setViewportY NOTIFY viewportYChanged)
     Q_PROPERTY(bool show3dImage READ show3dImage WRITE setShow3dImage NOTIFY show3dImageChanged)
 
-    typedef enum{
+    typedef enum {
         VERTEX_LOCATION,
         NORMAL_LOCATION,
         COLOR_LOCATION,
         TEXCOORD_LOCATION
-    }AttributeLocation;
+    } AttributeLocation;
 
     bool m_show3dImage;
 
 public:
-    explicit GLItem(QQuickItem *parent = nullptr,
-                    const QString &vertexShaderFilename = ":/shaders/vshader.vsh",
-                    const QString &fragmentShaderFilename = ":/shaders/fshader.fsh");
+    explicit GLItem(QQuickItem* parent = nullptr,
+        const QString& vertexShaderFilename = ":/shaders/vshader.vsh",
+        const QString& fragmentShaderFilename = ":/shaders/fshader.fsh");
     virtual ~GLItem();
-
 
     /**
      * @brief updatePaintNode Overwrite this function, if you want to add items to the scenegraph.
@@ -65,15 +62,15 @@ public:
      * @param node
      * @return
      */
-    QSGNode * updatePaintNode(QSGNode *node, UpdatePaintNodeData *);
+    QSGNode* updatePaintNode(QSGNode* node, UpdatePaintNodeData*);
 
     //simple getters
-    QString fragmentShaderFilename() const{return m_fragmentShaderFilename;}
-    QString vertexShaderFilename() const{return m_vertexShaderFilename;}
+    QString fragmentShaderFilename() const { return m_fragmentShaderFilename; }
+    QString vertexShaderFilename() const { return m_vertexShaderFilename; }
 
     bool movementEnabled();
 
-    void setEye (const QVector3D & newVal)
+    void setEye(const QVector3D& newVal)
     {
         m_eye = newVal;
     }
@@ -88,8 +85,6 @@ public:
         return m_viewportY;
     }
 
-
-
     bool loopMovement() const
     {
         return m_loopMovement;
@@ -101,7 +96,7 @@ public:
     }
 
 signals:
-    
+
     void vertexShaderFilenameChanged(QString arg);
     void fragmentShaderFilenameChanged(QString arg);
     void movementEnabledChanged(bool arg);
@@ -111,7 +106,6 @@ signals:
     void viewportYChanged(int arg);
 
     void loopMovementChanged(bool loopMovement);
-
 
     void show3dImageChanged(bool show3dImage);
 
@@ -133,9 +127,9 @@ public slots:
 
     /** Mouse event handler to be called from QML
      **/
-   void mousePressed(int x, int y);
-   void mousePositionChanged(int x, int y);
-   void mouseReleased(int x, int y);
+    void mousePressed(int x, int y);
+    void mousePositionChanged(int x, int y);
+    void mouseReleased(int x, int y);
 
     // Simple setters
     void setVertexShaderFilename(QString arg)
@@ -152,7 +146,6 @@ public slots:
             emit fragmentShaderFilenameChanged(arg);
         }
     }
-
 
     void setViewportX(int arg);
 
@@ -188,7 +181,8 @@ public slots:
      * @brief isShuttingDown
      * @return true, if shutdown request has been processed
      */
-    bool isShuttingDown(){
+    bool isShuttingDown()
+    {
         return m_renderThreadShutdownRequest && m_renderer == nullptr;
     }
 
@@ -207,13 +201,13 @@ protected slots:
      * @param win This function is called when the parent Window changes.
      * This is also the case, when a parent window is set for the first time.
      */
-    void handleWindowChanged(QQuickWindow *win);
+    void handleWindowChanged(QQuickWindow* win);
     /**
      * @brief destroyTextureObjects connected to QOpenGLContext::aboutToBeDestroyed
      */
     void destroyTextureObjects();
 
-     /**
+    /**
      * @brief onTimerTimeout Overwrite for moving the scene.
      */
     void onTimerTimeout();
@@ -291,13 +285,13 @@ protected:
      * @param texCoord Dummy texture coordinate
      * @param color Color of axis
      */
-    void createAxis(float length, const QVector3D &origin, const QVector3D &axis,
-                    const QVector3D &normal, const QVector3D &texCoord,
-                    const GLColorRgba &color);
+    void createAxis(float length, const QVector3D& origin, const QVector3D& axis,
+        const QVector3D& normal, const QVector3D& texCoord,
+        const GLColorRgba& color);
 
-    QVector<GLPoint> * points(){return &m_points;}
-    QVector<IndexType> * indices(){return &m_indices;}
-    GLESRenderer * renderer() {return m_renderer;}
+    QVector<GLPoint>* points() { return &m_points; }
+    QVector<IndexType>* indices() { return &m_indices; }
+    GLESRenderer* renderer() { return m_renderer; }
 
     //Geometry arrays for coordinate axes
     QVector<QVector3D> m_vertices;
@@ -311,7 +305,7 @@ protected:
     bool m_lightingEnabled;
     bool m_activatePaintBeforeQml;
     bool m_activatePaintAfterQml;
-    bool m_orthoMode;//orthogonal projection for debugging
+    bool m_orthoMode; //orthogonal projection for debugging
     float m_orthoRange; //range to be displayed
     bool m_drawAxes;
 
@@ -338,13 +332,12 @@ protected:
     int m_viewportH;
 
     //rotation
-    QTimer * m_timer;
+    QTimer* m_timer;
     float m_guiThreadRotation;
     float m_renderThreadRotation;
     bool m_loopMovement; //single or permanent rotation
     bool m_movementEnabled;
     float m_rotationIncrement;
-
 
     //shaders
     QString m_vertexShaderFilename;
@@ -359,10 +352,10 @@ protected:
      */
     virtual void initializeRenderer();
     //containers for geometry
-    QVector <GLPoint> m_points;
-    QVector <IndexType> m_indices;
+    QVector<GLPoint> m_points;
+    QVector<IndexType> m_indices;
     //renderer
-    GLESRenderer * m_renderer;
+    GLESRenderer* m_renderer;
     int m_firstAxesPoint;
     int m_lastAxesPoint;
 

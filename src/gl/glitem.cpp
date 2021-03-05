@@ -1,29 +1,28 @@
 #include "glitem.h"
-#include "glesrenderer.h"
-#include "gldefines.h"
 #include "glcolorrgba.h"
+#include "gldefines.h"
+#include "glesrenderer.h"
 
 #include <QDebug>
-#include <QString>
 #include <QQuickWindow>
-#include <QtQuick/QQuickItem>
-#include <QtGui/QOpenGLShaderProgram>
-#include <QtGui/QOpenGLContext>
 #include <QSGSimpleRectNode>
+#include <QString>
+#include <QtGui/QOpenGLContext>
+#include <QtGui/QOpenGLShaderProgram>
+#include <QtQuick/QQuickItem>
 
 #include <math.h>
 
 #ifdef Q_OS_ANDROID
 #ifndef GLES
- #define GLES  //Android uses GLES 2.0
+#define GLES //Android uses GLES 2.0
 #endif
 #endif
 
-
-GLItem::GLItem(QQuickItem *parent,
-               const QString &vertexShaderFilename,
-               const QString &fragmentShaderFilename) :
-    QQuickItem(parent)
+GLItem::GLItem(QQuickItem* parent,
+    const QString& vertexShaderFilename,
+    const QString& fragmentShaderFilename)
+    : QQuickItem(parent)
 {
     m_renderer = nullptr;
     m_fragmentShaderFilename = fragmentShaderFilename;
@@ -60,12 +59,12 @@ GLItem::GLItem(QQuickItem *parent,
     //The windowChanged signal is emitted by QQuickItem when it is added to the scenegraph.
     //This is the first time when a valid window exists.
     connect(this, SIGNAL(windowChanged(QQuickWindow*)),
-            this, SLOT(handleWindowChanged(QQuickWindow*)));
+        this, SLOT(handleWindowChanged(QQuickWindow*)));
     m_geometryIsValid = false; //invalidate geometry, we may need to set it up for the new window
     m_timer = new QTimer(this);
     m_timer->setInterval(20);
     connect(m_timer, SIGNAL(timeout()),
-            this, SLOT(onTimerTimeout()), Qt::DirectConnection);
+        this, SLOT(onTimerTimeout()), Qt::DirectConnection);
     m_guiThreadRotation = 0.0;
     m_renderThreadRotation = 0.0;
     setFlags(flags() | QQuickItem::ItemHasContents);
@@ -78,7 +77,7 @@ GLItem::GLItem(QQuickItem *parent,
 
 GLItem::~GLItem()
 {
-  // deleteRenderer();
+    // deleteRenderer();
 }
 
 /**
@@ -88,9 +87,9 @@ GLItem::~GLItem()
  * @return
  */
 
-QSGNode * GLItem::updatePaintNode(QSGNode *node, UpdatePaintNodeData *)
+QSGNode* GLItem::updatePaintNode(QSGNode* node, UpdatePaintNodeData*)
 {
- //   qDebug() << "GlItem::updatePaintNode called";
+    //   qDebug() << "GlItem::updatePaintNode called";
     Q_UNUSED(node);
     return nullptr; //remove this line and uncomment the rest of this function to draw a blue rectangle
     //Example code for a blue rectangle
@@ -112,24 +111,23 @@ bool GLItem::movementEnabled()
     return (m_timer && m_timer->isActive());
 }
 
-
 void GLItem::paintBefore()
 {
- //   qDebug() << "GlItem::paintBefore() called";
+    //   qDebug() << "GlItem::paintBefore() called";
 
-    if(!m_show3dImage)
+    if (!m_show3dImage)
         return;
 
-    if(m_renderThreadShutdownRequest){
+    if (m_renderThreadShutdownRequest) {
         cleanUpOpenGl();
         deleteRenderer();
         return;
     }
-    if(!m_renderer)
-      initializeRenderer();
-    if(!m_geometryIsValid)
+    if (!m_renderer)
+        initializeRenderer();
+    if (!m_geometryIsValid)
         setupGeometry();
-    if(!isVisible())
+    if (!isVisible())
         return;
     setupView(true);
     m_renderer->bind();
@@ -140,25 +138,25 @@ void GLItem::paintBefore()
 
 void GLItem::paintAfter()
 {
-  //  qDebug() << "GlItem::paintAfter() called";
-    if(!m_show3dImage)
+    //  qDebug() << "GlItem::paintAfter() called";
+    if (!m_show3dImage)
         return;
 
-    if(m_renderThreadShutdownRequest){
+    if (m_renderThreadShutdownRequest) {
         cleanUpOpenGl();
         deleteRenderer();
         return;
     }
-    if(!m_renderer)
-      initializeRenderer();
-    if(!m_geometryIsValid)
+    if (!m_renderer)
+        initializeRenderer();
+    if (!m_geometryIsValid)
         setupGeometry();
-    if(!isVisible())
+    if (!isVisible())
         return;
     setupView(false); // enables scissor test
     m_renderer->bind();
     paintOnTopOfQmlScene();
-    if(m_drawAxes)
+    if (m_drawAxes)
         drawAxes();
     m_renderer->release();
     glDisable(GL_SCISSOR_TEST);
@@ -167,33 +165,32 @@ void GLItem::paintAfter()
 
 void GLItem::initializeRenderer()
 {
-    qDebug() <<"GlItem::initializeRenderer called.";
-//    if(window()->openglContext() && !m_renderer){
-//        connect(window()->openglContext(), &QOpenGLContext::aboutToBeDestroyed,
-//                this, &GLItem::destroyTextureObjects, Qt::DirectConnection);
-//        connect(window()->openglContext(), &QOpenGLContext::aboutToBeDestroyed, //cleanup context before destroying window
-//                this, &GLItem::deleteRenderer, Qt::DirectConnection);
-//    }
+    qDebug() << "GlItem::initializeRenderer called.";
+    //    if(window()->openglContext() && !m_renderer){
+    //        connect(window()->openglContext(), &QOpenGLContext::aboutToBeDestroyed,
+    //                this, &GLItem::destroyTextureObjects, Qt::DirectConnection);
+    //        connect(window()->openglContext(), &QOpenGLContext::aboutToBeDestroyed, //cleanup context before destroying window
+    //                this, &GLItem::deleteRenderer, Qt::DirectConnection);
+    //    }
     //Renderer lives in Render Thread, GLItem lives in GUI Thread,
     // therefore GLItem can not be parent of Renderer and Renderer MUST be created here without a parent
-    if(!m_renderer)
-       m_renderer = new GLESRenderer(nullptr, m_vertexShaderFilename, m_fragmentShaderFilename);
+    if (!m_renderer)
+        m_renderer = new GLESRenderer(nullptr, m_vertexShaderFilename, m_fragmentShaderFilename);
 }
 
 void GLItem::deleteRenderer()
 {
-    qDebug() <<"GlItem::deleteRenderer() called.";
-    if(m_renderer)
-    {
-       delete m_renderer;
-       m_renderer = nullptr;
+    qDebug() << "GlItem::deleteRenderer() called.";
+    if (m_renderer) {
+        delete m_renderer;
+        m_renderer = nullptr;
     }
 }
 
 void GLItem::cleanUpOpenGl()
 {
-   qDebug() << "GLItem::cleanUpOpenGl()";
-   destroyTextureObjects();
+    qDebug() << "GLItem::cleanUpOpenGl()";
+    destroyTextureObjects();
 }
 
 void GLItem::doSynchronizeThreads()
@@ -202,24 +199,24 @@ void GLItem::doSynchronizeThreads()
 }
 
 void GLItem::synchronizeThreads()
-{    
+{
     m_renderThreadShutdownRequest = m_guiThreadShutdownRequest;
     doSynchronizeThreads();
 }
 
-
 void GLItem::toggleMove()
 {
     qDebug() << "GlItem::togglemMove() called";
-    if(m_timer->isActive())
+    if (m_timer->isActive())
         m_timer->stop();
-    else m_timer->start();
+    else
+        m_timer->start();
     emit movementEnabledChanged(m_movementEnabled);
 }
 
 void GLItem::mousePressed(int x, int y)
 {
-    qDebug() << "GlItem::mousePressed at x:" << x << " y: " << y;    
+    qDebug() << "GlItem::mousePressed at x:" << x << " y: " << y;
 }
 
 void GLItem::mousePositionChanged(int x, int y)
@@ -252,23 +249,22 @@ void GLItem::setViewportY(int arg)
 
 void GLItem::setupView(bool clearBuffers)
 {
-    if(!setupRenderer())
+    if (!setupRenderer())
         return;
     glViewport(m_viewportX, m_viewportY, m_viewportW, m_viewportH);
     //qDebug() << "viewport x: " << vx << " y: " << vy << " w: " << vw << " h: " << vh;
     glEnable(GL_SCISSOR_TEST);
-    glScissor(m_viewportX,m_viewportY,m_viewportW,m_viewportH);
+    glScissor(m_viewportX, m_viewportY, m_viewportW, m_viewportH);
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
     glDepthMask(true);
-    if(clearBuffers)
-    {
+    if (clearBuffers) {
 #ifndef GLES
         glClearDepth(1.0);
 #endif
         glClearColor(m_backgroundColor.red(), m_backgroundColor.green(),
-                     m_backgroundColor.blue(), m_backgroundColor.alpha());
+            m_backgroundColor.blue(), m_backgroundColor.alpha());
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     }
 
@@ -280,7 +276,7 @@ void GLItem::setupView(bool clearBuffers)
 
 bool GLItem::setupRenderer()
 {
-    if(!m_renderer|| !window())
+    if (!m_renderer || !window())
         return false;
 
     qreal ratio = window()->devicePixelRatio();
@@ -289,25 +285,24 @@ bool GLItem::setupRenderer()
     m_renderer->setViewport(m_viewportX, m_viewportY, m_viewportW, m_viewportH);
 
     m_aspect = static_cast<float>(m_viewportW) / static_cast<float>(m_viewportH);
-    if(! m_orthoMode ){
+    if (!m_orthoMode) {
         m_renderer->setPerspective(m_fovy,
-                              m_aspect,
-                              m_near,
-                              m_far);
-    }
-    else {
+            m_aspect,
+            m_near,
+            m_far);
+    } else {
         m_renderer->setOrtho(-m_orthoRange * m_aspect, m_orthoRange * m_aspect,
-                             -m_orthoRange, m_orthoRange, 0.1f, 100.0f); // for debugging
+            -m_orthoRange, m_orthoRange, 0.1f, 100.0f); // for debugging
     }
     m_renderer->setLookAt(m_eye, //eye
-                          m_center, //center
-                          m_up);//up
+        m_center, //center
+        m_up); //up
     //setup light before turning
     m_renderer->setLightDirection(m_lightDirection);
     m_renderer->setLightingEnabled(true);
     //now turn
     m_renderer->transform(m_cameraTransform);
-    m_renderer->rotate(m_renderThreadRotation, QVector3D(0.0,1.0,0.0));
+    m_renderer->rotate(m_renderThreadRotation, QVector3D(0.0, 1.0, 0.0));
     return true;
 }
 
@@ -318,7 +313,7 @@ bool GLItem::setupRenderer()
  * there is no valid window yet.
  * @param win The window in which this QQuickItem will be painted.
  */
-void GLItem::handleWindowChanged(QQuickWindow *win)
+void GLItem::handleWindowChanged(QQuickWindow* win)
 {
     qDebug() << "GlItem::handleWindowChanged() called.";
     if (win) {
@@ -326,22 +321,22 @@ void GLItem::handleWindowChanged(QQuickWindow *win)
         // Since this call is executed on the rendering thread it must be
         // a Qt::DirectConnection
 
-        if(m_activatePaintBeforeQml)
-           connect(win, SIGNAL(beforeRendering()),
-                   this, SLOT(paintBefore()), Qt::DirectConnection);
-        if(m_activatePaintAfterQml)
-        connect(win, SIGNAL(afterRendering()),
+        if (m_activatePaintBeforeQml)
+            connect(win, SIGNAL(beforeRendering()),
+                this, SLOT(paintBefore()), Qt::DirectConnection);
+        if (m_activatePaintAfterQml)
+            connect(win, SIGNAL(afterRendering()),
                 this, SLOT(paintAfter()), Qt::DirectConnection);
         connect(win, SIGNAL(beforeSynchronizing()),
-                this, SLOT(synchronizeThreads()), Qt::DirectConnection);
-//        connect(win, &QQuickWindow::sceneGraphInvalidated,
-//                this, &GLItem::destroyTextureObjects, Qt::DirectConnection);
-//        if(window()->openglContext()){
-//            connect(window()->openglContext(), &QOpenGLContext::aboutToBeDestroyed,
-//                    this, &GLItem::destroyTextureObjects, Qt::DirectConnection);
-//            connect(window()->openglContext(), &QOpenGLContext::aboutToBeDestroyed, //cleanup context before destroying window
-//                    this, &GLItem::deleteRenderer, Qt::DirectConnection);
-//        }
+            this, SLOT(synchronizeThreads()), Qt::DirectConnection);
+        //        connect(win, &QQuickWindow::sceneGraphInvalidated,
+        //                this, &GLItem::destroyTextureObjects, Qt::DirectConnection);
+        //        if(window()->openglContext()){
+        //            connect(window()->openglContext(), &QOpenGLContext::aboutToBeDestroyed,
+        //                    this, &GLItem::destroyTextureObjects, Qt::DirectConnection);
+        //            connect(window()->openglContext(), &QOpenGLContext::aboutToBeDestroyed, //cleanup context before destroying window
+        //                    this, &GLItem::deleteRenderer, Qt::DirectConnection);
+        //        }
         // If we allow QML to do the clearing, they would clear what we paint
         // and nothing would show.
         win->setClearBeforeRendering(false);
@@ -350,9 +345,9 @@ void GLItem::handleWindowChanged(QQuickWindow *win)
 
 void GLItem::destroyTextureObjects()
 {
-    if(!window())
+    if (!window())
         return;
-    if(!window()->openglContext())
+    if (!window()->openglContext())
         return;
     window()->openglContext()->makeCurrent(window());
     doDestroyTextureObjects();
@@ -368,14 +363,15 @@ void GLItem::onTimerTimeout()
     update();
 }
 
-void GLItem::doTimerTimeout(){
-    if(m_movementEnabled){
-         m_guiThreadRotation += m_rotationIncrement;
-         if(m_guiThreadRotation > 360.0f){
-             m_guiThreadRotation = 0.0f;
-             if(!m_loopMovement)
-                   setRotationEnabled(false);
-       }
+void GLItem::doTimerTimeout()
+{
+    if (m_movementEnabled) {
+        m_guiThreadRotation += m_rotationIncrement;
+        if (m_guiThreadRotation > 360.0f) {
+            m_guiThreadRotation = 0.0f;
+            if (!m_loopMovement)
+                setRotationEnabled(false);
+        }
     }
 }
 
@@ -387,10 +383,9 @@ void GLItem::doDestroyTextureObjects()
 void GLItem::setupGeometry()
 {
     m_geometryIsValid = true;
-    if(m_drawAxes)
+    if (m_drawAxes)
         createAxes(5.0);
 }
-
 
 void GLItem::paintUnderQmlScene()
 {
@@ -404,7 +399,7 @@ void GLItem::paintOnTopOfQmlScene()
 
 void GLItem::drawAxes()
 {
-    if(m_lastAxesPoint - m_firstAxesPoint == 0) //We have no axes
+    if (m_lastAxesPoint - m_firstAxesPoint == 0) //We have no axes
     {
         qDebug() << "GLItem::drawAxes(): No axes data available.";
         return;
@@ -417,9 +412,9 @@ void GLItem::drawAxes()
     m_renderer->setLightingEnabled(false);
     int stride = sizeof(GLPoint);
     m_renderer->activateAttributeArray(GLESRenderer::VERTEX_LOCATION,
-                                       m_points[0].vertexPointer(), stride);
+        m_points[0].vertexPointer(), stride);
     m_renderer->activateAttributeArray(GLESRenderer::COLOR_LOCATION,
-                                       m_points[0].colorPointer(), stride);
+        m_points[0].colorPointer(), stride);
     glDrawArrays(GL_LINES, m_firstAxesPoint, m_lastAxesPoint - m_firstAxesPoint + 1); //Coordinate Axes
     m_renderer->disableAttributeArrays();
     //restore old settings
@@ -428,29 +423,28 @@ void GLItem::drawAxes()
     glLineWidth(lineWidth[0]);
 }
 
-
-void GLItem::createAxis(float length, const QVector3D & origin, const QVector3D & axis,
-                 const QVector3D & normal, const QVector3D & texCoord,
-                 const GLColorRgba& color)
+void GLItem::createAxis(float length, const QVector3D& origin, const QVector3D& axis,
+    const QVector3D& normal, const QVector3D& texCoord,
+    const GLColorRgba& color)
 {
     int ticks = static_cast<int>(floor(static_cast<double>(length)));
     float tickLength = 0.2f;
-    m_points.append(GLPoint(origin - axis * length, normal, texCoord,color));
-    m_points.append(GLPoint(origin + axis * length, normal, texCoord,color));
-    for(int tick = -ticks; tick <= ticks; tick++)
-    {
+    m_points.append(GLPoint(origin - axis * length, normal, texCoord, color));
+    m_points.append(GLPoint(origin + axis * length, normal, texCoord, color));
+    for (int tick = -ticks; tick <= ticks; tick++) {
         m_points.append(GLPoint(origin + axis * tick, normal, texCoord, color));
-        if(tick%5 == 0)
+        if (tick % 5 == 0)
             m_points.append(GLPoint(origin + axis * tick + normal * tickLength * 2, normal, texCoord, color));
-        else m_points.append(GLPoint(origin + axis * tick + normal * tickLength, normal, texCoord, color));
+        else
+            m_points.append(GLPoint(origin + axis * tick + normal * tickLength, normal, texCoord, color));
     }
     QVector3D normal2 = QVector3D::crossProduct(axis, normal).normalized();
-    for(int tick = -ticks; tick <= ticks; tick++)
-    {
+    for (int tick = -ticks; tick <= ticks; tick++) {
         m_points.append(GLPoint(origin + axis * tick, normal2, texCoord, color));
-        if(tick%5 == 0)
+        if (tick % 5 == 0)
             m_points.append(GLPoint(origin + axis * tick + normal2 * tickLength * 2, normal2, texCoord, color));
-        else m_points.append(GLPoint(origin + axis * tick + normal2 * tickLength, normal2, texCoord, color));
+        else
+            m_points.append(GLPoint(origin + axis * tick + normal2 * tickLength, normal2, texCoord, color));
     }
 }
 
@@ -470,13 +464,13 @@ void GLItem::createAxes(float length)
     //Y-Axis
     axis = v_Y;
     normal = v_Z;
-    color= cl_Green;
+    color = cl_Green;
     createAxis(length, origin, axis, normal, texCoord, color);
 
     //Z-Axis
     axis = v_Z;
     normal = v_X;
-    color= cl_Blue;
+    color = cl_Blue;
     createAxis(length, origin, axis, normal, texCoord, color);
 
     m_lastAxesPoint = m_points.size() - 1;

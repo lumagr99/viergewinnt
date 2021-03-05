@@ -3,12 +3,13 @@
 
 #include <QObject>
 
-#include "glcourt.h"
-#include "glesrenderer.h"
-#include "glmouseray.h"
-#include "gltableplate.h"
-#include "gltokengreen.h"
-#include "gltokenred.h"
+#include "gl/glcourt.h"
+#include "gl/glesrenderer.h"
+#include "gl/glmouseray.h"
+#include "gl/gltableplate.h"
+#include "gl/gltokengreen.h"
+#include "gl/gltokenred.h"
+#include "player.h"
 
 class VierGewinntScene;
 
@@ -18,11 +19,6 @@ class VierGewinnt : public QObject {
     static constexpr int ANIMATION_STEPS = 100;
 
 public:
-    typedef enum {
-        RedPlayer,
-        GreenPlayer
-    } Player;
-
     explicit VierGewinnt(VierGewinntScene* scene);
 
     ~VierGewinnt();
