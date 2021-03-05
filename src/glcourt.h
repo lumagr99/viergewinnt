@@ -6,10 +6,7 @@
 #include "glbody.h"
 #include "gltoken.h"
 
-class GLCourt : public GLBody
-{
-
-public:
+class GLCourt : public GLBody {
 
     static constexpr int ROWS = 6;
     static constexpr int COLUMNS = 7;
@@ -17,19 +14,24 @@ public:
     static constexpr float HEIGHT = 8.5f;
     static constexpr float DEPTH = 0.65f;
 
-    GLCourt(const QString & name, float radius = 1.0f, const QString textureFile = "", const GLColorRgba & color = GLColorRgba::clBlue);
+public:
+    typedef enum {
+        Free,
+        RedPlayer,
+        GreenPlayer
+    } Status;
 
-    virtual void makeSurface(QVector<GLPoint> * pointContainer, QVector<IndexType> *indexContainer) Q_DECL_OVERRIDE;
+    GLCourt(const QString& name, const GLColorRgba& color = GLColorRgba::clBlue);
 
-    virtual void draw(GLESRenderer * renderer, bool useBuffers = false) Q_DECL_OVERRIDE;
+    QVector3D fieldToPosition(const QPoint& field) const;
 
-    virtual void findMinMaxCoordinates() Q_DECL_OVERRIDE;
+    QVector3D calulateInsertPosition(const GLToken* token);
 
-    bool isColliding(const GLToken *token) const;
+    int getColumnByPosition(const QVector3D& position) const;
 
-    QVector3D fieldToPosition(const QPoint &field) const;
+    QPoint getFreeField(int column);
 
-    int getColumnByPosition(const QVector3D &position) const;
+    void printCourt();
 
     int getRows() const;
 
@@ -42,9 +44,6 @@ public:
     float getDepth() const;
 
 private:
-
-    QVector<QVector<int>> m_court;
-
     int m_rows;
 
     int m_columns;
@@ -55,6 +54,12 @@ private:
 
     float m_depth;
 
+    QVector<QVector<int>> m_court;
+
+    QVector3D m_vRow;
+    QVector3D m_vColumn;
+    QVector3D m_vCorner;
+    QVector3D m_vOffset;
 };
 
 #endif // GLCOURT_H

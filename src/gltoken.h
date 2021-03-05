@@ -1,28 +1,23 @@
 #ifndef GLTOKEN_H
 #define GLTOKEN_H
 
-#include "glbody.h"
+#include "glmultiplebody.h"
 
-class GLToken: public GLBody
-{
+class GLCourt;
 
-public:
+class GLToken : public GLMultipleBody {
 
     static constexpr float HEIGHT = 0.325f;
     static constexpr float RADIUS = 0.625f;
 
-    GLToken(const QString & name, float radius = RADIUS, const QString textureFile = "",
-            const GLColorRgba & color = GLColorRgba::clBlue, float height = HEIGHT);
+public:
+    GLToken(const QString& name, const QString& textureFile);
 
-    virtual void makeSurface(QVector<GLPoint> * pointContainer, QVector<IndexType> *indexContainer) Q_DECL_OVERRIDE;
+    bool isColliding(const GLToken* token) const;
 
-    virtual void draw(GLESRenderer * renderer, bool useBuffers = false) Q_DECL_OVERRIDE;
+    bool isColliding(const GLCourt* court) const;
 
-    virtual void findMinMaxCoordinates() Q_DECL_OVERRIDE;
-
-    bool isColliding(const GLToken *token) const;
-
-    void moveToPosition(const QVector3D &position);
+    void moveToPosition(const QVector3D& position);
 
     void rotate();
 
@@ -30,16 +25,15 @@ public:
 
     float getRadius() const;
 
-    bool isSelected() const;
-
-    void setSelected(bool selected);
-
     bool isRotated() const;
 
     void setRotated(bool rotated);
 
-private:
+    bool isMovable() const;
 
+    void setMovable(bool movable);
+
+private:
     float m_radius;
 
     float m_height;
@@ -47,6 +41,8 @@ private:
     bool m_selected;
 
     bool m_rotated;
+
+    bool m_movable;
 };
 
 #endif // GLTOKEN_H

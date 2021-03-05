@@ -3,10 +3,12 @@
 
 #include "gltoken.h"
 
-class GLTokenRed : public GLToken
-{
+class GLTokenRed : public GLToken {
 public:
-    GLTokenRed(const QString & name);
+    GLTokenRed(const QString& name, const QString& textureFile = ":/textures/tokenred.JPG");
+
+private:
+    QString m_textureFile;
 };
 
 #endif // GLTOKENGREEN_H

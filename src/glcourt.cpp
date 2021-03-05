@@ -1,70 +1,63 @@
-#include "glcourt.h"
+#include <iostream>
 #include <math.h>
 
-GLCourt::GLCourt(const QString &name, float radius, const QString textureFile, const GLColorRgba &color)
-    :GLBody(name, radius, color, textureFile),
-      m_rows(ROWS),
-      m_columns(COLUMNS),
-      m_width(WIDTH),
-      m_height(HEIGHT),
-      m_depth(DEPTH)
+#include "glcourt.h"
+
+GLCourt::GLCourt(const QString& name, const GLColorRgba& color)
+    : GLBody(name, 1.0f, color)
+    , m_rows(ROWS)
+    , m_columns(COLUMNS)
+    , m_width(WIDTH)
+    , m_height(HEIGHT)
+    , m_depth(DEPTH)
 {
-    //qDebug() << "GLCourt::GLCourt() called.";
-    //setShowFrame(true);
-    setCenter(QVector3D(0, 0, 0));
-    setMinMaxCoordinates(QVector3D(-m_width/2, 0, -m_depth/2), QVector3D(m_width/2, m_height, m_depth/2));
+    m_vRow = v_Y * (m_height / m_rows);
+    m_vColumn = v_X * (m_width / m_columns);
+    m_vCorner = -v_X * (m_width / 2) + v_Y * m_height;
+    m_vOffset = 0.5f * (m_vColumn - m_vRow);
+    m_center = v_Zero;
+
     GLBody::readBinaryModelFile(":/models/court.dat");
-}
 
-void GLCourt::makeSurface(QVector<GLPoint> *pointContainer, QVector<GLushort> *indexContainer){
-    //qDebug() << "GLCourt::makeSurface() called.";
-    GLBody::makeSurface(pointContainer, indexContainer);
-}
-
-
-void GLCourt::draw(GLESRenderer *renderer, bool useBuffers)
-{
-    // qDebug() << "GLCourt::draw() called.";
-    GLBody::draw(renderer,useBuffers);
-}
-
-void GLCourt::findMinMaxCoordinates()
-{
-    m_minCoordinate = m_center + QVector3D(-m_width/2, -m_height/2, -m_depth/2);
-    m_maxCoordinate = m_center + QVector3D(m_width/2, m_height/2, m_depth/2);
-
-    if(m_showNormals) {
-        createNormals();
-    }
-    if(m_showFrame) {
-        createFrame();
+    for (int row = 0; row < m_rows; row++) {
+        m_court.append(QVector<int>(m_columns, Free));
     }
 }
 
-bool GLCourt::isColliding(const GLToken *token) const
+QVector3D GLCourt::fieldToPosition(const QPoint& field) const
 {
-    QVector3D v = token->getCenter();
-    if (fabs(v.z()) <= m_depth/2 + token->getRadius() && fabs(v.x()) <= m_width/2 + token->getRadius()) {
-        return true;
-    }
-    return false;
+    return m_vCorner + m_vOffset - m_vRow * field.x() + m_vColumn * field.y();
 }
 
-QVector3D GLCourt::fieldToPosition(const QPoint &field) const
+QVector3D GLCourt::calulateInsertPosition(const GLToken* token)
 {
-    QVector3D vx = v_X * (m_width / m_columns);
-    QVector3D vy = v_Y * (m_height / m_rows);
-
-    QVector3D result = QVector3D(-m_width/2, m_height, 0.0f) + 0.5 * (vx - vy);
-    result += vx * field.x();
-    result -= vy * field.y();
-
-    return result;
+    int column = getColumnByPosition(token->getCenter());
+    return m_vCorner + 0.5f * (m_vColumn + m_vRow) + m_vColumn * column;
 }
 
-int GLCourt::getColumnByPosition(const QVector3D &position) const
+int GLCourt::getColumnByPosition(const QVector3D& position) const
 {
     return (position.x() + m_width / 2) / (m_width / m_columns);
+}
+
+QPoint GLCourt::getFreeField(int column)
+{
+    for (int row = m_rows - 1; row >= 0; row--) {
+        if (m_court[row][column] == Free) {
+            return QPoint(row, column);
+        }
+    }
+    return QPoint(-1, -1);
+}
+
+void GLCourt::printCourt()
+{
+    for (int row = 0; row < m_rows; row++) {
+        for (int col = 0; col < m_columns; col++) {
+            std::cout << m_court[row][col] << " ";
+        }
+        std::cout << '\n';
+    }
 }
 
 int GLCourt::getRows() const

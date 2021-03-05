@@ -1,60 +1,33 @@
-#include <QDebug>
-
 #include "gltoken.h"
+#include "glcourt.h"
 
-GLToken::GLToken(const QString &name, float radius, const QString textureFile, const GLColorRgba &color, float height)
-    : GLBody(name, radius, color, textureFile),
-      m_radius(radius),
-      m_height(height),
-      m_selected(false),
-      m_rotated(false)
+#include <QDebug>
+#include <math.h>
+
+GLToken::GLToken(const QString& name, const QString& textureFile)
+    : GLMultipleBody(name)
+    , m_radius(RADIUS)
+    , m_height(HEIGHT)
+    , m_selected(false)
+    , m_rotated(false)
 {
-    //qDebug() << "GLToken::GLToken() called.";
+    // qDebug() << "GLToken::GLToken() called.";
+    setCenter(v_Zero);
     setShowFrame(true);
-    setCenter(QVector3D(0.0f, 0.0f, 0.0f));
-    findMinMaxCoordinates();
+    setTextureFile(textureFile);
     GLBody::readBinaryModelFile(":/models/token.dat");
 }
 
-void GLToken::makeSurface(QVector<GLPoint> *pointContainer, QVector<GLushort> *indexContainer){
-    //qDebug() << "GLToken::makeSurface() called.";
-    GLBody::makeSurface(pointContainer, indexContainer);
-}
-
-
-void GLToken::draw(GLESRenderer *renderer, bool useBuffers)
+bool GLToken::isColliding(const GLToken* token) const
 {
-    GLBody::draw(renderer,useBuffers);
-}
-
-void GLToken::findMinMaxCoordinates()
-{
-    if(isRotated()) {
-        m_minCoordinate = m_center + QVector3D(-m_radius, -m_radius, -m_height/2);
-        m_maxCoordinate = m_center + QVector3D(m_radius, m_radius, m_height/2);
-    } else {
-        m_minCoordinate = m_center + QVector3D(-m_radius, -m_height/2, -m_radius);
-        m_maxCoordinate = m_center + QVector3D(m_radius, m_height/2, m_radius);
-    }
-
-    if(m_showNormals) {
-        createNormals();
-    }
-    if(m_showFrame) {
-        createFrame();
-    }
-}
-
-bool GLToken::isColliding(const GLToken *token) const
-{
-    if(this == token) {
+    if (this == token) {
         return false;
     }
 
-    if((m_center - token->getCenter()).length() >= m_radius + token->getRadius()) {
+    if ((m_center - token->getCenter()).length() >= m_radius + token->getRadius()) {
         return false;
     } else {
-        if(m_center.y() < token->getCenter().y()) {
+        if (m_center.y() < token->getCenter().y()) {
             return token->getCenter().y() - m_center.y() <= m_height;
         } else {
             return m_center.y() - token->getCenter().y() <= token->getHeight();
@@ -62,16 +35,26 @@ bool GLToken::isColliding(const GLToken *token) const
     }
 }
 
-void GLToken::moveToPosition(const QVector3D &position)
+bool GLToken::isColliding(const GLCourt* court) const
+{
+    float depth = court->getDepth();
+    float width = court->getWidth();
+    if (fabs(m_center.z()) <= depth / 2 + m_radius && fabs(m_center.x()) <= width / 2 + m_radius) {
+        return true;
+    }
+    return false;
+}
+
+void GLToken::moveToPosition(const QVector3D& position)
 {
     move(position - m_center);
 }
 
 void GLToken::rotate()
 {
-    if(!m_rotated) {
-         rotateModelPoints(m_center, v_X, 90.0f);
-         m_rotated = true;
+    if (!m_rotated) {
+        rotateModelPoints(m_center, v_X, 90.0f);
+        m_rotated = true;
     } else {
         rotateModelPoints(m_center, v_X, -90.0f);
         m_rotated = false;
@@ -89,16 +72,6 @@ float GLToken::getRadius() const
     return m_radius;
 }
 
-bool GLToken::isSelected() const
-{
-    return m_selected;
-}
-
-void GLToken::setSelected(bool selected)
-{
-    m_selected = selected;
-}
-
 bool GLToken::isRotated() const
 {
     return m_rotated;
@@ -107,4 +80,14 @@ bool GLToken::isRotated() const
 void GLToken::setRotated(bool rotated)
 {
     m_rotated = rotated;
+}
+
+bool GLToken::isMovable() const
+{
+    return m_movable;
+}
+
+void GLToken::setMovable(bool movable)
+{
+    m_movable = movable;
 }

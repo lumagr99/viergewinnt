@@ -1,7 +1,10 @@
 #include "gltokengreen.h"
 
-GLTokenGreen::GLTokenGreen(const QString & name)
-    : GLToken(name, RADIUS, ":/textures/tokengreen.JPG", GLColorRgba::clGreen)
+GLTokenGreen::GLTokenGreen(const QString& name, const QString& textureFile)
+    : GLToken(name, textureFile)
+    , m_textureFile(textureFile)
 {
-    //qDebug() << "GLTokenGreen::GLTokenGreen() called.";
+    qDebug() << "GLTokenRed::GLTokenGreen() called.";
+    setColor(GLColorRgba::clGreen);
+    m_copies.append(this);
 }

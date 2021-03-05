@@ -3,58 +3,56 @@
 
 #include <QObject>
 
-#include "gltableplate.h"
 #include "glcourt.h"
+#include "glesrenderer.h"
+#include "glmouseray.h"
+#include "gltableplate.h"
 #include "gltokengreen.h"
 #include "gltokenred.h"
-#include "glmouseray.h"
-#include "glesrenderer.h"
 
 class VierGewinntScene;
 
-
-class VierGewinnt : public QObject
-{
+class VierGewinnt : public QObject {
     Q_OBJECT
 
-public:
+    static constexpr int ANIMATION_STEPS = 100;
 
+public:
     typedef enum {
         RedPlayer,
         GreenPlayer
     } Player;
 
-    explicit VierGewinnt(VierGewinntScene *scene);
+    explicit VierGewinnt(VierGewinntScene* scene);
 
     ~VierGewinnt();
 
-    virtual void draw(GLESRenderer *renderer);
+    virtual void draw(GLESRenderer* renderer);
 
-    bool selectToken(const QVector3D &nearPoint, const QVector3D &farPoint, const QVector3D &camera);
+    bool selectToken(const QVector3D& nearPoint, const QVector3D& farPoint, const QVector3D& camera);
 
     void deselectToken();
 
-    void checkForSelection(const QVector3D &nearPoint, const QVector3D &farPoint, const QVector3D &camera, GLToken *token);
+    void checkForSelection(const QVector3D& nearPoint, const QVector3D& farPoint, const QVector3D& camera, GLToken* token);
 
-    void moveToken(const QVector3D &vMove);
+    void moveToken(const QVector3D& vMove);
 
-    void insertToken(const GLToken *token, int column);
+    void insertToken(int column);
 
 private:
+    VierGewinntScene* m_scene;
 
-    VierGewinntScene *m_scene;
+    GLTablePlate* m_tablePlate;
 
-    GLTablePlate *m_tablePlate;
+    GLCourt* m_court;
 
-    GLCourt *m_court;
+    QList<GLTokenGreen*> m_greenTokens;
 
-    QList<GLTokenGreen *> m_greenTokens;
-
-    QList<GLTokenRed *> m_redTokens;
+    QList<GLTokenRed*> m_redTokens;
 
     Player m_player;
 
-    GLToken *m_selectedToken;
+    GLToken* m_selectedToken;
 };
 
 #endif // VIERGEWINNT_H
