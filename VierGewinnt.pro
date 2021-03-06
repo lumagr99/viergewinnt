@@ -20,8 +20,8 @@ SOURCES += \
         src/gl/gltoken.cpp \
         src/gl/gltokengreen.cpp \
         src/gl/gltokenred.cpp \
+        src/gl/shaderdebugger.cpp \
         src/main.cpp \
-        src/shaderdebugger.cpp \
         src/viergewinnt.cpp \
         src/viergewinntscene.cpp \
         src/soundengine.cpp
@@ -41,8 +41,8 @@ HEADERS += \
         src/gl/gltokengreen.h \
         src/gl/gltokenred.h \
         src/gl/gldefines.h \
+        src/gl/shaderdebugger.h \
         src/player.h \
-        src/shaderdebugger.h \
         src/viergewinnt.h \
         src/viergewinntscene.h \
         src/soundengine.h

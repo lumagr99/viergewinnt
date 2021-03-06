@@ -14,12 +14,16 @@
 class VierGewinntScene;
 
 class VierGewinnt : public QObject {
+
     Q_OBJECT
 
-    static constexpr int ANIMATION_STEPS = 100;
-
 public:
-    explicit VierGewinnt(VierGewinntScene* scene);
+
+    static constexpr float START_DISTANCE = 100000.0f;
+
+    static constexpr int ANIMATION_STEPS = 35;
+
+    VierGewinnt(VierGewinntScene* scene);
 
     ~VierGewinnt();
 
@@ -27,13 +31,32 @@ public:
 
     bool selectToken(const QVector3D& nearPoint, const QVector3D& farPoint, const QVector3D& camera);
 
-    void deselectToken();
-
     void checkForSelection(const QVector3D& nearPoint, const QVector3D& farPoint, const QVector3D& camera, GLToken* token);
+
+    void deselectToken();
 
     void moveToken(const QVector3D& vMove);
 
     void insertToken(int column);
+
+    void changePlayer();
+
+    void descentAnimation();
+
+    void jumpUpAnimation();
+
+    void jumpDownAnimation();
+
+    bool animateJumpUp();
+
+    bool animateJumpDown();
+
+    bool animateDescent();
+
+signals:
+    void playerChanged(Player player);
+
+    void soundReqeuest(const QString& soundFileName);
 
 private:
     VierGewinntScene* m_scene;
@@ -49,6 +72,24 @@ private:
     Player m_player;
 
     GLToken* m_selectedToken;
+
+    GLToken* m_descendingToken;
+
+    float m_lastDistance;
+
+    int m_animationStep;
+
+    float m_rotationStep;
+
+    float m_jumpMoveStep;
+
+    float m_descentMoveStep;
+
+    bool m_animateJumpUp;
+
+    bool m_animateJumpDown;
+
+    bool m_animateDescent;
 };
 
 #endif // VIERGEWINNT_H

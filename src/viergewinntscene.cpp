@@ -1,4 +1,5 @@
 #include <QDebug>
+#include <QThread>
 #include <math.h>
 
 #include "viergewinntscene.h"
@@ -7,7 +8,7 @@ VierGewinntScene::VierGewinntScene()
 {
     m_backgroundColor = GLColorRgba::clBlack;
     m_timer->start(16);
-    m_drawAxes = true;
+    //m_drawAxes = true;
     m_loopMovement = true;
     m_eye = 12.0f * v_Y + 20.0f * v_Z;
 
@@ -32,7 +33,6 @@ void VierGewinntScene::paintOnTopOfQmlScene()
 
 void VierGewinntScene::setupGeometry()
 {
-    //qDebug() << "VierGewinntScene::setupGeometry() called.";
     GLItem::setupGeometry();
     m_mouseRay = new GLMouseRay("MouseRay", GLColorRgba::clGreen);
     m_vierGewinnt = new VierGewinnt(this);
@@ -41,6 +41,7 @@ void VierGewinntScene::setupGeometry()
 void VierGewinntScene::doSynchronizeThreads()
 {
     GLItem::doSynchronizeThreads();
+
     if (!m_renderer) {
         return;
     }
@@ -61,6 +62,16 @@ void VierGewinntScene::doSynchronizeThreads()
         m_moveVector = v_Zero;
     }
 
+    if(m_timer->isActive()) {
+        if (m_vierGewinnt->animateDescent()) {
+            m_vierGewinnt->descentAnimation();
+        }else if(m_vierGewinnt->animateJumpUp()) {
+            m_vierGewinnt->jumpUpAnimation();
+        } else if(m_vierGewinnt->animateJumpDown()) {
+            m_vierGewinnt->jumpDownAnimation();
+        }
+    }
+
     m_mousePressReceived = false;
     m_mouseReleaseReceived = false;
     m_mousePositionChangedReceived = false;
@@ -68,20 +79,17 @@ void VierGewinntScene::doSynchronizeThreads()
 
 void VierGewinntScene::rotateLeft(float increment)
 {
-    //qDebug() << "VierGewinntScene::rotateLeft() with increment" << increment << "called.";
     m_movementEnabled = true;
     m_rotationIncrement = -fabs(increment);
 }
 
 void VierGewinntScene::stopRotation()
 {
-    //qDebug() << "VierGewinntScene::stopRotation() called.";
     m_movementEnabled = false;
 }
 
 void VierGewinntScene::rotateRight(float increment)
 {
-    //qDebug() << "VierGewinntScene::rotateRight() with increment" << increment << "called.";
     m_movementEnabled = true;
     m_rotationIncrement = fabs(increment);
 }

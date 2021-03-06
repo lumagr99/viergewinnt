@@ -5,17 +5,16 @@
 #include <math.h>
 
 GLToken::GLToken(const QString& name, const QString& textureFile)
-    : GLMultipleBody(name)
-    , m_radius(RADIUS)
-    , m_height(HEIGHT)
-    , m_selected(false)
+    : GLBody(name)
     , m_rotated(false)
+    , m_movable(true)
 {
-    // qDebug() << "GLToken::GLToken() called.";
-    setCenter(v_Zero);
+    m_center = v_Zero;
+    m_radius = RADIUS;
     setShowFrame(true);
     setTextureFile(textureFile);
     GLBody::readBinaryModelFile(":/models/token.dat");
+    findMinMaxCoordinates();
 }
 
 bool GLToken::isColliding(const GLToken* token) const
@@ -24,22 +23,22 @@ bool GLToken::isColliding(const GLToken* token) const
         return false;
     }
 
-    if ((m_center - token->getCenter()).length() >= m_radius + token->getRadius()) {
+    if ((m_center - token->getCenter()).length() >= 2 * RADIUS) {
         return false;
     } else {
         if (m_center.y() < token->getCenter().y()) {
-            return token->getCenter().y() - m_center.y() <= m_height;
+            return token->getCenter().y() - m_center.y() <= HEIGHT;
         } else {
-            return m_center.y() - token->getCenter().y() <= token->getHeight();
+            return m_center.y() - token->getCenter().y() <= HEIGHT;
         }
     }
 }
 
 bool GLToken::isColliding(const GLCourt* court) const
 {
-    float depth = court->getDepth();
-    float width = court->getWidth();
-    if (fabs(m_center.z()) <= depth / 2 + m_radius && fabs(m_center.x()) <= width / 2 + m_radius) {
+    QVector3D center = court->getCenter();
+    if (fabs(m_center.z()) <= center.z() + GLCourt::DEPTH / 2 + m_radius
+            && fabs(m_center.x()) <= center.x() + GLCourt::WIDTH / 2 + m_radius) {
         return true;
     }
     return false;
@@ -50,26 +49,9 @@ void GLToken::moveToPosition(const QVector3D& position)
     move(position - m_center);
 }
 
-void GLToken::rotate()
+void GLToken::rotate(float angle)
 {
-    if (!m_rotated) {
-        rotateModelPoints(m_center, v_X, 90.0f);
-        m_rotated = true;
-    } else {
-        rotateModelPoints(m_center, v_X, -90.0f);
-        m_rotated = false;
-    }
-    findMinMaxCoordinates();
-}
-
-float GLToken::getHeight() const
-{
-    return m_height;
-}
-
-float GLToken::getRadius() const
-{
-    return m_radius;
+    rotateModelPoints(m_center, v_X, angle);
 }
 
 bool GLToken::isRotated() const

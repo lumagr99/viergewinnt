@@ -1,16 +1,17 @@
 #ifndef GLTOKEN_H
 #define GLTOKEN_H
 
-#include "glmultiplebody.h"
+#include "glbody.h"
 
 class GLCourt;
 
-class GLToken : public GLMultipleBody {
+class GLToken : public GLBody {
+
+public:
 
     static constexpr float HEIGHT = 0.325f;
     static constexpr float RADIUS = 0.625f;
 
-public:
     GLToken(const QString& name, const QString& textureFile);
 
     bool isColliding(const GLToken* token) const;
@@ -19,11 +20,7 @@ public:
 
     void moveToPosition(const QVector3D& position);
 
-    void rotate();
-
-    float getHeight() const;
-
-    float getRadius() const;
+    void rotate(float angle);
 
     bool isRotated() const;
 
@@ -34,11 +31,6 @@ public:
     void setMovable(bool movable);
 
 private:
-    float m_radius;
-
-    float m_height;
-
-    bool m_selected;
 
     bool m_rotated;
 

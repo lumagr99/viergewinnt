@@ -5,22 +5,17 @@
 
 GLCourt::GLCourt(const QString& name, const GLColorRgba& color)
     : GLBody(name, 1.0f, color)
-    , m_rows(ROWS)
-    , m_columns(COLUMNS)
-    , m_width(WIDTH)
-    , m_height(HEIGHT)
-    , m_depth(DEPTH)
 {
-    m_vRow = v_Y * (m_height / m_rows);
-    m_vColumn = v_X * (m_width / m_columns);
-    m_vCorner = -v_X * (m_width / 2) + v_Y * m_height;
+    m_vRow = v_Y * (HEIGHT / ROWS);
+    m_vColumn = v_X * (WIDTH / COLUMNS);
+    m_vCorner = -v_X * (WIDTH / 2) + v_Y * HEIGHT;
     m_vOffset = 0.5f * (m_vColumn - m_vRow);
     m_center = v_Zero;
 
     GLBody::readBinaryModelFile(":/models/court.dat");
 
-    for (int row = 0; row < m_rows; row++) {
-        m_court.append(QVector<Status>(m_columns, Status::Free));
+    for (int row = 0; row < ROWS; row++) {
+        m_court.append(QVector<Status>(COLUMNS, Status::Free));
     }
 }
 
@@ -32,17 +27,17 @@ QVector3D GLCourt::fieldToPosition(const QPoint& field) const
 QVector3D GLCourt::calulateInsertPosition(const GLToken* token)
 {
     int column = getColumnByPosition(token->getCenter());
-    return m_vCorner + 0.5f * (m_vColumn + m_vRow) + m_vColumn * column;
+    return m_vCorner + v_X * m_vOffset.x() - v_Y * m_vOffset.y() + m_vColumn * column;
 }
 
 int GLCourt::getColumnByPosition(const QVector3D& position) const
 {
-    return (position.x() + m_width / 2) / (m_width / m_columns);
+    return (position.x() + WIDTH / 2) / (WIDTH / COLUMNS);
 }
 
 QPoint GLCourt::getFreeField(int column)
 {
-    for (int row = m_rows - 1; row >= 0; row--) {
+    for (int row = ROWS - 1; row >= 0; row--) {
         if (m_court[row][column] == Status::Free) {
             return QPoint(row, column);
         }
@@ -54,11 +49,12 @@ void GLCourt::setField(Player player, QPoint field)
 {
     int x = field.x();
     int y = field.y();
-    if (x < 0 || x >= m_rows) {
+
+    if (x < 0 || x >= ROWS) {
         return;
     }
 
-    if (y < 0 || y >= m_columns) {
+    if (y < 0 || y >= COLUMNS) {
         return;
     }
 
@@ -73,8 +69,8 @@ void GLCourt::setField(Player player, QPoint field)
 
 void GLCourt::printCourt()
 {
-    for (int row = 0; row < m_rows; row++) {
-        for (int col = 0; col < m_columns; col++) {
+    for (int row = 0; row < ROWS; row++) {
+        for (int col = 0; col < COLUMNS; col++) {
             if (m_court[row][col] == Status::Free) {
                 std::cout << "F";
 
@@ -88,29 +84,4 @@ void GLCourt::printCourt()
         }
         std::cout << '\n';
     }
-}
-
-int GLCourt::getRows() const
-{
-    return m_rows;
-}
-
-int GLCourt::getColumns() const
-{
-    return m_columns;
-}
-
-float GLCourt::getWidth() const
-{
-    return m_width;
-}
-
-float GLCourt::getHeight() const
-{
-    return m_height;
-}
-
-float GLCourt::getDepth() const
-{
-    return m_depth;
 }

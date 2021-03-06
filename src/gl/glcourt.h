@@ -9,13 +9,14 @@
 
 class GLCourt : public GLBody {
 
+public:
+
     static constexpr int ROWS = 6;
     static constexpr int COLUMNS = 7;
     static constexpr float WIDTH = 10.0f;
     static constexpr float HEIGHT = 8.5f;
     static constexpr float DEPTH = 0.65f;
 
-public:
     enum class Status {
         Free,
         RedPlayer,
@@ -36,32 +37,16 @@ public:
 
     void printCourt();
 
-    int getRows() const;
-
-    int getColumns() const;
-
-    float getWidth() const;
-
-    float getHeight() const;
-
-    float getDepth() const;
-
 private:
-    int m_rows;
-
-    int m_columns;
-
-    float m_width;
-
-    float m_height;
-
-    float m_depth;
 
     QVector<QVector<Status>> m_court;
 
     QVector3D m_vRow;
+
     QVector3D m_vColumn;
+
     QVector3D m_vCorner;
+
     QVector3D m_vOffset;
 };
 
