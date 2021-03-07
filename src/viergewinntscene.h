@@ -15,8 +15,6 @@
 class VierGewinntScene : public GLItem {
     Q_OBJECT
 
-    static constexpr int KEY_OFFSET = Qt::Key_0;
-
 public:
     explicit VierGewinntScene();
 
@@ -27,17 +25,23 @@ protected:
 
     virtual void setupGeometry() Q_DECL_OVERRIDE;
 
-protected slots:
+signals:
 
-    virtual void doSynchronizeThreads() Q_DECL_OVERRIDE;
+    void gameOver(QString message);
 
 public slots:
 
-    void rotateLeft(float increment);
+    virtual void doSynchronizeThreads() Q_DECL_OVERRIDE;
+
+    void newGame();
+
+    void startGame();
+
+    void stopGame();
+
+    void startRotation(float increment);
 
     void stopRotation();
-
-    void rotateRight(float increment);
 
     void mousePressed(int x, int y);
 
@@ -47,12 +51,8 @@ public slots:
 
     void handleWheelEvent(int angleDelta);
 
-    void handleKeyEvent(int key);
-
 private:
     VierGewinnt* m_vierGewinnt;
-
-    GLMouseRay* m_mouseRay;
 
     SoundEngine* m_sounds;
 

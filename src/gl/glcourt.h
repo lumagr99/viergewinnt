@@ -17,12 +17,6 @@ public:
     static constexpr float HEIGHT = 8.5f;
     static constexpr float DEPTH = 0.65f;
 
-    enum class Status {
-        Free,
-        RedPlayer,
-        GreenPlayer
-    };
-
     GLCourt(const QString& name, const GLColorRgba& color = GLColorRgba::clBlue);
 
     QVector3D fieldToPosition(const QPoint& field) const;
@@ -35,11 +29,13 @@ public:
 
     void setField(Player player, QPoint field);
 
+    Player checkWin();
+
     void printCourt();
 
 private:
 
-    QVector<QVector<Status>> m_court;
+    QVector<QVector<Player>> m_court;
 
     QVector3D m_vRow;
 

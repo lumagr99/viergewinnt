@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include <QTranslator>
 
 #include "viergewinntscene.h"
@@ -10,8 +11,9 @@ int main(int argc, char* argv[])
 
     QGuiApplication app(argc, argv);
     QTranslator translator;
-    if (translator.load("VierGewinnt_de_DE.qm", ":/translations"))
+    if (translator.load("VierGewinnt_de_DE.qm", ":/translations")) {
         app.installTranslator(&translator);
+    }
 
     QQmlApplicationEngine engine;
     qmlRegisterType<VierGewinntScene>("GlComponents", 1, 0, "VierGewinntScene");

@@ -8,34 +8,25 @@ VierGewinntScene::VierGewinntScene()
 {
     m_backgroundColor = GLColorRgba::clBlack;
     m_timer->start(16);
-    //m_drawAxes = true;
     m_loopMovement = true;
-    m_eye = 12.0f * v_Y + 20.0f * v_Z;
-
-    m_fovy = 45.0f;
-    m_aspect = 0.0f;
-    m_orthoMode = false;
-    m_orthoRange = 1.0f;
+    m_eye = 12.0f * v_Y + 25.0f * v_Z;
 }
 
 void VierGewinntScene::paintUnderQmlScene()
 {
-    //Do nothing
+    m_vierGewinnt->draw(m_renderer);
 }
 
 void VierGewinntScene::paintOnTopOfQmlScene()
 {
-    m_vierGewinnt->draw(m_renderer);
-    m_renderer->setLightingEnabled(false);
-    m_mouseRay->draw(m_renderer);
-    m_renderer->setLightingEnabled(true);
+    //Do Nothing
 }
 
 void VierGewinntScene::setupGeometry()
 {
     GLItem::setupGeometry();
-    m_mouseRay = new GLMouseRay("MouseRay", GLColorRgba::clGreen);
     m_vierGewinnt = new VierGewinnt(this);
+    connect(m_vierGewinnt, &VierGewinnt::gameOver, this, &VierGewinntScene::gameOver);
 }
 
 void VierGewinntScene::doSynchronizeThreads()
@@ -47,16 +38,24 @@ void VierGewinntScene::doSynchronizeThreads()
     }
 
     if (m_mouseReleaseReceived) {
+        m_renderer->pushMvMatrix();
+        m_renderer->setMvMatrix(m_vierGewinnt->getMvMatrix());
         m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar, m_mouseReleasePosition);
+        m_renderer->popMvMatrix();
         m_vierGewinnt->deselectToken();
     } else if (m_mousePressReceived) {
-        m_mouseRay->setPoints(m_mouseNear, m_mouseFar);
+        m_renderer->pushMvMatrix();
+        m_renderer->setMvMatrix(m_vierGewinnt->getMvMatrix());
         m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar, m_mousePressPosition);
         m_renderer->mouseIntersection(&m_lastIntersection, v_Y, 0.0f, m_mousePressPosition);
+        m_renderer->popMvMatrix();
         m_vierGewinnt->selectToken(m_mouseNear, m_mouseFar, m_eye);
     } else if (m_mousePositionChangedReceived) {
+        m_renderer->pushMvMatrix();
+        m_renderer->setMvMatrix(m_vierGewinnt->getMvMatrix());
         QVector3D oldIntersection = m_lastIntersection;
         m_renderer->mouseIntersection(&m_lastIntersection, v_Y, 0.0f, m_mousePositionChangedTo);
+        m_renderer->popMvMatrix();
         m_moveVector += m_lastIntersection - oldIntersection;
         m_vierGewinnt->moveToken(m_moveVector);
         m_moveVector = v_Zero;
@@ -70,28 +69,36 @@ void VierGewinntScene::doSynchronizeThreads()
         } else if(m_vierGewinnt->animateJumpDown()) {
             m_vierGewinnt->jumpDownAnimation();
         }
+        m_vierGewinnt->cameraRotationAnimation();
     }
-
     m_mousePressReceived = false;
     m_mouseReleaseReceived = false;
     m_mousePositionChangedReceived = false;
 }
 
-void VierGewinntScene::rotateLeft(float increment)
+void VierGewinntScene::newGame()
+{
+
+}
+
+void VierGewinntScene::startGame()
+{
+
+}
+
+void VierGewinntScene::stopGame()
+{
+}
+
+void VierGewinntScene::startRotation(float increment)
 {
     m_movementEnabled = true;
-    m_rotationIncrement = -fabs(increment);
+    m_rotationIncrement = fabs(increment);
 }
 
 void VierGewinntScene::stopRotation()
 {
     m_movementEnabled = false;
-}
-
-void VierGewinntScene::rotateRight(float increment)
-{
-    m_movementEnabled = true;
-    m_rotationIncrement = fabs(increment);
 }
 
 void VierGewinntScene::mousePressed(int x, int y)
@@ -120,12 +127,5 @@ void VierGewinntScene::handleWheelEvent(int angleDelta)
         m_eye *= 1.05f;
     } else {
         m_eye /= 1.05f;
-    }
-}
-
-void VierGewinntScene::handleKeyEvent(int key)
-{
-    if (key >= Qt::Key_1 && key <= Qt::Key_7) {
-        //m_vierGewinnt->insertToken(key - KEY_OFFSET);
     }
 }

@@ -11,10 +11,8 @@ GLToken::GLToken(const QString& name, const QString& textureFile)
 {
     m_center = v_Zero;
     m_radius = RADIUS;
-    setShowFrame(true);
     setTextureFile(textureFile);
     GLBody::readBinaryModelFile(":/models/token.dat");
-    findMinMaxCoordinates();
 }
 
 bool GLToken::isColliding(const GLToken* token) const

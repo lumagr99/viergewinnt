@@ -8,30 +8,20 @@ ApplicationWindow {
     visible: true
     title: qsTr("Vier Gewinnt")
 
-    SwipeView {
-        id: swipeView
+    GLPage {
+        id: glPage
         focus: true
         anchors.fill: parent
-        currentIndex: tabBar.currentIndex
-        Component.onCompleted: contentItem.interactive = false
-
-        GLPage {
-            vierGewinntScene.viewportY: applicationWindow.height - mapToItem(applicationWindow.contentItem, x, y + height).y;
-        }
-
-        Page2Form {
+        vierGewinntScene.viewportY: applicationWindow.height - mapToItem(applicationWindow.contentItem, x, y + height).y
+        vierGewinntScene.onGameOver: {
+            vierGewinntScene.startRotation(1.0);
+            gameOverDialog.winnerMessage = message
+            gameOverDialog.visible = true
         }
     }
 
-    footer: TabBar {
-        id: tabBar
-        currentIndex: swipeView.currentIndex
-
-        TabButton {
-            text: qsTr("Page 1")
-        }
-        TabButton {
-            text: qsTr("Page 2")
-        }
+    GameOverDialog {
+        id: gameOverDialog
+        visible: false
     }
 }

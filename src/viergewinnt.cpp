@@ -5,53 +5,30 @@ VierGewinnt::VierGewinnt(VierGewinntScene* scene)
     : m_scene(scene)
     , m_player(Player::RedPlayer)
     , m_selectedToken(nullptr)
+    , m_descendingToken(nullptr)
     , m_lastDistance(START_DISTANCE)
     , m_animationStep(0)
     , m_descentMoveStep(0)
     , m_animateJumpUp(false)
     , m_animateJumpDown(false)
     , m_animateDescent(false)
-{
+    , m_cameraRotationAngleStart(0)
+    , m_cameraRotationAngle(0)
+    , m_cameraRotationAngleTarget(0)
+    , m_cameraRotationStep(100)
+
+{    
     m_tablePlate = new GLTablePlate("TablePlate");
     m_court = new GLCourt("Court");
+
     m_rotationStep = 90.0f / ANIMATION_STEPS;
     m_jumpMoveStep = (GLCourt::HEIGHT + GLToken::RADIUS) / ANIMATION_STEPS;
 
-    GLTokenRed* redToken1 = new GLTokenRed("RedToken1");
-    redToken1->setShowFrame(false);
-    redToken1->move(QVector3D(-2.0f, 0.0f, 5.0f));
-    m_redTokens.append(redToken1);
-
-    GLTokenRed* redToken2 = new GLTokenRed("RedToken2");
-    redToken2->setShowFrame(false);
-    redToken2->move(QVector3D(0.0f, 0.0f, 5.0f));
-    m_redTokens.append(redToken2);
-
-    GLTokenRed* redToken3 = new GLTokenRed("RedToken3");
-    redToken3->setShowFrame(false);
-    redToken3->move(QVector3D(2.0f, 0.0f, 5.0f));
-    m_redTokens.append(redToken3);
-
-    GLTokenGreen* greenToken = new GLTokenGreen("GreenToken-1");
-    greenToken->move(QVector3D(0.0f, 0.0f, -5.0f));
-    m_greenTokens.append(greenToken);
-
-    /*
-    for (int i = 0; i < GLCourt::ROWS; i++) {
-        for (int j = 0; j < GLCourt::COLUMNS; j++) {
-            GLTokenGreen* greenToken = new GLTokenGreen("GreenToken" + QString(i * j));
-            greenToken->rotate(-90.0F);
-            QVector3D pos = m_court->fieldToPosition(QPoint(i, j));
-            greenToken->move(pos);
-            m_greenTokens.append(greenToken);
-        }
-    }
-    */
+    newToken();
 }
 
 VierGewinnt::~VierGewinnt()
 {
-    qDebug() << "VierGewinnt::~VierGewinnt() called.";
     for (auto& token : m_greenTokens) {
         delete token;
     }
@@ -64,8 +41,14 @@ VierGewinnt::~VierGewinnt()
 
 void VierGewinnt::draw(GLESRenderer* renderer)
 {
+    renderer->pushMvMatrix();
+    m_mvMatrix = renderer->getMvMatrix();
+    m_mvMatrix.rotate(m_cameraRotationAngle, v_Y);
+    renderer->setMvMatrix(m_mvMatrix);
+
     m_tablePlate->draw(renderer);
     m_court->draw(renderer);
+
     for (auto& token : m_greenTokens) {
         token->draw(renderer);
     }
@@ -73,6 +56,7 @@ void VierGewinnt::draw(GLESRenderer* renderer)
     for (auto& token : m_redTokens) {
         token->draw(renderer);
     }
+    renderer->popMvMatrix();
 }
 
 bool VierGewinnt::selectToken(const QVector3D& nearPoint, const QVector3D& farPoint, const QVector3D& camera)
@@ -98,16 +82,13 @@ void VierGewinnt::checkForSelection(const QVector3D& nearPoint, const QVector3D&
     if (token->isHit(nearPoint, farPoint)) {
         if (m_selectedToken == nullptr) {
             token->setSelected(true);
-            token->setShowFrame(true);
             m_selectedToken = token;
         } else {
-            float distance = (camera - token->getCenter()).length();
+            GLfloat distance = (camera - token->getCenter()).length();
             if (distance < m_lastDistance) {
                 m_lastDistance = distance;
                 m_selectedToken->setSelected(false);
-                m_selectedToken->setShowFrame(false);
                 token->setSelected(true);
-                token->setShowFrame(true);
                 m_selectedToken = token;
             }
         }
@@ -130,7 +111,6 @@ void VierGewinnt::deselectToken()
         insertToken(column);
     }
     m_selectedToken->setSelected(false);
-    m_selectedToken->setShowFrame(false);
     m_selectedToken = nullptr;
 }
 
@@ -147,12 +127,12 @@ void VierGewinnt::moveToken(const QVector3D& vMove)
     //Neue Position berechnen und verhindern, dass der Spielstein auf die Gegnerseite bewegt wird
     QVector3D newPos = m_selectedToken->getCenter() + vMove;
     QVector3D vz = v_Zero;
-    float z = newPos.z();
-    if (m_player == Player::RedPlayer && newPos.z() < 0) {
+    GLfloat z = newPos.z();
+    if (m_player == Player::RedPlayer && newPos.z() < 0.0f) {
         vz = v_Z * z;
     }
 
-    if (m_player == Player::GreenPlayer && newPos.z() > 0) {
+    if (m_player == Player::GreenPlayer && newPos.z() > 0.0f) {
         vz = v_Z * z;
     }
     m_selectedToken->move(vMove - vz);
@@ -198,6 +178,29 @@ void VierGewinnt::insertToken(int column)
 
         m_court->setField(m_player, field);
         m_animateDescent = true;
+
+
+        Player player = m_court->checkWin();
+        if(player == Player::RedPlayer) {
+            emit gameOver("Rot hat gewonnen!");
+        } else if(player == Player::GreenPlayer) {
+            emit gameOver("Grün hat gewonnen!");
+        } else {
+            changePlayer();
+        }
+    }
+}
+
+void VierGewinnt::newToken()
+{
+    if(m_player == Player::RedPlayer) {
+        GLTokenRed* redToken = new GLTokenRed(QString("RedToken%1").arg(m_redTokens.size()));
+        redToken->move(v_Z * 5.0f);
+        m_redTokens.append(redToken);
+    } else {
+        GLTokenGreen* greenToken = new GLTokenGreen(QString("GreenToken%1").arg(m_redTokens.size()));
+        greenToken->move(-v_Z * 5.0f);
+        m_greenTokens.append(greenToken);
     }
 }
 
@@ -205,9 +208,14 @@ void VierGewinnt::changePlayer()
 {
     if (m_player == Player::RedPlayer) {
         m_player = Player::GreenPlayer;
+        m_cameraRotationAngleTarget = 180.0;
     } else {
         m_player = Player::RedPlayer;
+        m_cameraRotationAngleTarget = 0.0;
     }
+    m_cameraRotationAngleStart = m_cameraRotationAngle;
+    m_cameraRotationStep = 0;
+    newToken();
 }
 
 void VierGewinnt::descentAnimation()
@@ -217,10 +225,10 @@ void VierGewinnt::descentAnimation()
             m_descendingToken->move(-v_Y * m_descentMoveStep);
             m_animationStep++;
         } else {
-            m_descentMoveStep = 0;
+            m_descentMoveStep = 0.0f;
             m_animateDescent = false;
             m_descendingToken = nullptr;
-            m_animationStep = 0;
+            m_animationStep = 0.0f;
         }
     }
 }
@@ -236,8 +244,8 @@ void VierGewinnt::jumpUpAnimation()
             m_selectedToken->setMovable(true);
             m_selectedToken->setRotated(true);
             m_animateJumpUp = false;
-            m_rotationStep = 90.f / ANIMATION_STEPS;
-            m_animationStep = 0;
+            m_rotationStep = 90.0f / ANIMATION_STEPS;
+            m_animationStep = 0.0f;
         }
     }
 }
@@ -253,9 +261,19 @@ void VierGewinnt::jumpDownAnimation()
             m_selectedToken->setMovable(true);
             m_selectedToken->setRotated(false);
             m_animateJumpDown = false;
-            m_rotationStep = 90.f / ANIMATION_STEPS;
-            m_animationStep = 0;
+            m_rotationStep = 90.0f / ANIMATION_STEPS;
+            m_animationStep = 0.0f;
         }
+    }
+}
+
+void VierGewinnt::cameraRotationAnimation()
+{
+    if(m_cameraRotationStep <= 100)
+    {
+        m_cameraRotationAngle = m_cameraRotationAngleStart + m_cameraRotationStep
+                * (m_cameraRotationAngleTarget - m_cameraRotationAngleStart) / 100.0;
+        m_cameraRotationStep++;
     }
 }
 
@@ -272,4 +290,9 @@ bool VierGewinnt::animateJumpDown()
 bool VierGewinnt::animateDescent()
 {
     return m_animateDescent;
+}
+
+QMatrix4x4 VierGewinnt::getMvMatrix()
+{
+    return m_mvMatrix;
 }

@@ -79,13 +79,13 @@
   * valid model painting matrix settings.
   */
 
-//#define USE_QOPENGL_FUNCTIONS
+#define USE_QOPENGL_FUNCTIONS
 
 class GLESRenderer : public QObject
-#ifdef USE_QOPENGL_FUNCTIONS
-    ,
-                     public QOpenGLFunctions
-#endif
+        #ifdef USE_QOPENGL_FUNCTIONS
+        ,
+        public QOpenGLFunctions
+        #endif
 {
     Q_OBJECT
 public:
@@ -98,8 +98,8 @@ public:
     } AttributeLocation;
 
     explicit GLESRenderer(QObject* parent,
-        const QString& vShaderFilename = ":/src/vshader.vsh",
-        const QString& fShaderFilename = ":/src/fshader.fsh");
+                          const QString& vShaderFilename = ":/src/vshader.vsh",
+                          const QString& fShaderFilename = ":/src/fshader.fsh");
 
     virtual ~GLESRenderer();
 

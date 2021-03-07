@@ -1,35 +1,44 @@
 import QtQuick 2.12
 import GlComponents 1.0
 
-GLForm {
-    id: glPage
-    buttonRotateLeft.onClicked: vierGewinntScene.rotateLeft(1.0)
-    buttonStop.onClicked: vierGewinntScene.stopRotation()
-    buttonRotateRight.onClicked: vierGewinntScene.rotateRight(1.0)
-    mouseArea.acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
 
-    mouseArea.onClicked: {
-        vierGewinntScene.mousePressed(mouse.x, mouse.y);
+Item {
+    property alias vierGewinntScene: vierGewinntScene
+    property alias mouseArea: mouseArea
+
+    VierGewinntScene {
+        id: vierGewinntScene
+        anchors.fill: parent
     }
 
-    mouseArea.onPressed: {
-        vierGewinntScene.mousePressed(mouse.x, mouse.y);
-    }
+    MouseArea {
+        id: mouseArea
+        x: 0
+        y: 0
+        width: parent.width
+        height: parent.height
 
-    mouseArea.onReleased: {
-        vierGewinntScene.mouseReleased(mouse.x, mouse.y);
-    }
+        acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
 
-    mouseArea.onPositionChanged: {
-        vierGewinntScene.mousePositionChanged(mouse.x, mouse.y);
-    }
+        onClicked: {
+            vierGewinntScene.mousePressed(mouse.x, mouse.y);
+        }
 
-    mouseArea.onWheel: {
-        vierGewinntScene.handleWheelEvent(wheel.angleDelta.y)
-    }
+        onPressed: {
+            vierGewinntScene.mousePressed(mouse.x, mouse.y);
+        }
 
-    Keys.onPressed: {
-        vierGewinntScene.handleKeyEvent(event.key);
+        onReleased: {
+            vierGewinntScene.mouseReleased(mouse.x, mouse.y);
+        }
+
+        onPositionChanged: {
+            vierGewinntScene.mousePositionChanged(mouse.x, mouse.y);
+        }
+
+        onWheel: {
+            vierGewinntScene.handleWheelEvent(wheel.angleDelta.y)
+        }
     }
 }
 

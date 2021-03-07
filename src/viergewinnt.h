@@ -2,6 +2,7 @@
 #define VIERGEWINNT_H
 
 #include <QObject>
+#include <QVector>
 
 #include "gl/glcourt.h"
 #include "gl/glesrenderer.h"
@@ -39,6 +40,8 @@ public:
 
     void insertToken(int column);
 
+    void newToken();
+
     void changePlayer();
 
     void descentAnimation();
@@ -47,14 +50,20 @@ public:
 
     void jumpDownAnimation();
 
+    void cameraRotationAnimation();
+
     bool animateJumpUp();
 
     bool animateJumpDown();
 
     bool animateDescent();
 
+    QMatrix4x4 getMvMatrix();
+
 signals:
     void playerChanged(Player player);
+
+    void gameOver(QString message);
 
     void soundReqeuest(const QString& soundFileName);
 
@@ -65,9 +74,9 @@ private:
 
     GLCourt* m_court;
 
-    QList<GLTokenGreen*> m_greenTokens;
+    QVector<GLTokenGreen*> m_greenTokens;
 
-    QList<GLTokenRed*> m_redTokens;
+    QVector<GLTokenRed*> m_redTokens;
 
     Player m_player;
 
@@ -75,21 +84,33 @@ private:
 
     GLToken* m_descendingToken;
 
-    float m_lastDistance;
+    GLfloat m_lastDistance;
 
-    int m_animationStep;
+    //Animation
+    GLint m_animationStep;
 
-    float m_rotationStep;
+    GLfloat m_rotationStep;
 
-    float m_jumpMoveStep;
+    GLfloat m_jumpMoveStep;
 
-    float m_descentMoveStep;
+    GLfloat m_descentMoveStep;
 
     bool m_animateJumpUp;
 
     bool m_animateJumpDown;
 
     bool m_animateDescent;
+
+    //Kamera
+    QMatrix4x4 m_mvMatrix;
+
+    GLfloat m_cameraRotationAngleStart;
+
+    GLfloat m_cameraRotationAngle;
+
+    GLfloat m_cameraRotationAngleTarget;
+
+    GLint m_cameraRotationStep;
 };
 
 #endif // VIERGEWINNT_H

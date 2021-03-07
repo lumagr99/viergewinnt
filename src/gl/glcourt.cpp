@@ -15,7 +15,7 @@ GLCourt::GLCourt(const QString& name, const GLColorRgba& color)
     GLBody::readBinaryModelFile(":/models/court.dat");
 
     for (int row = 0; row < ROWS; row++) {
-        m_court.append(QVector<Status>(COLUMNS, Status::Free));
+        m_court.append(QVector<Player>(COLUMNS, Player::None));
     }
 }
 
@@ -38,7 +38,7 @@ int GLCourt::getColumnByPosition(const QVector3D& position) const
 QPoint GLCourt::getFreeField(int column)
 {
     for (int row = ROWS - 1; row >= 0; row--) {
-        if (m_court[row][column] == Status::Free) {
+        if (m_court[row][column] == Player::None) {
             return QPoint(row, column);
         }
     }
@@ -58,23 +58,56 @@ void GLCourt::setField(Player player, QPoint field)
         return;
     }
 
-    if (m_court[x][y] == Status::Free) {
-        if (player == Player::RedPlayer) {
-            m_court[x][y] = Status::RedPlayer;
-        } else {
-            m_court[x][y] = Status::GreenPlayer;
+    if (m_court[x][y] == Player::None) {
+        m_court[x][y] = player;
+    }
+}
+
+Player GLCourt::checkWin()
+{
+    for(int row = 0; row < ROWS; row++) {
+        for(int col = 0; col < COLUMNS; col++) {
+            Player player = m_court[row][col];
+            if(player == Player::None) {
+                continue;
+            }
+
+            if (col + 3 < COLUMNS &&
+                    player == m_court[row][col+1] && // look right
+                    player == m_court[row][col+2] &&
+                    player == m_court[row][col+3]) {
+
+                return player;
+            }
+            if (row + 3 < ROWS) {
+                if (player == m_court[row+1][col] &&
+                        player == m_court[row+2][col] &&
+                        player == m_court[row+3][col])
+                    return player;
+                if (col + 3 < COLUMNS &&
+                        player == m_court[row+1][col+1] &&
+                        player == m_court[row+2][col+2] &&
+                        player == m_court[row+3][col+3])
+                    return player;
+                if (col - 3 >= 0 &&
+                        player == m_court[row+1][col-1] &&
+                        player == m_court[row+2][col-2] &&
+                        player == m_court[row+3][col-3])
+                    return player;
+            }
         }
     }
+    return Player::None;
 }
 
 void GLCourt::printCourt()
 {
     for (int row = 0; row < ROWS; row++) {
         for (int col = 0; col < COLUMNS; col++) {
-            if (m_court[row][col] == Status::Free) {
-                std::cout << "F";
+            if (m_court[row][col] == Player::None) {
+                std::cout << "N";
 
-            } else if (m_court[row][col] == Status::RedPlayer) {
+            } else if (m_court[row][col] == Player::RedPlayer) {
                 std::cout << "R";
 
             } else {
