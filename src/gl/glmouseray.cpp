@@ -23,6 +23,10 @@ void GLMouseRay::makeSurface(QVector<GLPoint>* pointContainer, QVector<GLushort>
 
 void GLMouseRay::draw(GLESRenderer* renderer, bool useBuffers)
 {
+    if (!m_surfaceIsValid) {
+        makeSurface(nullptr, nullptr);
+    }
+
     glPointSize(3.0);
     setDrawingMode(GL_POINTS);
     GLBody::draw(renderer, useBuffers);
@@ -36,7 +40,10 @@ void GLMouseRay::draw(GLESRenderer* renderer, bool useBuffers)
 
 void GLMouseRay::setPoints(const QVector3D& nearPoint, const QVector3D& farPoint)
 {
-    //qDebug() << "GLMouseRay::setPoints running on thread: " << QThread::currentThreadId();
+    if (!m_surfaceIsValid) {
+        makeSurface(nullptr, nullptr);
+    }
+
     m_nearPoint = nearPoint;
     m_farPoint = farPoint;
 

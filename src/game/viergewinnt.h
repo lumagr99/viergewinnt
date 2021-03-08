@@ -1,15 +1,16 @@
 #ifndef VIERGEWINNT_H
 #define VIERGEWINNT_H
 
+#include <QMap>
 #include <QObject>
 #include <QVector>
 
-#include "gl/glcourt.h"
-#include "gl/glesrenderer.h"
-#include "gl/glmouseray.h"
-#include "gl/gltableplate.h"
-#include "gl/gltokengreen.h"
-#include "gl/gltokenred.h"
+#include "../gl/glcourt.h"
+#include "../gl/glesrenderer.h"
+#include "../gl/glmouseray.h"
+#include "../gl/gltableplate.h"
+#include "../gl/gltokengreen.h"
+#include "../gl/gltokenred.h"
 #include "player.h"
 
 class VierGewinntScene;
@@ -19,10 +20,17 @@ class VierGewinnt : public QObject {
     Q_OBJECT
 
 public:
-
     static constexpr float START_DISTANCE = 100000.0f;
 
     static constexpr int ANIMATION_STEPS = 35;
+
+    static constexpr int TOKENS = 42;
+
+    typedef enum {
+        TokenSelected,
+        TokenInserted,
+        PlayerChanged
+    } SoundEvent;
 
     VierGewinnt(VierGewinntScene* scene);
 
@@ -39,8 +47,6 @@ public:
     void moveToken(const QVector3D& vMove);
 
     void insertToken(int column);
-
-    void newToken();
 
     void changePlayer();
 
@@ -61,9 +67,8 @@ public:
     QMatrix4x4 getMvMatrix();
 
 signals:
-    void playerChanged(Player player);
 
-    void gameOver(QString message);
+    void gameOver(const QString &color);
 
     void soundReqeuest(const QString& soundFileName);
 
@@ -86,7 +91,6 @@ private:
 
     GLfloat m_lastDistance;
 
-    //Animation
     GLint m_animationStep;
 
     GLfloat m_rotationStep;
@@ -101,7 +105,6 @@ private:
 
     bool m_animateDescent;
 
-    //Kamera
     QMatrix4x4 m_mvMatrix;
 
     GLfloat m_cameraRotationAngleStart;
@@ -111,6 +114,8 @@ private:
     GLfloat m_cameraRotationAngleTarget;
 
     GLint m_cameraRotationStep;
+
+    QMap<SoundEvent, QString> soundFileNames;
 };
 
 #endif // VIERGEWINNT_H

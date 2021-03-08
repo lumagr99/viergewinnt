@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>models/court.dat</file>
-        <file>models/token.dat</file>
-        <file>models/tableplate.dat</file>
+        <file>models/Court.dat</file>
+        <file>models/Tableplate.dat</file>
+        <file>models/Token.dat</file>
     </qresource>
 </RCC>

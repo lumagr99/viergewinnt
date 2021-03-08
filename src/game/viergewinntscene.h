@@ -1,15 +1,15 @@
 #ifndef VIERGEWINNTSCENE_H
 #define VIERGEWINNTSCENE_H
 
-#include <QKeyEvent>
+#include <QOpenGLBuffer>
 
-#include "gl/glcourt.h"
-#include "gl/glitem.h"
-#include "gl/glmouseray.h"
-#include "gl/gltableplate.h"
-#include "gl/gltokengreen.h"
-#include "gl/gltokenred.h"
-#include "soundengine.h"
+#include "../gl/glcourt.h"
+#include "../gl/glitem.h"
+#include "../gl/glmouseray.h"
+#include "../gl/gltableplate.h"
+#include "../gl/gltokengreen.h"
+#include "../gl/gltokenred.h"
+#include "../sound/soundengine.h"
 #include "viergewinnt.h"
 
 class VierGewinntScene : public GLItem {
@@ -25,9 +25,11 @@ protected:
 
     virtual void setupGeometry() Q_DECL_OVERRIDE;
 
+    virtual void setupBuffers();
+
 signals:
 
-    void gameOver(QString message);
+    void gameOver(const QString &color);
 
 public slots:
 
@@ -51,10 +53,20 @@ public slots:
 
     void handleWheelEvent(int angleDelta);
 
+    void toggleMouseRays();
+
+    void toggleAxes();
+
 private:
     VierGewinnt* m_vierGewinnt;
 
+    GLMouseRay* m_mouseRay;
+
     SoundEngine* m_sounds;
+
+    QOpenGLBuffer *m_vertexBuffer;
+
+    QOpenGLBuffer *m_indexBuffer;
 
     QPoint m_mousePressPosition;
 
@@ -75,6 +87,10 @@ private:
     bool m_mouseReleaseReceived;
 
     bool m_mousePositionChangedReceived;
+
+    bool m_drawMouseRays;
+
+    bool m_newGame;
 };
 
 #endif // VIERGEWINNTSCENE_H

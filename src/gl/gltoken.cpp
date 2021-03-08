@@ -9,10 +9,15 @@ GLToken::GLToken(const QString& name, const QString& textureFile)
     , m_rotated(false)
     , m_movable(true)
 {
-    m_center = v_Zero;
     m_radius = RADIUS;
+    m_center = v_Zero;
     setTextureFile(textureFile);
-    GLBody::readBinaryModelFile(":/models/token.dat");
+    GLBody::readBinaryModelFile(":/models/Token.dat");
+}
+
+GLToken::~GLToken()
+{
+    GLBody::destroyTextureObjects();
 }
 
 bool GLToken::isColliding(const GLToken* token) const

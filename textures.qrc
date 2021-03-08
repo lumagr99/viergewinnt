@@ -1,7 +1,8 @@
 <RCC>
     <qresource prefix="/">
-        <file>textures/table.JPG</file>
-        <file>textures/tokenred.JPG</file>
-        <file>textures/tokengreen.JPG</file>
+        <file>textures/TokenGreen.png</file>
+        <file>textures/TokenRed.png</file>
+        <file>textures/Table.png</file>
+        <file>textures/Court.png</file>
     </qresource>
 </RCC>

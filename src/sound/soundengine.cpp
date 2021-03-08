@@ -30,7 +30,7 @@ bool SoundEngine::loadSound(const QString& fileName)
     sound->setSource(QUrl::fromLocalFile(fileName));
 #endif
     sound->setLoopCount(1);
-    sound->setVolume(1.0);
+    sound->setVolume(0.8);
     m_sounds.insert(fileName, sound);
     return true;
 }

@@ -6,7 +6,9 @@
 class GLTablePlate : public GLBody {
 
 public:
-    GLTablePlate(const QString& name, float radius = 1.0f, const QString textureFile = ":/textures/table.JPG", const GLColorRgba& color = GLColorRgba::clGray);
+    GLTablePlate(const QString& name, float radius = 1.0f, const GLColorRgba& color = GLColorRgba::clBlue, const QString textureFile = ":/textures/Table.png");
+
+    ~GLTablePlate() Q_DECL_OVERRIDE;
 };
 
 #endif // GLTABLEPLATE_H

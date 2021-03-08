@@ -17,18 +17,36 @@ VierGewinnt::VierGewinnt(VierGewinntScene* scene)
     , m_cameraRotationAngleTarget(0)
     , m_cameraRotationStep(100)
 
-{    
+{
     m_tablePlate = new GLTablePlate("TablePlate");
     m_court = new GLCourt("Court");
 
     m_rotationStep = 90.0f / ANIMATION_STEPS;
     m_jumpMoveStep = (GLCourt::HEIGHT + GLToken::RADIUS) / ANIMATION_STEPS;
 
-    newToken();
+    soundFileNames[TokenSelected] = ":/sounds/TokenSelected.wav";
+    soundFileNames[TokenInserted] = ":/sounds/TokenInserted.wav";
+
+    for(int i = 0; i < GLCourt::COLUMNS; i++) {
+        for(int j = 0; j < GLCourt::ROWS / 2; j++) {
+            int n = (i + 1) * (j + 1);
+            GLTokenRed *token = new GLTokenRed(QString("RedToken%1").arg(n));
+            m_redTokens.append(token);
+            token->move(QVector3D(-GLCourt::WIDTH / 2 + ((GLCourt::WIDTH / 6) * i), 0.0f, 3.0 + 2 * j));
+        }
+        for(int j = 0; j < GLCourt::ROWS / 2; j++) {
+            int n = (i + 1) * (j+ 1);
+            GLTokenGreen *token = new GLTokenGreen(QString("GreenToken%1").arg(n));
+            m_greenTokens.append(token);
+            token->move(QVector3D(-GLCourt::WIDTH / 2 + ((GLCourt::WIDTH / 6) * i), 0.0f, -3.0 - 2 * j));
+        }
+    }
 }
 
 VierGewinnt::~VierGewinnt()
 {
+    qDebug() << "called";
+
     for (auto& token : m_greenTokens) {
         delete token;
     }
@@ -72,7 +90,7 @@ bool VierGewinnt::selectToken(const QVector3D& nearPoint, const QVector3D& farPo
     }
     if (m_selectedToken != nullptr) {
         m_lastDistance = START_DISTANCE;
-        //emit Sound
+        emit soundReqeuest(soundFileNames[TokenSelected]);
     }
     return m_selectedToken != nullptr;
 }
@@ -101,7 +119,7 @@ void VierGewinnt::deselectToken()
         return;
     }
 
-    if(!m_selectedToken->isMovable()) {
+    if (!m_selectedToken->isMovable()) {
         return;
     }
 
@@ -120,7 +138,7 @@ void VierGewinnt::moveToken(const QVector3D& vMove)
         return;
     }
 
-    if(!m_selectedToken->isMovable()) {
+    if (!m_selectedToken->isMovable()) {
         return;
     }
 
@@ -179,28 +197,16 @@ void VierGewinnt::insertToken(int column)
         m_court->setField(m_player, field);
         m_animateDescent = true;
 
-
         Player player = m_court->checkWin();
-        if(player == Player::RedPlayer) {
-            emit gameOver("Rot hat gewonnen!");
-        } else if(player == Player::GreenPlayer) {
-            emit gameOver("Grün hat gewonnen!");
+        if (player == Player::RedPlayer) {
+            emit gameOver(tr("Rot"));
+        } else if (player == Player::GreenPlayer) {
+            emit gameOver(tr("Grün"));
+        } else if(m_court->isFull()) {
+            emit gameOver(tr("Unentschieden"));
         } else {
             changePlayer();
         }
-    }
-}
-
-void VierGewinnt::newToken()
-{
-    if(m_player == Player::RedPlayer) {
-        GLTokenRed* redToken = new GLTokenRed(QString("RedToken%1").arg(m_redTokens.size()));
-        redToken->move(v_Z * 5.0f);
-        m_redTokens.append(redToken);
-    } else {
-        GLTokenGreen* greenToken = new GLTokenGreen(QString("GreenToken%1").arg(m_redTokens.size()));
-        greenToken->move(-v_Z * 5.0f);
-        m_greenTokens.append(greenToken);
     }
 }
 
@@ -215,28 +221,27 @@ void VierGewinnt::changePlayer()
     }
     m_cameraRotationAngleStart = m_cameraRotationAngle;
     m_cameraRotationStep = 0;
-    newToken();
 }
 
 void VierGewinnt::descentAnimation()
 {
-    if(m_descendingToken) {
-        if(m_animationStep < ANIMATION_STEPS) {
+    if (m_descendingToken) {
+        if (m_animationStep < ANIMATION_STEPS) {
             m_descendingToken->move(-v_Y * m_descentMoveStep);
             m_animationStep++;
         } else {
             m_descentMoveStep = 0.0f;
             m_animateDescent = false;
             m_descendingToken = nullptr;
-            m_animationStep = 0.0f;
+            m_animationStep = 0;
         }
     }
 }
 
 void VierGewinnt::jumpUpAnimation()
 {
-    if(m_selectedToken) {
-        if(m_animationStep < ANIMATION_STEPS) {
+    if (m_selectedToken) {
+        if (m_animationStep < ANIMATION_STEPS) {
             m_selectedToken->rotate(-m_rotationStep);
             m_selectedToken->move(v_Y * m_jumpMoveStep);
             m_animationStep++;
@@ -252,8 +257,8 @@ void VierGewinnt::jumpUpAnimation()
 
 void VierGewinnt::jumpDownAnimation()
 {
-    if(m_selectedToken) {
-        if(m_animationStep < ANIMATION_STEPS) {
+    if (m_selectedToken) {
+        if (m_animationStep < ANIMATION_STEPS) {
             m_selectedToken->rotate(m_rotationStep);
             m_selectedToken->move(-v_Y * m_jumpMoveStep);
             m_animationStep++;
@@ -269,10 +274,8 @@ void VierGewinnt::jumpDownAnimation()
 
 void VierGewinnt::cameraRotationAnimation()
 {
-    if(m_cameraRotationStep <= 100)
-    {
-        m_cameraRotationAngle = m_cameraRotationAngleStart + m_cameraRotationStep
-                * (m_cameraRotationAngleTarget - m_cameraRotationAngleStart) / 100.0;
+    if (m_cameraRotationStep <= 100) {
+        m_cameraRotationAngle = m_cameraRotationAngleStart + m_cameraRotationStep * (m_cameraRotationAngleTarget - m_cameraRotationAngleStart) / 100.0;
         m_cameraRotationStep++;
     }
 }

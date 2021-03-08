@@ -14,6 +14,8 @@ public:
 
     GLToken(const QString& name, const QString& textureFile);
 
+    ~GLToken() Q_DECL_OVERRIDE;
+
     bool isColliding(const GLToken* token) const;
 
     bool isColliding(const GLCourt* court) const;

@@ -5,7 +5,7 @@
 
 #include "glbody.h"
 #include "gltoken.h"
-#include "../player.h"
+#include "../game/player.h"
 
 class GLCourt : public GLBody {
 
@@ -17,7 +17,9 @@ public:
     static constexpr float HEIGHT = 8.5f;
     static constexpr float DEPTH = 0.65f;
 
-    GLCourt(const QString& name, const GLColorRgba& color = GLColorRgba::clBlue);
+    GLCourt(const QString& name, float radius = 1.0f, const GLColorRgba& color = GLColorRgba::clBlue, const QString textureFile = ":/textures/Court.png");
+
+    ~GLCourt() Q_DECL_OVERRIDE;
 
     QVector3D fieldToPosition(const QPoint& field) const;
 
@@ -30,6 +32,8 @@ public:
     void setField(Player player, QPoint field);
 
     Player checkWin();
+
+    bool isFull();
 
     void printCourt();
 

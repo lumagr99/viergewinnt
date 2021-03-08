@@ -5,7 +5,7 @@
 
 class GLTokenRed : public GLToken {
 public:
-    GLTokenRed(const QString& name, const QString& textureFile = ":/textures/tokenred.JPG");
+    GLTokenRed(const QString& name, const QString& textureFile = ":/textures/TokenRed.png");
 
 private:
     QString m_textureFile;

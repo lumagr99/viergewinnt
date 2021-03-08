@@ -6,21 +6,20 @@ Dialog {
     title: qsTr("Game over!")
     modal: false
     anchors.centerIn: parent
-    closePolicy: Popup.CloseOnReleaseOutsideParent
+    closePolicy: Popup.NoAutoClose
     standardButtons: Dialog.Yes | Dialog.No
 
     property alias winnerMessage : winnerMessage.text
-    property alias winnerColor: winnerMessage.color
+    property alias winnerColor : winnerMessage.color
 
     Rectangle {
-        color: "lightgray"
+        color: "whitesmoke"
         implicitWidth: 400
         implicitHeight: 130
 
         Text {
             id: winnerMessage
             font.pixelSize: 24
-            text: ""
             topPadding: 30
             anchors.horizontalCenter: parent.horizontalCenter
         }
@@ -28,12 +27,12 @@ Dialog {
         Text {
             id: playAgainMessage
             font.pixelSize: 18
-            text: "Möchten Sie eine weitere Runde spielen?"
+            text: qsTr("Möchten Sie eine weitere Runde spielen?")
             topPadding: 50
             anchors.centerIn: parent
         }
     }
 
-    onAccepted: console.log("JAAAAA")
+    onAccepted: vierGewinntScene.newGame();
     onRejected: Qt.quit()
 }

@@ -7,6 +7,8 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        src/game/viergewinnt.cpp \
+        src/game/viergewinntscene.cpp \
         src/gl/glbody.cpp \
         src/gl/glbodygroup.cpp \
         src/gl/glcolorrgba.cpp \
@@ -21,16 +23,18 @@ SOURCES += \
         src/gl/gltokengreen.cpp \
         src/gl/gltokenred.cpp \
         src/gl/shaderdebugger.cpp \
-        src/main.cpp \
-        src/viergewinnt.cpp \
-        src/viergewinntscene.cpp \
-        src/soundengine.cpp
+        src/sound/soundengine.cpp \
+        src/main.cpp
 
 HEADERS += \
+        src/game/player.h \
+        src/game/viergewinnt.h \
+        src/game/viergewinntscene.h \
         src/gl/glbody.h \
         src/gl/glbodygroup.h \
         src/gl/glcolorrgba.h \
         src/gl/glcourt.h \
+        src/gl/gldefines.h \
         src/gl/glesrenderer.h \
         src/gl/glitem.h \
         src/gl/glmouseray.h \
@@ -40,17 +44,14 @@ HEADERS += \
         src/gl/gltoken.h \
         src/gl/gltokengreen.h \
         src/gl/gltokenred.h \
-        src/gl/gldefines.h \
         src/gl/shaderdebugger.h \
-        src/player.h \
-        src/viergewinnt.h \
-        src/viergewinntscene.h \
-        src/soundengine.h
+        src/sound/soundengine.h
 
 RESOURCES += \
     models.qrc \
     qml.qrc \
     shaders.qrc \
+    sounds.qrc \
     textures.qrc \
     translations.qrc
 

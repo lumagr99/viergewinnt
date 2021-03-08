@@ -3,7 +3,7 @@
 #include <QQmlContext>
 #include <QTranslator>
 
-#include "viergewinntscene.h"
+#include "game/viergewinntscene.h"
 
 int main(int argc, char* argv[])
 {
@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
     QQmlApplicationEngine engine;
     qmlRegisterType<VierGewinntScene>("GlComponents", 1, 0, "VierGewinntScene");
 
-    const QUrl url(QStringLiteral("qrc:/qml/main.qml"));
+    const QUrl url(QStringLiteral("qrc:/qml/Main.qml"));
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated,
         &app, [url](QObject* obj, const QUrl& objUrl) {
