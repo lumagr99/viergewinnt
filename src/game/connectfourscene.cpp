@@ -1,9 +1,9 @@
 #include <QDebug>
 #include <math.h>
 
-#include "viergewinntscene.h"
+#include "connectfourscene.h"
 
-VierGewinntScene::VierGewinntScene()
+ConnectFourScene::ConnectFourScene()
     : m_vierGewinnt(nullptr)
     , m_mouseRay(nullptr)
     , m_sounds(nullptr)
@@ -23,7 +23,7 @@ VierGewinntScene::VierGewinntScene()
     createAxes(5.0f);
 }
 
-void VierGewinntScene::paintUnderQmlScene()
+void ConnectFourScene::paintUnderQmlScene()
 {
     m_vierGewinnt->draw(m_renderer);
     if (m_drawMouseRays) {
@@ -33,38 +33,38 @@ void VierGewinntScene::paintUnderQmlScene()
     }
 }
 
-void VierGewinntScene::paintOnTopOfQmlScene()
+void ConnectFourScene::paintOnTopOfQmlScene()
 {
-    //Do Nothing
+    //Tue nichts.
 }
 
-void VierGewinntScene::setupGeometry()
+void ConnectFourScene::setupGeometry()
 {
     GLItem::setupGeometry();
 
-    m_vierGewinnt = new VierGewinnt(this);
+    m_vierGewinnt = new ConnectFour(this);
     m_mouseRay = new GLMouseRay("MouseRay", GLColorRgba::clGreen);
 
-    connect(m_vierGewinnt, &VierGewinnt::gameOver, this, &VierGewinntScene::gameOver);
-    connect(m_vierGewinnt, &VierGewinnt::soundReqeuest, m_sounds, &SoundEngine::playSound);
+    connect(m_vierGewinnt, &ConnectFour::gameOver, this, &ConnectFourScene::gameOver);
+    connect(m_vierGewinnt, &ConnectFour::soundReqeuest, m_sounds, &SoundEngine::playSound);
 
     setupBuffers();
 }
 
-void VierGewinntScene::setupBuffers()
+void ConnectFourScene::setupBuffers()
 {
     m_vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
-    if(!m_vertexBuffer->create()){
+    if (!m_vertexBuffer->create()) {
         qDebug() << "VierGewinntScene::setupBuffers(): Vertex Buffer create failed";
         exit(1);
     }
     m_vertexBuffer->bind();
     m_vertexBuffer->setUsagePattern(QOpenGLBuffer::StaticDraw); // StaticDraw is default. However we set it for clearity.
-    m_vertexBuffer->allocate(m_points.data(), m_points.size() * static_cast<int>(sizeof(GLPoint)) );
+    m_vertexBuffer->allocate(m_points.data(), m_points.size() * static_cast<int>(sizeof(GLPoint)));
     m_vertexBuffer->release();
 
     m_indexBuffer = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
-    if(!m_indexBuffer->create()){
+    if (!m_indexBuffer->create()) {
         qDebug() << "VierGewinntScene::setupBuffers(): Index Buffer create failed";
         exit(1);
     }
@@ -73,7 +73,7 @@ void VierGewinntScene::setupBuffers()
     m_indexBuffer->release();
 }
 
-void VierGewinntScene::doSynchronizeThreads()
+void ConnectFourScene::doSynchronizeThreads()
 {
     GLItem::doSynchronizeThreads();
 
@@ -81,7 +81,7 @@ void VierGewinntScene::doSynchronizeThreads()
         return;
     }
 
-    if(m_newGame) {
+    if (m_newGame) {
         m_newGame = false;
         stopRotation();
         m_renderThreadRotation = 0.0f;
@@ -105,7 +105,7 @@ void VierGewinntScene::doSynchronizeThreads()
     } else if (m_mousePressReceived) {
         m_renderer->pushMvMatrix();
         m_renderer->setMvMatrix(m_vierGewinnt->getMvMatrix());
-        m_mouseRay->setPoints(m_mouseFar, m_mouseFar);
+        m_mouseRay->setPoints(m_mouseNear, m_mouseFar);
         m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar, m_mousePressPosition);
         m_renderer->mouseIntersection(&m_lastIntersection, v_Y, 0.0f, m_mousePressPosition);
         m_renderer->popMvMatrix();
@@ -126,7 +126,7 @@ void VierGewinntScene::doSynchronizeThreads()
         if (m_vierGewinnt->animateDescent()) {
             m_vierGewinnt->descentAnimation();
             //Muss hier abgespielt werden, da das emittieren eines Signals in der Animation zu Framedrops führt
-            if(m_vierGewinnt->animateDescent()) {
+            if (m_vierGewinnt->animateDescent()) {
                 m_sounds->playSound(":/sounds/TokenInserted.wav");
             }
         } else if (m_vierGewinnt->animateJumpUp()) {
@@ -140,72 +140,61 @@ void VierGewinntScene::doSynchronizeThreads()
     m_mousePressReceived = false;
     m_mouseReleaseReceived = false;
     m_mousePositionChangedReceived = false;
-
 }
 
-void VierGewinntScene::newGame()
+void ConnectFourScene::newGame()
 {
     stopGame();
     m_newGame = true;
     startGame();
 }
 
-void VierGewinntScene::startGame()
+void ConnectFourScene::startGame()
 {
     m_timer->start();
 }
 
-void VierGewinntScene::stopGame()
+void ConnectFourScene::stopGame()
 {
     m_timer->stop();
 }
 
-void VierGewinntScene::startRotation(float increment)
+void ConnectFourScene::startRotation(float increment)
 {
     m_movementEnabled = true;
     m_rotationIncrement = fabs(increment);
 }
 
-void VierGewinntScene::stopRotation()
+void ConnectFourScene::stopRotation()
 {
     m_movementEnabled = false;
 }
 
-void VierGewinntScene::mousePressed(int x, int y)
+void ConnectFourScene::mousePressed(int x, int y)
 {
     m_mousePressPosition = QPoint(x, y);
     m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar, m_mousePressPosition);
     m_mousePressReceived = true;
 }
 
-void VierGewinntScene::mousePositionChanged(int x, int y)
+void ConnectFourScene::mousePositionChanged(int x, int y)
 {
     m_mousePositionChangedTo = QPoint(x, y);
     m_mousePositionChangedReceived = true;
 }
 
-void VierGewinntScene::mouseReleased(int x, int y)
+void ConnectFourScene::mouseReleased(int x, int y)
 {
     m_mouseReleasePosition = QPoint(x, y);
     m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar, m_mouseReleasePosition);
     m_mouseReleaseReceived = true;
 }
 
-void VierGewinntScene::handleWheelEvent(int angleDelta)
+void ConnectFourScene::handleWheelEvent(int angleDelta)
 {
     if (angleDelta < 0) {
         m_eye *= 1.05f;
     } else {
         m_eye /= 1.05f;
     }
-}
-
-void VierGewinntScene::toggleMouseRays()
-{
-    m_drawMouseRays = !m_drawMouseRays;
-}
-
-void VierGewinntScene::toggleAxes()
-{
-    m_drawAxes = !m_drawAxes;
 }

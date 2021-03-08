@@ -79,25 +79,25 @@ Player GLCourt::checkWin()
             }
 
             if (col + 3 < COLUMNS
-                    && player == m_court[row][col + 1]
-                    && player == m_court[row][col + 2]
-                    && player == m_court[row][col + 3]) {
+                && player == m_court[row][col + 1]
+                && player == m_court[row][col + 2]
+                && player == m_court[row][col + 3]) {
                 return player;
             }
             if (row + 3 < ROWS) {
                 if (player == m_court[row + 1][col]
-                        && player == m_court[row + 2][col]
-                        && player == m_court[row + 3][col])
+                    && player == m_court[row + 2][col]
+                    && player == m_court[row + 3][col])
                     return player;
                 if (col + 3 < COLUMNS
-                        && player == m_court[row + 1][col + 1]
-                        && player == m_court[row + 2][col + 2]
-                        && player == m_court[row + 3][col + 3])
+                    && player == m_court[row + 1][col + 1]
+                    && player == m_court[row + 2][col + 2]
+                    && player == m_court[row + 3][col + 3])
                     return player;
                 if (col - 3 >= 0
-                        && player == m_court[row + 1][col - 1]
-                        && player == m_court[row + 2][col - 2]
-                        && player == m_court[row + 3][col - 3])
+                    && player == m_court[row + 1][col - 1]
+                    && player == m_court[row + 2][col - 2]
+                    && player == m_court[row + 3][col - 3])
                     return player;
             }
         }
@@ -108,8 +108,8 @@ Player GLCourt::checkWin()
 bool GLCourt::isFull()
 {
     int row = 0;
-    for(int col = 0; col < COLUMNS; col++) {
-        if(m_court[row][col] == Player::None) {
+    for (int col = 0; col < COLUMNS; col++) {
+        if (m_court[row][col] == Player::None) {
             return false;
         }
     }

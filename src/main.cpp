@@ -3,7 +3,7 @@
 #include <QQmlContext>
 #include <QTranslator>
 
-#include "game/viergewinntscene.h"
+#include "game/connectfourscene.h"
 
 int main(int argc, char* argv[])
 {
@@ -11,12 +11,12 @@ int main(int argc, char* argv[])
 
     QGuiApplication app(argc, argv);
     QTranslator translator;
-    if (translator.load("VierGewinnt_de_DE.qm", ":/translations")) {
+    if (translator.load("ConnectFour_de_DE.qm", ":/translations")) {
         app.installTranslator(&translator);
     }
 
     QQmlApplicationEngine engine;
-    qmlRegisterType<VierGewinntScene>("GlComponents", 1, 0, "VierGewinntScene");
+    qmlRegisterType<ConnectFourScene>("GlComponents", 1, 0, "VierGewinntScene");
 
     const QUrl url(QStringLiteral("qrc:/qml/Main.qml"));
     QObject::connect(

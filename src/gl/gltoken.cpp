@@ -41,7 +41,7 @@ bool GLToken::isColliding(const GLCourt* court) const
 {
     QVector3D center = court->getCenter();
     if (fabs(m_center.z()) <= center.z() + GLCourt::DEPTH / 2 + m_radius
-            && fabs(m_center.x()) <= center.x() + GLCourt::WIDTH / 2 + m_radius) {
+        && fabs(m_center.x()) <= center.x() + GLCourt::WIDTH / 2 + m_radius) {
         return true;
     }
     return false;
@@ -55,24 +55,4 @@ void GLToken::moveToPosition(const QVector3D& position)
 void GLToken::rotate(float angle)
 {
     rotateModelPoints(m_center, v_X, angle);
-}
-
-bool GLToken::isRotated() const
-{
-    return m_rotated;
-}
-
-void GLToken::setRotated(bool rotated)
-{
-    m_rotated = rotated;
-}
-
-bool GLToken::isMovable() const
-{
-    return m_movable;
-}
-
-void GLToken::setMovable(bool movable)
-{
-    m_movable = movable;
 }

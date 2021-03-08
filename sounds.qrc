@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>sounds/TokenSelected.wav</file>
         <file>sounds/TokenInserted.wav</file>
+        <file>sounds/GameOver.wav</file>
+        <file>sounds/PlayerChanged.wav</file>
     </qresource>
 </RCC>

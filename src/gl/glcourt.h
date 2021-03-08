@@ -3,14 +3,13 @@
 
 #include <QVector>
 
+#include "../game/player.h"
 #include "glbody.h"
 #include "gltoken.h"
-#include "../game/player.h"
 
 class GLCourt : public GLBody {
 
 public:
-
     static constexpr int ROWS = 6;
     static constexpr int COLUMNS = 7;
     static constexpr float WIDTH = 10.0f;
@@ -38,7 +37,6 @@ public:
     void printCourt();
 
 private:
-
     QVector<QVector<Player>> m_court;
 
     QVector3D m_vRow;

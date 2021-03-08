@@ -1,5 +1,5 @@
-#ifndef VIERGEWINNTSCENE_H
-#define VIERGEWINNTSCENE_H
+#ifndef CONNECTFOURSCENE_H
+#define CONNECTFOURSCENE_H
 
 #include <QOpenGLBuffer>
 
@@ -10,13 +10,13 @@
 #include "../gl/gltokengreen.h"
 #include "../gl/gltokenred.h"
 #include "../sound/soundengine.h"
-#include "viergewinnt.h"
+#include "connectfour.h"
 
-class VierGewinntScene : public GLItem {
+class ConnectFourScene : public GLItem {
     Q_OBJECT
 
 public:
-    explicit VierGewinntScene();
+    explicit ConnectFourScene();
 
 protected:
     virtual void paintUnderQmlScene() Q_DECL_OVERRIDE;
@@ -29,7 +29,7 @@ protected:
 
 signals:
 
-    void gameOver(const QString &color);
+    void gameOver(const QString& color);
 
 public slots:
 
@@ -53,20 +53,26 @@ public slots:
 
     void handleWheelEvent(int angleDelta);
 
-    void toggleMouseRays();
+    void toggleMouseRays()
+    {
+        m_drawMouseRays = !m_drawMouseRays;
+    }
 
-    void toggleAxes();
+    void toggleAxes()
+    {
+        m_drawAxes = !m_drawAxes;
+    }
 
 private:
-    VierGewinnt* m_vierGewinnt;
+    ConnectFour* m_vierGewinnt;
 
     GLMouseRay* m_mouseRay;
 
     SoundEngine* m_sounds;
 
-    QOpenGLBuffer *m_vertexBuffer;
+    QOpenGLBuffer* m_vertexBuffer;
 
-    QOpenGLBuffer *m_indexBuffer;
+    QOpenGLBuffer* m_indexBuffer;
 
     QPoint m_mousePressPosition;
 
@@ -93,4 +99,4 @@ private:
     bool m_newGame;
 };
 
-#endif // VIERGEWINNTSCENE_H
+#endif // CONNECTFOURSCENE_H

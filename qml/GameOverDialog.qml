@@ -27,12 +27,12 @@ Dialog {
         Text {
             id: playAgainMessage
             font.pixelSize: 18
-            text: qsTr("Möchten Sie eine weitere Runde spielen?")
+            text: qsTr("Do you want to play another round?")
             topPadding: 50
             anchors.centerIn: parent
         }
     }
 
     onAccepted: vierGewinntScene.newGame();
-    onRejected: Qt.quit()
+    onRejected: Qt.quit();
 }

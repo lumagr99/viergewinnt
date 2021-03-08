@@ -5,10 +5,10 @@ import GlComponents 1.0
 
 ApplicationWindow {
     id: applicationWindow
-    width: 1024
-    height: 768
+    width: 800
+    height: 600
     visible: true
-    title: qsTr("Vier Gewinnt")
+    title: qsTr("Connect Four")
 
     menuBar: MenuBar {
         id: menuBar
@@ -105,14 +105,15 @@ ApplicationWindow {
 
         onGameOver: {
             vierGewinntScene.startRotation(1.0);
-            if(color == "Rot") {
-                gameOverDialog.winnerMessage = color + qsTr(" hat gewonnen!")
+            if(color == "Red") {
+                gameOverDialog.winnerMessage = qsTr("Red") + " " + qsTr("has won!")
                 gameOverDialog.winnerColor = "red"
-            } else if (color == "Grün"){
-                gameOverDialog.winnerMessage = color + qsTr(" hat gewonnen!")
+            } else if (color == "Green"){
+                col
+                gameOverDialog.winnerMessage = qsTr("Green") + " " + qsTr("has won!")
                 gameOverDialog.winnerColor = "green"
             } else {
-                gameOverDialog.winnerMessage = qsTr("Unentschieden!")
+                gameOverDialog.winnerMessage = qsTr("Draw!")
             }
             gameOverDialog.visible = true
         }

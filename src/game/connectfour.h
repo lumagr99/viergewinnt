@@ -1,5 +1,5 @@
-#ifndef VIERGEWINNT_H
-#define VIERGEWINNT_H
+#ifndef CONNECTFOUR_H
+#define CONNECTFOUR_H
 
 #include <QMap>
 #include <QObject>
@@ -13,9 +13,9 @@
 #include "../gl/gltokenred.h"
 #include "player.h"
 
-class VierGewinntScene;
+class ConnectFourScene;
 
-class VierGewinnt : public QObject {
+class ConnectFour : public QObject {
 
     Q_OBJECT
 
@@ -29,12 +29,13 @@ public:
     typedef enum {
         TokenSelected,
         TokenInserted,
-        PlayerChanged
+        PlayerChanged,
+        GameOver
     } SoundEvent;
 
-    VierGewinnt(VierGewinntScene* scene);
+    ConnectFour(ConnectFourScene* scene);
 
-    ~VierGewinnt();
+    ~ConnectFour();
 
     virtual void draw(GLESRenderer* renderer);
 
@@ -58,22 +59,34 @@ public:
 
     void cameraRotationAnimation();
 
-    bool animateJumpUp();
+    bool animateJumpUp()
+    {
+        return m_animateJumpUp;
+    }
 
-    bool animateJumpDown();
+    bool animateJumpDown()
+    {
+        return m_animateJumpDown;
+    }
 
-    bool animateDescent();
+    bool animateDescent()
+    {
+        return m_animateDescent;
+    }
 
-    QMatrix4x4 getMvMatrix();
+    QMatrix4x4 getMvMatrix()
+    {
+        return m_mvMatrix;
+    }
 
 signals:
 
-    void gameOver(const QString &color);
+    void gameOver(const QString& color);
 
     void soundReqeuest(const QString& soundFileName);
 
 private:
-    VierGewinntScene* m_scene;
+    ConnectFourScene* m_scene;
 
     GLTablePlate* m_tablePlate;
 
@@ -118,4 +131,4 @@ private:
     QMap<SoundEvent, QString> soundFileNames;
 };
 
-#endif // VIERGEWINNT_H
+#endif // CONNECTFOUR_H

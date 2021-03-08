@@ -1,7 +1,7 @@
-#include "viergewinnt.h"
-#include "viergewinntscene.h"
+#include "connectfour.h"
+#include "connectfourscene.h"
 
-VierGewinnt::VierGewinnt(VierGewinntScene* scene)
+ConnectFour::ConnectFour(ConnectFourScene* scene)
     : m_scene(scene)
     , m_player(Player::RedPlayer)
     , m_selectedToken(nullptr)
@@ -26,27 +26,27 @@ VierGewinnt::VierGewinnt(VierGewinntScene* scene)
 
     soundFileNames[TokenSelected] = ":/sounds/TokenSelected.wav";
     soundFileNames[TokenInserted] = ":/sounds/TokenInserted.wav";
+    soundFileNames[PlayerChanged] = ":/sounds/PlayerChanged.wav";
+    soundFileNames[GameOver] = ":/sounds/GameOver.wav";
 
-    for(int i = 0; i < GLCourt::COLUMNS; i++) {
-        for(int j = 0; j < GLCourt::ROWS / 2; j++) {
+    for (int i = 0; i < GLCourt::COLUMNS; i++) {
+        for (int j = 0; j < GLCourt::ROWS / 2; j++) {
             int n = (i + 1) * (j + 1);
-            GLTokenRed *token = new GLTokenRed(QString("RedToken%1").arg(n));
+            GLTokenRed* token = new GLTokenRed(QString("RedToken%1").arg(n));
             m_redTokens.append(token);
             token->move(QVector3D(-GLCourt::WIDTH / 2 + ((GLCourt::WIDTH / 6) * i), 0.0f, 3.0 + 2 * j));
         }
-        for(int j = 0; j < GLCourt::ROWS / 2; j++) {
-            int n = (i + 1) * (j+ 1);
-            GLTokenGreen *token = new GLTokenGreen(QString("GreenToken%1").arg(n));
+        for (int j = 0; j < GLCourt::ROWS / 2; j++) {
+            int n = (i + 1) * (j + 1);
+            GLTokenGreen* token = new GLTokenGreen(QString("GreenToken%1").arg(n));
             m_greenTokens.append(token);
             token->move(QVector3D(-GLCourt::WIDTH / 2 + ((GLCourt::WIDTH / 6) * i), 0.0f, -3.0 - 2 * j));
         }
     }
 }
 
-VierGewinnt::~VierGewinnt()
+ConnectFour::~ConnectFour()
 {
-    qDebug() << "called";
-
     for (auto& token : m_greenTokens) {
         delete token;
     }
@@ -57,7 +57,7 @@ VierGewinnt::~VierGewinnt()
     delete m_court;
 }
 
-void VierGewinnt::draw(GLESRenderer* renderer)
+void ConnectFour::draw(GLESRenderer* renderer)
 {
     renderer->pushMvMatrix();
     m_mvMatrix = renderer->getMvMatrix();
@@ -77,7 +77,7 @@ void VierGewinnt::draw(GLESRenderer* renderer)
     renderer->popMvMatrix();
 }
 
-bool VierGewinnt::selectToken(const QVector3D& nearPoint, const QVector3D& farPoint, const QVector3D& camera)
+bool ConnectFour::selectToken(const QVector3D& nearPoint, const QVector3D& farPoint, const QVector3D& camera)
 {
     if (m_player == Player::RedPlayer) {
         for (auto& token : m_redTokens) {
@@ -95,7 +95,7 @@ bool VierGewinnt::selectToken(const QVector3D& nearPoint, const QVector3D& farPo
     return m_selectedToken != nullptr;
 }
 
-void VierGewinnt::checkForSelection(const QVector3D& nearPoint, const QVector3D& farPoint, const QVector3D& camera, GLToken* token)
+void ConnectFour::checkForSelection(const QVector3D& nearPoint, const QVector3D& farPoint, const QVector3D& camera, GLToken* token)
 {
     if (token->isHit(nearPoint, farPoint)) {
         if (m_selectedToken == nullptr) {
@@ -113,7 +113,7 @@ void VierGewinnt::checkForSelection(const QVector3D& nearPoint, const QVector3D&
     }
 }
 
-void VierGewinnt::deselectToken()
+void ConnectFour::deselectToken()
 {
     if (m_selectedToken == nullptr) {
         return;
@@ -132,7 +132,7 @@ void VierGewinnt::deselectToken()
     m_selectedToken = nullptr;
 }
 
-void VierGewinnt::moveToken(const QVector3D& vMove)
+void ConnectFour::moveToken(const QVector3D& vMove)
 {
     if (m_selectedToken == nullptr) {
         return;
@@ -182,7 +182,7 @@ void VierGewinnt::moveToken(const QVector3D& vMove)
     }
 }
 
-void VierGewinnt::insertToken(int column)
+void ConnectFour::insertToken(int column)
 {
     QPoint field = m_court->getFreeField(column);
     if (field != QPoint(-1, -1)) {
@@ -199,18 +199,22 @@ void VierGewinnt::insertToken(int column)
 
         Player player = m_court->checkWin();
         if (player == Player::RedPlayer) {
-            emit gameOver(tr("Rot"));
+            emit gameOver("Red");
+            emit soundReqeuest(soundFileNames[GameOver]);
         } else if (player == Player::GreenPlayer) {
-            emit gameOver(tr("Grün"));
-        } else if(m_court->isFull()) {
-            emit gameOver(tr("Unentschieden"));
+            emit gameOver("Green");
+            emit soundReqeuest(soundFileNames[GameOver]);
+        } else if (m_court->isFull()) {
+            emit gameOver("Draw");
+            emit soundReqeuest(soundFileNames[GameOver]);
         } else {
+            emit soundReqeuest(soundFileNames[PlayerChanged]);
             changePlayer();
         }
     }
 }
 
-void VierGewinnt::changePlayer()
+void ConnectFour::changePlayer()
 {
     if (m_player == Player::RedPlayer) {
         m_player = Player::GreenPlayer;
@@ -223,7 +227,7 @@ void VierGewinnt::changePlayer()
     m_cameraRotationStep = 0;
 }
 
-void VierGewinnt::descentAnimation()
+void ConnectFour::descentAnimation()
 {
     if (m_descendingToken) {
         if (m_animationStep < ANIMATION_STEPS) {
@@ -238,7 +242,7 @@ void VierGewinnt::descentAnimation()
     }
 }
 
-void VierGewinnt::jumpUpAnimation()
+void ConnectFour::jumpUpAnimation()
 {
     if (m_selectedToken) {
         if (m_animationStep < ANIMATION_STEPS) {
@@ -255,7 +259,7 @@ void VierGewinnt::jumpUpAnimation()
     }
 }
 
-void VierGewinnt::jumpDownAnimation()
+void ConnectFour::jumpDownAnimation()
 {
     if (m_selectedToken) {
         if (m_animationStep < ANIMATION_STEPS) {
@@ -272,30 +276,10 @@ void VierGewinnt::jumpDownAnimation()
     }
 }
 
-void VierGewinnt::cameraRotationAnimation()
+void ConnectFour::cameraRotationAnimation()
 {
     if (m_cameraRotationStep <= 100) {
         m_cameraRotationAngle = m_cameraRotationAngleStart + m_cameraRotationStep * (m_cameraRotationAngleTarget - m_cameraRotationAngleStart) / 100.0;
         m_cameraRotationStep++;
     }
-}
-
-bool VierGewinnt::animateJumpUp()
-{
-    return m_animateJumpUp;
-}
-
-bool VierGewinnt::animateJumpDown()
-{
-    return m_animateJumpDown;
-}
-
-bool VierGewinnt::animateDescent()
-{
-    return m_animateDescent;
-}
-
-QMatrix4x4 VierGewinnt::getMvMatrix()
-{
-    return m_mvMatrix;
 }

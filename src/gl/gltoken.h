@@ -8,7 +8,6 @@ class GLCourt;
 class GLToken : public GLBody {
 
 public:
-
     static constexpr float HEIGHT = 0.325f;
     static constexpr float RADIUS = 0.625f;
 
@@ -24,16 +23,27 @@ public:
 
     void rotate(float angle);
 
-    bool isRotated() const;
+    bool isRotated() const
+    {
+        return m_rotated;
+    }
 
-    void setRotated(bool rotated);
+    void setRotated(bool rotated)
+    {
+        m_rotated = rotated;
+    }
 
-    bool isMovable() const;
+    bool isMovable() const
+    {
+        return m_movable;
+    }
 
-    void setMovable(bool movable);
+    void setMovable(bool movable)
+    {
+        m_movable = movable;
+    }
 
 private:
-
     bool m_rotated;
 
     bool m_movable;
