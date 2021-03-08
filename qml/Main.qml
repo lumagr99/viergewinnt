@@ -42,6 +42,9 @@ ApplicationWindow {
                 }
             }
 
+            MenuSeparator {
+            }
+
             MenuItem {
                 id: closeAction
                 text: qsTr("&Exit")
@@ -109,7 +112,6 @@ ApplicationWindow {
                 gameOverDialog.winnerMessage = qsTr("Red") + " " + qsTr("has won!")
                 gameOverDialog.winnerColor = "red"
             } else if (color == "Green"){
-                col
                 gameOverDialog.winnerMessage = qsTr("Green") + " " + qsTr("has won!")
                 gameOverDialog.winnerColor = "green"
             } else {
