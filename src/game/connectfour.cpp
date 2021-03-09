@@ -1,9 +1,9 @@
 #include "connectfour.h"
 #include "connectfourscene.h"
 
-ConnectFour::ConnectFour(ConnectFourScene* scene)
+ConnectFour::ConnectFour(ConnectFourScene* scene, Player player)
     : m_scene(scene)
-    , m_player(Player::RedPlayer)
+    , m_player(player)
     , m_selectedToken(nullptr)
     , m_descendingToken(nullptr)
     , m_lastDistance(START_DISTANCE)
@@ -12,37 +12,49 @@ ConnectFour::ConnectFour(ConnectFourScene* scene)
     , m_animateJumpUp(false)
     , m_animateJumpDown(false)
     , m_animateDescent(false)
-    , m_cameraRotationAngleStart(0)
-    , m_cameraRotationAngle(0)
-    , m_cameraRotationAngleTarget(0)
-    , m_cameraRotationStep(100)
 
 {
+    //Tischplatte & Spielbrett erstellen
     m_tablePlate = new GLTablePlate("TablePlate");
     m_court = new GLCourt("Court");
 
+    //Rotations & Sprungschritt berechnen
     m_rotationStep = 90.0f / ANIMATION_STEPS;
     m_jumpMoveStep = (GLCourt::HEIGHT + GLToken::RADIUS) / ANIMATION_STEPS;
 
+    //Sounds initialisieren
     soundFileNames[TokenSelected] = ":/sounds/TokenSelected.wav";
     soundFileNames[TokenInserted] = ":/sounds/TokenInserted.wav";
     soundFileNames[PlayerChanged] = ":/sounds/PlayerChanged.wav";
     soundFileNames[GameOver] = ":/sounds/GameOver.wav";
 
-    for (int i = 0; i < GLCourt::COLUMNS; i++) {
-        for (int j = 0; j < GLCourt::ROWS / 2; j++) {
-            int n = (i + 1) * (j + 1);
+    //Tokens platzieren
+    for (GLint i = 0; i < GLCourt::COLUMNS; i++) {
+        for (GLint j = 0; j < GLCourt::ROWS / 2; j++) {
+            GLint n = (i + 1) * (j + 1);
             GLTokenRed* token = new GLTokenRed(QString("RedToken%1").arg(n));
             m_redTokens.append(token);
             token->move(QVector3D(-GLCourt::WIDTH / 2 + ((GLCourt::WIDTH / 6) * i), 0.0f, 3.0 + 2 * j));
         }
-        for (int j = 0; j < GLCourt::ROWS / 2; j++) {
-            int n = (i + 1) * (j + 1);
+        for (GLint j = 0; j < GLCourt::ROWS / 2; j++) {
+            GLint n = (i + 1) * (j + 1);
             GLTokenGreen* token = new GLTokenGreen(QString("GreenToken%1").arg(n));
             m_greenTokens.append(token);
             token->move(QVector3D(-GLCourt::WIDTH / 2 + ((GLCourt::WIDTH / 6) * i), 0.0f, -3.0 - 2 * j));
         }
     }
+
+    //Kameraposition anpassen
+    if (m_player == Player::RedPlayer) {
+        m_cameraRotationAngleStart = 0.0f;
+        m_cameraRotationAngle = 0.0f;
+        m_cameraRotationAngleTarget = 0.0f;
+    } else {
+        m_cameraRotationAngleStart = 180.0f;
+        m_cameraRotationAngle = 180.0f;
+        m_cameraRotationAngleTarget = 180.0f;
+    }
+    m_cameraRotationStep = 100;
 }
 
 ConnectFour::~ConnectFour()
@@ -60,10 +72,13 @@ ConnectFour::~ConnectFour()
 void ConnectFour::draw(GLESRenderer* renderer)
 {
     renderer->pushMvMatrix();
+
+    //Modelview Matrix rotieren
     m_mvMatrix = renderer->getMvMatrix();
     m_mvMatrix.rotate(m_cameraRotationAngle, v_Y);
     renderer->setMvMatrix(m_mvMatrix);
 
+    //Objekte speichern
     m_tablePlate->draw(renderer);
     m_court->draw(renderer);
 
@@ -90,7 +105,11 @@ bool ConnectFour::selectToken(const QVector3D& nearPoint, const QVector3D& farPo
     }
     if (m_selectedToken != nullptr) {
         m_lastDistance = START_DISTANCE;
-        emit soundReqeuest(soundFileNames[TokenSelected]);
+
+        //Sound abspielen, wenn das Token bewegbar ist
+        if (m_selectedToken->isMovable()) {
+            emit soundReqeuest(soundFileNames[TokenSelected]);
+        }
     }
     return m_selectedToken != nullptr;
 }
@@ -103,6 +122,7 @@ void ConnectFour::checkForSelection(const QVector3D& nearPoint, const QVector3D&
             m_selectedToken = token;
         } else {
             GLfloat distance = (camera - token->getCenter()).length();
+            //Token näher?
             if (distance < m_lastDistance) {
                 m_lastDistance = distance;
                 m_selectedToken->setSelected(false);
@@ -123,8 +143,10 @@ void ConnectFour::deselectToken()
         return;
     }
 
+    //Token kollidiert mit dem Spielbret -> einfügen
     if (m_selectedToken->isColliding(m_court)) {
         QVector3D center = m_selectedToken->getCenter();
+        //Spalte bestimmen
         int column = m_court->getColumnByPosition(center);
         insertToken(column);
     }
@@ -168,7 +190,7 @@ void ConnectFour::moveToken(const QVector3D& vMove)
         }
     }
 
-    //Kollisionserkennung Spielsteine
+    //Kollisionserkennung Spieltokens
     for (auto& token : m_redTokens) {
         if (m_selectedToken->isColliding(token)) {
             m_selectedToken->move(-vMove);
@@ -186,17 +208,23 @@ void ConnectFour::insertToken(int column)
 {
     QPoint field = m_court->getFreeField(column);
     if (field != QPoint(-1, -1)) {
+        //Token zur endgültigen Einfügeposition bewegen
         QVector3D insertPosition = m_court->calulateInsertPosition(m_selectedToken);
         m_selectedToken->moveToPosition(insertPosition);
         m_selectedToken->setMovable(false);
 
+        //Feldposition bestimmen
         QVector3D position = m_court->fieldToPosition(field);
         m_descentMoveStep = (m_selectedToken->getCenter().y() - position.y()) / ANIMATION_STEPS;
         m_descendingToken = m_selectedToken;
 
+        //Feld setzen
         m_court->setField(m_player, field);
+
+        //Abstiegsanimation starten
         m_animateDescent = true;
 
+        //Spielstatus überprüfen
         Player player = m_court->checkWin();
         if (player == Player::RedPlayer) {
             emit gameOver("Red");
@@ -208,7 +236,6 @@ void ConnectFour::insertToken(int column)
             emit gameOver("Draw");
             emit soundReqeuest(soundFileNames[GameOver]);
         } else {
-            emit soundReqeuest(soundFileNames[PlayerChanged]);
             changePlayer();
         }
     }
@@ -223,6 +250,7 @@ void ConnectFour::changePlayer()
         m_player = Player::RedPlayer;
         m_cameraRotationAngleTarget = 0.0;
     }
+    emit soundReqeuest(soundFileNames[PlayerChanged]);
     m_cameraRotationAngleStart = m_cameraRotationAngle;
     m_cameraRotationStep = 0;
 }

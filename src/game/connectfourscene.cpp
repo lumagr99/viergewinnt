@@ -12,6 +12,7 @@ ConnectFourScene::ConnectFourScene()
     , m_mousePositionChangedReceived(false)
     , m_drawMouseRays(false)
     , m_newGame(false)
+    , m_player(Player::RedPlayer)
 {
     m_backgroundColor = GLColorRgba::clBlack;
     m_timer->start(16);
@@ -42,35 +43,11 @@ void ConnectFourScene::setupGeometry()
 {
     GLItem::setupGeometry();
 
-    m_vierGewinnt = new ConnectFour(this);
+    m_vierGewinnt = new ConnectFour(this, m_player);
     m_mouseRay = new GLMouseRay("MouseRay", GLColorRgba::clGreen);
 
     connect(m_vierGewinnt, &ConnectFour::gameOver, this, &ConnectFourScene::gameOver);
     connect(m_vierGewinnt, &ConnectFour::soundReqeuest, m_sounds, &SoundEngine::playSound);
-
-    setupBuffers();
-}
-
-void ConnectFourScene::setupBuffers()
-{
-    m_vertexBuffer = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
-    if (!m_vertexBuffer->create()) {
-        qDebug() << "VierGewinntScene::setupBuffers(): Vertex Buffer create failed";
-        exit(1);
-    }
-    m_vertexBuffer->bind();
-    m_vertexBuffer->setUsagePattern(QOpenGLBuffer::StaticDraw); // StaticDraw is default. However we set it for clearity.
-    m_vertexBuffer->allocate(m_points.data(), m_points.size() * static_cast<int>(sizeof(GLPoint)));
-    m_vertexBuffer->release();
-
-    m_indexBuffer = new QOpenGLBuffer(QOpenGLBuffer::IndexBuffer);
-    if (!m_indexBuffer->create()) {
-        qDebug() << "VierGewinntScene::setupBuffers(): Index Buffer create failed";
-        exit(1);
-    }
-    m_indexBuffer->bind();
-    m_indexBuffer->allocate(m_indices.data(), m_indices.size() * static_cast<int>(sizeof(IndexType)));
-    m_indexBuffer->release();
 }
 
 void ConnectFourScene::doSynchronizeThreads()
@@ -84,14 +61,17 @@ void ConnectFourScene::doSynchronizeThreads()
     if (m_newGame) {
         m_newGame = false;
         stopRotation();
-        m_renderThreadRotation = 0.0f;
+
+        if (m_player == Player::RedPlayer) {
+            m_player = Player::GreenPlayer;
+        } else {
+            m_player = Player::RedPlayer;
+        }
         m_guiThreadRotation = 0.0f;
-        m_eye = 12.0f * v_Y + 25.0f * v_Z;
-        QMatrix4x4 mvMatrix;
-        mvMatrix.setToIdentity();
-        m_renderer->setMvMatrix(mvMatrix);
+
         delete m_vierGewinnt;
         delete m_mouseRay;
+
         setupGeometry();
         return;
     }
@@ -103,12 +83,15 @@ void ConnectFourScene::doSynchronizeThreads()
         m_renderer->popMvMatrix();
         m_vierGewinnt->deselectToken();
     } else if (m_mousePressReceived) {
+        m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar, m_mousePressPosition);
+        m_mouseRay->setPoints(m_mouseNear, m_mouseFar);
+
         m_renderer->pushMvMatrix();
         m_renderer->setMvMatrix(m_vierGewinnt->getMvMatrix());
-        m_mouseRay->setPoints(m_mouseNear, m_mouseFar);
         m_renderer->calculateMousePoints(&m_mouseNear, &m_mouseFar, m_mousePressPosition);
         m_renderer->mouseIntersection(&m_lastIntersection, v_Y, 0.0f, m_mousePressPosition);
         m_renderer->popMvMatrix();
+
         m_vierGewinnt->selectToken(m_mouseNear, m_mouseFar, m_eye);
     } else if (m_mousePositionChangedReceived) {
         m_renderer->pushMvMatrix();
@@ -126,7 +109,7 @@ void ConnectFourScene::doSynchronizeThreads()
         if (m_vierGewinnt->animateDescent()) {
             m_vierGewinnt->descentAnimation();
             //Muss hier abgespielt werden, da das emittieren eines Signals in der Animation zu Framedrops führt
-            if (m_vierGewinnt->animateDescent()) {
+            if (!m_vierGewinnt->animateDescent()) {
                 m_sounds->playSound(":/sounds/TokenInserted.wav");
             }
         } else if (m_vierGewinnt->animateJumpUp()) {
