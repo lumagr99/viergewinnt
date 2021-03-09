@@ -4,19 +4,13 @@
 #include "gltoken.h"
 
 /**
- * @brief The GLTokenGreen class
- *
- * Objekte der Klasse stellen ein grünes Token des Vier Gewinnt Spiels dar.
- *
+ * @brief Grünes Token des Vier Gewinnt Spiels.
  */
 class GLTokenGreen : public GLToken {
 
 public:
     /**
-     * @brief GLTokenGreen
-     *
-     * Erstellt und Initialisiert ein neues GLTokenGreen-Objekt.
-     *
+     * @brief Konstruktor. Erstellt und Initialisiert ein neues GLTokenGreen-Objekt.
      * @param name Name des Objekts.
      * @param textureFile Texturdatei des Objekts.
      */
@@ -24,9 +18,7 @@ public:
 
 private:
     /**
-     * @brief m_textureFile
-     *
-     * Texturdatei des Tokens.
+     * @brief Texturdatei.
      */
     QString m_textureFile;
 };

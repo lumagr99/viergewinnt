@@ -1,0 +1,873 @@
+\hypertarget{class_g_l_body}{}\doxysection{GLBody Class Reference}
+\label{class_g_l_body}\index{GLBody@{GLBody}}
+
+
+A 3D body that uses a \mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} for drawing and \mbox{\hyperlink{class_g_l_point}{GLPoint}} objects for defining its surface.  
+
+
+
+
+{\ttfamily \#include $<$glbody.\+h$>$}
+
+Inheritance diagram for GLBody\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.393939cm]{class_g_l_body}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_g_l_body_a48e9c1993ff477191f7013527a30afc8}{GLBody}} (const QString \&name, float radius=1.\+0, const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&color=GLColor\+Rgba\+::cl\+Blue, const QString m\+\_\+texture\+File=\char`\"{}\char`\"{})
+\item 
+\mbox{\hyperlink{class_g_l_body_a6e50d6cb10fbdb81e8aeb64ab3e46a66}{GLBody}} (QString name, const QVector3D offset)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_g_l_body}{GLBody}} Constructor does NOT create the surface. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{class_g_l_body_ac6cd2e5f6d0115cf6f6f0ae84c9d91a1}{$\sim$\+GLBody}} ()
+\item 
+bool \mbox{\hyperlink{class_g_l_body_a760a4221bb18ac880c10c41984e4257b}{create\+Texture\+Objects}} (GLenum minfilter=GL\+\_\+\+LINEAR\+\_\+\+MIPMAP\+\_\+\+NEAREST, GLenum magfilter=GL\+\_\+\+LINEAR, GLenum wrapmode=GL\+\_\+\+CLAMP\+\_\+\+TO\+\_\+\+EDGE)
+\item 
+\mbox{\Hypertarget{class_g_l_body_a84129218a5f712aaff781f3516d59f91}\label{class_g_l_body_a84129218a5f712aaff781f3516d59f91}} 
+virtual void \mbox{\hyperlink{class_g_l_body_a84129218a5f712aaff781f3516d59f91}{destroy\+Texture\+Objects}} ()
+\begin{DoxyCompactList}\small\item\em destroy\+Texture\+Objects delete all texture objects from m\+\_\+texture\+Ids \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_g_l_body_a73e51b159f343d0bda87f50df382b7db}{make\+Surface}} (QVector$<$ \mbox{\hyperlink{class_g_l_point}{GLPoint}} $>$ $\ast$point\+Container, QVector$<$ Index\+Type $>$ $\ast$index\+Container)
+\item 
+virtual void \mbox{\hyperlink{class_g_l_body_aac154c28cf7bc705a17b37163469ce98}{share\+Geometry}} (const \mbox{\hyperlink{class_g_l_body}{GLBody}} $\ast$other)
+\begin{DoxyCompactList}\small\item\em share\+Geometry copies container pointers and first and next point, index, normal Sets m\+\_\+own\+Containers to false \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_g_l_body_a603d6b9a83a9cf22ea282881dda32524}{share\+Texture\+Objects}} (const \mbox{\hyperlink{class_g_l_body}{GLBody}} $\ast$other)
+\begin{DoxyCompactList}\small\item\em share\+Texture\+Objects copy texture names (numbers) from other and set m\+\_\+own\+Textures to false. \end{DoxyCompactList}\item 
+Index\+Type \mbox{\hyperlink{class_g_l_body_ab49318c0af2044a32ec6e7833a6224c1}{points\+Size}} ()
+\begin{DoxyCompactList}\small\item\em points\+Size Convenience function to avoid multiple casting \end{DoxyCompactList}\item 
+Index\+Type \mbox{\hyperlink{class_g_l_body_a10511a36b5bc7012290252f84d40ac74}{indices\+Size}} ()
+\begin{DoxyCompactList}\small\item\em indices\+Size Convenience function to avoid multiple casting \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_g_l_body_ad6f12ae3d48aa96561138a8c91fab68a}{read\+Binary\+Model\+File}} (const QString \&data\+File\+Name, QVector$<$ \mbox{\hyperlink{class_g_l_point}{GLPoint}} $>$ $\ast$point\+Container=nullptr, QVector$<$ GLushort $>$ $\ast$index\+Container=nullptr)
+\begin{DoxyCompactList}\small\item\em read\+Binary\+File Calls make\+Surface and reads binary file. File format\+: 4 bytes uint number of Gl\+Points, 4 bytes uint number of uint indices number of points Gl\+Point objects followed by number of indices indices \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_g_l_body_a2bcb327029d699431bcb8ae51d3c57fb}{rotate\+Model\+Points}} (const QVector3D \&axis\+Center, const QVector3D \&axis\+Direction, float angle)
+\begin{DoxyCompactList}\small\item\em rotate\+Model\+Points Rotates model points around axis \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_af69c1be811d9da78c2cf9d65deb83b5d}\label{class_g_l_body_af69c1be811d9da78c2cf9d65deb83b5d}} 
+virtual void \mbox{\hyperlink{class_g_l_body_af69c1be811d9da78c2cf9d65deb83b5d}{calculate\+Draw\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em calculate\+Draw\+Matrix Virtual function to calculate the final matrix to be used for drawing. May be overwritten in subclasses. \mbox{\hyperlink{class_g_l_body_af69c1be811d9da78c2cf9d65deb83b5d}{GLBody\+::calculate\+Draw\+Matrix}} simply copies m\+\_\+transformation\+Matrix. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}{draw}} (\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$renderer, bool use\+Buffers=false)
+\item 
+virtual void \mbox{\hyperlink{class_g_l_body_a3c22fc9ca71740ed61097ac4b1e8cb1a}{draw\+Geometries}} (\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$renderer, bool use\+Buffers, int index=0)
+\begin{DoxyCompactList}\small\item\em draw\+Geometries Should be called from \mbox{\hyperlink{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}{draw()}}. Sets uniforms and calls gl\+Draw\+Array or gl\+Draw\+Elements. Does NOT bind attribute arrays or buffers! Therefore it is very fast. Assumes bound attributes. Binding is done in \mbox{\hyperlink{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}{draw()}}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_a577f12f9480e717384901c318d33c0a9}\label{class_g_l_body_a577f12f9480e717384901c318d33c0a9}} 
+virtual void \mbox{\hyperlink{class_g_l_body_a577f12f9480e717384901c318d33c0a9}{bind\+Texture}} (\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em bind\+Texture binds the texture at m\+\_\+active\+Texture\+Index \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_a48853827030e433431785a26cec72329}\label{class_g_l_body_a48853827030e433431785a26cec72329}} 
+virtual void \mbox{\hyperlink{class_g_l_body_a48853827030e433431785a26cec72329}{release\+Texture}} (\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em bind\+Texture releases the texture at m\+\_\+active\+Texture\+Index \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_g_l_body_acf2dca6b59e7ab7fcc3484b1bcb54e7b}{draw\+Debug\+Geometries}} (\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$renderer, bool use\+Buffers)
+\begin{DoxyCompactList}\small\item\em draw\+Debug\+Geometries Should be called from \mbox{\hyperlink{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}{draw()}}. Sets uniforms and calls gl\+Draw\+Array or gl\+Draw\+Elements on debug geometries. Does NOT bind attribute arrays or buffers!! Binding is done in \mbox{\hyperlink{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}{draw()}}. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_g_l_body_abe64b649f2b2ec09b2876d6382258e13}{is\+Hit}} (QVector3D p1, QVector3D p2)
+\item 
+virtual bool \mbox{\hyperlink{class_g_l_body_a565ad6592f00bd28942408a1a8ecd669}{is\+Cube\+Hit}} (QVector3D mouse\+Near, QVector3D mouse\+Far)
+\begin{DoxyCompactList}\small\item\em is\+Cube\+Hit \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_g_l_body_ad6855369ac46247ffe0709731e889d23}{is\+Hit}} (QPoint mouse\+Pos, \mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em is\+Hit \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_g_l_body_ab34746fd9ba6a8a0ba0a8e2b04e0fad3}{spheres\+Are\+Colliding}} (const \mbox{\hyperlink{class_g_l_body}{GLBody}} $\ast$other)
+\item 
+virtual bool \mbox{\hyperlink{class_g_l_body_ac912257e45e99c68c011da7f2d5d3708}{set\+Texture\+File}} (const QString \&texture\+File)
+\item 
+virtual bool \mbox{\hyperlink{class_g_l_body_a1338ad47f62e8a12f280ad169e78cd09}{set\+Texture\+Files}} (const QString\+List \&texture\+Files)
+\begin{DoxyCompactList}\small\item\em set\+Textures Alle Texturen aus texture\+Files laden. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_body_aa716fdbc46e14434e28b893dad1b87f1}{move}} (QVector3D v\+Move)
+\item 
+\mbox{\Hypertarget{class_g_l_body_a66f4ad6b00fd905cd19a4f852ddea02b}\label{class_g_l_body_a66f4ad6b00fd905cd19a4f852ddea02b}} 
+void \mbox{\hyperlink{class_g_l_body_a66f4ad6b00fd905cd19a4f852ddea02b}{transform\+Points}} ()
+\begin{DoxyCompactList}\small\item\em transform\+Points apply m\+\_\+transformation to all points and set m\+\_\+transformation to identity. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_g_l_body_a5620eb1389c1aeb5694e4e7fc8a9e88c}{start\+Animation}} (float start\+Value=0.\+0)
+\begin{DoxyCompactList}\small\item\em start\+Animation Start an animation process. Sets animation\+Active to true. Overwrite in subclasses to set Begin and End values for animated properties. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_a1bcb3503a1758fef20d2bb1f9726b85a}\label{class_g_l_body_a1bcb3503a1758fef20d2bb1f9726b85a}} 
+virtual void \mbox{\hyperlink{class_g_l_body_a1bcb3503a1758fef20d2bb1f9726b85a}{finish\+Animation}} ()
+\begin{DoxyCompactList}\small\item\em finish\+Animation Finish an animation process. Sets animation\+Active to false. Overwrite in subclasses to copy End values for animated properties to Begin values. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_g_l_body_a78e66df2ed6e8277d3363054b0ad0f2e}{is\+Animation\+Active}} ()
+\begin{DoxyCompactList}\small\item\em is\+Anaimation\+Active \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_g_l_body_a30ff6f538a3966b06b2f07739070d14d}{local\+Animation\+State}} (float global\+Animation\+State)
+\begin{DoxyCompactList}\small\item\em local\+Animation\+State \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_aebb22dadd619ce98ca7c72d3970e65c9}\label{class_g_l_body_aebb22dadd619ce98ca7c72d3970e65c9}} 
+virtual void \mbox{\hyperlink{class_g_l_body_aebb22dadd619ce98ca7c72d3970e65c9}{animate\+Forwards}} ()
+\begin{DoxyCompactList}\small\item\em animate\+Forwards Start upwards animation \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_abb7d94cef839384559975654a9729a2f}\label{class_g_l_body_abb7d94cef839384559975654a9729a2f}} 
+virtual void \mbox{\hyperlink{class_g_l_body_abb7d94cef839384559975654a9729a2f}{animate\+Backwards}} ()
+\begin{DoxyCompactList}\small\item\em animate\+Backwards Start downwards animation \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_a13dc56abce31b668719ff6cc53e1970a}\label{class_g_l_body_a13dc56abce31b668719ff6cc53e1970a}} 
+virtual void \mbox{\hyperlink{class_g_l_body_a13dc56abce31b668719ff6cc53e1970a}{update\+Animated\+Properties}} (float animation\+State)
+\begin{DoxyCompactList}\small\item\em update\+Animated\+Properties Overwrite to set current values of animated properties. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_g_l_body_aed7512fc5612d8a8a00b49110b4fc68d}{is\+Selected}} ()
+\item 
+\mbox{\Hypertarget{class_g_l_body_a80879471b9a5e1fd66dd7191c161d92c}\label{class_g_l_body_a80879471b9a5e1fd66dd7191c161d92c}} 
+const QVector3D \& {\bfseries get\+Center} () const
+\item 
+\mbox{\Hypertarget{class_g_l_body_ac6747ec6e2e22a9a5c7ac1ed7878bb6d}\label{class_g_l_body_ac6747ec6e2e22a9a5c7ac1ed7878bb6d}} 
+const QMatrix4x4 \& {\bfseries transformation} () const
+\item 
+\mbox{\Hypertarget{class_g_l_body_aa62c8c1c74d768f423bda212777e3228}\label{class_g_l_body_aa62c8c1c74d768f423bda212777e3228}} 
+const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \& {\bfseries color} () const
+\item 
+void \mbox{\hyperlink{class_g_l_body_a6101fd66bc1bfcd8dabed690b87c0d78}{set\+Color}} (const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&new\+Val)
+\item 
+\mbox{\Hypertarget{class_g_l_body_a90028e76cb59d81178a9a73eccffd4b1}\label{class_g_l_body_a90028e76cb59d81178a9a73eccffd4b1}} 
+void {\bfseries set\+Specular\+Color} (const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&new\+Val)
+\item 
+\mbox{\Hypertarget{class_g_l_body_a7f049343daaedfc9672448a8cd4bd3e2}\label{class_g_l_body_a7f049343daaedfc9672448a8cd4bd3e2}} 
+void {\bfseries set\+Shininess} (int new\+Val)
+\item 
+\mbox{\Hypertarget{class_g_l_body_a120b454d3d359022d4e74ba58b9b5a7b}\label{class_g_l_body_a120b454d3d359022d4e74ba58b9b5a7b}} 
+void {\bfseries set\+Selected} (bool new\+Val)
+\item 
+\mbox{\Hypertarget{class_g_l_body_ad13e6bd35c8796d7cb3ddc69eb87f85f}\label{class_g_l_body_ad13e6bd35c8796d7cb3ddc69eb87f85f}} 
+void {\bfseries set\+Drawing\+Mode} (GLuint new\+Val)
+\item 
+\mbox{\Hypertarget{class_g_l_body_a3f49f95804f8635125f107e319a38a01}\label{class_g_l_body_a3f49f95804f8635125f107e319a38a01}} 
+void {\bfseries set\+Transformation} (const QMatrix4x4 \&transformation)
+\item 
+\mbox{\Hypertarget{class_g_l_body_a44b1012b09a4b74e4edce7542091b97d}\label{class_g_l_body_a44b1012b09a4b74e4edce7542091b97d}} 
+void {\bfseries set\+Model\+Offset} (const QVector3D \&offset)
+\item 
+\mbox{\Hypertarget{class_g_l_body_aee8dcce60e8a36f49572e83bf0600ee2}\label{class_g_l_body_aee8dcce60e8a36f49572e83bf0600ee2}} 
+const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \& {\bfseries get\+Color} () const
+\item 
+\mbox{\Hypertarget{class_g_l_body_ab6bd6c800df50d3f41af3a135b94080b}\label{class_g_l_body_ab6bd6c800df50d3f41af3a135b94080b}} 
+const QMatrix4x4 \& {\bfseries get\+Transformation} () const
+\item 
+\mbox{\Hypertarget{class_g_l_body_af9f19479127cf12562fa0a2f9b5276f4}\label{class_g_l_body_af9f19479127cf12562fa0a2f9b5276f4}} 
+const QString \& {\bfseries name} () const
+\item 
+\mbox{\Hypertarget{class_g_l_body_aed77f06dadb7846e9f1fac0b9a99d482}\label{class_g_l_body_aed77f06dadb7846e9f1fac0b9a99d482}} 
+float {\bfseries get\+Radius} () const
+\item 
+void \mbox{\hyperlink{class_g_l_body_a092ff9e6d83c141c41936a7b8cd73033}{set\+Active\+Texture\+Index}} (int i)
+\begin{DoxyCompactList}\small\item\em set\+Texture\+Index \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_g_l_body_abb97f9928110d5bcd47c4488e92ac78e}{set\+Center}} (const QVector3D \&new\+Val)
+\item 
+\mbox{\Hypertarget{class_g_l_body_af601d382529e294db3fe7c993fff7a37}\label{class_g_l_body_af601d382529e294db3fe7c993fff7a37}} 
+void {\bfseries set\+Scale} (float scale)
+\item 
+\mbox{\Hypertarget{class_g_l_body_ad965929b76aa9dd3003c4b82905c12f7}\label{class_g_l_body_ad965929b76aa9dd3003c4b82905c12f7}} 
+virtual void {\bfseries set\+Show\+Frame} (bool show)
+\item 
+virtual void \mbox{\hyperlink{class_g_l_body_a6c639f02ba3adc93628e5fab5f4c3991}{set\+Min\+Max\+Coordinates}} (const QVector3D min, const QVector3D max)
+\begin{DoxyCompactList}\small\item\em set\+Min\+Max\+Coordinates sets min/max coordinates and blocks automatic setting of min/max by setting m\+\_\+has\+Custom\+Frame to true \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_acbf8e07de7e749a6e579ecfb683dbc56}\label{class_g_l_body_acbf8e07de7e749a6e579ecfb683dbc56}} 
+void {\bfseries show\+Normals} (bool show)
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{class_g_l_body_aa06402c02671771961bf5dc5223fcd9d}{is\+Triangle\+Hit}} (const QVector3D \&p1, const QVector3D \&p2, const QVector3D \&p3, const QVector3D \&p\+Line, const QVector3D \&line\+Direction, QVector3D $\ast$intersection=nullptr)
+\begin{DoxyCompactList}\small\item\em is\+Triangle\+Hit \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{class_g_l_body_ade0bd28b058f386bb326cbabcbf62be4}{is\+Parallelogram\+Hit}} (const QVector3D \&p1, const QVector3D \&p2, const QVector3D \&p3, const QVector3D \&p\+Line, const QVector3D \&line\+Direction, QVector3D $\ast$intersection=nullptr)
+\begin{DoxyCompactList}\small\item\em is\+Parallelogram\+Hit \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_body_ae074664f15e9b0553288ddab30c50293}\label{class_g_l_body_ae074664f15e9b0553288ddab30c50293}} 
+void {\bfseries create\+Normals} (float length=1.\+0)
+\item 
+\mbox{\Hypertarget{class_g_l_body_aac288828b1d2eb46f1e6750a696d557f}\label{class_g_l_body_aac288828b1d2eb46f1e6750a696d557f}} 
+virtual void \mbox{\hyperlink{class_g_l_body_aac288828b1d2eb46f1e6750a696d557f}{create\+Frame}} ()
+\begin{DoxyCompactList}\small\item\em create\+Frame Creates a frame from min/max coordinates. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_a02b789838bb2c60008ba7878eb6bb28e}\label{class_g_l_body_a02b789838bb2c60008ba7878eb6bb28e}} 
+void \mbox{\hyperlink{class_g_l_body_a02b789838bb2c60008ba7878eb6bb28e}{init}} ()
+\begin{DoxyCompactList}\small\item\em init Initialize \mbox{\hyperlink{class_g_l_body}{GLBody}} with defaults. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_a35f619d585501cb1ac0945586afb9fa1}\label{class_g_l_body_a35f619d585501cb1ac0945586afb9fa1}} 
+void {\bfseries activate\+Attribute\+Buffers} (\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$renderer)
+\item 
+\mbox{\Hypertarget{class_g_l_body_a2d1dcd40bdc2d1d50b70f2807a67f9a3}\label{class_g_l_body_a2d1dcd40bdc2d1d50b70f2807a67f9a3}} 
+void {\bfseries activate\+Attribute\+Arrays} (\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$renderer)
+\item 
+\mbox{\Hypertarget{class_g_l_body_a780c5f3232c0c106dc81708ebe2c6228}\label{class_g_l_body_a780c5f3232c0c106dc81708ebe2c6228}} 
+virtual void \mbox{\hyperlink{class_g_l_body_a780c5f3232c0c106dc81708ebe2c6228}{find\+Min\+Max\+Coordinates}} ()
+\begin{DoxyCompactList}\small\item\em find\+Min\+Max\+Coordinates Calculate m\+\_\+min\+Coordinate an m\+\_\+max\+Coordinate from vertex data. Creates frame from min/max coordinates if m\+\_\+show\+Frame is set. Creates normals if m\+\_\+show\+Normals is set. Is called from read\+Binary\+Model\+File. Does nothing, if set\+Min\+Max\+Coordinates has been called. (m\+\_\+has\+Custom\+Frame is true) Overwrite this function and set your own min/max coordinates to create a custom frame. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{class_g_l_body_a4a0a876d516652e66c2269c18d4032bc}{calculate\+Intersection}} (const QVector3D \&p1, const QVector3D \&p2, const QVector3D \&p3, const QVector3D \&p\+Line, const QVector3D \&line\+Direction, float $\ast$a, float $\ast$b, QVector3D $\ast$intersection=nullptr)
+\begin{DoxyCompactList}\small\item\em calculate\+Intersection Calculate intersection of line with plane defined by p1,p2,p3 Calculates factors a and b. Resulting coordinates are p1 + a $\ast$ p12 + b $\ast$ p13. Intersection is inside parallelogram p12, p13 when a and b are $>$ 0 and $<$ 1.\+0 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QString \mbox{\hyperlink{class_g_l_body_a348178ac24c376d6ebfe280ce30ff9c4}{m\+\_\+name}}
+\item 
+QVector3D \mbox{\hyperlink{class_g_l_body_afffadedad59d067a5fd8cd24d82ab95b}{m\+\_\+center}}
+\item 
+\mbox{\Hypertarget{class_g_l_body_a6151001e1a78005be6ebbbdbf814ffe3}\label{class_g_l_body_a6151001e1a78005be6ebbbdbf814ffe3}} 
+QVector3D \mbox{\hyperlink{class_g_l_body_a6151001e1a78005be6ebbbdbf814ffe3}{m\+\_\+min\+Coordinate}}
+\begin{DoxyCompactList}\small\item\em m\+\_\+min\+Coordinate The left bottom back corner of the cube for frame and hit test. Will be set by find\+Min\+Max\+Coordinates, if not set by set\+Min\+Max\+Coordinates \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_aa92b3be1a0e0f852e7a19ce55fd8c1b1}\label{class_g_l_body_aa92b3be1a0e0f852e7a19ce55fd8c1b1}} 
+QVector3D \mbox{\hyperlink{class_g_l_body_aa92b3be1a0e0f852e7a19ce55fd8c1b1}{m\+\_\+max\+Coordinate}}
+\begin{DoxyCompactList}\small\item\em m\+\_\+max\+Coordinate The right top front corner of the cube for frame and hit test. Will be set by find\+Min\+Max\+Coordinates, if not set by set\+Min\+Max\+Coordinates \end{DoxyCompactList}\item 
+GLfloat \mbox{\hyperlink{class_g_l_body_a96006c2b453ffe0490bee1961e61e3b3}{m\+\_\+radius}}
+\item 
+GLuint \mbox{\hyperlink{class_g_l_body_a3c6c3d3afde4a1990c3cc97976fd5bd8}{m\+\_\+drawing\+Mode}}
+\item 
+\mbox{\Hypertarget{class_g_l_body_af93b66b39a57548765d0d134db1ea35a}\label{class_g_l_body_af93b66b39a57548765d0d134db1ea35a}} 
+bool \mbox{\hyperlink{class_g_l_body_af93b66b39a57548765d0d134db1ea35a}{m\+\_\+animation\+Active}}
+\begin{DoxyCompactList}\small\item\em m\+\_\+animation\+Active Flag for a running animation \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_a504aa46f6ae7ee454f38bb96c466e561}\label{class_g_l_body_a504aa46f6ae7ee454f38bb96c466e561}} 
+float \mbox{\hyperlink{class_g_l_body_a504aa46f6ae7ee454f38bb96c466e561}{m\+\_\+animation\+Start}}
+\begin{DoxyCompactList}\small\item\em m\+\_\+animation\+Start The value of the animation state when this function is called. e.\+g. 0.\+5 if the global animation process is already half finished. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_ac3a56048c861a5bdd11b344e1e24946b}\label{class_g_l_body_ac3a56048c861a5bdd11b344e1e24946b}} 
+bool \mbox{\hyperlink{class_g_l_body_ac3a56048c861a5bdd11b344e1e24946b}{m\+\_\+animate\+Forwards}}
+\begin{DoxyCompactList}\small\item\em m\+\_\+animate\+Forwards Animate to final state or back to start state \end{DoxyCompactList}\item 
+QVector$<$ \mbox{\hyperlink{class_g_l_point}{GLPoint}} $>$ $\ast$ \mbox{\hyperlink{class_g_l_body_a8e157d4bf676d1c5af7f74d30d44ea12}{m\+\_\+points}}
+\item 
+\mbox{\Hypertarget{class_g_l_body_afd41dccec396a5d5bc0d7deb004390c0}\label{class_g_l_body_afd41dccec396a5d5bc0d7deb004390c0}} 
+bool \mbox{\hyperlink{class_g_l_body_afd41dccec396a5d5bc0d7deb004390c0}{m\+\_\+own\+Points\+Container}}
+\begin{DoxyCompactList}\small\item\em own\+Points\+Container Set this Flag, if points container was created by this body. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_abaf51ac1970735fdc27e861e0276d059}\label{class_g_l_body_abaf51ac1970735fdc27e861e0276d059}} 
+GLushort \mbox{\hyperlink{class_g_l_body_abaf51ac1970735fdc27e861e0276d059}{m\+\_\+first\+Point}}
+\begin{DoxyCompactList}\small\item\em first\+Point The first\+Point for this body \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_ad23169cadd57fa23a035c50749974eaa}\label{class_g_l_body_ad23169cadd57fa23a035c50749974eaa}} 
+GLushort \mbox{\hyperlink{class_g_l_body_ad23169cadd57fa23a035c50749974eaa}{m\+\_\+next\+Point}}
+\begin{DoxyCompactList}\small\item\em last\+Point The next point for this body. ( last point +1) \end{DoxyCompactList}\item 
+QVector$<$ GLushort $>$ $\ast$ \mbox{\hyperlink{class_g_l_body_a0ac1c7cdd34662989db4204735f05aca}{m\+\_\+indices}}
+\item 
+\mbox{\Hypertarget{class_g_l_body_af55a5779ab18630e90686d6e3104b932}\label{class_g_l_body_af55a5779ab18630e90686d6e3104b932}} 
+bool \mbox{\hyperlink{class_g_l_body_af55a5779ab18630e90686d6e3104b932}{m\+\_\+own\+Index\+Container}}
+\begin{DoxyCompactList}\small\item\em own\+Points\+Container Set this Flag, if points container was created by this body. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_a8274ed0febea3f7b3e1a4e2ac8c49314}\label{class_g_l_body_a8274ed0febea3f7b3e1a4e2ac8c49314}} 
+GLushort \mbox{\hyperlink{class_g_l_body_a8274ed0febea3f7b3e1a4e2ac8c49314}{m\+\_\+first\+Index}}
+\begin{DoxyCompactList}\small\item\em start\+Index The first index for this body \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_a09c31be4c87449e26ec420916e132eac}\label{class_g_l_body_a09c31be4c87449e26ec420916e132eac}} 
+GLushort \mbox{\hyperlink{class_g_l_body_a09c31be4c87449e26ec420916e132eac}{m\+\_\+next\+Index}}
+\begin{DoxyCompactList}\small\item\em index\+Count The next index for this body. (last index + 1) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_g_l_body_a518355cd5063cb8f7354065f2c521cbc}{m\+\_\+surface\+Is\+Valid}}
+\item 
+\mbox{\Hypertarget{class_g_l_body_a5dc891ad8ea8e92a28b8a01f4df3db91}\label{class_g_l_body_a5dc891ad8ea8e92a28b8a01f4df3db91}} 
+QVector$<$ QOpen\+GLTexture $\ast$ $>$ \mbox{\hyperlink{class_g_l_body_a5dc891ad8ea8e92a28b8a01f4df3db91}{m\+\_\+textures}}
+\begin{DoxyCompactList}\small\item\em m\+\_\+textures The textures to be used with this body \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_a1a9e2d0993dde3fe6ae7062d30834a69}\label{class_g_l_body_a1a9e2d0993dde3fe6ae7062d30834a69}} 
+bool \mbox{\hyperlink{class_g_l_body_a1a9e2d0993dde3fe6ae7062d30834a69}{m\+\_\+own\+Textures}}
+\begin{DoxyCompactList}\small\item\em m\+\_\+own\+Textures true, if textures are owned by this \mbox{\hyperlink{class_g_l_body}{GLBody}} \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_g_l_body_ad21b09d906e63e5c222ccb96e4d242df}{m\+\_\+active\+Texture\+Index}}
+\item 
+QString\+List \mbox{\hyperlink{class_g_l_body_a51eed96c1bc0d06742d7a9ab455d527d}{m\+\_\+texture\+Filenames}}
+\item 
+\mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \mbox{\hyperlink{class_g_l_body_a267b5c0fbe5752370197012975663dca}{m\+\_\+color}}
+\item 
+\mbox{\Hypertarget{class_g_l_body_a2b0aef20300ab4db1ec620879c8b6cab}\label{class_g_l_body_a2b0aef20300ab4db1ec620879c8b6cab}} 
+\mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \mbox{\hyperlink{class_g_l_body_a2b0aef20300ab4db1ec620879c8b6cab}{m\+\_\+frame\+Color}}
+\begin{DoxyCompactList}\small\item\em m\+\_\+frame\+Color the color for the frame from min\+Coordinate to max\+Coordinate \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \mbox{\hyperlink{class_g_l_body_ac9db9ed4eb8ca1fbf3e4113c530b92af}{m\+\_\+specular\+Color}}
+\item 
+int \mbox{\hyperlink{class_g_l_body_a4e6949c8876ffe0bc4fddddfa4dd6c9b}{m\+\_\+shininess}}
+\item 
+bool \mbox{\hyperlink{class_g_l_body_aa98197c0f7376b5afa58302eb96cb05e}{m\+\_\+selected}}
+\item 
+\mbox{\Hypertarget{class_g_l_body_a8b2d358664d9cac307bee8ba6709b73a}\label{class_g_l_body_a8b2d358664d9cac307bee8ba6709b73a}} 
+QVector3D {\bfseries m\+\_\+model\+Offset}
+\item 
+QMatrix4x4 \mbox{\hyperlink{class_g_l_body_a38b323efc7e55b6c770638cd108c2143}{m\+\_\+transformation\+Matrix}}
+\item 
+\mbox{\Hypertarget{class_g_l_body_afd247051378cdf8d444cb7af288cb012}\label{class_g_l_body_afd247051378cdf8d444cb7af288cb012}} 
+QMatrix4x4 \mbox{\hyperlink{class_g_l_body_afd247051378cdf8d444cb7af288cb012}{m\+\_\+draw\+Matrix}}
+\begin{DoxyCompactList}\small\item\em m\+\_\+draw\+Matrix This matrix is multiplied with the modelview matrix prior to rendering the body. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_a82266ebb17e8932521180ca9626c314c}\label{class_g_l_body_a82266ebb17e8932521180ca9626c314c}} 
+float \mbox{\hyperlink{class_g_l_body_a82266ebb17e8932521180ca9626c314c}{m\+\_\+scale}}
+\begin{DoxyCompactList}\small\item\em m\+\_\+scale \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_body_a790f0028b0ad3c1e08a9c7314fbb91ea}\label{class_g_l_body_a790f0028b0ad3c1e08a9c7314fbb91ea}} 
+Index\+Type {\bfseries m\+\_\+first\+Normal\+Point}
+\item 
+\mbox{\Hypertarget{class_g_l_body_a43978300a750a5c67e474a576ac3ad3c}\label{class_g_l_body_a43978300a750a5c67e474a576ac3ad3c}} 
+Index\+Type {\bfseries m\+\_\+next\+Normal\+Point}
+\item 
+\mbox{\Hypertarget{class_g_l_body_a1b14db868b9e81a32a935f6bdaeba118}\label{class_g_l_body_a1b14db868b9e81a32a935f6bdaeba118}} 
+Index\+Type {\bfseries m\+\_\+first\+Frame\+Point}
+\item 
+\mbox{\Hypertarget{class_g_l_body_a1af4cb49c0510aa2afe09670689f3911}\label{class_g_l_body_a1af4cb49c0510aa2afe09670689f3911}} 
+Index\+Type {\bfseries m\+\_\+next\+Frame\+Point}
+\item 
+\mbox{\Hypertarget{class_g_l_body_a3deb492827b145e78753bb69da5a1273}\label{class_g_l_body_a3deb492827b145e78753bb69da5a1273}} 
+Index\+Type {\bfseries m\+\_\+first\+Normal\+Index}
+\item 
+\mbox{\Hypertarget{class_g_l_body_af69d3ddae94f6a09446970f97ded2cc5}\label{class_g_l_body_af69d3ddae94f6a09446970f97ded2cc5}} 
+Index\+Type {\bfseries m\+\_\+next\+Normal\+Index}
+\item 
+\mbox{\Hypertarget{class_g_l_body_a6db51835ac52260561d8f93ce1e55c15}\label{class_g_l_body_a6db51835ac52260561d8f93ce1e55c15}} 
+Index\+Type {\bfseries m\+\_\+first\+Frame\+Index}
+\item 
+\mbox{\Hypertarget{class_g_l_body_aef3425aa1efb75b2c758b83372d427d1}\label{class_g_l_body_aef3425aa1efb75b2c758b83372d427d1}} 
+Index\+Type {\bfseries m\+\_\+next\+Frame\+Index}
+\item 
+\mbox{\Hypertarget{class_g_l_body_a4707235e9ca92fd90399fb785759d946}\label{class_g_l_body_a4707235e9ca92fd90399fb785759d946}} 
+bool {\bfseries m\+\_\+show\+Normals}
+\item 
+\mbox{\Hypertarget{class_g_l_body_a924c029db27b2ec330e03c195ff2ada9}\label{class_g_l_body_a924c029db27b2ec330e03c195ff2ada9}} 
+bool {\bfseries m\+\_\+has\+Custom\+Frame}
+\item 
+\mbox{\Hypertarget{class_g_l_body_af6486869505b4269277a13734acc9bcd}\label{class_g_l_body_af6486869505b4269277a13734acc9bcd}} 
+bool {\bfseries m\+\_\+show\+Frame}
+\item 
+\mbox{\Hypertarget{class_g_l_body_a5b2cab1d1d24acb048520ed2949c3e3c}\label{class_g_l_body_a5b2cab1d1d24acb048520ed2949c3e3c}} 
+bool {\bfseries m\+\_\+texture\+Enabled}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A 3D body that uses a \mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} for drawing and \mbox{\hyperlink{class_g_l_point}{GLPoint}} objects for defining its surface. 
+
+Overwrite \mbox{\hyperlink{class_g_l_body_a73e51b159f343d0bda87f50df382b7db}{make\+Surface()}} in subclasses to create the GLPoints that form the surface. Set drawing\+Mode to GL\+\_\+\+LINE\+\_\+\+STRIP or GL\+\_\+\+LINES for debugging the surface. Default is GL\+\_\+\+TRIANGLE\+\_\+\+STRIP. Vertices and indices may be stored in external or internal containers. If Gl\+Body\+::make\+Surface is called with pointers to existing containers, these will be used. Otherwise Gl\+Body\+::make\+Surface will create new containers. Only in this case, the destructor will delete the containers. Overwrite \mbox{\hyperlink{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}{draw()}} if you do need special drawing procedures. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_g_l_body_a48e9c1993ff477191f7013527a30afc8}\label{class_g_l_body_a48e9c1993ff477191f7013527a30afc8}} 
+\index{GLBody@{GLBody}!GLBody@{GLBody}}
+\index{GLBody@{GLBody}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{GLBody()}{GLBody()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily GLBody\+::\+GLBody (\begin{DoxyParamCaption}\item[{const QString \&}]{name,  }\item[{float}]{radius = {\ttfamily 1.0},  }\item[{const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&}]{color = {\ttfamily GLColorRgba\+:\+:clBlue},  }\item[{const QString}]{texture\+File = {\ttfamily \char`\"{}\char`\"{}} }\end{DoxyParamCaption})}
+
+Constructor does NOT create the surface. \mbox{\Hypertarget{class_g_l_body_a6e50d6cb10fbdb81e8aeb64ab3e46a66}\label{class_g_l_body_a6e50d6cb10fbdb81e8aeb64ab3e46a66}} 
+\index{GLBody@{GLBody}!GLBody@{GLBody}}
+\index{GLBody@{GLBody}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{GLBody()}{GLBody()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily GLBody\+::\+GLBody (\begin{DoxyParamCaption}\item[{QString}]{name,  }\item[{const QVector3D}]{offset }\end{DoxyParamCaption})}
+
+
+
+\mbox{\hyperlink{class_g_l_body}{GLBody}} Constructor does NOT create the surface. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & The offset from coordinate origin to modeldata zero. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_body_ac6cd2e5f6d0115cf6f6f0ae84c9d91a1}\label{class_g_l_body_ac6cd2e5f6d0115cf6f6f0ae84c9d91a1}} 
+\index{GLBody@{GLBody}!````~GLBody@{$\sim$GLBody}}
+\index{````~GLBody@{$\sim$GLBody}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{$\sim$GLBody()}{~GLBody()}}
+{\footnotesize\ttfamily GLBody\+::$\sim$\+GLBody (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Destructor will delete created containers.
+
+Destructor 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_g_l_body_a4a0a876d516652e66c2269c18d4032bc}\label{class_g_l_body_a4a0a876d516652e66c2269c18d4032bc}} 
+\index{GLBody@{GLBody}!calculateIntersection@{calculateIntersection}}
+\index{calculateIntersection@{calculateIntersection}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{calculateIntersection()}{calculateIntersection()}}
+{\footnotesize\ttfamily bool GLBody\+::calculate\+Intersection (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{p1,  }\item[{const QVector3D \&}]{p2,  }\item[{const QVector3D \&}]{p3,  }\item[{const QVector3D \&}]{p\+Line,  }\item[{const QVector3D \&}]{line\+Direction,  }\item[{float $\ast$}]{a,  }\item[{float $\ast$}]{b,  }\item[{QVector3D $\ast$}]{intersection = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+calculate\+Intersection Calculate intersection of line with plane defined by p1,p2,p3 Calculates factors a and b. Resulting coordinates are p1 + a $\ast$ p12 + b $\ast$ p13. Intersection is inside parallelogram p12, p13 when a and b are $>$ 0 and $<$ 1.\+0 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & \\
+\hline
+{\em p2} & \\
+\hline
+{\em p3} & \\
+\hline
+{\em p\+Line} & Point on Line \\
+\hline
+{\em line\+Direction} & \\
+\hline
+{\em a} & Multiple of p12 \\
+\hline
+{\em b} & Multiple of p13 \\
+\hline
+{\em intersection} & Coordinates of intersection \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if an intersection exists. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_body_a760a4221bb18ac880c10c41984e4257b}\label{class_g_l_body_a760a4221bb18ac880c10c41984e4257b}} 
+\index{GLBody@{GLBody}!createTextureObjects@{createTextureObjects}}
+\index{createTextureObjects@{createTextureObjects}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{createTextureObjects()}{createTextureObjects()}}
+{\footnotesize\ttfamily bool GLBody\+::create\+Texture\+Objects (\begin{DoxyParamCaption}\item[{GLenum}]{minfilter = {\ttfamily GL\+\_\+LINEAR\+\_\+MIPMAP\+\_\+NEAREST},  }\item[{GLenum}]{magfilter = {\ttfamily GL\+\_\+LINEAR},  }\item[{GLenum}]{wrapmode = {\ttfamily GL\+\_\+CLAMP\+\_\+TO\+\_\+EDGE} }\end{DoxyParamCaption})}
+
+Set textures from files. Returns true on success. Needs a current Open\+GL context.
+
+Set texture objects from files in m\+\_\+\+Texture\+File\+Names. Returns true on success \mbox{\Hypertarget{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}\label{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}} 
+\index{GLBody@{GLBody}!draw@{draw}}
+\index{draw@{draw}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void GLBody\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$}]{renderer,  }\item[{bool}]{use\+Buffers = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Draws the surface and calls make\+Surface if required. Binds attributes and textures (!!slow!!), then calls \mbox{\hyperlink{class_g_l_body_a3c22fc9ca71740ed61097ac4b1e8cb1a}{draw\+Geometries()}}. Needs an active (made current) GL-\/\+Context.
+
+Draws the surface and calls make\+Surface if required. Needs an active (made current) GL-\/\+Context. 
+
+Reimplemented in \mbox{\hyperlink{class_g_l_mouse_ray_ae6a8d606ab7684b73f0959e9a7cf26c8}{GLMouse\+Ray}}.
+
+\mbox{\Hypertarget{class_g_l_body_acf2dca6b59e7ab7fcc3484b1bcb54e7b}\label{class_g_l_body_acf2dca6b59e7ab7fcc3484b1bcb54e7b}} 
+\index{GLBody@{GLBody}!drawDebugGeometries@{drawDebugGeometries}}
+\index{drawDebugGeometries@{drawDebugGeometries}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{drawDebugGeometries()}{drawDebugGeometries()}}
+{\footnotesize\ttfamily void GLBody\+::draw\+Debug\+Geometries (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$}]{renderer,  }\item[{bool}]{use\+Buffers }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+draw\+Debug\+Geometries Should be called from \mbox{\hyperlink{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}{draw()}}. Sets uniforms and calls gl\+Draw\+Array or gl\+Draw\+Elements on debug geometries. Does NOT bind attribute arrays or buffers!! Binding is done in \mbox{\hyperlink{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}{draw()}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em renderer} & \\
+\hline
+{\em use\+Buffers} & \\
+\hline
+{\em index} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_body_a3c22fc9ca71740ed61097ac4b1e8cb1a}\label{class_g_l_body_a3c22fc9ca71740ed61097ac4b1e8cb1a}} 
+\index{GLBody@{GLBody}!drawGeometries@{drawGeometries}}
+\index{drawGeometries@{drawGeometries}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{drawGeometries()}{drawGeometries()}}
+{\footnotesize\ttfamily void GLBody\+::draw\+Geometries (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$}]{renderer,  }\item[{bool}]{use\+Buffers,  }\item[{int}]{index = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+draw\+Geometries Should be called from \mbox{\hyperlink{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}{draw()}}. Sets uniforms and calls gl\+Draw\+Array or gl\+Draw\+Elements. Does NOT bind attribute arrays or buffers! Therefore it is very fast. Assumes bound attributes. Binding is done in \mbox{\hyperlink{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}{draw()}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em renderer} & \\
+\hline
+{\em use\+Buffers} & \\
+\hline
+{\em index} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_body_a10511a36b5bc7012290252f84d40ac74}\label{class_g_l_body_a10511a36b5bc7012290252f84d40ac74}} 
+\index{GLBody@{GLBody}!indicesSize@{indicesSize}}
+\index{indicesSize@{indicesSize}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{indicesSize()}{indicesSize()}}
+{\footnotesize\ttfamily Index\+Type GLBody\+::indices\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+indices\+Size Convenience function to avoid multiple casting 
+
+\begin{DoxyReturn}{Returns}
+m\+\_\+indices-\/$>$size() 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_body_a78e66df2ed6e8277d3363054b0ad0f2e}\label{class_g_l_body_a78e66df2ed6e8277d3363054b0ad0f2e}} 
+\index{GLBody@{GLBody}!isAnimationActive@{isAnimationActive}}
+\index{isAnimationActive@{isAnimationActive}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{isAnimationActive()}{isAnimationActive()}}
+{\footnotesize\ttfamily bool GLBody\+::is\+Animation\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+is\+Anaimation\+Active 
+
+\begin{DoxyReturn}{Returns}
+True, if an animation is in progress. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_body_a565ad6592f00bd28942408a1a8ecd669}\label{class_g_l_body_a565ad6592f00bd28942408a1a8ecd669}} 
+\index{GLBody@{GLBody}!isCubeHit@{isCubeHit}}
+\index{isCubeHit@{isCubeHit}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{isCubeHit()}{isCubeHit()}}
+{\footnotesize\ttfamily bool GLBody\+::is\+Cube\+Hit (\begin{DoxyParamCaption}\item[{QVector3D}]{mouse\+Near,  }\item[{QVector3D}]{mouse\+Far }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+is\+Cube\+Hit 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mouse\+Near} & Point 1 on line in model space \\
+\hline
+{\em mouse\+Far} & Point 2 on line in model space \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if line defined by mouse\+Near and mouse\+Far intersects cube defined by m\+\_\+min\+Coordinate and m\+\_\+max\+Coordinate 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_body_ad6855369ac46247ffe0709731e889d23}\label{class_g_l_body_ad6855369ac46247ffe0709731e889d23}} 
+\index{GLBody@{GLBody}!isHit@{isHit}}
+\index{isHit@{isHit}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{isHit()}{isHit()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool GLBody\+::is\+Hit (\begin{DoxyParamCaption}\item[{QPoint}]{mouse\+Pos,  }\item[{\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+is\+Hit 
+
+\begin{DoxyReturn}{Returns}
+True if line defined by mouse\+Pos intersects cube defined by min\+Coordinates and max\+Coordinates. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_body_abe64b649f2b2ec09b2876d6382258e13}\label{class_g_l_body_abe64b649f2b2ec09b2876d6382258e13}} 
+\index{GLBody@{GLBody}!isHit@{isHit}}
+\index{isHit@{isHit}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{isHit()}{isHit()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool GLBody\+::is\+Hit (\begin{DoxyParamCaption}\item[{QVector3D}]{p1,  }\item[{QVector3D}]{p2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Returns true, when line through p1 and p2 intersects body sphere True if line through p1 and p2 intersects cube defined by min\+Coordinates and max\+Coordinates. To be overwritten by subclasses.
+
+Returns true, when line through p1 and p2 intersects body shpere True if line through p1 and p2 intersects cube defined by min\+Coordinates and max\+Coordinates. \mbox{\Hypertarget{class_g_l_body_ade0bd28b058f386bb326cbabcbf62be4}\label{class_g_l_body_ade0bd28b058f386bb326cbabcbf62be4}} 
+\index{GLBody@{GLBody}!isParallelogramHit@{isParallelogramHit}}
+\index{isParallelogramHit@{isParallelogramHit}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{isParallelogramHit()}{isParallelogramHit()}}
+{\footnotesize\ttfamily bool GLBody\+::is\+Parallelogram\+Hit (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{p1,  }\item[{const QVector3D \&}]{p2,  }\item[{const QVector3D \&}]{p3,  }\item[{const QVector3D \&}]{p\+Line,  }\item[{const QVector3D \&}]{line\+Direction,  }\item[{QVector3D $\ast$}]{intersection = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+is\+Parallelogram\+Hit 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & Triangle point 1 \\
+\hline
+{\em p2} & Triangle point 2 \\
+\hline
+{\em p3} & Triangle point 3 \\
+\hline
+{\em p\+Line} & Point on line \\
+\hline
+{\em line\+Direction} & Direction of line \\
+\hline
+{\em intersection} & If not nullptr, coordinates of intersection are written to $\ast$intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True, if plane defined by p1, p2, p3 is intersected by line inside the parallelogram (rectangle) formed by p1, p2, p3. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_body_aed7512fc5612d8a8a00b49110b4fc68d}\label{class_g_l_body_aed7512fc5612d8a8a00b49110b4fc68d}} 
+\index{GLBody@{GLBody}!isSelected@{isSelected}}
+\index{isSelected@{isSelected}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{isSelected()}{isSelected()}}
+{\footnotesize\ttfamily bool GLBody\+::is\+Selected (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Simple gettters \mbox{\Hypertarget{class_g_l_body_aa06402c02671771961bf5dc5223fcd9d}\label{class_g_l_body_aa06402c02671771961bf5dc5223fcd9d}} 
+\index{GLBody@{GLBody}!isTriangleHit@{isTriangleHit}}
+\index{isTriangleHit@{isTriangleHit}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{isTriangleHit()}{isTriangleHit()}}
+{\footnotesize\ttfamily bool GLBody\+::is\+Triangle\+Hit (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{p1,  }\item[{const QVector3D \&}]{p2,  }\item[{const QVector3D \&}]{p3,  }\item[{const QVector3D \&}]{p\+Line,  }\item[{const QVector3D \&}]{line\+Direction,  }\item[{QVector3D $\ast$}]{intersection = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+is\+Triangle\+Hit 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p1} & Triangle point 1 \\
+\hline
+{\em p2} & Triangle point 2 \\
+\hline
+{\em p3} & Triangle point 3 \\
+\hline
+{\em p\+Line} & Point on line \\
+\hline
+{\em line\+Direction} & Direction of line \\
+\hline
+{\em intersection} & If not nullptr, coordinates of intersection are written to $\ast$intersection. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True, if plane defined by p1, p2, p3 is intersected by line inside the triangle formed by p1, p2, p3. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_body_a30ff6f538a3966b06b2f07739070d14d}\label{class_g_l_body_a30ff6f538a3966b06b2f07739070d14d}} 
+\index{GLBody@{GLBody}!localAnimationState@{localAnimationState}}
+\index{localAnimationState@{localAnimationState}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{localAnimationState()}{localAnimationState()}}
+{\footnotesize\ttfamily float GLBody\+::local\+Animation\+State (\begin{DoxyParamCaption}\item[{float}]{global\+Animation\+State }\end{DoxyParamCaption})}
+
+
+
+local\+Animation\+State 
+
+\begin{DoxyReturn}{Returns}
+State in the range from m\+\_\+animation\+Start to 1.\+0 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_body_a73e51b159f343d0bda87f50df382b7db}\label{class_g_l_body_a73e51b159f343d0bda87f50df382b7db}} 
+\index{GLBody@{GLBody}!makeSurface@{makeSurface}}
+\index{makeSurface@{makeSurface}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{makeSurface()}{makeSurface()}}
+{\footnotesize\ttfamily void GLBody\+::make\+Surface (\begin{DoxyParamCaption}\item[{QVector$<$ \mbox{\hyperlink{class_g_l_point}{GLPoint}} $>$ $\ast$}]{point\+Container,  }\item[{QVector$<$ Index\+Type $>$ $\ast$}]{index\+Container }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Creates the surface. Should be called, when a GL engine is already running. To be overwritten by subclasses. GLESBody\+::create\+Surface should be called at the beginning of overriding functions. It will create the point\+Container, if none is supplied Is called automatically by draw, if required. MUST NOT be called without a working GL engine.
+
+
+\begin{DoxyParams}{Parameters}
+{\em point\+Container} & The container for the geometry data. If nullptr, a new one is created. \\
+\hline
+{\em index\+Container} & The container for the index data. If nullptr, a new one is created. Created containers will be deleted by destructor.\\
+\hline
+\end{DoxyParams}
+Creates the surface. Should be called, when a GL engine is already running. Is called automatically by draw, if required. 
+
+Reimplemented in \mbox{\hyperlink{class_g_l_mouse_ray_ad3b28f01b11cd8440b4ca7cbc17a14c0}{GLMouse\+Ray}}.
+
+\mbox{\Hypertarget{class_g_l_body_aa716fdbc46e14434e28b893dad1b87f1}\label{class_g_l_body_aa716fdbc46e14434e28b893dad1b87f1}} 
+\index{GLBody@{GLBody}!move@{move}}
+\index{move@{move}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily void GLBody\+::move (\begin{DoxyParamCaption}\item[{QVector3D}]{v\+Move }\end{DoxyParamCaption})}
+
+Moves the body by adding v\+Move to all vertices. \mbox{\Hypertarget{class_g_l_body_ab49318c0af2044a32ec6e7833a6224c1}\label{class_g_l_body_ab49318c0af2044a32ec6e7833a6224c1}} 
+\index{GLBody@{GLBody}!pointsSize@{pointsSize}}
+\index{pointsSize@{pointsSize}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{pointsSize()}{pointsSize()}}
+{\footnotesize\ttfamily Index\+Type GLBody\+::points\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+points\+Size Convenience function to avoid multiple casting 
+
+\begin{DoxyReturn}{Returns}
+number of points 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_body_ad6f12ae3d48aa96561138a8c91fab68a}\label{class_g_l_body_ad6f12ae3d48aa96561138a8c91fab68a}} 
+\index{GLBody@{GLBody}!readBinaryModelFile@{readBinaryModelFile}}
+\index{readBinaryModelFile@{readBinaryModelFile}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{readBinaryModelFile()}{readBinaryModelFile()}}
+{\footnotesize\ttfamily bool GLBody\+::read\+Binary\+Model\+File (\begin{DoxyParamCaption}\item[{const QString \&}]{data\+File\+Name,  }\item[{QVector$<$ \mbox{\hyperlink{class_g_l_point}{GLPoint}} $>$ $\ast$}]{point\+Container = {\ttfamily nullptr},  }\item[{QVector$<$ GLushort $>$ $\ast$}]{index\+Container = {\ttfamily nullptr} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+read\+Binary\+File Calls make\+Surface and reads binary file. File format\+: 4 bytes uint number of Gl\+Points, 4 bytes uint number of uint indices number of points Gl\+Point objects followed by number of indices indices 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+File\+Name} & \\
+\hline
+{\em point\+Container} & To be used for GLPoints. If nullptr, a new private container is created \\
+\hline
+{\em index\+Container} & To be used for indices. If nullptr, a new private container is created \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_body_a2bcb327029d699431bcb8ae51d3c57fb}\label{class_g_l_body_a2bcb327029d699431bcb8ae51d3c57fb}} 
+\index{GLBody@{GLBody}!rotateModelPoints@{rotateModelPoints}}
+\index{rotateModelPoints@{rotateModelPoints}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{rotateModelPoints()}{rotateModelPoints()}}
+{\footnotesize\ttfamily void GLBody\+::rotate\+Model\+Points (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{axis\+Center,  }\item[{const QVector3D \&}]{axis\+Direction,  }\item[{float}]{angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+rotate\+Model\+Points Rotates model points around axis 
+
+
+\begin{DoxyParams}{Parameters}
+{\em axis\+Center} & The center of the rotation axis \\
+\hline
+{\em axis\+Direction} & Direction of rotation axis \\
+\hline
+{\em angle} & Clockwise rotation angle. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_body_a092ff9e6d83c141c41936a7b8cd73033}\label{class_g_l_body_a092ff9e6d83c141c41936a7b8cd73033}} 
+\index{GLBody@{GLBody}!setActiveTextureIndex@{setActiveTextureIndex}}
+\index{setActiveTextureIndex@{setActiveTextureIndex}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{setActiveTextureIndex()}{setActiveTextureIndex()}}
+{\footnotesize\ttfamily void GLBody\+::set\+Active\+Texture\+Index (\begin{DoxyParamCaption}\item[{int}]{i }\end{DoxyParamCaption})}
+
+
+
+set\+Texture\+Index 
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & set m\+\_\+active\+Texture to m\+\_\+texture\+Ids\mbox{[}i\mbox{]} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_body_abb97f9928110d5bcd47c4488e92ac78e}\label{class_g_l_body_abb97f9928110d5bcd47c4488e92ac78e}} 
+\index{GLBody@{GLBody}!setCenter@{setCenter}}
+\index{setCenter@{setCenter}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{setCenter()}{setCenter()}}
+{\footnotesize\ttfamily void GLBody\+::set\+Center (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{new\+Val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Set new center and invalidate surface. \mbox{\Hypertarget{class_g_l_body_a6101fd66bc1bfcd8dabed690b87c0d78}\label{class_g_l_body_a6101fd66bc1bfcd8dabed690b87c0d78}} 
+\index{GLBody@{GLBody}!setColor@{setColor}}
+\index{setColor@{setColor}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{setColor()}{setColor()}}
+{\footnotesize\ttfamily void GLBody\+::set\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&}]{new\+Val }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Simple setters \mbox{\Hypertarget{class_g_l_body_a6c639f02ba3adc93628e5fab5f4c3991}\label{class_g_l_body_a6c639f02ba3adc93628e5fab5f4c3991}} 
+\index{GLBody@{GLBody}!setMinMaxCoordinates@{setMinMaxCoordinates}}
+\index{setMinMaxCoordinates@{setMinMaxCoordinates}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{setMinMaxCoordinates()}{setMinMaxCoordinates()}}
+{\footnotesize\ttfamily void GLBody\+::set\+Min\+Max\+Coordinates (\begin{DoxyParamCaption}\item[{const QVector3D}]{min,  }\item[{const QVector3D}]{max }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+set\+Min\+Max\+Coordinates sets min/max coordinates and blocks automatic setting of min/max by setting m\+\_\+has\+Custom\+Frame to true 
+
+
+\begin{DoxyParams}{Parameters}
+{\em min} & \\
+\hline
+{\em max} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_body_ac912257e45e99c68c011da7f2d5d3708}\label{class_g_l_body_ac912257e45e99c68c011da7f2d5d3708}} 
+\index{GLBody@{GLBody}!setTextureFile@{setTextureFile}}
+\index{setTextureFile@{setTextureFile}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{setTextureFile()}{setTextureFile()}}
+{\footnotesize\ttfamily bool GLBody\+::set\+Texture\+File (\begin{DoxyParamCaption}\item[{const QString \&}]{texture\+File }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Set texture file. Needs a current Open\+GL context.
+
+Set texture file. \mbox{\Hypertarget{class_g_l_body_a1338ad47f62e8a12f280ad169e78cd09}\label{class_g_l_body_a1338ad47f62e8a12f280ad169e78cd09}} 
+\index{GLBody@{GLBody}!setTextureFiles@{setTextureFiles}}
+\index{setTextureFiles@{setTextureFiles}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{setTextureFiles()}{setTextureFiles()}}
+{\footnotesize\ttfamily bool GLBody\+::set\+Texture\+Files (\begin{DoxyParamCaption}\item[{const QString\+List \&}]{texture\+Files }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+set\+Textures Alle Texturen aus texture\+Files laden. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em minfilter} & \\
+\hline
+{\em magfilter} & \\
+\hline
+{\em wrapmode} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true wenn ok. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_body_aac154c28cf7bc705a17b37163469ce98}\label{class_g_l_body_aac154c28cf7bc705a17b37163469ce98}} 
+\index{GLBody@{GLBody}!shareGeometry@{shareGeometry}}
+\index{shareGeometry@{shareGeometry}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{shareGeometry()}{shareGeometry()}}
+{\footnotesize\ttfamily void GLBody\+::share\+Geometry (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_g_l_body}{GLBody}} $\ast$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+share\+Geometry copies container pointers and first and next point, index, normal Sets m\+\_\+own\+Containers to false 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The \mbox{\hyperlink{class_g_l_body}{GLBody}} to be copied \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_body_a603d6b9a83a9cf22ea282881dda32524}\label{class_g_l_body_a603d6b9a83a9cf22ea282881dda32524}} 
+\index{GLBody@{GLBody}!shareTextureObjects@{shareTextureObjects}}
+\index{shareTextureObjects@{shareTextureObjects}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{shareTextureObjects()}{shareTextureObjects()}}
+{\footnotesize\ttfamily void GLBody\+::share\+Texture\+Objects (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_g_l_body}{GLBody}} $\ast$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+share\+Texture\+Objects copy texture names (numbers) from other and set m\+\_\+own\+Textures to false. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_body_ab34746fd9ba6a8a0ba0a8e2b04e0fad3}\label{class_g_l_body_ab34746fd9ba6a8a0ba0a8e2b04e0fad3}} 
+\index{GLBody@{GLBody}!spheresAreColliding@{spheresAreColliding}}
+\index{spheresAreColliding@{spheresAreColliding}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{spheresAreColliding()}{spheresAreColliding()}}
+{\footnotesize\ttfamily bool GLBody\+::spheres\+Are\+Colliding (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_g_l_body}{GLBody}} $\ast$}]{other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Returns true, if enclosing spheres touch or intersect \mbox{\Hypertarget{class_g_l_body_a5620eb1389c1aeb5694e4e7fc8a9e88c}\label{class_g_l_body_a5620eb1389c1aeb5694e4e7fc8a9e88c}} 
+\index{GLBody@{GLBody}!startAnimation@{startAnimation}}
+\index{startAnimation@{startAnimation}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{startAnimation()}{startAnimation()}}
+{\footnotesize\ttfamily void GLBody\+::start\+Animation (\begin{DoxyParamCaption}\item[{float}]{start\+Value = {\ttfamily 0.0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+start\+Animation Start an animation process. Sets animation\+Active to true. Overwrite in subclasses to set Begin and End values for animated properties. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Value} & Present state of the animation process \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_g_l_body_ad21b09d906e63e5c222ccb96e4d242df}\label{class_g_l_body_ad21b09d906e63e5c222ccb96e4d242df}} 
+\index{GLBody@{GLBody}!m\_activeTextureIndex@{m\_activeTextureIndex}}
+\index{m\_activeTextureIndex@{m\_activeTextureIndex}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_activeTextureIndex}{m\_activeTextureIndex}}
+{\footnotesize\ttfamily int GLBody\+::m\+\_\+active\+Texture\+Index\hspace{0.3cm}{\ttfamily [protected]}}
+
+The textures to be used. The index of the texture to be used in function \mbox{\hyperlink{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}{draw()}} \mbox{\Hypertarget{class_g_l_body_afffadedad59d067a5fd8cd24d82ab95b}\label{class_g_l_body_afffadedad59d067a5fd8cd24d82ab95b}} 
+\index{GLBody@{GLBody}!m\_center@{m\_center}}
+\index{m\_center@{m\_center}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_center}{m\_center}}
+{\footnotesize\ttfamily QVector3D GLBody\+::m\+\_\+center\hspace{0.3cm}{\ttfamily [protected]}}
+
+The center of the enclosing sphere \mbox{\Hypertarget{class_g_l_body_a267b5c0fbe5752370197012975663dca}\label{class_g_l_body_a267b5c0fbe5752370197012975663dca}} 
+\index{GLBody@{GLBody}!m\_color@{m\_color}}
+\index{m\_color@{m\_color}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_color}{m\_color}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} GLBody\+::m\+\_\+color\hspace{0.3cm}{\ttfamily [protected]}}
+
+The diffuse and ambient color for the body. \mbox{\Hypertarget{class_g_l_body_a3c6c3d3afde4a1990c3cc97976fd5bd8}\label{class_g_l_body_a3c6c3d3afde4a1990c3cc97976fd5bd8}} 
+\index{GLBody@{GLBody}!m\_drawingMode@{m\_drawingMode}}
+\index{m\_drawingMode@{m\_drawingMode}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_drawingMode}{m\_drawingMode}}
+{\footnotesize\ttfamily GLuint GLBody\+::m\+\_\+drawing\+Mode\hspace{0.3cm}{\ttfamily [protected]}}
+
+The mode to be passed to gl\+Draw\+Arrays or gl\+Draw\+Elements e.\+g. GL\+\_\+\+TRIANGLES, GL\+\_\+\+TRIANGLE\+\_\+\+STRIP \mbox{\Hypertarget{class_g_l_body_a0ac1c7cdd34662989db4204735f05aca}\label{class_g_l_body_a0ac1c7cdd34662989db4204735f05aca}} 
+\index{GLBody@{GLBody}!m\_indices@{m\_indices}}
+\index{m\_indices@{m\_indices}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_indices}{m\_indices}}
+{\footnotesize\ttfamily QVector$<$GLushort$>$$\ast$ GLBody\+::m\+\_\+indices\hspace{0.3cm}{\ttfamily [protected]}}
+
+The array with the indices. May be left empty. \mbox{\Hypertarget{class_g_l_body_a348178ac24c376d6ebfe280ce30ff9c4}\label{class_g_l_body_a348178ac24c376d6ebfe280ce30ff9c4}} 
+\index{GLBody@{GLBody}!m\_name@{m\_name}}
+\index{m\_name@{m\_name}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_name}{m\_name}}
+{\footnotesize\ttfamily QString GLBody\+::m\+\_\+name\hspace{0.3cm}{\ttfamily [protected]}}
+
+The name of this object for debugging messages. \mbox{\Hypertarget{class_g_l_body_a8e157d4bf676d1c5af7f74d30d44ea12}\label{class_g_l_body_a8e157d4bf676d1c5af7f74d30d44ea12}} 
+\index{GLBody@{GLBody}!m\_points@{m\_points}}
+\index{m\_points@{m\_points}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_points}{m\_points}}
+{\footnotesize\ttfamily QVector$<$\mbox{\hyperlink{class_g_l_point}{GLPoint}}$>$$\ast$ GLBody\+::m\+\_\+points\hspace{0.3cm}{\ttfamily [protected]}}
+
+The array of points defining the surface. This {\itshape may be} a container not owned by this body. \mbox{\Hypertarget{class_g_l_body_a96006c2b453ffe0490bee1961e61e3b3}\label{class_g_l_body_a96006c2b453ffe0490bee1961e61e3b3}} 
+\index{GLBody@{GLBody}!m\_radius@{m\_radius}}
+\index{m\_radius@{m\_radius}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_radius}{m\_radius}}
+{\footnotesize\ttfamily GLfloat GLBody\+::m\+\_\+radius\hspace{0.3cm}{\ttfamily [protected]}}
+
+The radius of the enclosing sphere \mbox{\Hypertarget{class_g_l_body_aa98197c0f7376b5afa58302eb96cb05e}\label{class_g_l_body_aa98197c0f7376b5afa58302eb96cb05e}} 
+\index{GLBody@{GLBody}!m\_selected@{m\_selected}}
+\index{m\_selected@{m\_selected}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_selected}{m\_selected}}
+{\footnotesize\ttfamily bool GLBody\+::m\+\_\+selected\hspace{0.3cm}{\ttfamily [protected]}}
+
+Flag for selected mode. \mbox{\Hypertarget{class_g_l_body_a4e6949c8876ffe0bc4fddddfa4dd6c9b}\label{class_g_l_body_a4e6949c8876ffe0bc4fddddfa4dd6c9b}} 
+\index{GLBody@{GLBody}!m\_shininess@{m\_shininess}}
+\index{m\_shininess@{m\_shininess}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_shininess}{m\_shininess}}
+{\footnotesize\ttfamily int GLBody\+::m\+\_\+shininess\hspace{0.3cm}{\ttfamily [protected]}}
+
+Shininess for specular color \mbox{\Hypertarget{class_g_l_body_ac9db9ed4eb8ca1fbf3e4113c530b92af}\label{class_g_l_body_ac9db9ed4eb8ca1fbf3e4113c530b92af}} 
+\index{GLBody@{GLBody}!m\_specularColor@{m\_specularColor}}
+\index{m\_specularColor@{m\_specularColor}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_specularColor}{m\_specularColor}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} GLBody\+::m\+\_\+specular\+Color\hspace{0.3cm}{\ttfamily [protected]}}
+
+The specular color \mbox{\Hypertarget{class_g_l_body_a518355cd5063cb8f7354065f2c521cbc}\label{class_g_l_body_a518355cd5063cb8f7354065f2c521cbc}} 
+\index{GLBody@{GLBody}!m\_surfaceIsValid@{m\_surfaceIsValid}}
+\index{m\_surfaceIsValid@{m\_surfaceIsValid}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_surfaceIsValid}{m\_surfaceIsValid}}
+{\footnotesize\ttfamily bool GLBody\+::m\+\_\+surface\+Is\+Valid\hspace{0.3cm}{\ttfamily [protected]}}
+
+The flag for a valid surface. \mbox{\Hypertarget{class_g_l_body_a51eed96c1bc0d06742d7a9ab455d527d}\label{class_g_l_body_a51eed96c1bc0d06742d7a9ab455d527d}} 
+\index{GLBody@{GLBody}!m\_textureFilenames@{m\_textureFilenames}}
+\index{m\_textureFilenames@{m\_textureFilenames}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_textureFilenames}{m\_textureFilenames}}
+{\footnotesize\ttfamily QString\+List GLBody\+::m\+\_\+texture\+Filenames\hspace{0.3cm}{\ttfamily [protected]}}
+
+The tetxure files. \mbox{\Hypertarget{class_g_l_body_a38b323efc7e55b6c770638cd108c2143}\label{class_g_l_body_a38b323efc7e55b6c770638cd108c2143}} 
+\index{GLBody@{GLBody}!m\_transformationMatrix@{m\_transformationMatrix}}
+\index{m\_transformationMatrix@{m\_transformationMatrix}!GLBody@{GLBody}}
+\doxysubsubsection{\texorpdfstring{m\_transformationMatrix}{m\_transformationMatrix}}
+{\footnotesize\ttfamily QMatrix4x4 GLBody\+::m\+\_\+transformation\+Matrix\hspace{0.3cm}{\ttfamily [protected]}}
+
+This matrix holds the basic transformation for the body and should not be modified after first setting. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/gl/glbody.\+h\item 
+src/gl/glbody.\+cpp\end{DoxyCompactItemize}

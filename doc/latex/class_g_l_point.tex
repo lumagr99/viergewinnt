@@ -1,0 +1,105 @@
+\hypertarget{class_g_l_point}{}\doxysection{GLPoint Class Reference}
+\label{class_g_l_point}\index{GLPoint@{GLPoint}}
+
+
+The \mbox{\hyperlink{class_g_l_point}{GLPoint}} class A Point containing data for a surface point. This class is used in binary read and write functions. DO NOT add virtual methods, DO NOT change order of declarations. xxx\+Pointer methods return the addresses needed by Open\+GL attribute functions.  
+
+
+
+
+{\ttfamily \#include $<$glpoint.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_point_a41a36ef6e07c906a279c866e86f2f241}\label{class_g_l_point_a41a36ef6e07c906a279c866e86f2f241}} 
+{\bfseries GLPoint} (const QVector3D \&vertex=QVector3D(0.\+0, 0.\+0, 0.\+0), const QVector3D \&normal=QVector3D(0.\+0, 1.\+0, 0.\+0), const QVector3D \&tex\+Coord=QVector3D(0.\+0, 0.\+0, 0.\+0), const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&color=\mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}(1.\+0, 1.\+0, 1.\+0, 1.\+0))
+\item 
+\mbox{\Hypertarget{class_g_l_point_a5582523837a5fbae6aeaf7c360553c0b}\label{class_g_l_point_a5582523837a5fbae6aeaf7c360553c0b}} 
+QVector3D $\ast$ {\bfseries vertex\+Pointer} ()
+\item 
+\mbox{\Hypertarget{class_g_l_point_a453d3148640b4a6a5bb8596370f236f8}\label{class_g_l_point_a453d3148640b4a6a5bb8596370f236f8}} 
+QVector3D $\ast$ {\bfseries normal\+Pointer} ()
+\item 
+\mbox{\Hypertarget{class_g_l_point_ad4cffce86ff32bfbdbbbe6b884f354c6}\label{class_g_l_point_ad4cffce86ff32bfbdbbbe6b884f354c6}} 
+QVector3D $\ast$ {\bfseries tex\+Coord\+Pointer} ()
+\item 
+\mbox{\Hypertarget{class_g_l_point_a86adf137055461d018700894c4c5f377}\label{class_g_l_point_a86adf137055461d018700894c4c5f377}} 
+\mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} $\ast$ {\bfseries color\+Pointer} ()
+\item 
+\mbox{\Hypertarget{class_g_l_point_ad7e52fdef100d9649aef55de90464117}\label{class_g_l_point_ad7e52fdef100d9649aef55de90464117}} 
+void {\bfseries set\+Vertex} (const QVector3D \&new\+Val)
+\item 
+\mbox{\Hypertarget{class_g_l_point_ac982178e336fefef63c2b4d97485dd93}\label{class_g_l_point_ac982178e336fefef63c2b4d97485dd93}} 
+void {\bfseries set\+Normal} (const QVector3D \&new\+Val)
+\item 
+\mbox{\Hypertarget{class_g_l_point_a14c69f50c3f43aa5e3636836ae960266}\label{class_g_l_point_a14c69f50c3f43aa5e3636836ae960266}} 
+void {\bfseries set\+Tex\+Coord} (const QVector3D \&new\+Val)
+\item 
+\mbox{\Hypertarget{class_g_l_point_a6aabfd5f798d021e346eb03ea6f56cb7}\label{class_g_l_point_a6aabfd5f798d021e346eb03ea6f56cb7}} 
+void {\bfseries set\+Color} (const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&new\+Val)
+\item 
+\mbox{\Hypertarget{class_g_l_point_a4766a3f463b4e46cd3af53a6d17cdd69}\label{class_g_l_point_a4766a3f463b4e46cd3af53a6d17cdd69}} 
+const QVector3D \& {\bfseries vertex} () const
+\item 
+\mbox{\Hypertarget{class_g_l_point_a4506f53f6b5312d3ec37cdbf566d57c8}\label{class_g_l_point_a4506f53f6b5312d3ec37cdbf566d57c8}} 
+const QVector3D \& {\bfseries normal} () const
+\item 
+\mbox{\Hypertarget{class_g_l_point_ac496dbef3a6ee7adc444b4e0c5d99ba0}\label{class_g_l_point_ac496dbef3a6ee7adc444b4e0c5d99ba0}} 
+const QVector3D \& {\bfseries tex\+Coord} () const
+\item 
+\mbox{\Hypertarget{class_g_l_point_a7f360810a20e379f02c1f2a00f56cc3e}\label{class_g_l_point_a7f360810a20e379f02c1f2a00f56cc3e}} 
+const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \& {\bfseries color} () const
+\item 
+\mbox{\Hypertarget{class_g_l_point_adf9e0baf9c965a9642f34672e6564e9a}\label{class_g_l_point_adf9e0baf9c965a9642f34672e6564e9a}} 
+void {\bfseries move} (QVector3D v\+Move)
+\item 
+\mbox{\Hypertarget{class_g_l_point_ab85d8d026e488d1c28fdb00c1ab9ad12}\label{class_g_l_point_ab85d8d026e488d1c28fdb00c1ab9ad12}} 
+void {\bfseries move\+To} (QVector3D v\+Move)
+\item 
+void \mbox{\hyperlink{class_g_l_point_a1e65d4eb8478a28ea1ebe6bd98e26837}{transform}} (const QMatrix4x4 \&vertex\+Matrix, const QMatrix4x4 \&normal\+Matrix)
+\begin{DoxyCompactList}\small\item\em transform Multiply vertex with vertex\+Matrix and normal with normal\+Matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_point_ac45fdd4dc914c102ab013eb4d984f994}\label{class_g_l_point_ac45fdd4dc914c102ab013eb4d984f994}} 
+static int {\bfseries vertex\+Offset} ()
+\item 
+\mbox{\Hypertarget{class_g_l_point_a7625e2028fceb48d927236a03bfc3b75}\label{class_g_l_point_a7625e2028fceb48d927236a03bfc3b75}} 
+static int {\bfseries normal\+Offset} ()
+\item 
+\mbox{\Hypertarget{class_g_l_point_ac94d3bf766f3f81da117997950844b21}\label{class_g_l_point_ac94d3bf766f3f81da117997950844b21}} 
+static int {\bfseries tex\+Coord\+Offset} ()
+\item 
+\mbox{\Hypertarget{class_g_l_point_a91ba1c6cd816cb5e1e11a233ea0d1328}\label{class_g_l_point_a91ba1c6cd816cb5e1e11a233ea0d1328}} 
+static int {\bfseries color\+Offset} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \mbox{\hyperlink{class_g_l_point}{GLPoint}} class A Point containing data for a surface point. This class is used in binary read and write functions. DO NOT add virtual methods, DO NOT change order of declarations. xxx\+Pointer methods return the addresses needed by Open\+GL attribute functions. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_g_l_point_a1e65d4eb8478a28ea1ebe6bd98e26837}\label{class_g_l_point_a1e65d4eb8478a28ea1ebe6bd98e26837}} 
+\index{GLPoint@{GLPoint}!transform@{transform}}
+\index{transform@{transform}!GLPoint@{GLPoint}}
+\doxysubsubsection{\texorpdfstring{transform()}{transform()}}
+{\footnotesize\ttfamily void GLPoint\+::transform (\begin{DoxyParamCaption}\item[{const QMatrix4x4 \&}]{vertex\+Matrix,  }\item[{const QMatrix4x4 \&}]{normal\+Matrix }\end{DoxyParamCaption})}
+
+
+
+transform Multiply vertex with vertex\+Matrix and normal with normal\+Matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertex\+Matrix} & \\
+\hline
+{\em normal\+Matrix} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/gl/glpoint.\+h\item 
+src/gl/glpoint.\+cpp\end{DoxyCompactItemize}

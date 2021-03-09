@@ -1,0 +1,185 @@
+\hypertarget{class_connect_four_scene}{}\doxysection{Connect\+Four\+Scene Class Reference}
+\label{class_connect_four_scene}\index{ConnectFourScene@{ConnectFourScene}}
+
+
+Die Connect\+Four\+Scene-\/\+Klasse ist abgeleitet von \mbox{\hyperlink{class_g_l_item}{GLItem}}. Die Klasse verarbeitet Mauseingaben für das Vier Gewinnt Spiel. Die Eingaben werden in m\+\_\+mouse\+Near, m\+\_\+mouse\+Far und m\+\_\+last\+Intersection gespeichert. Mithilfe der Flags m\+\_\+mouse\+Press\+Received, m\+\_\+mouse\+Position\+Changed\+Received und m\+\_\+mouse\+Release\+Received findet anschließend eine Verarbeitung in der Methode do\+Synchronize\+Threads statt.  
+
+
+
+
+{\ttfamily \#include $<$connectfourscene.\+h$>$}
+
+Inheritance diagram for Connect\+Four\+Scene\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_connect_four_scene}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_connect_four_scene_a902937314e6f379fdeba6e9c32535bae}\label{class_connect_four_scene_a902937314e6f379fdeba6e9c32535bae}} 
+virtual void \mbox{\hyperlink{class_connect_four_scene_a902937314e6f379fdeba6e9c32535bae}{do\+Synchronize\+Threads}} () Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\begin{DoxyCompactList}\small\item\em Kopiert Daten vom GUI-\/\+Thread zum Render-\/\+Thread un vice versa. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_connect_four_scene_ad45e4e2e648102c3a3e84e31d884be0f}\label{class_connect_four_scene_ad45e4e2e648102c3a3e84e31d884be0f}} 
+void \mbox{\hyperlink{class_connect_four_scene_ad45e4e2e648102c3a3e84e31d884be0f}{new\+Game}} ()
+\begin{DoxyCompactList}\small\item\em Erstellt ein neues Vier Gewinnt Spiel durch setzen des Flags m\+\_\+new\+Game auf true. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_connect_four_scene_a828be8975498c5e90c03bb63dc5ad747}\label{class_connect_four_scene_a828be8975498c5e90c03bb63dc5ad747}} 
+void \mbox{\hyperlink{class_connect_four_scene_a828be8975498c5e90c03bb63dc5ad747}{start\+Game}} ()
+\begin{DoxyCompactList}\small\item\em Startet das Vier Gewinnt Spiel. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_connect_four_scene_a59183ce195372247f11bd8567cf71d4c}\label{class_connect_four_scene_a59183ce195372247f11bd8567cf71d4c}} 
+void \mbox{\hyperlink{class_connect_four_scene_a59183ce195372247f11bd8567cf71d4c}{stop\+Game}} ()
+\begin{DoxyCompactList}\small\item\em Pausiert das Vier Gewinnt Spiel. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connect_four_scene_a4d155a28e274ff425b9fdfb348586742}{start\+Rotation}} (float increment)
+\begin{DoxyCompactList}\small\item\em Startet die Kamerarotation mit der übergebenen Geschwindigkeit. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_connect_four_scene_a85eaf7a3e46c1da8fe65eefd13ef695d}\label{class_connect_four_scene_a85eaf7a3e46c1da8fe65eefd13ef695d}} 
+void \mbox{\hyperlink{class_connect_four_scene_a85eaf7a3e46c1da8fe65eefd13ef695d}{stop\+Rotation}} ()
+\begin{DoxyCompactList}\small\item\em Stoppt die Kamerarotation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connect_four_scene_a263edee77d8baafbb37153d9a5f7c83e}{mouse\+Pressed}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Wird beim Klicken der Maus aufgerufen. Speichert die Mausklickposition in m\+\_\+mouse\+Press\+Position und setzt das Flag m\+\_\+mouse\+Press\+Received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connect_four_scene_afc4fe66178bab39ef83eca443ee26a96}{mouse\+Position\+Changed}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Wird beim Bewegen der Maus aufgerufen. Speichert die Mausposition in m\+\_\+m\+\_\+mouse\+Position\+Changed\+To und setzt das Flag m\+\_\+mouse\+Position\+Changed\+Received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connect_four_scene_ab82c1e42369ce99056ba58cf88dd3a68}{mouse\+Released}} (int x, int y)
+\begin{DoxyCompactList}\small\item\em Wird beim Loslassen des Mausklicks aufgerufen. Speichert die Mausklick-\/\+Loslass Position in m\+\_\+mouse\+Release\+Position und setzt das Flag m\+\_\+mouse\+Release\+Received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connect_four_scene_a3351c36b5f8f99af9507b7395141d041}{handle\+Wheel\+Event}} (int angle\+Delta)
+\begin{DoxyCompactList}\small\item\em Wird beim Bewegen des Mausrads aufgerufen. Ändert den Zoom entsprechend der Mausradbewegung. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_connect_four_scene_aad4379db33912b306996112c96f3d245}\label{class_connect_four_scene_aad4379db33912b306996112c96f3d245}} 
+void \mbox{\hyperlink{class_connect_four_scene_aad4379db33912b306996112c96f3d245}{toggle\+Mouse\+Rays}} ()
+\begin{DoxyCompactList}\small\item\em Schaltet das das Zeichnen der Maus Rays um. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_connect_four_scene_a758037760adbb750398a29e60ed117ac}\label{class_connect_four_scene_a758037760adbb750398a29e60ed117ac}} 
+void \mbox{\hyperlink{class_connect_four_scene_a758037760adbb750398a29e60ed117ac}{toggle\+Axes}} ()
+\begin{DoxyCompactList}\small\item\em Schaltet das das Zeichnen der Koordinatenachsen um. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_connect_four_scene_a8a60484149b748f7b6b28a89acd3fa73}{game\+Over}} (const QString \&color)
+\begin{DoxyCompactList}\small\item\em Wird bei Ende einer Spielrunde emittiert. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_connect_four_scene_a6b134cd3094581c4388031c48e9f55f3}\label{class_connect_four_scene_a6b134cd3094581c4388031c48e9f55f3}} 
+\mbox{\hyperlink{class_connect_four_scene_a6b134cd3094581c4388031c48e9f55f3}{Connect\+Four\+Scene}} ()
+\begin{DoxyCompactList}\small\item\em Konstrutkor. Erstellt und Initialisiert ein neues Connect\+Four\+Scene-\/\+Objekt. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_connect_four_scene_a99445e9950581792a8a255c080d0da2a}\label{class_connect_four_scene_a99445e9950581792a8a255c080d0da2a}} 
+virtual void \mbox{\hyperlink{class_connect_four_scene_a99445e9950581792a8a255c080d0da2a}{paint\+Under\+Qml\+Scene}} () Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\begin{DoxyCompactList}\small\item\em Zeichnet die Geometrien in m\+\_\+points unter der QML-\/\+Szene. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_connect_four_scene_ad0338f799e2ea3e54f3537980885598c}\label{class_connect_four_scene_ad0338f799e2ea3e54f3537980885598c}} 
+virtual void \mbox{\hyperlink{class_connect_four_scene_ad0338f799e2ea3e54f3537980885598c}{paint\+On\+Top\+Of\+Qml\+Scene}} () Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\begin{DoxyCompactList}\small\item\em Zeichnet die Geometrien in m\+\_\+points über der QML-\/\+Szene. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_connect_four_scene_a9600d0c6d2a6221f7dd225000275219d}\label{class_connect_four_scene_a9600d0c6d2a6221f7dd225000275219d}} 
+virtual void \mbox{\hyperlink{class_connect_four_scene_a9600d0c6d2a6221f7dd225000275219d}{setup\+Geometry}} () Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\begin{DoxyCompactList}\small\item\em Schreibt die Geometriedaten in m\+\_\+points und setzt das Flag m\+\_\+geometry\+Is\+Valid auf true. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Die Connect\+Four\+Scene-\/\+Klasse ist abgeleitet von \mbox{\hyperlink{class_g_l_item}{GLItem}}. Die Klasse verarbeitet Mauseingaben für das Vier Gewinnt Spiel. Die Eingaben werden in m\+\_\+mouse\+Near, m\+\_\+mouse\+Far und m\+\_\+last\+Intersection gespeichert. Mithilfe der Flags m\+\_\+mouse\+Press\+Received, m\+\_\+mouse\+Position\+Changed\+Received und m\+\_\+mouse\+Release\+Received findet anschließend eine Verarbeitung in der Methode do\+Synchronize\+Threads statt. 
+
+Töne werden mithilfe der Klasse \mbox{\hyperlink{class_sound_engine}{Sound\+Engine}} abgespielt. Die Tondateien müssen im .wav-\/\+Format sein und in den Ressourcendateien des Programms vorliegen. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_connect_four_scene_a8a60484149b748f7b6b28a89acd3fa73}\label{class_connect_four_scene_a8a60484149b748f7b6b28a89acd3fa73}} 
+\index{ConnectFourScene@{ConnectFourScene}!gameOver@{gameOver}}
+\index{gameOver@{gameOver}!ConnectFourScene@{ConnectFourScene}}
+\doxysubsubsection{\texorpdfstring{gameOver}{gameOver}}
+{\footnotesize\ttfamily void Connect\+Four\+Scene\+::game\+Over (\begin{DoxyParamCaption}\item[{const QString \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Wird bei Ende einer Spielrunde emittiert. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & Farbe des Gewinners (Red, Green) oder Draw. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_connect_four_scene_a3351c36b5f8f99af9507b7395141d041}\label{class_connect_four_scene_a3351c36b5f8f99af9507b7395141d041}} 
+\index{ConnectFourScene@{ConnectFourScene}!handleWheelEvent@{handleWheelEvent}}
+\index{handleWheelEvent@{handleWheelEvent}!ConnectFourScene@{ConnectFourScene}}
+\doxysubsubsection{\texorpdfstring{handleWheelEvent}{handleWheelEvent}}
+{\footnotesize\ttfamily void Connect\+Four\+Scene\+::handle\+Wheel\+Event (\begin{DoxyParamCaption}\item[{int}]{angle\+Delta }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Wird beim Bewegen des Mausrads aufgerufen. Ändert den Zoom entsprechend der Mausradbewegung. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em angle\+Delta} & Mausradrichtung. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_connect_four_scene_afc4fe66178bab39ef83eca443ee26a96}\label{class_connect_four_scene_afc4fe66178bab39ef83eca443ee26a96}} 
+\index{ConnectFourScene@{ConnectFourScene}!mousePositionChanged@{mousePositionChanged}}
+\index{mousePositionChanged@{mousePositionChanged}!ConnectFourScene@{ConnectFourScene}}
+\doxysubsubsection{\texorpdfstring{mousePositionChanged}{mousePositionChanged}}
+{\footnotesize\ttfamily void Connect\+Four\+Scene\+::mouse\+Position\+Changed (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Wird beim Bewegen der Maus aufgerufen. Speichert die Mausposition in m\+\_\+m\+\_\+mouse\+Position\+Changed\+To und setzt das Flag m\+\_\+mouse\+Position\+Changed\+Received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X-\/\+Koordinate der Maus. \\
+\hline
+{\em y} & Y-\/\+Koordinate der Maus. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_connect_four_scene_a263edee77d8baafbb37153d9a5f7c83e}\label{class_connect_four_scene_a263edee77d8baafbb37153d9a5f7c83e}} 
+\index{ConnectFourScene@{ConnectFourScene}!mousePressed@{mousePressed}}
+\index{mousePressed@{mousePressed}!ConnectFourScene@{ConnectFourScene}}
+\doxysubsubsection{\texorpdfstring{mousePressed}{mousePressed}}
+{\footnotesize\ttfamily void Connect\+Four\+Scene\+::mouse\+Pressed (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Wird beim Klicken der Maus aufgerufen. Speichert die Mausklickposition in m\+\_\+mouse\+Press\+Position und setzt das Flag m\+\_\+mouse\+Press\+Received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X-\/\+Koordinate der Mausklick Position. \\
+\hline
+{\em y} & Y-\/\+Koordinate der Mausklick Position. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_connect_four_scene_ab82c1e42369ce99056ba58cf88dd3a68}\label{class_connect_four_scene_ab82c1e42369ce99056ba58cf88dd3a68}} 
+\index{ConnectFourScene@{ConnectFourScene}!mouseReleased@{mouseReleased}}
+\index{mouseReleased@{mouseReleased}!ConnectFourScene@{ConnectFourScene}}
+\doxysubsubsection{\texorpdfstring{mouseReleased}{mouseReleased}}
+{\footnotesize\ttfamily void Connect\+Four\+Scene\+::mouse\+Released (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Wird beim Loslassen des Mausklicks aufgerufen. Speichert die Mausklick-\/\+Loslass Position in m\+\_\+mouse\+Release\+Position und setzt das Flag m\+\_\+mouse\+Release\+Received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X-\/\+Koordinate der Mausklick-\/\+Loslass Position. \\
+\hline
+{\em y} & Y-\/\+Koordinate der Mausklick-\/\+Loslass Position. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_connect_four_scene_a4d155a28e274ff425b9fdfb348586742}\label{class_connect_four_scene_a4d155a28e274ff425b9fdfb348586742}} 
+\index{ConnectFourScene@{ConnectFourScene}!startRotation@{startRotation}}
+\index{startRotation@{startRotation}!ConnectFourScene@{ConnectFourScene}}
+\doxysubsubsection{\texorpdfstring{startRotation}{startRotation}}
+{\footnotesize\ttfamily void Connect\+Four\+Scene\+::start\+Rotation (\begin{DoxyParamCaption}\item[{float}]{increment }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+Startet die Kamerarotation mit der übergebenen Geschwindigkeit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em increment} & Rotationsgeschwindigkeit. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/game/connectfourscene.\+h\item 
+src/game/connectfourscene.\+cpp\end{DoxyCompactItemize}

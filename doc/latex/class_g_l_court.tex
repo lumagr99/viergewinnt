@@ -1,0 +1,229 @@
+\hypertarget{class_g_l_court}{}\doxysection{GLCourt Class Reference}
+\label{class_g_l_court}\index{GLCourt@{GLCourt}}
+
+
+Spielbrett des Vier Gewinnt Spiels.  
+
+
+
+
+{\ttfamily \#include $<$glcourt.\+h$>$}
+
+Inheritance diagram for GLCourt\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_g_l_court}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_g_l_court_a12882cebc67f78ae9befdf2fba9946cc}{GLCourt}} (const QString \&name, float radius=1.\+0f, const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&color=GLColor\+Rgba\+::cl\+Blue, const QString texture\+File=\char`\"{}\+:/textures/Court.\+png\char`\"{})
+\begin{DoxyCompactList}\small\item\em Konstruktor. Erstellt und Initialisiert ein neues GLCourt-\/\+Objekt. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_court_aca753c255ae8e6eac547cb2795910ec7}\label{class_g_l_court_aca753c255ae8e6eac547cb2795910ec7}} 
+\mbox{\hyperlink{class_g_l_court_aca753c255ae8e6eac547cb2795910ec7}{$\sim$\+GLCourt}} () Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\begin{DoxyCompactList}\small\item\em $\sim$\+Destruktor. Löscht das Texturobjekt des Spielfelds. \end{DoxyCompactList}\item 
+QVector3D \mbox{\hyperlink{class_g_l_court_a90ff11bbc28ff26ea12963a96a3df62a}{field\+To\+Position}} (const QPoint \&field) const
+\begin{DoxyCompactList}\small\item\em Gibt die Position des übergebenen Feldes als QVector3D zurück. \end{DoxyCompactList}\item 
+QVector3D \mbox{\hyperlink{class_g_l_court_a5732cce3e04d9c8d0a5d3af6907801a9}{calulate\+Insert\+Position}} (const \mbox{\hyperlink{class_g_l_token}{GLToken}} $\ast$token)
+\begin{DoxyCompactList}\small\item\em Berechnet die nächste Einfügeposition für das übergebene Token. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_g_l_court_aa935db385b50d3b610830e280fafb040}{get\+Column\+By\+Position}} (const QVector3D \&position) const
+\begin{DoxyCompactList}\small\item\em Berechnet die der übergebenen Position nächsten Spalte. \end{DoxyCompactList}\item 
+QPoint \mbox{\hyperlink{class_g_l_court_a148681e151b8b5b9a0bacc36286ae3f1}{get\+Free\+Field}} (int column)
+\begin{DoxyCompactList}\small\item\em Bestimmt die erste freie Position in einer Spalte. Die erste freie Position wird dabei von unten bestimmt. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_court_a1bf649218e687fd99a5ace2119ccd178}{set\+Field}} (Player player, QPoint field)
+\begin{DoxyCompactList}\small\item\em Setzt das übergebene Feld für den übergebenen Spieler. \end{DoxyCompactList}\item 
+Player \mbox{\hyperlink{class_g_l_court_adb2174f8af908b6410be5db2e03f9f72}{check\+Win}} ()
+\begin{DoxyCompactList}\small\item\em Überprüft, ob einer der Spieler gewonnen hat. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_g_l_court_aea3edace9776184140182e156b547db7}{is\+Full}} ()
+\begin{DoxyCompactList}\small\item\em Überprüft, ob das Spielfeld voll ist. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_court_a3ee24c103b7db48e067a2c199731f040}\label{class_g_l_court_a3ee24c103b7db48e067a2c199731f040}} 
+static constexpr int \mbox{\hyperlink{class_g_l_court_a3ee24c103b7db48e067a2c199731f040}{ROWS}} = 6
+\begin{DoxyCompactList}\small\item\em Anzahl der Zeilen des Spielfelds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_court_a37e9c6ec9b591a780460c5fddb03a82e}\label{class_g_l_court_a37e9c6ec9b591a780460c5fddb03a82e}} 
+static constexpr int \mbox{\hyperlink{class_g_l_court_a37e9c6ec9b591a780460c5fddb03a82e}{COLUMNS}} = 7
+\begin{DoxyCompactList}\small\item\em Anzahl der Spalten des Spielfelds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_court_a68575d87a8323c7e3fdaa3f1ca8b971c}\label{class_g_l_court_a68575d87a8323c7e3fdaa3f1ca8b971c}} 
+static constexpr float \mbox{\hyperlink{class_g_l_court_a68575d87a8323c7e3fdaa3f1ca8b971c}{WIDTH}} = 10.\+0f
+\begin{DoxyCompactList}\small\item\em Breite des Spielfelds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_court_a81ca2dfc4b82fbffada1e3e86ed7418a}\label{class_g_l_court_a81ca2dfc4b82fbffada1e3e86ed7418a}} 
+static constexpr float \mbox{\hyperlink{class_g_l_court_a81ca2dfc4b82fbffada1e3e86ed7418a}{HEIGHT}} = 8.\+5f
+\begin{DoxyCompactList}\small\item\em Höhe des Spielfelds. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_court_abfb3d70357c12f52b9c95846a5e69ecc}\label{class_g_l_court_abfb3d70357c12f52b9c95846a5e69ecc}} 
+static constexpr float \mbox{\hyperlink{class_g_l_court_abfb3d70357c12f52b9c95846a5e69ecc}{DEPTH}} = 0.\+65f
+\begin{DoxyCompactList}\small\item\em Tiefe des Spielfelds. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Spielbrett des Vier Gewinnt Spiels. 
+
+Das Spielfeld besteht aus sechs Zeilen und sieben Spalten und kann maximal 42 Token beinhalten.
+
+Die Attribute m\+\_\+v\+Row, m\+\_\+v\+Column, m\+\_\+v\+Corner und m\+\_\+v\+Offset werden für die Berechnung der Tokenplatzierungen verwendet\+:
+\begin{DoxyItemize}
+\item m\+\_\+v\+Row ist ein Vektor mit der Höhe einer Zeile.
+\item m\+\_\+v\+Column ist ein Vektor mit der Breite einer Spalte.
+\item m\+\_\+v\+Corner beschreibt die Position der obereren linken Ecke.
+\item m\+\_\+v\+Offset ist der Abstand der oberen linken Ecke zur ersten Feldposition (0,0).
+\end{DoxyItemize}
+
+Die aktuell platzierten Tokens werden als Player-\/\+Objekte in m\+\_\+court gespeichert. Player\+::\+None bezeichnet dabei eine freie Position wärend Player\+::\+Red\+Player und Player\+::\+Green\+Player ein vom entsprechenden Spieler platziertes Token bezeichnen. Eine Position kann mit der Methode set\+Field gesetzt werden.
+
+Die Feldpositionen des Spielfelds lauten wie folgt\+:
+
+\mbox{[}0,0\mbox{]} \mbox{[}0,1\mbox{]} \mbox{[}0,2\mbox{]} \mbox{[}0,3\mbox{]} \mbox{[}0,4\mbox{]} \mbox{[}0,5\mbox{]} \mbox{[}0,6\mbox{]} \mbox{[}1,0\mbox{]} \mbox{[}1,1\mbox{]} \mbox{[}1,2\mbox{]} \mbox{[}1,3\mbox{]} \mbox{[}1,4\mbox{]} \mbox{[}1,5\mbox{]} \mbox{[}1,6\mbox{]} \mbox{[}2,0\mbox{]} \mbox{[}2,1\mbox{]} \mbox{[}2,2\mbox{]} \mbox{[}2,3\mbox{]} \mbox{[}2,4\mbox{]} \mbox{[}2,5\mbox{]} \mbox{[}2,6\mbox{]} \mbox{[}3,0\mbox{]} \mbox{[}3,1\mbox{]} \mbox{[}3,2\mbox{]} \mbox{[}3,3\mbox{]} \mbox{[}3,4\mbox{]} \mbox{[}3,5\mbox{]} \mbox{[}3,6\mbox{]} \mbox{[}4,0\mbox{]} \mbox{[}4,1\mbox{]} \mbox{[}4,2\mbox{]} \mbox{[}4,3\mbox{]} \mbox{[}4,4\mbox{]} \mbox{[}4,5\mbox{]} \mbox{[}4,6\mbox{]} \mbox{[}5,0\mbox{]} \mbox{[}5,1\mbox{]} \mbox{[}5,2\mbox{]} \mbox{[}5,3\mbox{]} \mbox{[}5,4\mbox{]} \mbox{[}5,5\mbox{]} \mbox{[}5,6\mbox{]}
+
+Mithilfe der Methode field\+To\+Position lassen sich Feldposition auf Vektoren abbilden. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_g_l_court_a12882cebc67f78ae9befdf2fba9946cc}\label{class_g_l_court_a12882cebc67f78ae9befdf2fba9946cc}} 
+\index{GLCourt@{GLCourt}!GLCourt@{GLCourt}}
+\index{GLCourt@{GLCourt}!GLCourt@{GLCourt}}
+\doxysubsubsection{\texorpdfstring{GLCourt()}{GLCourt()}}
+{\footnotesize\ttfamily GLCourt\+::\+GLCourt (\begin{DoxyParamCaption}\item[{const QString \&}]{name,  }\item[{float}]{radius = {\ttfamily 1.0f},  }\item[{const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&}]{color = {\ttfamily GLColorRgba\+:\+:clBlue},  }\item[{const QString}]{texture\+File = {\ttfamily \char`\"{}\+:/textures/Court.png\char`\"{}} }\end{DoxyParamCaption})}
+
+
+
+Konstruktor. Erstellt und Initialisiert ein neues GLCourt-\/\+Objekt. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name des Objekts. \\
+\hline
+{\em radius} & Radius des Objekts. \\
+\hline
+{\em color} & Farbe des Objekts. \\
+\hline
+{\em texture\+File} & Texturdatei des Objekts. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_g_l_court_a5732cce3e04d9c8d0a5d3af6907801a9}\label{class_g_l_court_a5732cce3e04d9c8d0a5d3af6907801a9}} 
+\index{GLCourt@{GLCourt}!calulateInsertPosition@{calulateInsertPosition}}
+\index{calulateInsertPosition@{calulateInsertPosition}!GLCourt@{GLCourt}}
+\doxysubsubsection{\texorpdfstring{calulateInsertPosition()}{calulateInsertPosition()}}
+{\footnotesize\ttfamily QVector3D GLCourt\+::calulate\+Insert\+Position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_g_l_token}{GLToken}} $\ast$}]{token }\end{DoxyParamCaption})}
+
+
+
+Berechnet die nächste Einfügeposition für das übergebene Token. 
+
+Die nächste Einfügeposition ist die Position mit dem geringsten Abstand zum Token.
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & Token dessen Einfügeposition bestimmt werden soll. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Einfügeposition. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_court_adb2174f8af908b6410be5db2e03f9f72}\label{class_g_l_court_adb2174f8af908b6410be5db2e03f9f72}} 
+\index{GLCourt@{GLCourt}!checkWin@{checkWin}}
+\index{checkWin@{checkWin}!GLCourt@{GLCourt}}
+\doxysubsubsection{\texorpdfstring{checkWin()}{checkWin()}}
+{\footnotesize\ttfamily Player GLCourt\+::check\+Win (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Überprüft, ob einer der Spieler gewonnen hat. 
+
+\begin{DoxyReturn}{Returns}
+Player\+::\+Red\+Player bzw. Player\+::\+Green\+Player, wenn der entsprechende Spieler gewonnen hat oder Player\+::\+None, wenn kein Gewinner feststeht. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_court_a90ff11bbc28ff26ea12963a96a3df62a}\label{class_g_l_court_a90ff11bbc28ff26ea12963a96a3df62a}} 
+\index{GLCourt@{GLCourt}!fieldToPosition@{fieldToPosition}}
+\index{fieldToPosition@{fieldToPosition}!GLCourt@{GLCourt}}
+\doxysubsubsection{\texorpdfstring{fieldToPosition()}{fieldToPosition()}}
+{\footnotesize\ttfamily QVector3D GLCourt\+::field\+To\+Position (\begin{DoxyParamCaption}\item[{const QPoint \&}]{field }\end{DoxyParamCaption}) const}
+
+
+
+Gibt die Position des übergebenen Feldes als QVector3D zurück. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & Feld dessen Position bestimmt werden soll. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Position des übergebenen Feldes. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_court_aa935db385b50d3b610830e280fafb040}\label{class_g_l_court_aa935db385b50d3b610830e280fafb040}} 
+\index{GLCourt@{GLCourt}!getColumnByPosition@{getColumnByPosition}}
+\index{getColumnByPosition@{getColumnByPosition}!GLCourt@{GLCourt}}
+\doxysubsubsection{\texorpdfstring{getColumnByPosition()}{getColumnByPosition()}}
+{\footnotesize\ttfamily int GLCourt\+::get\+Column\+By\+Position (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{position }\end{DoxyParamCaption}) const}
+
+
+
+Berechnet die der übergebenen Position nächsten Spalte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Position deren Spalte bestimmt werden soll. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Spalte. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_court_a148681e151b8b5b9a0bacc36286ae3f1}\label{class_g_l_court_a148681e151b8b5b9a0bacc36286ae3f1}} 
+\index{GLCourt@{GLCourt}!getFreeField@{getFreeField}}
+\index{getFreeField@{getFreeField}!GLCourt@{GLCourt}}
+\doxysubsubsection{\texorpdfstring{getFreeField()}{getFreeField()}}
+{\footnotesize\ttfamily QPoint GLCourt\+::get\+Free\+Field (\begin{DoxyParamCaption}\item[{int}]{column }\end{DoxyParamCaption})}
+
+
+
+Bestimmt die erste freie Position in einer Spalte. Die erste freie Position wird dabei von unten bestimmt. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em column} & Spalte deren erste freie Position bestimmt werden soll. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+erste freie Position. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_court_aea3edace9776184140182e156b547db7}\label{class_g_l_court_aea3edace9776184140182e156b547db7}} 
+\index{GLCourt@{GLCourt}!isFull@{isFull}}
+\index{isFull@{isFull}!GLCourt@{GLCourt}}
+\doxysubsubsection{\texorpdfstring{isFull()}{isFull()}}
+{\footnotesize\ttfamily bool GLCourt\+::is\+Full (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Überprüft, ob das Spielfeld voll ist. 
+
+\begin{DoxyReturn}{Returns}
+true, falls ja, false sonst. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_court_a1bf649218e687fd99a5ace2119ccd178}\label{class_g_l_court_a1bf649218e687fd99a5ace2119ccd178}} 
+\index{GLCourt@{GLCourt}!setField@{setField}}
+\index{setField@{setField}!GLCourt@{GLCourt}}
+\doxysubsubsection{\texorpdfstring{setField()}{setField()}}
+{\footnotesize\ttfamily void GLCourt\+::set\+Field (\begin{DoxyParamCaption}\item[{Player}]{player,  }\item[{QPoint}]{field }\end{DoxyParamCaption})}
+
+
+
+Setzt das übergebene Feld für den übergebenen Spieler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em player} & Spieler dessen Token am übergebenen Feld ist. \\
+\hline
+{\em field} & Feld das gesetzt werden soll. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/gl/glcourt.\+h\item 
+src/gl/glcourt.\+cpp\end{DoxyCompactItemize}

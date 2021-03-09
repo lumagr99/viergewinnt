@@ -1,0 +1,120 @@
+\hypertarget{class_g_l_mouse_ray}{}\doxysection{GLMouse\+Ray Class Reference}
+\label{class_g_l_mouse_ray}\index{GLMouseRay@{GLMouseRay}}
+
+
+Mouse\+Ray für das Debuggen von Mausklicks.  
+
+
+
+
+{\ttfamily \#include $<$glmouseray.\+h$>$}
+
+Inheritance diagram for GLMouse\+Ray\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_g_l_mouse_ray}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_g_l_mouse_ray_a31e0fd9a34b487b3e57d44cdbefaed1c}{GLMouse\+Ray}} (const QString \&name, const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&color)
+\begin{DoxyCompactList}\small\item\em Konstruktor. Erstellt und Initialisiert ein neues GLMouse\+Ray-\/\+Objekt. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_g_l_mouse_ray_ad3b28f01b11cd8440b4ca7cbc17a14c0}{make\+Surface}} (QVector$<$ \mbox{\hyperlink{class_g_l_point}{GLPoint}} $>$ $\ast$point\+Container, QVector$<$ Index\+Type $>$ $\ast$index\+Container) Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\begin{DoxyCompactList}\small\item\em Erzeugt die Geometriedaten des Objekts. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_g_l_mouse_ray_ae6a8d606ab7684b73f0959e9a7cf26c8}{draw}} (\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$renderer, bool use\+Buffers=false) Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\begin{DoxyCompactList}\small\item\em Zeichnet das GLMouse\+Ray-\/\+Objekt im aktuellen Kontext. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_mouse_ray_a6172e290272f9ed89ec9eb8a97506b8f}{set\+Points}} (const QVector3D \&near\+Point, const QVector3D \&far\+Point)
+\begin{DoxyCompactList}\small\item\em Setzt die Punkte des Mouse\+Rays. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Mouse\+Ray für das Debuggen von Mausklicks. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_g_l_mouse_ray_a31e0fd9a34b487b3e57d44cdbefaed1c}\label{class_g_l_mouse_ray_a31e0fd9a34b487b3e57d44cdbefaed1c}} 
+\index{GLMouseRay@{GLMouseRay}!GLMouseRay@{GLMouseRay}}
+\index{GLMouseRay@{GLMouseRay}!GLMouseRay@{GLMouseRay}}
+\doxysubsubsection{\texorpdfstring{GLMouseRay()}{GLMouseRay()}}
+{\footnotesize\ttfamily GLMouse\+Ray\+::\+GLMouse\+Ray (\begin{DoxyParamCaption}\item[{const QString \&}]{name,  }\item[{const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Konstruktor. Erstellt und Initialisiert ein neues GLMouse\+Ray-\/\+Objekt. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name des Objekts. \\
+\hline
+{\em color} & Farbe des Objekts. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_g_l_mouse_ray_ae6a8d606ab7684b73f0959e9a7cf26c8}\label{class_g_l_mouse_ray_ae6a8d606ab7684b73f0959e9a7cf26c8}} 
+\index{GLMouseRay@{GLMouseRay}!draw@{draw}}
+\index{draw@{draw}!GLMouseRay@{GLMouseRay}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void GLMouse\+Ray\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$}]{renderer,  }\item[{bool}]{use\+Buffers = {\ttfamily false} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Zeichnet das GLMouse\+Ray-\/\+Objekt im aktuellen Kontext. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em renderer} & Renderer mit dem das Mouse\+Ray-\/\+Objekt gezeichnet werden soll. \\
+\hline
+{\em use\+Buffers} & Verwendung von Buffern. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_g_l_body_aaeb47c0a8cfc36caed81fc139c42ddfc}{GLBody}}.
+
+\mbox{\Hypertarget{class_g_l_mouse_ray_ad3b28f01b11cd8440b4ca7cbc17a14c0}\label{class_g_l_mouse_ray_ad3b28f01b11cd8440b4ca7cbc17a14c0}} 
+\index{GLMouseRay@{GLMouseRay}!makeSurface@{makeSurface}}
+\index{makeSurface@{makeSurface}!GLMouseRay@{GLMouseRay}}
+\doxysubsubsection{\texorpdfstring{makeSurface()}{makeSurface()}}
+{\footnotesize\ttfamily void GLMouse\+Ray\+::make\+Surface (\begin{DoxyParamCaption}\item[{QVector$<$ \mbox{\hyperlink{class_g_l_point}{GLPoint}} $>$ $\ast$}]{point\+Container,  }\item[{QVector$<$ Index\+Type $>$ $\ast$}]{index\+Container }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Erzeugt die Geometriedaten des Objekts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point\+Container} & QVector mit den Punkten des Objekts. \\
+\hline
+{\em index\+Container} & QVector mit den Punktindizes des Objekts. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{class_g_l_body_a73e51b159f343d0bda87f50df382b7db}{GLBody}}.
+
+\mbox{\Hypertarget{class_g_l_mouse_ray_a6172e290272f9ed89ec9eb8a97506b8f}\label{class_g_l_mouse_ray_a6172e290272f9ed89ec9eb8a97506b8f}} 
+\index{GLMouseRay@{GLMouseRay}!setPoints@{setPoints}}
+\index{setPoints@{setPoints}!GLMouseRay@{GLMouseRay}}
+\doxysubsubsection{\texorpdfstring{setPoints()}{setPoints()}}
+{\footnotesize\ttfamily void GLMouse\+Ray\+::set\+Points (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{near\+Point,  }\item[{const QVector3D \&}]{far\+Point }\end{DoxyParamCaption})}
+
+
+
+Setzt die Punkte des Mouse\+Rays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em near\+Point} & Nahpunkt. \\
+\hline
+{\em far\+Point} & Fernpunk. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/gl/glmouseray.\+h\item 
+src/gl/glmouseray.\+cpp\end{DoxyCompactItemize}

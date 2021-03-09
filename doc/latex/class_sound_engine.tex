@@ -1,0 +1,67 @@
+\hypertarget{class_sound_engine}{}\doxysection{Sound\+Engine Class Reference}
+\label{class_sound_engine}\index{SoundEngine@{SoundEngine}}
+
+
+{\ttfamily \#include $<$soundengine.\+h$>$}
+
+Inheritance diagram for Sound\+Engine\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sound_engine}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_sound_engine_a78a2b70b792e5ad7949b795dae77bd78}{load\+Sound}} (const QString \&file\+Name)
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_sound_engine_a78a2b70b792e5ad7949b795dae77bd78}{Sound\+Engine\+::load\+Sound}} Preload a file, so that it can be played with low latency afterwrds. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_sound_engine_a51b3e6c11e276f7d34146ab29e9922d9}{play\+Sound}} (const QString \&file\+Name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sound_engine_a2bedc53fecc2fab5d9bc2661de19794b}\label{class_sound_engine_a2bedc53fecc2fab5d9bc2661de19794b}} 
+{\bfseries Sound\+Engine} (QObject $\ast$parent=0)
+\item 
+\mbox{\Hypertarget{class_sound_engine_afa2ee0c61edb153b145e007dfc60196a}\label{class_sound_engine_afa2ee0c61edb153b145e007dfc60196a}} 
+void {\bfseries set\+Enabled} (bool new\+Val)
+\item 
+\mbox{\Hypertarget{class_sound_engine_a153bab90eed208fc02c6cd27d60bffdd}\label{class_sound_engine_a153bab90eed208fc02c6cd27d60bffdd}} 
+bool {\bfseries is\+Enabled} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Plays sound files when play\+Sound is called. Needs the Phonon library to be installed. Use set\+Enabled to switch sound playing off/on. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_sound_engine_a78a2b70b792e5ad7949b795dae77bd78}\label{class_sound_engine_a78a2b70b792e5ad7949b795dae77bd78}} 
+\index{SoundEngine@{SoundEngine}!loadSound@{loadSound}}
+\index{loadSound@{loadSound}!SoundEngine@{SoundEngine}}
+\doxysubsubsection{\texorpdfstring{loadSound}{loadSound}}
+{\footnotesize\ttfamily bool Sound\+Engine\+::load\+Sound (\begin{DoxyParamCaption}\item[{const QString \&}]{file\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+
+
+\mbox{\hyperlink{class_sound_engine_a78a2b70b792e5ad7949b795dae77bd78}{Sound\+Engine\+::load\+Sound}} Preload a file, so that it can be played with low latency afterwrds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Name} & Must be a .wav file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True on success 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_sound_engine_a51b3e6c11e276f7d34146ab29e9922d9}\label{class_sound_engine_a51b3e6c11e276f7d34146ab29e9922d9}} 
+\index{SoundEngine@{SoundEngine}!playSound@{playSound}}
+\index{playSound@{playSound}!SoundEngine@{SoundEngine}}
+\doxysubsubsection{\texorpdfstring{playSound}{playSound}}
+{\footnotesize\ttfamily void Sound\+Engine\+::play\+Sound (\begin{DoxyParamCaption}\item[{const QString \&}]{file\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Load and play soundfile or resource. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/sound/soundengine.\+h\item 
+src/sound/soundengine.\+cpp\end{DoxyCompactItemize}

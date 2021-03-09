@@ -1,0 +1,450 @@
+\hypertarget{class_g_l_item}{}\doxysection{GLItem Class Reference}
+\label{class_g_l_item}\index{GLItem@{GLItem}}
+
+
+The Gl\+Item class is a 3D-\/scene item designed for use in QML Scene\+Graphs. It should be subclassed according to your requirements, registered with qml\+Register\+Type and used as a component in QML files. The default constructor will use src/vshader.\+vsh and src/fshader.\+fsh as shaders. Fell free to use shaders of your own. Refer to the \mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} class for shader requirements. Geometry data should be put into m\+\_\+points and m\+\_\+vertices containers for maximum performance. Use paint\+Under\+Qml or paint\+On\+Top\+Of\+Qml to paint a 3D scene under or on top of the QML elements of the QML Scene\+Graph. For debugging geometries, call toggle\+Move to let the scene rotate around m\+\_\+rotation\+Axis. Warning\+: Updating geometry data must be carried out in synchronize\+Threads, because drawing will be performed on the rendering thread. The rendering thread is waiting when synchronize\+Threads is called.  
+
+
+
+
+{\ttfamily \#include $<$glitem.\+h$>$}
+
+Inheritance diagram for GLItem\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_g_l_item}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Slots}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a1b613d9ef12ba94771b505798170c6e9}\label{class_g_l_item_a1b613d9ef12ba94771b505798170c6e9}} 
+void \mbox{\hyperlink{class_g_l_item_a1b613d9ef12ba94771b505798170c6e9}{paint\+Before}} ()
+\begin{DoxyCompactList}\small\item\em paint\+Before Activates renderer, clear color and depth buffers and calls paint\+Under\+Qml\+Scene. This function should not be overwritten \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_a146bd63e186b55cbd6ed192706773a24}\label{class_g_l_item_a146bd63e186b55cbd6ed192706773a24}} 
+void \mbox{\hyperlink{class_g_l_item_a146bd63e186b55cbd6ed192706773a24}{paint\+After}} ()
+\begin{DoxyCompactList}\small\item\em paint\+After Activates renderer, clear color and depth buffers and calls paint\+On\+Top\+Of\+Qml\+Scene. This function should not be overwritten \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_acd4f1c0f42402d1cb09e83f1051703cc}\label{class_g_l_item_acd4f1c0f42402d1cb09e83f1051703cc}} 
+void {\bfseries toggle\+Move} ()
+\item 
+void \mbox{\hyperlink{class_g_l_item_aba4710ee3d504c893e493a2a9f48efd0}{mouse\+Pressed}} (int x, int y)
+\item 
+\mbox{\Hypertarget{class_g_l_item_a52831365074bd5d082de828755ee8954}\label{class_g_l_item_a52831365074bd5d082de828755ee8954}} 
+void {\bfseries mouse\+Position\+Changed} (int x, int y)
+\item 
+\mbox{\Hypertarget{class_g_l_item_aca75d031f39c19b86c69042bd39c127a}\label{class_g_l_item_aca75d031f39c19b86c69042bd39c127a}} 
+void {\bfseries mouse\+Released} (int x, int y)
+\item 
+\mbox{\Hypertarget{class_g_l_item_afe9282e5b6619800867b757504b036f8}\label{class_g_l_item_afe9282e5b6619800867b757504b036f8}} 
+void {\bfseries set\+Vertex\+Shader\+Filename} (QString arg)
+\item 
+\mbox{\Hypertarget{class_g_l_item_ad20ccfff6747a45ecd150f870fa832bf}\label{class_g_l_item_ad20ccfff6747a45ecd150f870fa832bf}} 
+void {\bfseries set\+Fragment\+Shader\+Filename} (QString arg)
+\item 
+\mbox{\Hypertarget{class_g_l_item_aacd52a7466b26509442d8f6b80d6e6d9}\label{class_g_l_item_aacd52a7466b26509442d8f6b80d6e6d9}} 
+void {\bfseries set\+ViewportX} (int arg)
+\item 
+\mbox{\Hypertarget{class_g_l_item_a9e93a59b34064c9417b3470373b9d0d7}\label{class_g_l_item_a9e93a59b34064c9417b3470373b9d0d7}} 
+void {\bfseries set\+ViewportY} (int arg)
+\item 
+\mbox{\Hypertarget{class_g_l_item_a6c8f867525da67d678adc01e432509df}\label{class_g_l_item_a6c8f867525da67d678adc01e432509df}} 
+void {\bfseries set\+Loop\+Movement} (bool loop\+Movement)
+\item 
+\mbox{\Hypertarget{class_g_l_item_ab14e6efa249c4cf33bff95a9088f0241}\label{class_g_l_item_ab14e6efa249c4cf33bff95a9088f0241}} 
+void {\bfseries set\+Rotation\+Enabled} (bool movement\+Enabled)
+\item 
+\mbox{\Hypertarget{class_g_l_item_aa567311160aaacb3f307f25fabb79059}\label{class_g_l_item_aa567311160aaacb3f307f25fabb79059}} 
+void \mbox{\hyperlink{class_g_l_item_aa567311160aaacb3f307f25fabb79059}{request\+Shutdown}} ()
+\begin{DoxyCompactList}\small\item\em request\+Shutdown set theshutdown flag in GUI thread. Will be copied to m\+\_\+render\+Thread\+Shutdown\+Request in synchronize\+Threads. m\+\_\+render\+Thread\+Shutdown\+Request triggers cleanup and shutdown in paint\+Before \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_g_l_item_ab9a3a64e745f4138cdee3fda8fe577be}{is\+Shutting\+Down}} ()
+\begin{DoxyCompactList}\small\item\em is\+Shutting\+Down \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_a6b233df1a0dbb07c848b952b6e6f6c39}\label{class_g_l_item_a6b233df1a0dbb07c848b952b6e6f6c39}} 
+void {\bfseries set\+Show3d\+Image} (bool show3d\+Image)
+\end{DoxyCompactItemize}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a2fea9c2dace4fa8f74b26a4d8c7d34c1}\label{class_g_l_item_a2fea9c2dace4fa8f74b26a4d8c7d34c1}} 
+void {\bfseries vertex\+Shader\+Filename\+Changed} (QString arg)
+\item 
+\mbox{\Hypertarget{class_g_l_item_a9ee193afb733b9dc81f3c1e0eed39880}\label{class_g_l_item_a9ee193afb733b9dc81f3c1e0eed39880}} 
+void {\bfseries fragment\+Shader\+Filename\+Changed} (QString arg)
+\item 
+\mbox{\Hypertarget{class_g_l_item_a13bd9966913d28cf4c5bb07561312bf8}\label{class_g_l_item_a13bd9966913d28cf4c5bb07561312bf8}} 
+void {\bfseries movement\+Enabled\+Changed} (bool arg)
+\item 
+\mbox{\Hypertarget{class_g_l_item_aa79438b1da8394ef68e912afdb78670c}\label{class_g_l_item_aa79438b1da8394ef68e912afdb78670c}} 
+void {\bfseries viewport\+XChanged} (int arg)
+\item 
+\mbox{\Hypertarget{class_g_l_item_ae652508d060e776d88285ca8a610d2fb}\label{class_g_l_item_ae652508d060e776d88285ca8a610d2fb}} 
+void {\bfseries viewport\+YChanged} (int arg)
+\item 
+\mbox{\Hypertarget{class_g_l_item_af2d4c87cc9b37f2e79bbe46cf7b7badf}\label{class_g_l_item_af2d4c87cc9b37f2e79bbe46cf7b7badf}} 
+void {\bfseries loop\+Movement\+Changed} (bool loop\+Movement)
+\item 
+\mbox{\Hypertarget{class_g_l_item_adb11cfb7a0f0efdd2dd9645ec1f3bb7d}\label{class_g_l_item_adb11cfb7a0f0efdd2dd9645ec1f3bb7d}} 
+void {\bfseries show3d\+Image\+Changed} (bool show3d\+Image)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_item_aae26b9d7f00f845229e3e0dfaec07392}\label{class_g_l_item_aae26b9d7f00f845229e3e0dfaec07392}} 
+{\bfseries GLItem} (QQuick\+Item $\ast$parent=nullptr, const QString \&vertex\+Shader\+Filename=\char`\"{}\+:/shaders/vshader.\+vsh\char`\"{}, const QString \&fragment\+Shader\+Filename=\char`\"{}\+:/shaders/fshader.\+fsh\char`\"{})
+\item 
+QSGNode $\ast$ \mbox{\hyperlink{class_g_l_item_a3ee5b8ed5321e4b60d233328e3b89d3a}{update\+Paint\+Node}} (QSGNode $\ast$node, Update\+Paint\+Node\+Data $\ast$)
+\begin{DoxyCompactList}\small\item\em update\+Paint\+Node Overwrite this function, if you want to add items to the scenegraph. Do not call this function. It will be called automatically. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_a8b2e0c9769ceddce3e79959cce359236}\label{class_g_l_item_a8b2e0c9769ceddce3e79959cce359236}} 
+QString {\bfseries fragment\+Shader\+Filename} () const
+\item 
+\mbox{\Hypertarget{class_g_l_item_ac329bb38182a8921e8f83f6990366648}\label{class_g_l_item_ac329bb38182a8921e8f83f6990366648}} 
+QString {\bfseries vertex\+Shader\+Filename} () const
+\item 
+\mbox{\Hypertarget{class_g_l_item_a1f9e7cb4a4c5e1173f6002a2ba17a5c3}\label{class_g_l_item_a1f9e7cb4a4c5e1173f6002a2ba17a5c3}} 
+bool {\bfseries movement\+Enabled} ()
+\item 
+\mbox{\Hypertarget{class_g_l_item_a9a731cdacee49b522f6da9f7439048dd}\label{class_g_l_item_a9a731cdacee49b522f6da9f7439048dd}} 
+void {\bfseries set\+Eye} (const QVector3D \&new\+Val)
+\item 
+\mbox{\Hypertarget{class_g_l_item_ad9b8583ed12cdc4eadb5a23e3a9c0791}\label{class_g_l_item_ad9b8583ed12cdc4eadb5a23e3a9c0791}} 
+int {\bfseries viewportX} () const
+\item 
+\mbox{\Hypertarget{class_g_l_item_a890604fe40a634ca721a55494e69079a}\label{class_g_l_item_a890604fe40a634ca721a55494e69079a}} 
+int {\bfseries viewportY} () const
+\item 
+\mbox{\Hypertarget{class_g_l_item_a09684ec808258249ab6ecfdbcb293d70}\label{class_g_l_item_a09684ec808258249ab6ecfdbcb293d70}} 
+bool {\bfseries loop\+Movement} () const
+\item 
+\mbox{\Hypertarget{class_g_l_item_ac6810d13d01513bc2eeb404f987cea0f}\label{class_g_l_item_ac6810d13d01513bc2eeb404f987cea0f}} 
+bool {\bfseries show3d\+Image} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_g_l_item_a95c8f2a7aa5d735bf73b7566fd4d12da}{handle\+Window\+Changed}} (QQuick\+Window $\ast$win)
+\begin{DoxyCompactList}\small\item\em handle\+Window\+Changed \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_aa4466034e62a99d65a4b81c980e11216}\label{class_g_l_item_aa4466034e62a99d65a4b81c980e11216}} 
+void \mbox{\hyperlink{class_g_l_item_aa4466034e62a99d65a4b81c980e11216}{destroy\+Texture\+Objects}} ()
+\begin{DoxyCompactList}\small\item\em destroy\+Texture\+Objects connected to QOpen\+GLContext\+::about\+To\+Be\+Destroyed \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_acc7a813e42fb63bc6b7f2cf680b62717}\label{class_g_l_item_acc7a813e42fb63bc6b7f2cf680b62717}} 
+void \mbox{\hyperlink{class_g_l_item_acc7a813e42fb63bc6b7f2cf680b62717}{on\+Timer\+Timeout}} ()
+\begin{DoxyCompactList}\small\item\em on\+Timer\+Timeout Overwrite for moving the scene. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_a790da330a5b53f0156c144b68eff20c2}\label{class_g_l_item_a790da330a5b53f0156c144b68eff20c2}} 
+void \mbox{\hyperlink{class_g_l_item_a790da330a5b53f0156c144b68eff20c2}{synchronize\+Threads}} ()
+\begin{DoxyCompactList}\small\item\em synchronize\+Threads Render thread is sleeping when this function is called. Copy geometry modifications from Gui\+Thread owned variables here. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_a88da6fcb94651b2d45bda9527d7e64c9}\label{class_g_l_item_a88da6fcb94651b2d45bda9527d7e64c9}} 
+void \mbox{\hyperlink{class_g_l_item_a88da6fcb94651b2d45bda9527d7e64c9}{delete\+Renderer}} ()
+\begin{DoxyCompactList}\small\item\em delete\+Renderer Delete renderer unloads shader program and deletes renderer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a74aeb83f6c59c7f26eb88339c80a62d5}\label{class_g_l_item_a74aeb83f6c59c7f26eb88339c80a62d5}} 
+virtual void \mbox{\hyperlink{class_g_l_item_a74aeb83f6c59c7f26eb88339c80a62d5}{clean\+Up\+Open\+Gl}} ()
+\begin{DoxyCompactList}\small\item\em clean\+Up\+Open\+Gl delete Open\+Gl Resources e.\+g. buffers and textures MUST be called on the rendering thread with a current Open\+Gl context. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_aaec2f87eed24614ebed2268b10b3c342}\label{class_g_l_item_aaec2f87eed24614ebed2268b10b3c342}} 
+virtual void \mbox{\hyperlink{class_g_l_item_aaec2f87eed24614ebed2268b10b3c342}{do\+Synchronize\+Threads}} ()
+\begin{DoxyCompactList}\small\item\em do\+Synchronize\+Threads Copy data from GUI-\/thread to render-\/thread and vice versa. Virtual function to be overridden by subclasses \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_a5ae087d6d77f470952829beee4346af8}\label{class_g_l_item_a5ae087d6d77f470952829beee4346af8}} 
+virtual void {\bfseries do\+Timer\+Timeout} ()
+\item 
+\mbox{\Hypertarget{class_g_l_item_abd9a3289b1a4d33b6f76f59a04682980}\label{class_g_l_item_abd9a3289b1a4d33b6f76f59a04682980}} 
+virtual void \mbox{\hyperlink{class_g_l_item_abd9a3289b1a4d33b6f76f59a04682980}{do\+Destroy\+Texture\+Objects}} ()
+\begin{DoxyCompactList}\small\item\em do\+Destroy\+Texture\+Objects destroy all texture objects when GL-\/context is about to be destroyed. To be overridden \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_a6e779fa84599e999b6e299d5aac92fa2}\label{class_g_l_item_a6e779fa84599e999b6e299d5aac92fa2}} 
+virtual void \mbox{\hyperlink{class_g_l_item_a6e779fa84599e999b6e299d5aac92fa2}{paint\+Under\+Qml\+Scene}} ()
+\begin{DoxyCompactList}\small\item\em paint\+Under\+Qml\+Scene Virtual function for painting under a QML scene. This function is called by paint\+Before after calling create\+Geometries and initializing and binding the renderer. Overwrite in subclasses for painting geometries in m\+\_\+points with the renderer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_a595830cf6ae5434a253c68366275b65d}\label{class_g_l_item_a595830cf6ae5434a253c68366275b65d}} 
+virtual void \mbox{\hyperlink{class_g_l_item_a595830cf6ae5434a253c68366275b65d}{paint\+On\+Top\+Of\+Qml\+Scene}} ()
+\begin{DoxyCompactList}\small\item\em paint\+Under\+Qml\+Scene Virtual function for painting on top of a QML scene. This function is called by paint\+After after calling create\+Geometries and initializing and binding the renderer. Overwrite in subclasses for painting geometries in m\+\_\+points with the renderer. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_aef70de1482fa71495a178626566f4f3a}\label{class_g_l_item_aef70de1482fa71495a178626566f4f3a}} 
+virtual void {\bfseries draw\+Axes} ()
+\item 
+\mbox{\Hypertarget{class_g_l_item_acbf456bdbaf38bc941029bddab6a69a9}\label{class_g_l_item_acbf456bdbaf38bc941029bddab6a69a9}} 
+virtual void {\bfseries create\+Axes} (float length)
+\item 
+\mbox{\Hypertarget{class_g_l_item_a74269f515d4d025149cc8a603d8c66f1}\label{class_g_l_item_a74269f515d4d025149cc8a603d8c66f1}} 
+virtual void \mbox{\hyperlink{class_g_l_item_a74269f515d4d025149cc8a603d8c66f1}{setup\+Geometry}} ()
+\begin{DoxyCompactList}\small\item\em setup\+Geometry Put the geometric data into the points array and set m\+\_\+geometry\+Is\+Valid flag. MUST be overridden in subclasses. Gl\+Item\+::setup\+Geometry() does nothing. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_a3b5a6427cdafb5adb6aeef1c644bb933}\label{class_g_l_item_a3b5a6427cdafb5adb6aeef1c644bb933}} 
+virtual void \mbox{\hyperlink{class_g_l_item_a3b5a6427cdafb5adb6aeef1c644bb933}{setup\+View}} (bool clear\+Buffers)
+\begin{DoxyCompactList}\small\item\em setup\+View Setup matrices, lighting and basic GL rendering settings Gl\+Item\+::setup\+View sets up a basic view with (0,0,0) in the center of the screen. You may override this function to fit your requirements. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_a026f429130712bff4517c1cf9af910fd}\label{class_g_l_item_a026f429130712bff4517c1cf9af910fd}} 
+virtual bool \mbox{\hyperlink{class_g_l_item_a026f429130712bff4517c1cf9af910fd}{setup\+Renderer}} ()
+\begin{DoxyCompactList}\small\item\em setup\+Renderer Setup matrices, lighting. Does not call gl\+XXX functions \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_item_a2153cac833846fcd3b8b507bff244406}{create\+Axis}} (float length, const QVector3D \&origin, const QVector3D \&axis, const QVector3D \&normal, const QVector3D \&tex\+Coord, const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&color)
+\begin{DoxyCompactList}\small\item\em create\+Axis creates a coordinate axis \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_item_a30a7ce7ab52ac63010cc3f692406b259}\label{class_g_l_item_a30a7ce7ab52ac63010cc3f692406b259}} 
+QVector$<$ \mbox{\hyperlink{class_g_l_point}{GLPoint}} $>$ $\ast$ {\bfseries points} ()
+\item 
+\mbox{\Hypertarget{class_g_l_item_ab14e096f79b7499d20e9cbcf69bf181a}\label{class_g_l_item_ab14e096f79b7499d20e9cbcf69bf181a}} 
+QVector$<$ Index\+Type $>$ $\ast$ {\bfseries indices} ()
+\item 
+\mbox{\Hypertarget{class_g_l_item_a4575b8c146849022b567a75b4f9cfa8e}\label{class_g_l_item_a4575b8c146849022b567a75b4f9cfa8e}} 
+\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$ {\bfseries renderer} ()
+\item 
+\mbox{\Hypertarget{class_g_l_item_aa77a50c3152b78113ba43752d20211f5}\label{class_g_l_item_aa77a50c3152b78113ba43752d20211f5}} 
+virtual void \mbox{\hyperlink{class_g_l_item_aa77a50c3152b78113ba43752d20211f5}{initialize\+Renderer}} ()
+\begin{DoxyCompactList}\small\item\em create\+Shader\+Program creates and links the shader program using vshader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_item_acf6802c6d50a16ff8fbb0b0b1413dcc8}\label{class_g_l_item_acf6802c6d50a16ff8fbb0b0b1413dcc8}} 
+QVector$<$ QVector3D $>$ {\bfseries m\+\_\+vertices}
+\item 
+\mbox{\Hypertarget{class_g_l_item_ab36af5032ab015c92a55fbed02c40c4d}\label{class_g_l_item_ab36af5032ab015c92a55fbed02c40c4d}} 
+QVector$<$ QVector3D $>$ {\bfseries m\+\_\+normals}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a4b1e91a116668252bb1c099ddb2ccc3a}\label{class_g_l_item_a4b1e91a116668252bb1c099ddb2ccc3a}} 
+QVector$<$ QVector3D $>$ {\bfseries m\+\_\+tex\+Coords}
+\item 
+\mbox{\Hypertarget{class_g_l_item_aeb7650aa679d0b95cc3bb99e9bf220fc}\label{class_g_l_item_aeb7650aa679d0b95cc3bb99e9bf220fc}} 
+QVector$<$ QVector4D $>$ {\bfseries m\+\_\+colors}
+\item 
+\mbox{\Hypertarget{class_g_l_item_ac9a158bb5880321e7777a64fdc4c69a9}\label{class_g_l_item_ac9a158bb5880321e7777a64fdc4c69a9}} 
+bool {\bfseries m\+\_\+geometry\+Is\+Valid}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a57b8c3fa334a8322c4d040532eb51aef}\label{class_g_l_item_a57b8c3fa334a8322c4d040532eb51aef}} 
+bool {\bfseries m\+\_\+color\+Array\+Enabled}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a75f48d9e816ab64f6f2e4025c690b9b8}\label{class_g_l_item_a75f48d9e816ab64f6f2e4025c690b9b8}} 
+bool {\bfseries m\+\_\+textures\+Enabled}
+\item 
+\mbox{\Hypertarget{class_g_l_item_ad8770dd7051138df6a0da7b412254e34}\label{class_g_l_item_ad8770dd7051138df6a0da7b412254e34}} 
+bool {\bfseries m\+\_\+lighting\+Enabled}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a6034466c7a88892138e14294876144b7}\label{class_g_l_item_a6034466c7a88892138e14294876144b7}} 
+bool {\bfseries m\+\_\+activate\+Paint\+Before\+Qml}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a077f0ece18caae8fa8a16ba36c51cac9}\label{class_g_l_item_a077f0ece18caae8fa8a16ba36c51cac9}} 
+bool {\bfseries m\+\_\+activate\+Paint\+After\+Qml}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a7ff6af05a375bac0cc2cc9333595de43}\label{class_g_l_item_a7ff6af05a375bac0cc2cc9333595de43}} 
+bool {\bfseries m\+\_\+ortho\+Mode}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a9829d649c448ca4a92b5ccac08d51d68}\label{class_g_l_item_a9829d649c448ca4a92b5ccac08d51d68}} 
+float {\bfseries m\+\_\+ortho\+Range}
+\item 
+\mbox{\Hypertarget{class_g_l_item_ac323dad2cc4683da8925b461856603d3}\label{class_g_l_item_ac323dad2cc4683da8925b461856603d3}} 
+bool {\bfseries m\+\_\+draw\+Axes}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a1d3d64533872bf01a9d472554c371871}\label{class_g_l_item_a1d3d64533872bf01a9d472554c371871}} 
+QVector3D {\bfseries m\+\_\+light\+Direction}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a81f1697f1783f043c424fca09eb5a2a5}\label{class_g_l_item_a81f1697f1783f043c424fca09eb5a2a5}} 
+GLfloat {\bfseries m\+\_\+ambient\+Light\+Brightness}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a54d5d7350de34add6a0f4616b2d9d3c7}\label{class_g_l_item_a54d5d7350de34add6a0f4616b2d9d3c7}} 
+\mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries m\+\_\+background\+Color}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a586ce733c3f1509966d0d0aaf7edde0d}\label{class_g_l_item_a586ce733c3f1509966d0d0aaf7edde0d}} 
+QVector3D {\bfseries m\+\_\+eye}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a2dc1570f2e0680183451cb59545c0c94}\label{class_g_l_item_a2dc1570f2e0680183451cb59545c0c94}} 
+QVector3D {\bfseries m\+\_\+center}
+\item 
+\mbox{\Hypertarget{class_g_l_item_abeb358b4ad8161c9837e875fe19da5ee}\label{class_g_l_item_abeb358b4ad8161c9837e875fe19da5ee}} 
+QVector3D {\bfseries m\+\_\+up}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a77f1d70315398888649ae325745cec2d}\label{class_g_l_item_a77f1d70315398888649ae325745cec2d}} 
+float {\bfseries m\+\_\+fovy}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a497f7f25c40790bf88b354b6ea432512}\label{class_g_l_item_a497f7f25c40790bf88b354b6ea432512}} 
+float {\bfseries m\+\_\+aspect}
+\item 
+\mbox{\Hypertarget{class_g_l_item_ac811c5b957f441dedd62736a8feecb80}\label{class_g_l_item_ac811c5b957f441dedd62736a8feecb80}} 
+float {\bfseries m\+\_\+near}
+\item 
+\mbox{\Hypertarget{class_g_l_item_ad5271d1dadd0691f4312fffe609ed93f}\label{class_g_l_item_ad5271d1dadd0691f4312fffe609ed93f}} 
+float {\bfseries m\+\_\+far}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a6f01d6d9f59a2c151ba7ceef071b1689}\label{class_g_l_item_a6f01d6d9f59a2c151ba7ceef071b1689}} 
+int {\bfseries m\+\_\+viewportX}
+\item 
+\mbox{\Hypertarget{class_g_l_item_ae80eb4ae45d65460db5535598b54a873}\label{class_g_l_item_ae80eb4ae45d65460db5535598b54a873}} 
+int {\bfseries m\+\_\+viewportY}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a7941d53165e82da781e98f1523d1189c}\label{class_g_l_item_a7941d53165e82da781e98f1523d1189c}} 
+int {\bfseries m\+\_\+viewportW}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a7b4451d24045e056aed2e395174714e0}\label{class_g_l_item_a7b4451d24045e056aed2e395174714e0}} 
+int {\bfseries m\+\_\+viewportH}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a6c60908bebbb5d5089f363b425d9a744}\label{class_g_l_item_a6c60908bebbb5d5089f363b425d9a744}} 
+QTimer $\ast$ {\bfseries m\+\_\+timer}
+\item 
+\mbox{\Hypertarget{class_g_l_item_af234a9a0d980c8e96fe04cc35c96e9df}\label{class_g_l_item_af234a9a0d980c8e96fe04cc35c96e9df}} 
+float {\bfseries m\+\_\+gui\+Thread\+Rotation}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a323a6e917ca9e27991ac1837efc96a3f}\label{class_g_l_item_a323a6e917ca9e27991ac1837efc96a3f}} 
+float {\bfseries m\+\_\+render\+Thread\+Rotation}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a809b186eb6d9b25ac7e7248093796951}\label{class_g_l_item_a809b186eb6d9b25ac7e7248093796951}} 
+bool {\bfseries m\+\_\+loop\+Movement}
+\item 
+\mbox{\Hypertarget{class_g_l_item_ab07e2faa6be9d532f2fc6282d149d675}\label{class_g_l_item_ab07e2faa6be9d532f2fc6282d149d675}} 
+bool {\bfseries m\+\_\+movement\+Enabled}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a25e987489c6bbe3791a075c6379edeac}\label{class_g_l_item_a25e987489c6bbe3791a075c6379edeac}} 
+float {\bfseries m\+\_\+rotation\+Increment}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a669c6b22f83bc2d6739e80a8870eab57}\label{class_g_l_item_a669c6b22f83bc2d6739e80a8870eab57}} 
+QString {\bfseries m\+\_\+vertex\+Shader\+Filename}
+\item 
+\mbox{\Hypertarget{class_g_l_item_ae589369bc5ec1439f67144f128b34405}\label{class_g_l_item_ae589369bc5ec1439f67144f128b34405}} 
+QString {\bfseries m\+\_\+fragment\+Shader\+Filename}
+\item 
+\mbox{\Hypertarget{class_g_l_item_acc7f15d8aa73d0e9f9bd4397b7f7d377}\label{class_g_l_item_acc7f15d8aa73d0e9f9bd4397b7f7d377}} 
+QMatrix4x4 {\bfseries m\+\_\+camera\+Transform}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a52bdba33d8c29f43ed5506035fbcaa81}\label{class_g_l_item_a52bdba33d8c29f43ed5506035fbcaa81}} 
+QVector$<$ \mbox{\hyperlink{class_g_l_point}{GLPoint}} $>$ {\bfseries m\+\_\+points}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a8468276169e38c20e55eaf390a8e81c1}\label{class_g_l_item_a8468276169e38c20e55eaf390a8e81c1}} 
+QVector$<$ Index\+Type $>$ {\bfseries m\+\_\+indices}
+\item 
+\mbox{\Hypertarget{class_g_l_item_aa23f231003107c152ad26180e02dd428}\label{class_g_l_item_aa23f231003107c152ad26180e02dd428}} 
+\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$ {\bfseries m\+\_\+renderer}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a770f91579acd280f401ac242c1800957}\label{class_g_l_item_a770f91579acd280f401ac242c1800957}} 
+int {\bfseries m\+\_\+first\+Axes\+Point}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a08d819a2e323706eaebda482fa0c06c2}\label{class_g_l_item_a08d819a2e323706eaebda482fa0c06c2}} 
+int {\bfseries m\+\_\+last\+Axes\+Point}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a847cdcb8163576405ce33392716ae7cd}\label{class_g_l_item_a847cdcb8163576405ce33392716ae7cd}} 
+bool {\bfseries m\+\_\+gui\+Thread\+Shutdown\+Request}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a1d248dd3363c6cf689373c63e7d7a2b3}\label{class_g_l_item_a1d248dd3363c6cf689373c63e7d7a2b3}} 
+bool {\bfseries m\+\_\+render\+Thread\+Shutdown\+Request}
+\end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_item_aa18b199e7c5d8a1c0a288dc45b12c8c6}\label{class_g_l_item_aa18b199e7c5d8a1c0a288dc45b12c8c6}} 
+QString {\bfseries vertex\+Shader\+Filename}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a81e33a49ac37afcc322c703b55cd6071}\label{class_g_l_item_a81e33a49ac37afcc322c703b55cd6071}} 
+QString {\bfseries fragment\+Shader\+Filename}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a71cee982580ee96c35be636aa867e6d5}\label{class_g_l_item_a71cee982580ee96c35be636aa867e6d5}} 
+bool {\bfseries movement\+Enabled}
+\item 
+\mbox{\Hypertarget{class_g_l_item_ad873cffcb75019580e1372eee4a50a07}\label{class_g_l_item_ad873cffcb75019580e1372eee4a50a07}} 
+bool {\bfseries loop\+Movement}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a91dc1c10352ee468fd0804162967a2c5}\label{class_g_l_item_a91dc1c10352ee468fd0804162967a2c5}} 
+int {\bfseries viewportX}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a2703487de4b0843c256861f914b57208}\label{class_g_l_item_a2703487de4b0843c256861f914b57208}} 
+int {\bfseries viewportY}
+\item 
+\mbox{\Hypertarget{class_g_l_item_a72e70007c06a05fbc7cf15fe9289eb52}\label{class_g_l_item_a72e70007c06a05fbc7cf15fe9289eb52}} 
+bool {\bfseries show3d\+Image}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The Gl\+Item class is a 3D-\/scene item designed for use in QML Scene\+Graphs. It should be subclassed according to your requirements, registered with qml\+Register\+Type and used as a component in QML files. The default constructor will use src/vshader.\+vsh and src/fshader.\+fsh as shaders. Fell free to use shaders of your own. Refer to the \mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} class for shader requirements. Geometry data should be put into m\+\_\+points and m\+\_\+vertices containers for maximum performance. Use paint\+Under\+Qml or paint\+On\+Top\+Of\+Qml to paint a 3D scene under or on top of the QML elements of the QML Scene\+Graph. For debugging geometries, call toggle\+Move to let the scene rotate around m\+\_\+rotation\+Axis. Warning\+: Updating geometry data must be carried out in synchronize\+Threads, because drawing will be performed on the rendering thread. The rendering thread is waiting when synchronize\+Threads is called. 
+
+Shutdown Sequence\+: Call request\+Shutdown on GUI thread to free Open\+Gl resources for this\+Gl\+Item. Will be copied to render thread on next call to synchronize\+Threads. Open\+Gl resources will be freed on next call to paint\+Before or paint\+After. Call is\+Shutting\+Down from top window (Application\+Window) to check for freed resources. If true is returned, call Qt.\+quit() in QML or call QWindow\+::close() from QMain\+Window. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_g_l_item_a2153cac833846fcd3b8b507bff244406}\label{class_g_l_item_a2153cac833846fcd3b8b507bff244406}} 
+\index{GLItem@{GLItem}!createAxis@{createAxis}}
+\index{createAxis@{createAxis}!GLItem@{GLItem}}
+\doxysubsubsection{\texorpdfstring{createAxis()}{createAxis()}}
+{\footnotesize\ttfamily void GLItem\+::create\+Axis (\begin{DoxyParamCaption}\item[{float}]{length,  }\item[{const QVector3D \&}]{origin,  }\item[{const QVector3D \&}]{axis,  }\item[{const QVector3D \&}]{normal,  }\item[{const QVector3D \&}]{tex\+Coord,  }\item[{const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+create\+Axis creates a coordinate axis 
+
+
+\begin{DoxyParams}{Parameters}
+{\em length} & Total length of axis, starting from origin \\
+\hline
+{\em origin} & Start coordinate of axis \\
+\hline
+{\em axis} & Direction of axis \\
+\hline
+{\em normal} & Direction of ticks and dummy normal. \\
+\hline
+{\em tex\+Coord} & Dummy texture coordinate \\
+\hline
+{\em color} & Color of axis \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_item_a95c8f2a7aa5d735bf73b7566fd4d12da}\label{class_g_l_item_a95c8f2a7aa5d735bf73b7566fd4d12da}} 
+\index{GLItem@{GLItem}!handleWindowChanged@{handleWindowChanged}}
+\index{handleWindowChanged@{handleWindowChanged}!GLItem@{GLItem}}
+\doxysubsubsection{\texorpdfstring{handleWindowChanged}{handleWindowChanged}}
+{\footnotesize\ttfamily void GLItem\+::handle\+Window\+Changed (\begin{DoxyParamCaption}\item[{QQuick\+Window $\ast$}]{win }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [slot]}}
+
+
+
+handle\+Window\+Changed 
+
+Gl\+Item\+::handle\+Window\+Changed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em win} & This function is called when the parent Window changes. This is also the case, when a parent window is set for the first time.\\
+\hline
+\end{DoxyParams}
+Connect to the window\textquotesingle{}s signals. This can not be done in the constructor, because at that time there is no valid window yet. 
+\begin{DoxyParams}{Parameters}
+{\em win} & The window in which this QQuick\+Item will be painted. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_item_ab9a3a64e745f4138cdee3fda8fe577be}\label{class_g_l_item_ab9a3a64e745f4138cdee3fda8fe577be}} 
+\index{GLItem@{GLItem}!isShuttingDown@{isShuttingDown}}
+\index{isShuttingDown@{isShuttingDown}!GLItem@{GLItem}}
+\doxysubsubsection{\texorpdfstring{isShuttingDown}{isShuttingDown}}
+{\footnotesize\ttfamily bool GLItem\+::is\+Shutting\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [slot]}}
+
+
+
+is\+Shutting\+Down 
+
+\begin{DoxyReturn}{Returns}
+true, if shutdown request has been processed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_item_aba4710ee3d504c893e493a2a9f48efd0}\label{class_g_l_item_aba4710ee3d504c893e493a2a9f48efd0}} 
+\index{GLItem@{GLItem}!mousePressed@{mousePressed}}
+\index{mousePressed@{mousePressed}!GLItem@{GLItem}}
+\doxysubsubsection{\texorpdfstring{mousePressed}{mousePressed}}
+{\footnotesize\ttfamily void GLItem\+::mouse\+Pressed (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [slot]}}
+
+Mouse event handler to be called from QML \mbox{\Hypertarget{class_g_l_item_a3ee5b8ed5321e4b60d233328e3b89d3a}\label{class_g_l_item_a3ee5b8ed5321e4b60d233328e3b89d3a}} 
+\index{GLItem@{GLItem}!updatePaintNode@{updatePaintNode}}
+\index{updatePaintNode@{updatePaintNode}!GLItem@{GLItem}}
+\doxysubsubsection{\texorpdfstring{updatePaintNode()}{updatePaintNode()}}
+{\footnotesize\ttfamily QSGNode $\ast$ GLItem\+::update\+Paint\+Node (\begin{DoxyParamCaption}\item[{QSGNode $\ast$}]{node,  }\item[{Update\+Paint\+Node\+Data $\ast$}]{ }\end{DoxyParamCaption})}
+
+
+
+update\+Paint\+Node Overwrite this function, if you want to add items to the scenegraph. Do not call this function. It will be called automatically. 
+
+Gl\+Item\+::update\+Paint\+Node.
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em node} & Returns the root of the subtree to be rendered ON TOP of scene rendered in paint(). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/gl/glitem.\+h\item 
+src/gl/glitem.\+cpp\end{DoxyCompactItemize}

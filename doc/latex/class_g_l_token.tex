@@ -1,0 +1,211 @@
+\hypertarget{class_g_l_token}{}\doxysection{GLToken Class Reference}
+\label{class_g_l_token}\index{GLToken@{GLToken}}
+
+
+Token des Vier Gewinnt Spiels.  
+
+
+
+
+{\ttfamily \#include $<$gltoken.\+h$>$}
+
+Inheritance diagram for GLToken\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.000000cm]{class_g_l_token}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_g_l_token_a22f4c9bfecf1a7475b2f0c0c781f5e9a}{GLToken}} (const QString \&name, const QString \&texture\+File)
+\begin{DoxyCompactList}\small\item\em Erstellt und Initialisiert ein neues GLToken-\/\+Objekt. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_token_a435ab2f65f38098a9ad5dd5344e21047}\label{class_g_l_token_a435ab2f65f38098a9ad5dd5344e21047}} 
+virtual \mbox{\hyperlink{class_g_l_token_a435ab2f65f38098a9ad5dd5344e21047}{$\sim$\+GLToken}} () Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+\begin{DoxyCompactList}\small\item\em Destruktor. Löscht das Texturobjekt des Tokens. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_g_l_token_a0be962ca0d4b7d722d6fd816664ff792}{is\+Colliding}} (const \mbox{\hyperlink{class_g_l_token}{GLToken}} $\ast$token) const
+\begin{DoxyCompactList}\small\item\em Überprüft, ob das Token mit dem übergebenen Token kollidiert. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_g_l_token_a469378c3cb25a060630bd6341b5f5160}{is\+Colliding}} (const \mbox{\hyperlink{class_g_l_court}{GLCourt}} $\ast$court) const
+\begin{DoxyCompactList}\small\item\em Überprüft, ob das Token mit dem übergebenen Spielbrett kollidiert. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_token_ac86c0a55530d22d52e9dedf2ebaa5429}{move\+To\+Position}} (const QVector3D \&position)
+\begin{DoxyCompactList}\small\item\em Bewegt das Token zur übergebenen Position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_token_a7e112f0cc8873c0b1d97a87ff31ec477}{rotate}} (float angle)
+\begin{DoxyCompactList}\small\item\em Rotiert das Token um den übergebenen Winkel um die X-\/\+Achse. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_g_l_token_a6a6554216f2b4adc728e53a1c70c06db}{is\+Rotated}} () const
+\begin{DoxyCompactList}\small\item\em Gibt an, ob das Token rotiert wurde. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_token_a7cee8874ae0968b874794f4ff13f5c58}{set\+Rotated}} (bool rotated)
+\begin{DoxyCompactList}\small\item\em Setzt den Rotationsstatus auf den übergebenen wert. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_g_l_token_a5966b95560c22715d9e448abcd1dd197}{is\+Movable}} () const
+\begin{DoxyCompactList}\small\item\em Gibt an, ob das Token bewegbar ist. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_token_a855c189289bb5d5935be78271f0e2f70}{set\+Movable}} (bool movable)
+\begin{DoxyCompactList}\small\item\em Setzt den Bewegbarkeitsstatus auf den übergebenen wert. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_token_a051e6516e4fc0672c06f7ed21990158b}\label{class_g_l_token_a051e6516e4fc0672c06f7ed21990158b}} 
+static constexpr float \mbox{\hyperlink{class_g_l_token_a051e6516e4fc0672c06f7ed21990158b}{HEIGHT}} = 0.\+325f
+\begin{DoxyCompactList}\small\item\em Höhe eines Tokens. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_g_l_token_af6749aa2d1690ac6ceab412591783c6b}\label{class_g_l_token_af6749aa2d1690ac6ceab412591783c6b}} 
+static constexpr float \mbox{\hyperlink{class_g_l_token_af6749aa2d1690ac6ceab412591783c6b}{RADIUS}} = 0.\+650f
+\begin{DoxyCompactList}\small\item\em Radius eines Tokens. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Token des Vier Gewinnt Spiels. 
+
+Wird abgeleitetet durch die Klassen \mbox{\hyperlink{class_g_l_token_red}{GLToken\+Red}} und \mbox{\hyperlink{class_g_l_token_green}{GLToken\+Green}}.
+
+Das Attribut m\+\_\+rotated gibt an, ob das Token rotiert wurde.
+
+Über das Attribut m\+\_\+movable kann gestuert werden, ob das Token bewegbar ist. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_g_l_token_a22f4c9bfecf1a7475b2f0c0c781f5e9a}\label{class_g_l_token_a22f4c9bfecf1a7475b2f0c0c781f5e9a}} 
+\index{GLToken@{GLToken}!GLToken@{GLToken}}
+\index{GLToken@{GLToken}!GLToken@{GLToken}}
+\doxysubsubsection{\texorpdfstring{GLToken()}{GLToken()}}
+{\footnotesize\ttfamily GLToken\+::\+GLToken (\begin{DoxyParamCaption}\item[{const QString \&}]{name,  }\item[{const QString \&}]{texture\+File }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Erstellt und Initialisiert ein neues GLToken-\/\+Objekt. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name des Objekts. \\
+\hline
+{\em texture\+File} & Texturdatei des Objekts. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_g_l_token_a469378c3cb25a060630bd6341b5f5160}\label{class_g_l_token_a469378c3cb25a060630bd6341b5f5160}} 
+\index{GLToken@{GLToken}!isColliding@{isColliding}}
+\index{isColliding@{isColliding}!GLToken@{GLToken}}
+\doxysubsubsection{\texorpdfstring{isColliding()}{isColliding()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool GLToken\+::is\+Colliding (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_g_l_court}{GLCourt}} $\ast$}]{court }\end{DoxyParamCaption}) const}
+
+
+
+Überprüft, ob das Token mit dem übergebenen Spielbrett kollidiert. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em court} & Spielbrett zu dem die Kollision überprüft werden soll. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true falls ja, false sonst. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_token_a0be962ca0d4b7d722d6fd816664ff792}\label{class_g_l_token_a0be962ca0d4b7d722d6fd816664ff792}} 
+\index{GLToken@{GLToken}!isColliding@{isColliding}}
+\index{isColliding@{isColliding}!GLToken@{GLToken}}
+\doxysubsubsection{\texorpdfstring{isColliding()}{isColliding()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool GLToken\+::is\+Colliding (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_g_l_token}{GLToken}} $\ast$}]{token }\end{DoxyParamCaption}) const}
+
+
+
+Überprüft, ob das Token mit dem übergebenen Token kollidiert. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & Token zu dem die Kollision überprüft werden soll. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true falls ja, false sonst. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_token_a5966b95560c22715d9e448abcd1dd197}\label{class_g_l_token_a5966b95560c22715d9e448abcd1dd197}} 
+\index{GLToken@{GLToken}!isMovable@{isMovable}}
+\index{isMovable@{isMovable}!GLToken@{GLToken}}
+\doxysubsubsection{\texorpdfstring{isMovable()}{isMovable()}}
+{\footnotesize\ttfamily bool GLToken\+::is\+Movable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gibt an, ob das Token bewegbar ist. 
+
+\begin{DoxyReturn}{Returns}
+true falls ja, false sonst. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_token_a6a6554216f2b4adc728e53a1c70c06db}\label{class_g_l_token_a6a6554216f2b4adc728e53a1c70c06db}} 
+\index{GLToken@{GLToken}!isRotated@{isRotated}}
+\index{isRotated@{isRotated}!GLToken@{GLToken}}
+\doxysubsubsection{\texorpdfstring{isRotated()}{isRotated()}}
+{\footnotesize\ttfamily bool GLToken\+::is\+Rotated (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gibt an, ob das Token rotiert wurde. 
+
+\begin{DoxyReturn}{Returns}
+true falls ja, false sonst. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_token_ac86c0a55530d22d52e9dedf2ebaa5429}\label{class_g_l_token_ac86c0a55530d22d52e9dedf2ebaa5429}} 
+\index{GLToken@{GLToken}!moveToPosition@{moveToPosition}}
+\index{moveToPosition@{moveToPosition}!GLToken@{GLToken}}
+\doxysubsubsection{\texorpdfstring{moveToPosition()}{moveToPosition()}}
+{\footnotesize\ttfamily void GLToken\+::move\+To\+Position (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{position }\end{DoxyParamCaption})}
+
+
+
+Bewegt das Token zur übergebenen Position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Position zu dem das Token bewegt werden soll. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_token_a7e112f0cc8873c0b1d97a87ff31ec477}\label{class_g_l_token_a7e112f0cc8873c0b1d97a87ff31ec477}} 
+\index{GLToken@{GLToken}!rotate@{rotate}}
+\index{rotate@{rotate}!GLToken@{GLToken}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}}
+{\footnotesize\ttfamily void GLToken\+::rotate (\begin{DoxyParamCaption}\item[{float}]{angle }\end{DoxyParamCaption})}
+
+
+
+Rotiert das Token um den übergebenen Winkel um die X-\/\+Achse. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em angle} & Rotationswinkel. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_token_a855c189289bb5d5935be78271f0e2f70}\label{class_g_l_token_a855c189289bb5d5935be78271f0e2f70}} 
+\index{GLToken@{GLToken}!setMovable@{setMovable}}
+\index{setMovable@{setMovable}!GLToken@{GLToken}}
+\doxysubsubsection{\texorpdfstring{setMovable()}{setMovable()}}
+{\footnotesize\ttfamily void GLToken\+::set\+Movable (\begin{DoxyParamCaption}\item[{bool}]{movable }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setzt den Bewegbarkeitsstatus auf den übergebenen wert. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em movable} & Bewegbarkeitsstatus. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_token_a7cee8874ae0968b874794f4ff13f5c58}\label{class_g_l_token_a7cee8874ae0968b874794f4ff13f5c58}} 
+\index{GLToken@{GLToken}!setRotated@{setRotated}}
+\index{setRotated@{setRotated}!GLToken@{GLToken}}
+\doxysubsubsection{\texorpdfstring{setRotated()}{setRotated()}}
+{\footnotesize\ttfamily void GLToken\+::set\+Rotated (\begin{DoxyParamCaption}\item[{bool}]{rotated }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Setzt den Rotationsstatus auf den übergebenen wert. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rotated} & Rotationsstatus. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/gl/gltoken.\+h\item 
+src/gl/gltoken.\+cpp\end{DoxyCompactItemize}

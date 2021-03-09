@@ -8,9 +8,7 @@
 #include "gltoken.h"
 
 /**
- * @brief The GLCourt class
- *
- * Spielbrett des Vier Gewinnt Spiels.
+ * @brief Spielbrett des Vier Gewinnt Spiels.
  *
  * Das Spielfeld besteht aus sechs Zeilen und sieben Spalten und kann maximal 42 Token beinhalten.
  *
@@ -39,45 +37,32 @@ class GLCourt : public GLBody {
 
 public:
     /**
-     * @brief ROWS
-     *
-     * Anzahl der Zeilen des Spielfelds.
+     * @brief Anzahl der Zeilen des Spielfelds.
      */
     static constexpr int ROWS = 6;
 
     /**
-     * @brief COLUMNS
-     *
-     * Anzahl der Spalten des Spielfelds.
+     * @brief Anzahl der Spalten des Spielfelds.
      */
     static constexpr int COLUMNS = 7;
 
     /**
-     * @brief WIDTH
-     *
-     * Breite des Spielfelds
+     * @brief Breite des Spielfelds.
      */
     static constexpr float WIDTH = 10.0f;
 
     /**
-     * @brief HEIGHT
-     *
-     * Höhe des Spielfelds.
+     * @brief Höhe des Spielfelds.
      */
     static constexpr float HEIGHT = 8.5f;
 
     /**
-     * @brief DEPTH
-     *
-     * Tiefe des Spielfelds.
+     * @brief Tiefe des Spielfelds.
      */
     static constexpr float DEPTH = 0.65f;
 
     /**
-     * @brief GLCourt
-     *
-     * Erstellt und Initialisiert ein neues GLCourt-Objekt.
-     *
+     * @brief Konstruktor. Erstellt und Initialisiert ein neues GLCourt-Objekt.
      * @param name Name des Objekts.
      * @param radius Radius des Objekts.
      * @param color Farbe des Objekts.
@@ -85,27 +70,22 @@ public:
      */
     GLCourt(const QString& name, float radius = 1.0f, const GLColorRgba& color = GLColorRgba::clBlue,
         const QString textureFile = ":/textures/Court.png");
+
     /**
-     * @brief ~GLCourt
-     *
-     * Destruktor. Löscht das Texturobjekt des Spielfelds.
+     * @brief ~Destruktor. Löscht das Texturobjekt des Spielfelds.
      */
     ~GLCourt() Q_DECL_OVERRIDE;
 
     /**
-     * @brief fieldToPosition
-     *
-     * Gibt die Position des übergebenen Feldes als QVector3D zurück.
-     *
+     * @brief Gibt die Position des übergebenen Feldes als QVector3D zurück.
      * @param field Feld dessen Position bestimmt werden soll.
      * @return Position des übergebenen Feldes.
      */
     QVector3D fieldToPosition(const QPoint& field) const;
 
     /**
-     * @brief calulateInsertPosition
+     * @brief Berechnet die nächste Einfügeposition für das übergebene Token.
      *
-     * Berechnet die nächste Einfügeposition für das übergebene Token.
      * Die nächste Einfügeposition ist die Position mit dem geringsten Abstand zum Token.
      *
      * @param token Token dessen Einfügeposition bestimmt werden soll.
@@ -114,87 +94,62 @@ public:
     QVector3D calulateInsertPosition(const GLToken* token);
 
     /**
-     * @brief getColumnByPosition
-     *
-     * Berechnet die der übergebenen Position nächsten Spalte.
-     *
+     * @brief Berechnet die der übergebenen Position nächsten Spalte.
      * @param position Position deren Spalte bestimmt werden soll.
      * @return Spalte.
      */
     int getColumnByPosition(const QVector3D& position) const;
 
     /**
-     * @brief getFreeField
-     *
-     * Bestimmt die erste freie Position in einer Spalte. Die erste freie Position wird dabei von unten bestimmt.
-     *
+     * @brief Bestimmt die erste freie Position in einer Spalte. Die erste freie Position wird dabei von unten bestimmt.
      * @param column Spalte deren erste freie Position bestimmt werden soll.
      * @return erste freie Position.
      */
     QPoint getFreeField(int column);
 
     /**
-     * @brief setField
-     *
-     * Setzt das übergebene Feld für den übergebenen Spieler.
-     *
+     * @brief Setzt das übergebene Feld für den übergebenen Spieler.
      * @param player Spieler dessen Token am übergebenen Feld ist.
      * @param field Feld das gesetzt werden soll.
      */
     void setField(Player player, QPoint field);
 
     /**
-     * @brief checkWin
-     *
-     * Überprüft, ob einer der Spieler gewonnen hat.
-     *
+     * @brief Überprüft, ob einer der Spieler gewonnen hat.
      * @return Player::RedPlayer bzw. Player::GreenPlayer, wenn der entsprechende Spieler gewonnen hat
      * oder Player::None, wenn kein Gewinner feststeht.
      */
     Player checkWin();
 
     /**
-     * @brief isFull
-     *
-     * Überprüft, ob das Spielfeld voll ist.
-     *
+     * @brief Überprüft, ob das Spielfeld voll ist.
      * @return true, falls ja, false sonst.
      */
     bool isFull();
 
 private:
     /**
-     * @brief m_vRow
-     *
-     * Vektor mit der Höhe einer Zeile des Spielfelds.
+     * @brief Vektor mit der Höhe einer Zeile des Spielfelds.
      */
     QVector3D m_vRow;
 
     /**
-     * @brief m_vColumn
-     *
-     * Vektor mit der Breite einer Spalte des Spielfelds.
+     * @brief Vektor mit der Breite einer Spalte des Spielfelds.
      */
     QVector3D m_vColumn;
 
     /**
-     * @brief m_vCorner
-     *
-     * Vektor der obereren linken Ecke.
+     * @brief Vektor der obereren linken Ecke.
      */
     QVector3D m_vCorner;
 
     /**
-     * @brief m_vOffset
-     *
-     * Vektor mit dem Abstand der oberen linken Ecke zur ersten Feldposition (0,0).
+     * @brief Vektor mit dem Abstand der oberen linken Ecke zur ersten Feldposition (0,0).
      */
     QVector3D m_vOffset;
 
     /**
-     * @brief m_court
-     *
-     * Enthält die aktuell platzierten Tokens als Player-Objekte.
+     * @brief Enthält die aktuell platzierten Tokens als Player-Objekte.
      *
      * Player::None bezeichnet eine freie Position
      *

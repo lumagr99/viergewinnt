@@ -1,0 +1,97 @@
+\hypertarget{class_g_l_color_rgba}{}\doxysection{GLColor\+Rgba Class Reference}
+\label{class_g_l_color_rgba}\index{GLColorRgba@{GLColorRgba}}
+
+
+The Gl\+Color\+Rgba class is a convenience class to replace QVector4D for color variables.  
+
+
+
+
+{\ttfamily \#include $<$glcolorrgba.\+h$>$}
+
+Inheritance diagram for GLColor\+Rgba\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_g_l_color_rgba}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_a1dfcf62fbdbb63deac8db456a5d8b05d}\label{class_g_l_color_rgba_a1dfcf62fbdbb63deac8db456a5d8b05d}} 
+{\bfseries GLColor\+Rgba} (float r=0.\+0, float g=0.\+0, float b=0.\+0, float a=1.\+0)
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_af3580e510acb408439fa87e5d8653f74}\label{class_g_l_color_rgba_af3580e510acb408439fa87e5d8653f74}} 
+{\bfseries GLColor\+Rgba} (const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&other)
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_a6ffc715b25827505384d7309235baacf}\label{class_g_l_color_rgba_a6ffc715b25827505384d7309235baacf}} 
+{\bfseries GLColor\+Rgba} (const QVector4D \&other)
+\item 
+\mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \mbox{\hyperlink{class_g_l_color_rgba_aebd1534aa7987e20cf5bf610a30c812c}{inverted}} ()
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_a3aba13eb0ecd12cf6391026f2e2961f0}\label{class_g_l_color_rgba_a3aba13eb0ecd12cf6391026f2e2961f0}} 
+\mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries operator$\ast$} (float factor)
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_aae8d243708fe5ebb679ff2b3c1df55b3}\label{class_g_l_color_rgba_aae8d243708fe5ebb679ff2b3c1df55b3}} 
+float {\bfseries red} () const
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_a345e39e9aea9ec259b44001e0715d4a7}\label{class_g_l_color_rgba_a345e39e9aea9ec259b44001e0715d4a7}} 
+float {\bfseries green} () const
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_ab7c2621addaa72a585ad4882a70780d6}\label{class_g_l_color_rgba_ab7c2621addaa72a585ad4882a70780d6}} 
+float {\bfseries blue} () const
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_a66d6b14dc626a277e9848fc16230e9c7}\label{class_g_l_color_rgba_a66d6b14dc626a277e9848fc16230e9c7}} 
+float {\bfseries alpha} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_a62741523011318e60e56d56c766ecd50}\label{class_g_l_color_rgba_a62741523011318e60e56d56c766ecd50}} 
+static \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries cl\+Black} = \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}(0.\+0, 0.\+0, 0.\+0, 1.\+0)
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_aa83b7d12e38e4a7e649c4ce34874ac55}\label{class_g_l_color_rgba_aa83b7d12e38e4a7e649c4ce34874ac55}} 
+static \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries cl\+Red} = \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}(1.\+0, 0.\+0, 0.\+0, 1.\+0)
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_ab0516f94c60823f22b2c8caf1dbe76b6}\label{class_g_l_color_rgba_ab0516f94c60823f22b2c8caf1dbe76b6}} 
+static \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries cl\+Yellow} = \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}(1.\+0, 1.\+0, 0.\+0, 1.\+0)
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_afbceb0d8b2cbbc56d4ac491a7a87ea63}\label{class_g_l_color_rgba_afbceb0d8b2cbbc56d4ac491a7a87ea63}} 
+static \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries cl\+Green} = \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}(0.\+0, 1.\+0, 0.\+0, 1.\+0)
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_a9c1574f1f48d60c98ffda644550ed3f6}\label{class_g_l_color_rgba_a9c1574f1f48d60c98ffda644550ed3f6}} 
+static \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries cl\+Cyan} = \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}(0.\+0, 1.\+0, 1.\+0, 1.\+0)
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_abf246bb4f542851d17ba84b5143a9214}\label{class_g_l_color_rgba_abf246bb4f542851d17ba84b5143a9214}} 
+static \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries cl\+Blue} = \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}(0.\+0, 0.\+0, 1.\+0, 1.\+0)
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_a820a38e5290a31ad19026f2417392a8c}\label{class_g_l_color_rgba_a820a38e5290a31ad19026f2417392a8c}} 
+static \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries cl\+Light\+Blue} = \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}(0.\+2, 0.\+2, 1.\+0, 1.\+0)
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_a38ff3538a96d418ffe8e80ada6fc16be}\label{class_g_l_color_rgba_a38ff3538a96d418ffe8e80ada6fc16be}} 
+static \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries cl\+Magenta} = \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}(1.\+0, 0.\+0, 1.\+0, 1.\+0)
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_ac017bac6b8a0c5318a32277a9f8fa2b9}\label{class_g_l_color_rgba_ac017bac6b8a0c5318a32277a9f8fa2b9}} 
+static \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries cl\+Gray} = \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}(0.\+5, 0.\+5, 0.\+5, 1.\+0)
+\item 
+\mbox{\Hypertarget{class_g_l_color_rgba_a71745b9d605d383870b32d83c79908dd}\label{class_g_l_color_rgba_a71745b9d605d383870b32d83c79908dd}} 
+static \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries cl\+White} = \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}(1.\+0, 1.\+0, 1.\+0, 1.\+0)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The Gl\+Color\+Rgba class is a convenience class to replace QVector4D for color variables. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_g_l_color_rgba_aebd1534aa7987e20cf5bf610a30c812c}\label{class_g_l_color_rgba_aebd1534aa7987e20cf5bf610a30c812c}} 
+\index{GLColorRgba@{GLColorRgba}!inverted@{inverted}}
+\index{inverted@{inverted}!GLColorRgba@{GLColorRgba}}
+\doxysubsubsection{\texorpdfstring{inverted()}{inverted()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} GLColor\+Rgba\+::inverted (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Returns the inverted color with a= 1.\+0 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/gl/glcolorrgba.\+h\item 
+src/gl/glcolorrgba.\+cpp\end{DoxyCompactItemize}

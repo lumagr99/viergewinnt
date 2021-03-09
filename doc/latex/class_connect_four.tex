@@ -1,0 +1,327 @@
+\hypertarget{class_connect_four}{}\doxysection{Connect\+Four Class Reference}
+\label{class_connect_four}\index{ConnectFour@{ConnectFour}}
+
+
+Die Connect\+Four-\/\+Klasse enthält die Spiellogik für ein Vier Gewinnt Spiel. Die Klasse enthält die Tischplatte, das Spielbrett und die 42 Spieltoken.  
+
+
+
+
+{\ttfamily \#include $<$connectfour.\+h$>$}
+
+Inheritance diagram for Connect\+Four\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_connect_four}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_connect_four_a4785027ee6e1ed056aea36133b822040}\label{class_connect_four_a4785027ee6e1ed056aea36133b822040}} 
+enum \mbox{\hyperlink{class_connect_four_a4785027ee6e1ed056aea36133b822040}{Sound\+Event}} \{ {\bfseries Token\+Selected}
+, {\bfseries Token\+Inserted}
+, {\bfseries Player\+Changed}
+, {\bfseries Game\+Over}
+ \}
+\begin{DoxyCompactList}\small\item\em Aufzählung für die Sound-\/\+Events. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_connect_four_a4724dabc426ed1a465392c9800133b69}{game\+Over}} (const QString \&color)
+\begin{DoxyCompactList}\small\item\em Wird bei Ende einer Spielrunde emittiert. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connect_four_a7f1274504faf25c3e490c641563f50a9}{sound\+Reqeuest}} (const QString \&sound\+File\+Name)
+\begin{DoxyCompactList}\small\item\em Wird emittiert, wenn ein Ton abgespielt werden soll. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_connect_four_ae7ad50b8cdccaf17f0abc87cb853fff1}{Connect\+Four}} (\mbox{\hyperlink{class_connect_four_scene}{Connect\+Four\+Scene}} $\ast$scene, Player player)
+\begin{DoxyCompactList}\small\item\em Konnstruktor. Erstellt und Initialisiert ein neues Connect\+Four-\/\+Objekt. Der übergebene Spieler ist als erstes am Zug. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_connect_four_ae7d414d7f7f694fd427bfeaef80bd1f9}\label{class_connect_four_ae7d414d7f7f694fd427bfeaef80bd1f9}} 
+virtual \mbox{\hyperlink{class_connect_four_ae7d414d7f7f694fd427bfeaef80bd1f9}{$\sim$\+Connect\+Four}} ()
+\begin{DoxyCompactList}\small\item\em Destruktor. Gibt den Speicher der Tischplatte, des Spielbretts und der Token frei. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_connect_four_a84b79c86389466f4b3dc9cf403c0fce9}{draw}} (\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$renderer)
+\begin{DoxyCompactList}\small\item\em Zeichnet das Vier Gewinnt Spiel im aktuellen Kontext. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_connect_four_aecb1ad6e2ebe943fac5442741ec1886b}{select\+Token}} (const QVector3D \&near\+Point, const QVector3D \&far\+Point, const QVector3D \&camera)
+\begin{DoxyCompactList}\small\item\em Selektiert das getroffene Token, dass am nächsten an der Kamera ist. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connect_four_a0f27e07334ef47b8520a3a957049defa}{deselect\+Token}} ()
+\begin{DoxyCompactList}\small\item\em Deselektiert das aktuell ausgewählte Token. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connect_four_aab474fe435e974760c3887d86856dfdf}{move\+Token}} (const QVector3D \&v\+Move)
+\begin{DoxyCompactList}\small\item\em Bewegt das selektierte Token entsprechend der Vier Gewinnt Spielregeln. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connect_four_ad335df7ac4f5c32d8524ce18fabef026}{descent\+Animation}} ()
+\begin{DoxyCompactList}\small\item\em Animiert den Abstieg eines eingefügten Tokens zur Zielposition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connect_four_a156fc30f0654be66a74be7f744a2ca63}{jump\+Up\+Animation}} ()
+\begin{DoxyCompactList}\small\item\em Animiert den Sprung des selektierten Tokens von der Tischplatte zu einer Einfügeposition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connect_four_ab5d6a751a43e35e37bc81cb4cc5f1417}{jump\+Down\+Animation}} ()
+\begin{DoxyCompactList}\small\item\em Animiert den Sprung des selektierten Tokens von einer Einfügeposition zur Tischplatte. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_connect_four_a32ddd5a7b8d2fc7603a0eb12b535fbd4}{camera\+Rotation\+Animation}} ()
+\begin{DoxyCompactList}\small\item\em Animiert die Kamerarotation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_connect_four_a88c935578192059b4393a8c7c88c0d2c}{animate\+Jump\+Up}} ()
+\begin{DoxyCompactList}\small\item\em Gibt true zurück, wenn die jump\+Up\+Animation ausgeführt werden soll. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_connect_four_a148c0587bc84f272fe7b8c6ae5997e26}{animate\+Jump\+Down}} ()
+\begin{DoxyCompactList}\small\item\em Gibt true zurück, wenn die jump\+Down\+Animation ausgeführt werden soll. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_connect_four_ad11925c1c4ff1f4d5ed69fb1e39989a9}{animate\+Descent}} ()
+\begin{DoxyCompactList}\small\item\em Gibt true zurück, wenn die descent\+Animation ausgeführt werden soll. \end{DoxyCompactList}\item 
+QMatrix4x4 \& \mbox{\hyperlink{class_connect_four_a443046505326fe5dcd69f7d07b6677d8}{get\+Mv\+Matrix}} ()
+\begin{DoxyCompactList}\small\item\em Gibt die Modelview-\/\+Matrix zurück. Die Modelview-\/\+Matrix wird für zusätzliche Transformationen verwendet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_connect_four_a615da1fb0d5f2e271f988ea73dfd86c1}\label{class_connect_four_a615da1fb0d5f2e271f988ea73dfd86c1}} 
+static constexpr GLfloat \mbox{\hyperlink{class_connect_four_a615da1fb0d5f2e271f988ea73dfd86c1}{START\+\_\+\+DISTANCE}} = 100000.\+0f
+\begin{DoxyCompactList}\small\item\em Startdistanz, die bei der Selektionsberechnung verwendet wird. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_connect_four_a7bc3a3e4aca58c6d1851d29c7970e17b}\label{class_connect_four_a7bc3a3e4aca58c6d1851d29c7970e17b}} 
+static constexpr GLint \mbox{\hyperlink{class_connect_four_a7bc3a3e4aca58c6d1851d29c7970e17b}{ANIMATION\+\_\+\+STEPS}} = 35
+\begin{DoxyCompactList}\small\item\em Anzahl der Animationsschritte. Eine höhere Anzahl von Animationsschritten führt zu flüssigeren Animationen, verlangsamt diese jedoch auch. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Die Connect\+Four-\/\+Klasse enthält die Spiellogik für ein Vier Gewinnt Spiel. Die Klasse enthält die Tischplatte, das Spielbrett und die 42 Spieltoken. 
+
+Die draw-\/\+Methode zeichnet die enthaltenen Objekte und benötigt einen aktiven Open\+GL-\/\+Kontext. Über die Methode select\+Token kann ein Token ausgewählt und anschließend mit der Methode move\+Token bewegt werden. Mithilfe der Methode deselect\+Token kann das ausgewählte Token deselektiert werden.
+
+Das Spiel startet mit dem im Konstruktor übergebenen Spieler. Bei Spielende wird ein game\+Over Signal mit Gewinnerfarbe emittiert.
+
+Bei folgenden Aktionen wird ein sound\+Requested Signal mit dem Dateinamen der abzuspielenden Datei emittiert\+:
+\begin{DoxyItemize}
+\item Bei Selektion eines Tokens
+\item Beim Einfügen eines Tokens in das Spielbrett
+\item Beim Spielerwechsel
+\item Beim Spielende 
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_connect_four_ae7ad50b8cdccaf17f0abc87cb853fff1}\label{class_connect_four_ae7ad50b8cdccaf17f0abc87cb853fff1}} 
+\index{ConnectFour@{ConnectFour}!ConnectFour@{ConnectFour}}
+\index{ConnectFour@{ConnectFour}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{ConnectFour()}{ConnectFour()}}
+{\footnotesize\ttfamily Connect\+Four\+::\+Connect\+Four (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_connect_four_scene}{Connect\+Four\+Scene}} $\ast$}]{scene,  }\item[{Player}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Konnstruktor. Erstellt und Initialisiert ein neues Connect\+Four-\/\+Objekt. Der übergebene Spieler ist als erstes am Zug. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scene} & Szene für die das Vier Gewinnt Spiel erstellt werden soll. \\
+\hline
+{\em player} & Spieler der als erstes am Zug ist. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_connect_four_ad11925c1c4ff1f4d5ed69fb1e39989a9}\label{class_connect_four_ad11925c1c4ff1f4d5ed69fb1e39989a9}} 
+\index{ConnectFour@{ConnectFour}!animateDescent@{animateDescent}}
+\index{animateDescent@{animateDescent}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{animateDescent()}{animateDescent()}}
+{\footnotesize\ttfamily bool Connect\+Four\+::animate\+Descent (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gibt true zurück, wenn die descent\+Animation ausgeführt werden soll. 
+
+\begin{DoxyReturn}{Returns}
+true, wenn die Animation ausgeführt werden soll, false sonst. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_connect_four_a148c0587bc84f272fe7b8c6ae5997e26}\label{class_connect_four_a148c0587bc84f272fe7b8c6ae5997e26}} 
+\index{ConnectFour@{ConnectFour}!animateJumpDown@{animateJumpDown}}
+\index{animateJumpDown@{animateJumpDown}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{animateJumpDown()}{animateJumpDown()}}
+{\footnotesize\ttfamily bool Connect\+Four\+::animate\+Jump\+Down (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gibt true zurück, wenn die jump\+Down\+Animation ausgeführt werden soll. 
+
+\begin{DoxyReturn}{Returns}
+true, wenn die Animation ausgeführt werden soll, false sonst. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_connect_four_a88c935578192059b4393a8c7c88c0d2c}\label{class_connect_four_a88c935578192059b4393a8c7c88c0d2c}} 
+\index{ConnectFour@{ConnectFour}!animateJumpUp@{animateJumpUp}}
+\index{animateJumpUp@{animateJumpUp}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{animateJumpUp()}{animateJumpUp()}}
+{\footnotesize\ttfamily bool Connect\+Four\+::animate\+Jump\+Up (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gibt true zurück, wenn die jump\+Up\+Animation ausgeführt werden soll. 
+
+\begin{DoxyReturn}{Returns}
+true, wenn die Animation ausgeführt werden soll, false sonst. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_connect_four_a32ddd5a7b8d2fc7603a0eb12b535fbd4}\label{class_connect_four_a32ddd5a7b8d2fc7603a0eb12b535fbd4}} 
+\index{ConnectFour@{ConnectFour}!cameraRotationAnimation@{cameraRotationAnimation}}
+\index{cameraRotationAnimation@{cameraRotationAnimation}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{cameraRotationAnimation()}{cameraRotationAnimation()}}
+{\footnotesize\ttfamily void Connect\+Four\+::camera\+Rotation\+Animation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Animiert die Kamerarotation. 
+
+Wird alle 16 msec durch die Methode do\+Synchronize\+Threads der Szene aufgerufen. \mbox{\Hypertarget{class_connect_four_ad335df7ac4f5c32d8524ce18fabef026}\label{class_connect_four_ad335df7ac4f5c32d8524ce18fabef026}} 
+\index{ConnectFour@{ConnectFour}!descentAnimation@{descentAnimation}}
+\index{descentAnimation@{descentAnimation}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{descentAnimation()}{descentAnimation()}}
+{\footnotesize\ttfamily void Connect\+Four\+::descent\+Animation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Animiert den Abstieg eines eingefügten Tokens zur Zielposition. 
+
+Die Methode wird alle 16 msec durch die Methode do\+Synchronize\+Threads der Szene aufgerufen, falls das Flag m\+\_\+animate\+Descent true ist.
+
+Ist m\+\_\+animation\+Step = ANIMATION\+\_\+\+STEPS wird das Flag m\+\_\+animate\+Descent auf false gesetzt.
+
+Die Anzahl der Animationsschritte entspricht ANIMATION\+\_\+\+STEPS. \mbox{\Hypertarget{class_connect_four_a0f27e07334ef47b8520a3a957049defa}\label{class_connect_four_a0f27e07334ef47b8520a3a957049defa}} 
+\index{ConnectFour@{ConnectFour}!deselectToken@{deselectToken}}
+\index{deselectToken@{deselectToken}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{deselectToken()}{deselectToken()}}
+{\footnotesize\ttfamily void Connect\+Four\+::deselect\+Token (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Deselektiert das aktuell ausgewählte Token. 
+
+Befindet sich das Token in der nähe des Spielbretts wird die Methode insert\+Token aufgerufen, um das Token in die nächste Spalte einzufügen. \mbox{\Hypertarget{class_connect_four_a84b79c86389466f4b3dc9cf403c0fce9}\label{class_connect_four_a84b79c86389466f4b3dc9cf403c0fce9}} 
+\index{ConnectFour@{ConnectFour}!draw@{draw}}
+\index{draw@{draw}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Connect\+Four\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_g_l_e_s_renderer}{GLESRenderer}} $\ast$}]{renderer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Zeichnet das Vier Gewinnt Spiel im aktuellen Kontext. 
+
+Rotiert bei Aufruf die Kamera um m\+\_\+camera\+Rotation\+Angle um die Y-\/\+Achse mithilfe der Modelview-\/\+Matrix m\+\_\+mv\+Matrix.
+
+
+\begin{DoxyParams}{Parameters}
+{\em renderer} & Renderer mit dem das Spiel gezeichent werden soll. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_connect_four_a4724dabc426ed1a465392c9800133b69}\label{class_connect_four_a4724dabc426ed1a465392c9800133b69}} 
+\index{ConnectFour@{ConnectFour}!gameOver@{gameOver}}
+\index{gameOver@{gameOver}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{gameOver}{gameOver}}
+{\footnotesize\ttfamily void Connect\+Four\+::game\+Over (\begin{DoxyParamCaption}\item[{const QString \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Wird bei Ende einer Spielrunde emittiert. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & Farbe des Gewinners (Red, Green) oder Draw. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_connect_four_a443046505326fe5dcd69f7d07b6677d8}\label{class_connect_four_a443046505326fe5dcd69f7d07b6677d8}} 
+\index{ConnectFour@{ConnectFour}!getMvMatrix@{getMvMatrix}}
+\index{getMvMatrix@{getMvMatrix}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{getMvMatrix()}{getMvMatrix()}}
+{\footnotesize\ttfamily QMatrix4x4\& Connect\+Four\+::get\+Mv\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gibt die Modelview-\/\+Matrix zurück. Die Modelview-\/\+Matrix wird für zusätzliche Transformationen verwendet. 
+
+\begin{DoxyReturn}{Returns}
+Modelview-\/\+Matrix. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_connect_four_ab5d6a751a43e35e37bc81cb4cc5f1417}\label{class_connect_four_ab5d6a751a43e35e37bc81cb4cc5f1417}} 
+\index{ConnectFour@{ConnectFour}!jumpDownAnimation@{jumpDownAnimation}}
+\index{jumpDownAnimation@{jumpDownAnimation}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{jumpDownAnimation()}{jumpDownAnimation()}}
+{\footnotesize\ttfamily void Connect\+Four\+::jump\+Down\+Animation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Animiert den Sprung des selektierten Tokens von einer Einfügeposition zur Tischplatte. 
+
+Das Token wird durch die Animation um 90° um die X-\/\+Achse gedreht und das Flag m\+\_\+rotated auf false gesetzt.
+
+Die Methode wird alle 16 msec durch die Methode do\+Synchronize\+Threads der Szene aufgerufen, falls das Flag m\+\_\+animate\+Jump\+Down true ist.
+
+Ist m\+\_\+animation\+Step = ANIMATION\+\_\+\+STEPS wird das Flag m\+\_\+animate\+Jump\+Down auf false gesetzt.
+
+Die Anzahl der Animationsschritte entspricht ANIMATION\+\_\+\+STEPS. \mbox{\Hypertarget{class_connect_four_a156fc30f0654be66a74be7f744a2ca63}\label{class_connect_four_a156fc30f0654be66a74be7f744a2ca63}} 
+\index{ConnectFour@{ConnectFour}!jumpUpAnimation@{jumpUpAnimation}}
+\index{jumpUpAnimation@{jumpUpAnimation}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{jumpUpAnimation()}{jumpUpAnimation()}}
+{\footnotesize\ttfamily void Connect\+Four\+::jump\+Up\+Animation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Animiert den Sprung des selektierten Tokens von der Tischplatte zu einer Einfügeposition. 
+
+Das Token wird durch die Animation um -\/90° um die X-\/\+Achse gedreht und das Flag m\+\_\+rotated auf true gesetzt.
+
+Die Methode wird alle 16 msec durch die Methode do\+Synchronize\+Threads der Szene aufgerufen, falls das Flag m\+\_\+animate\+Jump\+Up true ist.
+
+Ist m\+\_\+animation\+Step = ANIMATION\+\_\+\+STEPS wird das Flag m\+\_\+animate\+Jump\+Up auf false gesetzt.
+
+Die Anzahl der Animationsschritte entspricht ANIMATION\+\_\+\+STEPS. \mbox{\Hypertarget{class_connect_four_aab474fe435e974760c3887d86856dfdf}\label{class_connect_four_aab474fe435e974760c3887d86856dfdf}} 
+\index{ConnectFour@{ConnectFour}!moveToken@{moveToken}}
+\index{moveToken@{moveToken}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{moveToken()}{moveToken()}}
+{\footnotesize\ttfamily void Connect\+Four\+::move\+Token (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{v\+Move }\end{DoxyParamCaption})}
+
+
+
+Bewegt das selektierte Token entsprechend der Vier Gewinnt Spielregeln. 
+
+Bei Kollision mit anderen Spielsteinen wird die Bewegung verhindert.
+
+Bei Kollision mit dem Spielbrett wird das Flag m\+\_\+animate\+Jump\+Up auf true gesetzt, was dazu führt dass eine Animation zu einer möglichen Einfügeposition ausgeführt wird.
+
+Wird das Token von einer Einfügeposition wegbewegt, so wird das Flag m\+\_\+animate\+Jump\+Down auf true gesetzt und dadurch eine Animation zur Tischplatte ausgeführt.
+
+
+\begin{DoxyParams}{Parameters}
+{\em v\+Move} & Vektor in dessen Richtung das Token bewegt werden soll. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_connect_four_aecb1ad6e2ebe943fac5442741ec1886b}\label{class_connect_four_aecb1ad6e2ebe943fac5442741ec1886b}} 
+\index{ConnectFour@{ConnectFour}!selectToken@{selectToken}}
+\index{selectToken@{selectToken}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{selectToken()}{selectToken()}}
+{\footnotesize\ttfamily bool Connect\+Four\+::select\+Token (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{near\+Point,  }\item[{const QVector3D \&}]{far\+Point,  }\item[{const QVector3D \&}]{camera }\end{DoxyParamCaption})}
+
+
+
+Selektiert das getroffene Token, dass am nächsten an der Kamera ist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em near\+Point} & Nahpunkt des Mausklicks. \\
+\hline
+{\em far\+Point} & Fernpunkt des Mausklicks. \\
+\hline
+{\em camera} & Kamera. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true, falls ein Token selektiert wurde, false sonst. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_connect_four_a7f1274504faf25c3e490c641563f50a9}\label{class_connect_four_a7f1274504faf25c3e490c641563f50a9}} 
+\index{ConnectFour@{ConnectFour}!soundReqeuest@{soundReqeuest}}
+\index{soundReqeuest@{soundReqeuest}!ConnectFour@{ConnectFour}}
+\doxysubsubsection{\texorpdfstring{soundReqeuest}{soundReqeuest}}
+{\footnotesize\ttfamily void Connect\+Four\+::sound\+Reqeuest (\begin{DoxyParamCaption}\item[{const QString \&}]{sound\+File\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+
+
+Wird emittiert, wenn ein Ton abgespielt werden soll. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sound\+File\+Name} & Dateiname des abzuspielenden Tons. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/game/connectfour.\+h\item 
+src/game/connectfour.\+cpp\end{DoxyCompactItemize}

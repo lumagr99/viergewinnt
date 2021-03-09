@@ -20,6 +20,7 @@ public:
     explicit SoundEngine(QObject* parent = 0);
 
     void setEnabled(bool newVal) { enabled = newVal; }
+
     bool isEnabled() const { return enabled; }
 
 signals:

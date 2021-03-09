@@ -1,0 +1,882 @@
+\hypertarget{class_g_l_e_s_renderer}{}\doxysection{GLESRenderer Class Reference}
+\label{class_g_l_e_s_renderer}\index{GLESRenderer@{GLESRenderer}}
+Inheritance diagram for GLESRenderer\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_g_l_e_s_renderer}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a05f4cf233d5cf60f4d6ea50ddc06a2c4}\label{class_g_l_e_s_renderer_a05f4cf233d5cf60f4d6ea50ddc06a2c4}} 
+enum {\bfseries Attribute\+Location} \{ \newline
+{\bfseries INVALID\+\_\+\+LOCATION}
+, {\bfseries VERTEX\+\_\+\+LOCATION}
+, {\bfseries NORMAL\+\_\+\+LOCATION}
+, {\bfseries COLOR\+\_\+\+LOCATION}
+, \newline
+{\bfseries TEXCOORD\+\_\+\+LOCATION}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a0c5bf4702ee731dde0377a08b5e15ae2}\label{class_g_l_e_s_renderer_a0c5bf4702ee731dde0377a08b5e15ae2}} 
+{\bfseries GLESRenderer} (QObject $\ast$parent, const QString \&v\+Shader\+Filename=\char`\"{}\+:/src/vshader.\+vsh\char`\"{}, const QString \&f\+Shader\+Filename=\char`\"{}\+:/src/fshader.\+fsh\char`\"{})
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_aa828ddb16aa0f76409d24369735baa63}\label{class_g_l_e_s_renderer_aa828ddb16aa0f76409d24369735baa63}} 
+virtual \mbox{\hyperlink{class_g_l_e_s_renderer_aa828ddb16aa0f76409d24369735baa63}{$\sim$\+GLESRenderer}} ()
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{class_g_l_e_s_renderer_aa828ddb16aa0f76409d24369735baa63}{GLESRenderer\+::$\sim$\+GLESRenderer}} We need to delete the shaders here. They can not be added to the child list, because they live in render thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{Indent}\textbf{ Initialization, binding and releasing}\par
+\begin{DoxyCompactItemize}
+\item 
+virtual bool \mbox{\hyperlink{class_g_l_e_s_renderer_a0bb1617bc39236ccbf430cd282f127f2}{initialize}} ()
+\item 
+virtual bool \mbox{\hyperlink{class_g_l_e_s_renderer_a41d040c7fa439552abf339b3883b02f4}{bind}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a860d9102e98cd4394dc91c56e61c512b}{release}} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ Unproject, project and mouse interaction functions}\par
+\begin{DoxyCompactItemize}
+\item 
+QVector3D \mbox{\hyperlink{class_g_l_e_s_renderer_a8be3d2a634d0fe1e13fb7b97673eefab}{un\+Project\+Viewport\+Point}} (const QVector3D \&v\+Win)
+\item 
+QVector3D \mbox{\hyperlink{class_g_l_e_s_renderer_a36440b34ef23691928cb033a55c9c6f9}{viewport\+To\+Clip}} (const QVector3D \&v)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_ae600d289f94594374cdbd8c031cb0c86}{calculate\+Mouse\+Points}} (QVector3D $\ast$near\+Point, QVector3D $\ast$far\+Point, const QPoint \&mouse\+Pos)
+\item 
+float \mbox{\hyperlink{class_g_l_e_s_renderer_a6f31b6893897549f3762a88a8bf135f8}{distance\+To\+Mouse\+Click}} (QVector3D p, const QPoint \&mouse\+Pos)
+\item 
+bool \mbox{\hyperlink{class_g_l_e_s_renderer_a2c8f6b6ff0df6acafc6cbd7a82678a17}{mouse\+Intersection}} (QVector3D $\ast$intersection, QVector3D normal, float d, const QPoint \&mouse\+Pos)
+\end{DoxyCompactItemize}
+\end{Indent}
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a8242d0b241a14c5850867ec00819c014}{set\+Mv\+Matrix}} (const QMatrix4x4 new\+Val)
+\item 
+const QMatrix4x4 \& \mbox{\hyperlink{class_g_l_e_s_renderer_af6f079ccbe2e37b90018dde13ad36b94}{get\+Mv\+Matrix}} ()
+\item 
+const QMatrix4x4 \mbox{\hyperlink{class_g_l_e_s_renderer_a5c752d886c22560c5dc5fc76391f4315}{get\+View\+Matrix}} ()
+\item 
+const QMatrix3x3 \& \mbox{\hyperlink{class_g_l_e_s_renderer_a0dfc680c7a7b2aea8439f88a892858fe}{get\+Normal\+Matrix}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a180fe52b28553039f83b07157b962c3e}{set\+Look\+At}} (const QVector3D \&eye, const QVector3D \&center, const QVector3D \&up)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_ad439b83c368872dfd4439136d9af4d6d}{set\+PMatrix}} (const QMatrix4x4 new\+Val)
+\item 
+const QMatrix4x4 \& \mbox{\hyperlink{class_g_l_e_s_renderer_a57700c29516d33449e65e7243eaf2aac}{get\+PMatrix}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_afff0eca251e49d50c83277a2fe3ad5af}{set\+Perspective}} (GLfloat fovy, GLfloat aspect, GLfloat near\+Clip, GLfloat far\+Clip)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a7f0488a9867d384110718ca6ef9a70af}{set\+Ortho}} (float left, float right, float bottom, float top, float near\+Plane, float far\+Plane)
+\begin{DoxyCompactList}\small\item\em set\+Ortho Set p\+Matrix to an orthogonal projection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a9715cb674cb2fb4ae0cf13052f063336}{set\+Viewport}} (int x, int y, int w, int h)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_aadd9caa2f116226fa3d896bbad437e90}{read\+GLViewport\+Settings}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_afce69d0a59a823b4470037bd785d0694}{set\+Ambient\+And\+Diffuse\+Color}} (const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} new\+Val)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a0173737627f25d5a0586a57569c211d2}{set\+Ambient\+Light\+Brightness}} (float new\+Val)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a1ab28a7a363508c57024fbbd67c30481}{set\+Specular\+Color}} (const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} new\+Val)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a75fdf201c7a27ab2e053e2a5d37e4ac4}{set\+Shininess}} (float new\+Val)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a1e147c3f7e1cdc2d022c376817ece5d9}{set\+Source\+Alpha}} (float new\+Val)
+\begin{DoxyCompactList}\small\item\em set\+Source\+Alpha Set the source alpha value used for blending. gl\+Enable(\+GL\+\_\+\+BLEND) and gl\+Blendfunc calls are required! \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_g_l_e_s_renderer_a06300bcac50a10f5ef947012a2050f6c}{source\+Alpha}} ()
+\begin{DoxyCompactList}\small\item\em source\+Alpha The present source alpha value for blending \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_ae6e3531d53ffdc334688eec3feaf9e77}{set\+Lighting\+Enabled}} (bool new\+Val)
+\item 
+bool \mbox{\hyperlink{class_g_l_e_s_renderer_a72a9b248926c08a45dfea70b8f0e22ca}{is\+Lighting\+Enabled}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a990ae5bda053d007a710e7e9956facf1}{set\+Color\+Array\+Enabled}} (bool new\+Val)
+\item 
+bool \mbox{\hyperlink{class_g_l_e_s_renderer_a79ef99aaf1e080612cad7ce4e77580bd}{is\+Color\+Array\+Enabled}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a83f1e3ddcb613eea7e74fa6ce4289350}{set\+Texture\+Enabled}} (bool new\+Val)
+\item 
+bool \mbox{\hyperlink{class_g_l_e_s_renderer_afedd8e9ef1c5804d070f3c79baa15439}{is\+Texture\+Enabled}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a957d299ae6eafc6604b5de598f525c6d}{set\+Mask\+Active}} (bool new\+Val)
+\begin{DoxyCompactList}\small\item\em set\+Mask\+Active Set the fragment shader mask flag \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_g_l_e_s_renderer_a256990132d3f0ceff02a369db1361c2c}{is\+Mask\+Active}} ()
+\begin{DoxyCompactList}\small\item\em is\+Mask\+Active \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a4f755a8549d3ecbb2a40cabe56974c5f}{set\+Light\+Direction}} (const QVector3D \&new\+Val)
+\item 
+const QVector3D \mbox{\hyperlink{class_g_l_e_s_renderer_a12a75a5ea065e69ad3476344e59f5909}{light\+Direction}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a2ea9d299d160c0757f75e883164f6e21}{set\+Point\+Size}} (float new\+Val)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_aa41f49d92c3514ce90a354cd2127d1c5}{set\+Mask\+Center}} (const QPoint \&new\+Val)
+\begin{DoxyCompactList}\small\item\em set\+Mask\+Center Set center of fragment shader mask \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a07c9bfdc4f16745e9b09529e21184910}{set\+Mask\+Diameter}} (float new\+Val)
+\begin{DoxyCompactList}\small\item\em set\+Mask\+Diameter Set diameter of fragment shader mask \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_g_l_e_s_renderer_a2ba82f565d0a34259614448407cdad11}{point\+Size}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a712dddd10f14f80a003a347ff1aa1666}{push\+Mv\+Matrix}} ()
+\item 
+int \mbox{\hyperlink{class_g_l_e_s_renderer_a8492e132e07e28f448ecf48559eb14bc}{matrix\+Stack\+Size}} ()
+\begin{DoxyCompactList}\small\item\em matrix\+Stack\+Size for debugging \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a93ddfbce8f107b0cbc41b2854855202d}{pop\+Mv\+Matrix}} ()
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a252caaa926c2e86312b219454492ffe0}{translate}} (const QVector3D \&v)
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a45f1e6f0154b7887289fd8a3aa22908f}\label{class_g_l_e_s_renderer_a45f1e6f0154b7887289fd8a3aa22908f}} 
+void {\bfseries translate} (float x, float y, float z)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a9e034d2d95eedc35a56f8db1688df163}{rotate}} (GLfloat angle, const QVector3D \&axis)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a4e51b730376db41ff15b4a976b258c6e}{rotate}} (float angle, float x, float y, float z)
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a43e69a0a8c38adf1faae474c33fb7bb8}\label{class_g_l_e_s_renderer_a43e69a0a8c38adf1faae474c33fb7bb8}} 
+void {\bfseries zoom} (float zoom\+Factor)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a8d8a2bac71c26f834b7ce7983204e870}{transform}} (const QMatrix4x4 \&transformation)
+\begin{DoxyCompactList}\small\item\em transform Multiplies mv\+Matrix with transformation \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a5a523cfef1b63258e863af159c04c235}{add\+Transformation}} (const QMatrix4x4 additional\+Transformation)
+\begin{DoxyCompactList}\small\item\em add\+Transformation Multiplies additional\+Transformation to mv\+Matrix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_a4bd22f2f738b185f3b6c3e381c58feca}{scale}} (const QVector3D \&v)
+\end{DoxyCompactItemize}
+
+\begin{Indent}\textbf{ Attribute setters}\par
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{class_g_l_e_s_renderer_a8529c317862c57c027acce876bad17bb}{activate\+Attribute\+Array}} (Attribute\+Location location, const QVector2D $\ast$values, int stride=0)
+\item 
+bool \mbox{\hyperlink{class_g_l_e_s_renderer_a102377bf45b15bb52324214d2e9b6f14}{activate\+Attribute\+Array}} (Attribute\+Location location, const QVector3D $\ast$values, int stride=0)
+\item 
+bool \mbox{\hyperlink{class_g_l_e_s_renderer_ada229880a48efdbb3daaa375b701ace0}{activate\+Attribute\+Array}} (Attribute\+Location location, const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} $\ast$values, int stride=0)
+\item 
+void \mbox{\hyperlink{class_g_l_e_s_renderer_ad0bc53b13af77050b43f7a6ba5f97ea1}{activate\+Attribute\+Buffer}} (Attribute\+Location location)
+\item 
+virtual void \mbox{\hyperlink{class_g_l_e_s_renderer_a0978cd1fe3baab589b7bfbcde6554c15}{disable\+Attribute\+Arrays}} ()
+\end{DoxyCompactItemize}
+\end{Indent}
+\doxysubsection*{Debugging}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a2c936870131300b9ed86cf9073747637}\label{class_g_l_e_s_renderer_a2c936870131300b9ed86cf9073747637}} 
+bool {\bfseries m\+\_\+initialized}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_ab4227a6b3394b7392c9a7001fc306ad1}\label{class_g_l_e_s_renderer_ab4227a6b3394b7392c9a7001fc306ad1}} 
+bool {\bfseries m\+\_\+bound}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a89a023d2cabec874691841f5ff140bc8}\label{class_g_l_e_s_renderer_a89a023d2cabec874691841f5ff140bc8}} 
+bool {\bfseries m\+\_\+lighting\+Enabled}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a71b59ce0e9ae03eba0ed065bae8ecff7}\label{class_g_l_e_s_renderer_a71b59ce0e9ae03eba0ed065bae8ecff7}} 
+bool {\bfseries m\+\_\+color\+Array\+Enabled}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a61680a3953bfb6b22e7131a518b1a5e2}\label{class_g_l_e_s_renderer_a61680a3953bfb6b22e7131a518b1a5e2}} 
+bool {\bfseries m\+\_\+texture\+Enabled}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a9c58c18b9b58fb4f49bb1fd79f4a2f51}\label{class_g_l_e_s_renderer_a9c58c18b9b58fb4f49bb1fd79f4a2f51}} 
+bool {\bfseries m\+\_\+inverted\+Mvp\+Matrix\+Valid}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a8e58a3bbfb5ba75c48cc35b06711131c}\label{class_g_l_e_s_renderer_a8e58a3bbfb5ba75c48cc35b06711131c}} 
+bool {\bfseries m\+\_\+mask\+Active}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a878a3ee8fe04d1a56659c78ba5e95f4b}\label{class_g_l_e_s_renderer_a878a3ee8fe04d1a56659c78ba5e95f4b}} 
+QMatrix4x4 {\bfseries m\+\_\+mvp\+Matrix}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_af08d271c05f553df400b67685435cb0c}\label{class_g_l_e_s_renderer_af08d271c05f553df400b67685435cb0c}} 
+QMatrix4x4 {\bfseries m\+\_\+inverted\+Mvp\+Matrix}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a5675ffb62f73dc7ebff3e4aea59db56e}\label{class_g_l_e_s_renderer_a5675ffb62f73dc7ebff3e4aea59db56e}} 
+QStack$<$ QMatrix4x4 $>$ {\bfseries m\+\_\+mv\+Matrix\+Stack}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a2f8a5b98999a5ee14551a39e5f005389}\label{class_g_l_e_s_renderer_a2f8a5b98999a5ee14551a39e5f005389}} 
+QMatrix4x4 {\bfseries m\+\_\+mv\+Matrix}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a56b9a37f117f1980bd27d5a1c9e19ac3}\label{class_g_l_e_s_renderer_a56b9a37f117f1980bd27d5a1c9e19ac3}} 
+QMatrix4x4 {\bfseries m\+\_\+view\+Matrix}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a2fe2ba5157fa87a9eca8eb15f8097fb5}\label{class_g_l_e_s_renderer_a2fe2ba5157fa87a9eca8eb15f8097fb5}} 
+QMatrix4x4 {\bfseries m\+\_\+p\+Matrix}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_abd7cabc787ad5c787b54ed2d47412df8}\label{class_g_l_e_s_renderer_abd7cabc787ad5c787b54ed2d47412df8}} 
+float {\bfseries m\+\_\+fovy}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a719e99de6bb7e5af3a5fcae041fdefda}\label{class_g_l_e_s_renderer_a719e99de6bb7e5af3a5fcae041fdefda}} 
+float {\bfseries m\+\_\+aspect}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_ab29bf2e72c2d91883b1ad3f3e8351940}\label{class_g_l_e_s_renderer_ab29bf2e72c2d91883b1ad3f3e8351940}} 
+float {\bfseries m\+\_\+near\+Clip}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a6ecd1dee12a4592f35d097e14f90933b}\label{class_g_l_e_s_renderer_a6ecd1dee12a4592f35d097e14f90933b}} 
+float {\bfseries m\+\_\+far\+Clip}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a78662dcb0fedf7710a57345d3d684b85}\label{class_g_l_e_s_renderer_a78662dcb0fedf7710a57345d3d684b85}} 
+bool {\bfseries m\+\_\+\+Ortho\+Mode}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a76ff9b2803ac2a897d9df0cf587601ed}\label{class_g_l_e_s_renderer_a76ff9b2803ac2a897d9df0cf587601ed}} 
+QMatrix3x3 {\bfseries m\+\_\+normal\+Matrix}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a7347241a0f6482d69479d10848c70238}\label{class_g_l_e_s_renderer_a7347241a0f6482d69479d10848c70238}} 
+QVector3D {\bfseries m\+\_\+light\+Direction}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_ae3feaa98657e57bbc795a845dfafe1fe}\label{class_g_l_e_s_renderer_ae3feaa98657e57bbc795a845dfafe1fe}} 
+QVector3D {\bfseries m\+\_\+half\+Plane\+Vector}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_af4b3fcfa029b28bfdd9d2b7bb9202796}\label{class_g_l_e_s_renderer_af4b3fcfa029b28bfdd9d2b7bb9202796}} 
+\mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries m\+\_\+ambient\+And\+Diffuse\+Color}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_ad40448fd0cbb01b078a759e5f8d9debc}\label{class_g_l_e_s_renderer_ad40448fd0cbb01b078a759e5f8d9debc}} 
+float {\bfseries m\+\_\+ambient\+Light\+Brightness}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a58ff6c2e940d9cb7fb8bdf9e676f69cd}\label{class_g_l_e_s_renderer_a58ff6c2e940d9cb7fb8bdf9e676f69cd}} 
+\mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} {\bfseries m\+\_\+specular\+Color}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a5cb19e8d00b558a84f3776d51f0aca9c}\label{class_g_l_e_s_renderer_a5cb19e8d00b558a84f3776d51f0aca9c}} 
+float {\bfseries m\+\_\+shininess}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a35e72b5ed4f567ffa5922c7d3490d51e}\label{class_g_l_e_s_renderer_a35e72b5ed4f567ffa5922c7d3490d51e}} 
+float {\bfseries m\+\_\+source\+Alpha}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a8571248c1e8858ccd260d91497e13354}\label{class_g_l_e_s_renderer_a8571248c1e8858ccd260d91497e13354}} 
+float {\bfseries m\+\_\+point\+Size}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a8657f5ff8c5f663cd043731e9753e70a}\label{class_g_l_e_s_renderer_a8657f5ff8c5f663cd043731e9753e70a}} 
+float {\bfseries m\+\_\+mask\+Diameter}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a4251b608f7c887b2bcfcb421b4a793c5}\label{class_g_l_e_s_renderer_a4251b608f7c887b2bcfcb421b4a793c5}} 
+QPoint {\bfseries m\+\_\+mask\+Center}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a9f9222c1a54ff9b01edb609bb570151a}\label{class_g_l_e_s_renderer_a9f9222c1a54ff9b01edb609bb570151a}} 
+QString {\bfseries m\+\_\+v\+Shader\+File\+Name}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_ac876ef67f2795f17e0f1d1e43cb686b4}\label{class_g_l_e_s_renderer_ac876ef67f2795f17e0f1d1e43cb686b4}} 
+QString {\bfseries m\+\_\+f\+Shader\+File\+Name}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a41916fc04d753007a9340065ab08762e}\label{class_g_l_e_s_renderer_a41916fc04d753007a9340065ab08762e}} 
+QOpen\+GLShader $\ast$ {\bfseries m\+\_\+v\+Shader}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a63dd17ddf099e24a26a9d7cdeab664fa}\label{class_g_l_e_s_renderer_a63dd17ddf099e24a26a9d7cdeab664fa}} 
+QOpen\+GLShader $\ast$ {\bfseries m\+\_\+f\+Shader}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a49b1f32fad69d86fb7522d1a3f1e8d4f}\label{class_g_l_e_s_renderer_a49b1f32fad69d86fb7522d1a3f1e8d4f}} 
+QOpen\+GLShader\+Program $\ast$ {\bfseries m\+\_\+render\+Program}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_ab03a79822dd105e1a0e5eecb65ee492b}\label{class_g_l_e_s_renderer_ab03a79822dd105e1a0e5eecb65ee492b}} 
+int {\bfseries m\+\_\+location\+\_\+a\+Vertex}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a5bf9f36f33237a7fe2706f60c341dec9}\label{class_g_l_e_s_renderer_a5bf9f36f33237a7fe2706f60c341dec9}} 
+int {\bfseries m\+\_\+location\+\_\+a\+Color}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_adca575c93185a1beb32bf54235a7766f}\label{class_g_l_e_s_renderer_adca575c93185a1beb32bf54235a7766f}} 
+int {\bfseries m\+\_\+location\+\_\+a\+Normal}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_af5b18a94719f0b93d32be7cd9262fcfb}\label{class_g_l_e_s_renderer_af5b18a94719f0b93d32be7cd9262fcfb}} 
+int {\bfseries m\+\_\+location\+\_\+a\+Tex\+Coord}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_aafa0944ec42f35eb2ebf08fe0e850ad7}\label{class_g_l_e_s_renderer_aafa0944ec42f35eb2ebf08fe0e850ad7}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Color\+Array\+Enabled}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a8d61c896b68041ae2439d21ed6981f28}\label{class_g_l_e_s_renderer_a8d61c896b68041ae2439d21ed6981f28}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Lighting\+Enabled}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_aec01e0adb9416c451d958f925a64d329}\label{class_g_l_e_s_renderer_aec01e0adb9416c451d958f925a64d329}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Normal\+Matrix}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a51a95f6a35efdde4a6e103ecae334322}\label{class_g_l_e_s_renderer_a51a95f6a35efdde4a6e103ecae334322}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Mvp\+Matrix}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a4125a33e9cea4fbc0e7e23edb4b4de43}\label{class_g_l_e_s_renderer_a4125a33e9cea4fbc0e7e23edb4b4de43}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Ambient\+And\+Diffuse\+Color}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a0dc79f50f3eea91e32316a6ecd8a9754}\label{class_g_l_e_s_renderer_a0dc79f50f3eea91e32316a6ecd8a9754}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Ambient\+Light\+Brightness}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a0945edb3cd12c3228e405519d9cebe08}\label{class_g_l_e_s_renderer_a0945edb3cd12c3228e405519d9cebe08}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Specular\+Color}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_af1152640d14a616c9930161402da5eb3}\label{class_g_l_e_s_renderer_af1152640d14a616c9930161402da5eb3}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Shininess}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a965e4605dd74ceb7b00299c89cd63997}\label{class_g_l_e_s_renderer_a965e4605dd74ceb7b00299c89cd63997}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Source\+Alpha}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_aba8a7f233b51b258542adce7114a93da}\label{class_g_l_e_s_renderer_aba8a7f233b51b258542adce7114a93da}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Light\+Direction}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a8a4088b65277a3efa4810454c00e6a16}\label{class_g_l_e_s_renderer_a8a4088b65277a3efa4810454c00e6a16}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Half\+Plane\+Vector}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a3cab0140a32534203dc8070058647d02}\label{class_g_l_e_s_renderer_a3cab0140a32534203dc8070058647d02}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Point\+Size}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_ac2f2a0039e1b58fbd7d5abd3c43640bc}\label{class_g_l_e_s_renderer_ac2f2a0039e1b58fbd7d5abd3c43640bc}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Texture\+Sampler}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a82f6728d7361a42c33f0e88be7a329a2}\label{class_g_l_e_s_renderer_a82f6728d7361a42c33f0e88be7a329a2}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Texture\+Enabled}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a60785985120438561f095a5d0bb0a0e6}\label{class_g_l_e_s_renderer_a60785985120438561f095a5d0bb0a0e6}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Mask\+Diameter}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_aa5865237289b4b166ccdcee4fafeefa7}\label{class_g_l_e_s_renderer_aa5865237289b4b166ccdcee4fafeefa7}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Mask\+Center}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_ac7d1efb2e83cebe39608a9816856da64}\label{class_g_l_e_s_renderer_ac7d1efb2e83cebe39608a9816856da64}} 
+int {\bfseries m\+\_\+location\+\_\+u\+Mask\+Active}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a923229687ee02d0364a7e472fa1ed578}\label{class_g_l_e_s_renderer_a923229687ee02d0364a7e472fa1ed578}} 
+QList$<$ int $>$ {\bfseries m\+\_\+active\+Attribute\+Locations}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a437c4d81da1b944458b4abde903c23ce}\label{class_g_l_e_s_renderer_a437c4d81da1b944458b4abde903c23ce}} 
+int {\bfseries m\+\_\+viewportX}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a0e81b88aa0c613e99dc6be1737d83c93}\label{class_g_l_e_s_renderer_a0e81b88aa0c613e99dc6be1737d83c93}} 
+int {\bfseries m\+\_\+viewportY}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_af839e0f722a97a026d7517de19acd352}\label{class_g_l_e_s_renderer_af839e0f722a97a026d7517de19acd352}} 
+int {\bfseries m\+\_\+viewportW}
+\item 
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a07da628f9769b11914946d71b71a4665}\label{class_g_l_e_s_renderer_a07da628f9769b11914946d71b71a4665}} 
+int {\bfseries m\+\_\+viewportH}
+\item 
+QVector3D \mbox{\hyperlink{class_g_l_e_s_renderer_a5d591173ee2492417476253eb2e41986}{model\+To\+Clip}} (const QVector3D \&v)
+\item 
+QVector3D \mbox{\hyperlink{class_g_l_e_s_renderer_a531ca73b72e3a00a667b9f8237735724}{clip\+To\+Viewport}} (const QVector3D \&v)
+\item 
+QVector3D \mbox{\hyperlink{class_g_l_e_s_renderer_a18692df474a8fc87dc04f64579280b6d}{model\+To\+Viewport}} (const QVector3D \&v)
+\begin{DoxyCompactList}\small\item\em model\+To\+Viewport transform vector from model space to viewport \end{DoxyCompactList}\item 
+QVector3D \mbox{\hyperlink{class_g_l_e_s_renderer_a45b9782e076c13fc9a9325a6f7abdf98}{model\+To\+Mouse}} (const QVector3D \&v)
+\begin{DoxyCompactList}\small\item\em model\+To\+Mouse transform vector from model space to mouse coordinates \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_g_l_e_s_renderer_ae18e97568cc61118fdcb6f9ca0b6480f}{activate\+Attribute\+Array}} (Attribute\+Location location, const float $\ast$values, int tuple\+Size, int stride=0)
+\begin{DoxyCompactList}\small\item\em activate\+Attribute\+Array Enables Vertex, normal, color or tex\+Coord arrays and sets start adresses of arrays location may be\+: VERTEX\+\_\+\+LOCATION, NORMAL\+\_\+\+LOCATION, COLOR\+\_\+\+LOCATION, TEXCOORD\+\_\+\+LOCATION \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_ae18e97568cc61118fdcb6f9ca0b6480f}\label{class_g_l_e_s_renderer_ae18e97568cc61118fdcb6f9ca0b6480f}} 
+\index{GLESRenderer@{GLESRenderer}!activateAttributeArray@{activateAttributeArray}}
+\index{activateAttributeArray@{activateAttributeArray}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{activateAttributeArray()}{activateAttributeArray()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily bool GLESRenderer\+::activate\+Attribute\+Array (\begin{DoxyParamCaption}\item[{Attribute\+Location}]{array\+Location,  }\item[{const float $\ast$}]{values,  }\item[{int}]{tuple\+Size,  }\item[{int}]{stride = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+activate\+Attribute\+Array Enables Vertex, normal, color or tex\+Coord arrays and sets start adresses of arrays location may be\+: VERTEX\+\_\+\+LOCATION, NORMAL\+\_\+\+LOCATION, COLOR\+\_\+\+LOCATION, TEXCOORD\+\_\+\+LOCATION 
+
+
+\begin{DoxyParams}{Parameters}
+{\em location} & \\
+\hline
+{\em values} & Address of first number \\
+\hline
+{\em tuple\+Size} & Numbers per vertex \\
+\hline
+{\em stride} & Distance to next tuple \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+Enables Vertex, normal, color or tex\+Coord arrays and sets start adresses of arrays array\+Location may be\+: VERTEX\+\_\+\+LOCATION, NORMAL\+\_\+\+LOCATION, COLOR\+\_\+\+LOCATION, TEXCOORD\+\_\+\+LOCATION \mbox{\Hypertarget{class_g_l_e_s_renderer_ada229880a48efdbb3daaa375b701ace0}\label{class_g_l_e_s_renderer_ada229880a48efdbb3daaa375b701ace0}} 
+\index{GLESRenderer@{GLESRenderer}!activateAttributeArray@{activateAttributeArray}}
+\index{activateAttributeArray@{activateAttributeArray}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{activateAttributeArray()}{activateAttributeArray()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily bool GLESRenderer\+::activate\+Attribute\+Array (\begin{DoxyParamCaption}\item[{Attribute\+Location}]{array\+Location,  }\item[{const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} $\ast$}]{values,  }\item[{int}]{stride = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+Enables 4D Vertex or color arrays and sets start adresses of arrays Type may be\+: VERTEX\+\_\+\+LOCATION, COLOR\+\_\+\+LOCATION
+
+Enables Vertex, normal, color or tex\+Coord arrays and sets start adresses of arrays array\+Location may be\+: VERTEX\+\_\+\+LOCATION, NORMAL\+\_\+\+LOCATION, COLOR\+\_\+\+LOCATION, TEXCOORD\+\_\+\+LOCATION \mbox{\Hypertarget{class_g_l_e_s_renderer_a8529c317862c57c027acce876bad17bb}\label{class_g_l_e_s_renderer_a8529c317862c57c027acce876bad17bb}} 
+\index{GLESRenderer@{GLESRenderer}!activateAttributeArray@{activateAttributeArray}}
+\index{activateAttributeArray@{activateAttributeArray}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{activateAttributeArray()}{activateAttributeArray()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily bool GLESRenderer\+::activate\+Attribute\+Array (\begin{DoxyParamCaption}\item[{Attribute\+Location}]{array\+Location,  }\item[{const QVector2D $\ast$}]{values,  }\item[{int}]{stride = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+Enables 2D Vertex, normal, color or tex\+Coord arrays and sets start adresses of arrays Type may be\+: VERTEX\+\_\+\+LOCATION, NORMAL\+\_\+\+LOCATION, COLOR\+\_\+\+LOCATION, TEXCOORD\+\_\+\+LOCATION
+
+Enables Vertex, normal, color or tex\+Coord arrays and sets start adresses of arrays array\+Location may be\+: VERTEX\+\_\+\+LOCATION, NORMAL\+\_\+\+LOCATION, COLOR\+\_\+\+LOCATION, TEXCOORD\+\_\+\+LOCATION \mbox{\Hypertarget{class_g_l_e_s_renderer_a102377bf45b15bb52324214d2e9b6f14}\label{class_g_l_e_s_renderer_a102377bf45b15bb52324214d2e9b6f14}} 
+\index{GLESRenderer@{GLESRenderer}!activateAttributeArray@{activateAttributeArray}}
+\index{activateAttributeArray@{activateAttributeArray}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{activateAttributeArray()}{activateAttributeArray()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily bool GLESRenderer\+::activate\+Attribute\+Array (\begin{DoxyParamCaption}\item[{Attribute\+Location}]{array\+Location,  }\item[{const QVector3D $\ast$}]{values,  }\item[{int}]{stride = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+Enables 3D Vertex, normal, color or tex\+Coord arrays and sets start adresses of arrays Type may be\+: VERTEX\+\_\+\+LOCATION, NORMAL\+\_\+\+LOCATION, COLOR\+\_\+\+LOCATION, TEXCOORD\+\_\+\+LOCATION
+
+Enables Vertex, normal, color or tex\+Coord arrays and sets start adresses of arrays array\+Location may be\+: VERTEX\+\_\+\+LOCATION, NORMAL\+\_\+\+LOCATION, COLOR\+\_\+\+LOCATION, TEXCOORD\+\_\+\+LOCATION \mbox{\Hypertarget{class_g_l_e_s_renderer_ad0bc53b13af77050b43f7a6ba5f97ea1}\label{class_g_l_e_s_renderer_ad0bc53b13af77050b43f7a6ba5f97ea1}} 
+\index{GLESRenderer@{GLESRenderer}!activateAttributeBuffer@{activateAttributeBuffer}}
+\index{activateAttributeBuffer@{activateAttributeBuffer}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{activateAttributeBuffer()}{activateAttributeBuffer()}}
+{\footnotesize\ttfamily void GLESRenderer\+::activate\+Attribute\+Buffer (\begin{DoxyParamCaption}\item[{GLESRenderer\+::\+Attribute\+Location}]{buffer\+Location }\end{DoxyParamCaption})}
+
+To be used with arrays (e.\+g. QVector$<$\+GLPoint$>$) of \mbox{\hyperlink{class_g_l_point}{GLPoint}} objects. Enables 3D Vertex, normal, color or tex\+Coord buffer location may be\+: VERTEX\+\_\+\+LOCATION, NORMAL\+\_\+\+LOCATION, COLOR\+\_\+\+LOCATION, TEXCOORD\+\_\+\+LOCATION tuple\+Size is set to 3 for VERTEX\+\_\+\+LOCATION, NORMAL\+\_\+\+LOCATION, TEXCOORD\+\_\+\+LOCATION, to 4 for COLOR\+\_\+\+LOCATION \mbox{\Hypertarget{class_g_l_e_s_renderer_a5a523cfef1b63258e863af159c04c235}\label{class_g_l_e_s_renderer_a5a523cfef1b63258e863af159c04c235}} 
+\index{GLESRenderer@{GLESRenderer}!addTransformation@{addTransformation}}
+\index{addTransformation@{addTransformation}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{addTransformation()}{addTransformation()}}
+{\footnotesize\ttfamily void GLESRenderer\+::add\+Transformation (\begin{DoxyParamCaption}\item[{const QMatrix4x4}]{additional\+Transformation }\end{DoxyParamCaption})}
+
+
+
+add\+Transformation Multiplies additional\+Transformation to mv\+Matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em additional\+Transformation} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a41d040c7fa439552abf339b3883b02f4}\label{class_g_l_e_s_renderer_a41d040c7fa439552abf339b3883b02f4}} 
+\index{GLESRenderer@{GLESRenderer}!bind@{bind}}
+\index{bind@{bind}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{bind()}{bind()}}
+{\footnotesize\ttfamily bool GLESRenderer\+::bind (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Bind program and transfer attribute and uniform data to the shaders. Calls initialize, if not alraedy initialized. Returns false, if binding failed.
+
+Bind program and transfer attribute and uniform data to the shaders. Calls initialize, if not already initialized. \mbox{\Hypertarget{class_g_l_e_s_renderer_ae600d289f94594374cdbd8c031cb0c86}\label{class_g_l_e_s_renderer_ae600d289f94594374cdbd8c031cb0c86}} 
+\index{GLESRenderer@{GLESRenderer}!calculateMousePoints@{calculateMousePoints}}
+\index{calculateMousePoints@{calculateMousePoints}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{calculateMousePoints()}{calculateMousePoints()}}
+{\footnotesize\ttfamily void GLESRenderer\+::calculate\+Mouse\+Points (\begin{DoxyParamCaption}\item[{QVector3D $\ast$}]{near\+Point,  }\item[{QVector3D $\ast$}]{far\+Point,  }\item[{const QPoint \&}]{mouse\+Pos }\end{DoxyParamCaption})}
+
+Returns the points on near and far clipping plane, that correspond to the mouseX and mouseY coordinates of a mouse click. mouseX and mouseY are coordinates as delivered by QMouse\+Event or QDeclarative\+Mouse\+Event. \mbox{\Hypertarget{class_g_l_e_s_renderer_a531ca73b72e3a00a667b9f8237735724}\label{class_g_l_e_s_renderer_a531ca73b72e3a00a667b9f8237735724}} 
+\index{GLESRenderer@{GLESRenderer}!clipToViewport@{clipToViewport}}
+\index{clipToViewport@{clipToViewport}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{clipToViewport()}{clipToViewport()}}
+{\footnotesize\ttfamily QVector3D GLESRenderer\+::clip\+To\+Viewport (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{v }\end{DoxyParamCaption})}
+
+Performs viewport transform. Mainly for debugging. \mbox{\Hypertarget{class_g_l_e_s_renderer_a0978cd1fe3baab589b7bfbcde6554c15}\label{class_g_l_e_s_renderer_a0978cd1fe3baab589b7bfbcde6554c15}} 
+\index{GLESRenderer@{GLESRenderer}!disableAttributeArrays@{disableAttributeArrays}}
+\index{disableAttributeArrays@{disableAttributeArrays}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{disableAttributeArrays()}{disableAttributeArrays()}}
+{\footnotesize\ttfamily void GLESRenderer\+::disable\+Attribute\+Arrays (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Disables all enabled attribute arrays. To be called after rendering an object.
+
+Disables all enabled attribute arrays. \mbox{\Hypertarget{class_g_l_e_s_renderer_a6f31b6893897549f3762a88a8bf135f8}\label{class_g_l_e_s_renderer_a6f31b6893897549f3762a88a8bf135f8}} 
+\index{GLESRenderer@{GLESRenderer}!distanceToMouseClick@{distanceToMouseClick}}
+\index{distanceToMouseClick@{distanceToMouseClick}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{distanceToMouseClick()}{distanceToMouseClick()}}
+{\footnotesize\ttfamily float GLESRenderer\+::distance\+To\+Mouse\+Click (\begin{DoxyParamCaption}\item[{QVector3D}]{p,  }\item[{const QPoint \&}]{mouse\+Pos }\end{DoxyParamCaption})}
+
+Calculate the distance of the \char`\"{}mouse ray line\char`\"{} to point p in model space. mouseX, mouseY are the coordinates of the mouse click as delivered by QMouse\+Event. Returns distance. \mbox{\Hypertarget{class_g_l_e_s_renderer_af6f079ccbe2e37b90018dde13ad36b94}\label{class_g_l_e_s_renderer_af6f079ccbe2e37b90018dde13ad36b94}} 
+\index{GLESRenderer@{GLESRenderer}!getMvMatrix@{getMvMatrix}}
+\index{getMvMatrix@{getMvMatrix}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{getMvMatrix()}{getMvMatrix()}}
+{\footnotesize\ttfamily const QMatrix4x4\& GLESRenderer\+::get\+Mv\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter for debugging. \mbox{\Hypertarget{class_g_l_e_s_renderer_a0dfc680c7a7b2aea8439f88a892858fe}\label{class_g_l_e_s_renderer_a0dfc680c7a7b2aea8439f88a892858fe}} 
+\index{GLESRenderer@{GLESRenderer}!getNormalMatrix@{getNormalMatrix}}
+\index{getNormalMatrix@{getNormalMatrix}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{getNormalMatrix()}{getNormalMatrix()}}
+{\footnotesize\ttfamily const QMatrix3x3\& GLESRenderer\+::get\+Normal\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter for debugging. \mbox{\Hypertarget{class_g_l_e_s_renderer_a57700c29516d33449e65e7243eaf2aac}\label{class_g_l_e_s_renderer_a57700c29516d33449e65e7243eaf2aac}} 
+\index{GLESRenderer@{GLESRenderer}!getPMatrix@{getPMatrix}}
+\index{getPMatrix@{getPMatrix}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{getPMatrix()}{getPMatrix()}}
+{\footnotesize\ttfamily const QMatrix4x4\& GLESRenderer\+::get\+PMatrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter for debugging. \mbox{\Hypertarget{class_g_l_e_s_renderer_a5c752d886c22560c5dc5fc76391f4315}\label{class_g_l_e_s_renderer_a5c752d886c22560c5dc5fc76391f4315}} 
+\index{GLESRenderer@{GLESRenderer}!getViewMatrix@{getViewMatrix}}
+\index{getViewMatrix@{getViewMatrix}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{getViewMatrix()}{getViewMatrix()}}
+{\footnotesize\ttfamily const QMatrix4x4 GLESRenderer\+::get\+View\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter for debugging. \mbox{\Hypertarget{class_g_l_e_s_renderer_a0bb1617bc39236ccbf430cd282f127f2}\label{class_g_l_e_s_renderer_a0bb1617bc39236ccbf430cd282f127f2}} 
+\index{GLESRenderer@{GLESRenderer}!initialize@{initialize}}
+\index{initialize@{initialize}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily bool GLESRenderer\+::initialize (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+Compile shaders, get attribute and uniform locations of shaders. This function needs an active Open\+GL context. Returns false, if initialization failed.
+
+Compile shaders, get attribute and uniform locations. This function needs an active Open\+GL context. \mbox{\Hypertarget{class_g_l_e_s_renderer_a79ef99aaf1e080612cad7ce4e77580bd}\label{class_g_l_e_s_renderer_a79ef99aaf1e080612cad7ce4e77580bd}} 
+\index{GLESRenderer@{GLESRenderer}!isColorArrayEnabled@{isColorArrayEnabled}}
+\index{isColorArrayEnabled@{isColorArrayEnabled}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{isColorArrayEnabled()}{isColorArrayEnabled()}}
+{\footnotesize\ttfamily bool GLESRenderer\+::is\+Color\+Array\+Enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns lighting flag. \mbox{\Hypertarget{class_g_l_e_s_renderer_a72a9b248926c08a45dfea70b8f0e22ca}\label{class_g_l_e_s_renderer_a72a9b248926c08a45dfea70b8f0e22ca}} 
+\index{GLESRenderer@{GLESRenderer}!isLightingEnabled@{isLightingEnabled}}
+\index{isLightingEnabled@{isLightingEnabled}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{isLightingEnabled()}{isLightingEnabled()}}
+{\footnotesize\ttfamily bool GLESRenderer\+::is\+Lighting\+Enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns lighting flag. \mbox{\Hypertarget{class_g_l_e_s_renderer_a256990132d3f0ceff02a369db1361c2c}\label{class_g_l_e_s_renderer_a256990132d3f0ceff02a369db1361c2c}} 
+\index{GLESRenderer@{GLESRenderer}!isMaskActive@{isMaskActive}}
+\index{isMaskActive@{isMaskActive}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{isMaskActive()}{isMaskActive()}}
+{\footnotesize\ttfamily bool GLESRenderer\+::is\+Mask\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+is\+Mask\+Active 
+
+\begin{DoxyReturn}{Returns}
+Returns mask flag. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_afedd8e9ef1c5804d070f3c79baa15439}\label{class_g_l_e_s_renderer_afedd8e9ef1c5804d070f3c79baa15439}} 
+\index{GLESRenderer@{GLESRenderer}!isTextureEnabled@{isTextureEnabled}}
+\index{isTextureEnabled@{isTextureEnabled}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{isTextureEnabled()}{isTextureEnabled()}}
+{\footnotesize\ttfamily bool GLESRenderer\+::is\+Texture\+Enabled (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns texture flag; \mbox{\Hypertarget{class_g_l_e_s_renderer_a12a75a5ea065e69ad3476344e59f5909}\label{class_g_l_e_s_renderer_a12a75a5ea065e69ad3476344e59f5909}} 
+\index{GLESRenderer@{GLESRenderer}!lightDirection@{lightDirection}}
+\index{lightDirection@{lightDirection}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{lightDirection()}{lightDirection()}}
+{\footnotesize\ttfamily const QVector3D GLESRenderer\+::light\+Direction (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Getter. \mbox{\Hypertarget{class_g_l_e_s_renderer_a8492e132e07e28f448ecf48559eb14bc}\label{class_g_l_e_s_renderer_a8492e132e07e28f448ecf48559eb14bc}} 
+\index{GLESRenderer@{GLESRenderer}!matrixStackSize@{matrixStackSize}}
+\index{matrixStackSize@{matrixStackSize}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{matrixStackSize()}{matrixStackSize()}}
+{\footnotesize\ttfamily int GLESRenderer\+::matrix\+Stack\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+matrix\+Stack\+Size for debugging 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a5d591173ee2492417476253eb2e41986}\label{class_g_l_e_s_renderer_a5d591173ee2492417476253eb2e41986}} 
+\index{GLESRenderer@{GLESRenderer}!modelToClip@{modelToClip}}
+\index{modelToClip@{modelToClip}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{modelToClip()}{modelToClip()}}
+{\footnotesize\ttfamily QVector3D GLESRenderer\+::model\+To\+Clip (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{v }\end{DoxyParamCaption})}
+
+Multiplies current mvp matrix with v. Mainly for debugging. \mbox{\Hypertarget{class_g_l_e_s_renderer_a45b9782e076c13fc9a9325a6f7abdf98}\label{class_g_l_e_s_renderer_a45b9782e076c13fc9a9325a6f7abdf98}} 
+\index{GLESRenderer@{GLESRenderer}!modelToMouse@{modelToMouse}}
+\index{modelToMouse@{modelToMouse}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{modelToMouse()}{modelToMouse()}}
+{\footnotesize\ttfamily QVector3D GLESRenderer\+::model\+To\+Mouse (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{v }\end{DoxyParamCaption})}
+
+
+
+model\+To\+Mouse transform vector from model space to mouse coordinates 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a18692df474a8fc87dc04f64579280b6d}\label{class_g_l_e_s_renderer_a18692df474a8fc87dc04f64579280b6d}} 
+\index{GLESRenderer@{GLESRenderer}!modelToViewport@{modelToViewport}}
+\index{modelToViewport@{modelToViewport}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{modelToViewport()}{modelToViewport()}}
+{\footnotesize\ttfamily QVector3D GLESRenderer\+::model\+To\+Viewport (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{v }\end{DoxyParamCaption})}
+
+
+
+model\+To\+Viewport transform vector from model space to viewport 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vieport coordinates 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a2c8f6b6ff0df6acafc6cbd7a82678a17}\label{class_g_l_e_s_renderer_a2c8f6b6ff0df6acafc6cbd7a82678a17}} 
+\index{GLESRenderer@{GLESRenderer}!mouseIntersection@{mouseIntersection}}
+\index{mouseIntersection@{mouseIntersection}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{mouseIntersection()}{mouseIntersection()}}
+{\footnotesize\ttfamily bool GLESRenderer\+::mouse\+Intersection (\begin{DoxyParamCaption}\item[{QVector3D $\ast$}]{intersection,  }\item[{QVector3D}]{normal,  }\item[{float}]{d,  }\item[{const QPoint \&}]{mouse\+Pos }\end{DoxyParamCaption})}
+
+Calculates intersection of \char`\"{}mouse ray line\char`\"{} with the plane defined by normal and d. mouseX, mouseY are the coordinates of the mouse click as delivered by QMouse\+Event. Returns true, if intersection is in the visible frustum, else returns false. If return value is true, {\itshape intersection is the intersection of the mouse ray line with the plane normal}(x,y,z) + d = 0. If return value is false, $\ast$intersection is not modified. \mbox{\Hypertarget{class_g_l_e_s_renderer_a2ba82f565d0a34259614448407cdad11}\label{class_g_l_e_s_renderer_a2ba82f565d0a34259614448407cdad11}} 
+\index{GLESRenderer@{GLESRenderer}!pointSize@{pointSize}}
+\index{pointSize@{pointSize}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{pointSize()}{pointSize()}}
+{\footnotesize\ttfamily float GLESRenderer\+::point\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns point\+Size; \mbox{\Hypertarget{class_g_l_e_s_renderer_a93ddfbce8f107b0cbc41b2854855202d}\label{class_g_l_e_s_renderer_a93ddfbce8f107b0cbc41b2854855202d}} 
+\index{GLESRenderer@{GLESRenderer}!popMvMatrix@{popMvMatrix}}
+\index{popMvMatrix@{popMvMatrix}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{popMvMatrix()}{popMvMatrix()}}
+{\footnotesize\ttfamily void GLESRenderer\+::pop\+Mv\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Pops mv\+Matrix from stack and updates normal\+Matrix and mvp\+Matrix. \mbox{\Hypertarget{class_g_l_e_s_renderer_a712dddd10f14f80a003a347ff1aa1666}\label{class_g_l_e_s_renderer_a712dddd10f14f80a003a347ff1aa1666}} 
+\index{GLESRenderer@{GLESRenderer}!pushMvMatrix@{pushMvMatrix}}
+\index{pushMvMatrix@{pushMvMatrix}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{pushMvMatrix()}{pushMvMatrix()}}
+{\footnotesize\ttfamily void GLESRenderer\+::push\+Mv\+Matrix (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Pushes mv\+Matrix. \mbox{\Hypertarget{class_g_l_e_s_renderer_aadd9caa2f116226fa3d896bbad437e90}\label{class_g_l_e_s_renderer_aadd9caa2f116226fa3d896bbad437e90}} 
+\index{GLESRenderer@{GLESRenderer}!readGLViewportSettings@{readGLViewportSettings}}
+\index{readGLViewportSettings@{readGLViewportSettings}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{readGLViewportSettings()}{readGLViewportSettings()}}
+{\footnotesize\ttfamily void GLESRenderer\+::read\+GLViewport\+Settings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Get the present viewport settings from GL engine
+
+get the present settings from GL engine \mbox{\Hypertarget{class_g_l_e_s_renderer_a860d9102e98cd4394dc91c56e61c512b}\label{class_g_l_e_s_renderer_a860d9102e98cd4394dc91c56e61c512b}} 
+\index{GLESRenderer@{GLESRenderer}!release@{release}}
+\index{release@{release}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{release()}{release()}}
+{\footnotesize\ttfamily void GLESRenderer\+::release (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Releases program. To be called, when all rendering is finished. Calls disable\+Attribute\+Arrays and releases program.
+
+Releases program. To be called, when all rendering is finished. \mbox{\Hypertarget{class_g_l_e_s_renderer_a4e51b730376db41ff15b4a976b258c6e}\label{class_g_l_e_s_renderer_a4e51b730376db41ff15b4a976b258c6e}} 
+\index{GLESRenderer@{GLESRenderer}!rotate@{rotate}}
+\index{rotate@{rotate}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void GLESRenderer\+::rotate (\begin{DoxyParamCaption}\item[{float}]{angle,  }\item[{float}]{x,  }\item[{float}]{y,  }\item[{float}]{z }\end{DoxyParamCaption})}
+
+Rotates mv\+Matrix by angle around axis (x,y,z) \mbox{\Hypertarget{class_g_l_e_s_renderer_a9e034d2d95eedc35a56f8db1688df163}\label{class_g_l_e_s_renderer_a9e034d2d95eedc35a56f8db1688df163}} 
+\index{GLESRenderer@{GLESRenderer}!rotate@{rotate}}
+\index{rotate@{rotate}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{rotate()}{rotate()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void GLESRenderer\+::rotate (\begin{DoxyParamCaption}\item[{GLfloat}]{angle,  }\item[{const QVector3D \&}]{axis }\end{DoxyParamCaption})}
+
+Rotates mv\+Matrix by angle around axis \mbox{\Hypertarget{class_g_l_e_s_renderer_a4bd22f2f738b185f3b6c3e381c58feca}\label{class_g_l_e_s_renderer_a4bd22f2f738b185f3b6c3e381c58feca}} 
+\index{GLESRenderer@{GLESRenderer}!scale@{scale}}
+\index{scale@{scale}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{scale()}{scale()}}
+{\footnotesize\ttfamily void GLESRenderer\+::scale (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{v }\end{DoxyParamCaption})}
+
+Scales mv\+Matrix. \mbox{\Hypertarget{class_g_l_e_s_renderer_afce69d0a59a823b4470037bd785d0694}\label{class_g_l_e_s_renderer_afce69d0a59a823b4470037bd785d0694}} 
+\index{GLESRenderer@{GLESRenderer}!setAmbientAndDiffuseColor@{setAmbientAndDiffuseColor}}
+\index{setAmbientAndDiffuseColor@{setAmbientAndDiffuseColor}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setAmbientAndDiffuseColor()}{setAmbientAndDiffuseColor()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Ambient\+And\+Diffuse\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}}]{new\+Val }\end{DoxyParamCaption})}
+
+Set the color for ambient and diffuse lighting (or no lighting). Alternatively use a color array and color attribute. Defaults to white.
+
+Set the color for ambient and diffuse lighting (or no lighting). Alternatively use a color array and color attribute. \mbox{\Hypertarget{class_g_l_e_s_renderer_a0173737627f25d5a0586a57569c211d2}\label{class_g_l_e_s_renderer_a0173737627f25d5a0586a57569c211d2}} 
+\index{GLESRenderer@{GLESRenderer}!setAmbientLightBrightness@{setAmbientLightBrightness}}
+\index{setAmbientLightBrightness@{setAmbientLightBrightness}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setAmbientLightBrightness()}{setAmbientLightBrightness()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Ambient\+Light\+Brightness (\begin{DoxyParamCaption}\item[{float}]{new\+Val }\end{DoxyParamCaption})}
+
+Set the dimming factor for ambient light. Defaults to 0.\+2. \mbox{\Hypertarget{class_g_l_e_s_renderer_a990ae5bda053d007a710e7e9956facf1}\label{class_g_l_e_s_renderer_a990ae5bda053d007a710e7e9956facf1}} 
+\index{GLESRenderer@{GLESRenderer}!setColorArrayEnabled@{setColorArrayEnabled}}
+\index{setColorArrayEnabled@{setColorArrayEnabled}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setColorArrayEnabled()}{setColorArrayEnabled()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Color\+Array\+Enabled (\begin{DoxyParamCaption}\item[{bool}]{new\+Val }\end{DoxyParamCaption})}
+
+Enable / disable color array. Defaults to false.
+
+Enable / disable color array. \mbox{\Hypertarget{class_g_l_e_s_renderer_a4f755a8549d3ecbb2a40cabe56974c5f}\label{class_g_l_e_s_renderer_a4f755a8549d3ecbb2a40cabe56974c5f}} 
+\index{GLESRenderer@{GLESRenderer}!setLightDirection@{setLightDirection}}
+\index{setLightDirection@{setLightDirection}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setLightDirection()}{setLightDirection()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Light\+Direction (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{new\+Val }\end{DoxyParamCaption})}
+
+Set light direction. Defaults to (1.\+0, 1.\+0, 1.\+0)
+
+Set light direction. \mbox{\Hypertarget{class_g_l_e_s_renderer_ae6e3531d53ffdc334688eec3feaf9e77}\label{class_g_l_e_s_renderer_ae6e3531d53ffdc334688eec3feaf9e77}} 
+\index{GLESRenderer@{GLESRenderer}!setLightingEnabled@{setLightingEnabled}}
+\index{setLightingEnabled@{setLightingEnabled}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setLightingEnabled()}{setLightingEnabled()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Lighting\+Enabled (\begin{DoxyParamCaption}\item[{bool}]{new\+Val }\end{DoxyParamCaption})}
+
+Enable / disable lighting. Defaults to false.
+
+Enable / disable lighting. \mbox{\Hypertarget{class_g_l_e_s_renderer_a180fe52b28553039f83b07157b962c3e}\label{class_g_l_e_s_renderer_a180fe52b28553039f83b07157b962c3e}} 
+\index{GLESRenderer@{GLESRenderer}!setLookAt@{setLookAt}}
+\index{setLookAt@{setLookAt}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setLookAt()}{setLookAt()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Look\+At (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{eye,  }\item[{const QVector3D \&}]{center,  }\item[{const QVector3D \&}]{up }\end{DoxyParamCaption})}
+
+Sets mv\+Matrix to a look\+At transformation. Call set\+PMatrix or set\+Perspective first. \mbox{\Hypertarget{class_g_l_e_s_renderer_a957d299ae6eafc6604b5de598f525c6d}\label{class_g_l_e_s_renderer_a957d299ae6eafc6604b5de598f525c6d}} 
+\index{GLESRenderer@{GLESRenderer}!setMaskActive@{setMaskActive}}
+\index{setMaskActive@{setMaskActive}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setMaskActive()}{setMaskActive()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Mask\+Active (\begin{DoxyParamCaption}\item[{bool}]{new\+Val }\end{DoxyParamCaption})}
+
+
+
+set\+Mask\+Active Set the fragment shader mask flag 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Val} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_aa41f49d92c3514ce90a354cd2127d1c5}\label{class_g_l_e_s_renderer_aa41f49d92c3514ce90a354cd2127d1c5}} 
+\index{GLESRenderer@{GLESRenderer}!setMaskCenter@{setMaskCenter}}
+\index{setMaskCenter@{setMaskCenter}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setMaskCenter()}{setMaskCenter()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Mask\+Center (\begin{DoxyParamCaption}\item[{const QPoint \&}]{new\+Val }\end{DoxyParamCaption})}
+
+
+
+set\+Mask\+Center Set center of fragment shader mask 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Val} & New center in viewport coordinates \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a07c9bfdc4f16745e9b09529e21184910}\label{class_g_l_e_s_renderer_a07c9bfdc4f16745e9b09529e21184910}} 
+\index{GLESRenderer@{GLESRenderer}!setMaskDiameter@{setMaskDiameter}}
+\index{setMaskDiameter@{setMaskDiameter}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setMaskDiameter()}{setMaskDiameter()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Mask\+Diameter (\begin{DoxyParamCaption}\item[{float}]{new\+Val }\end{DoxyParamCaption})}
+
+
+
+set\+Mask\+Diameter Set diameter of fragment shader mask 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Val} & New diameter in pixels. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a8242d0b241a14c5850867ec00819c014}\label{class_g_l_e_s_renderer_a8242d0b241a14c5850867ec00819c014}} 
+\index{GLESRenderer@{GLESRenderer}!setMvMatrix@{setMvMatrix}}
+\index{setMvMatrix@{setMvMatrix}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setMvMatrix()}{setMvMatrix()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Mv\+Matrix (\begin{DoxyParamCaption}\item[{const QMatrix4x4}]{new\+Val }\end{DoxyParamCaption})}
+
+Getters and setters for uniforms Set modelview matrix. Updates mvp\+Matrix and normal\+Matrix too. Call set\+PMatrix or set\+Perspective first.
+
+Set modelview matrix. Updates mvp\+Matrix and normal\+Matrix too. Call set\+PMatrix first. \mbox{\Hypertarget{class_g_l_e_s_renderer_a7f0488a9867d384110718ca6ef9a70af}\label{class_g_l_e_s_renderer_a7f0488a9867d384110718ca6ef9a70af}} 
+\index{GLESRenderer@{GLESRenderer}!setOrtho@{setOrtho}}
+\index{setOrtho@{setOrtho}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setOrtho()}{setOrtho()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Ortho (\begin{DoxyParamCaption}\item[{float}]{left,  }\item[{float}]{right,  }\item[{float}]{bottom,  }\item[{float}]{top,  }\item[{float}]{near\+Plane,  }\item[{float}]{far\+Plane }\end{DoxyParamCaption})}
+
+
+
+set\+Ortho Set p\+Matrix to an orthogonal projection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & \\
+\hline
+{\em right} & \\
+\hline
+{\em bottom} & \\
+\hline
+{\em top} & \\
+\hline
+{\em near\+Plane} & \\
+\hline
+{\em far\+Plane} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_afff0eca251e49d50c83277a2fe3ad5af}\label{class_g_l_e_s_renderer_afff0eca251e49d50c83277a2fe3ad5af}} 
+\index{GLESRenderer@{GLESRenderer}!setPerspective@{setPerspective}}
+\index{setPerspective@{setPerspective}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setPerspective()}{setPerspective()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Perspective (\begin{DoxyParamCaption}\item[{GLfloat}]{fovy,  }\item[{GLfloat}]{aspect,  }\item[{GLfloat}]{near\+Clip,  }\item[{GLfloat}]{far\+Clip }\end{DoxyParamCaption})}
+
+Setup projection matrix. Call set\+Mv\+Matrix after this. \mbox{\Hypertarget{class_g_l_e_s_renderer_ad439b83c368872dfd4439136d9af4d6d}\label{class_g_l_e_s_renderer_ad439b83c368872dfd4439136d9af4d6d}} 
+\index{GLESRenderer@{GLESRenderer}!setPMatrix@{setPMatrix}}
+\index{setPMatrix@{setPMatrix}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setPMatrix()}{setPMatrix()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+PMatrix (\begin{DoxyParamCaption}\item[{const QMatrix4x4}]{new\+Val }\end{DoxyParamCaption})}
+
+Set projection matrix. Call set\+Mv\+Matrix after this. \mbox{\Hypertarget{class_g_l_e_s_renderer_a2ea9d299d160c0757f75e883164f6e21}\label{class_g_l_e_s_renderer_a2ea9d299d160c0757f75e883164f6e21}} 
+\index{GLESRenderer@{GLESRenderer}!setPointSize@{setPointSize}}
+\index{setPointSize@{setPointSize}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setPointSize()}{setPointSize()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Point\+Size (\begin{DoxyParamCaption}\item[{float}]{new\+Val }\end{DoxyParamCaption})}
+
+Set size of points drawn with GL\+\_\+\+POINTS. Defaults to 2.\+0.
+
+Set size of points drawn with GL\+\_\+\+POINTS. \mbox{\Hypertarget{class_g_l_e_s_renderer_a75fdf201c7a27ab2e053e2a5d37e4ac4}\label{class_g_l_e_s_renderer_a75fdf201c7a27ab2e053e2a5d37e4ac4}} 
+\index{GLESRenderer@{GLESRenderer}!setShininess@{setShininess}}
+\index{setShininess@{setShininess}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setShininess()}{setShininess()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Shininess (\begin{DoxyParamCaption}\item[{float}]{new\+Val }\end{DoxyParamCaption})}
+
+Set the shininess (exponent) for specular lighting. Defaults to 200.
+
+Set the shininess for specular lighting. \mbox{\Hypertarget{class_g_l_e_s_renderer_a1e147c3f7e1cdc2d022c376817ece5d9}\label{class_g_l_e_s_renderer_a1e147c3f7e1cdc2d022c376817ece5d9}} 
+\index{GLESRenderer@{GLESRenderer}!setSourceAlpha@{setSourceAlpha}}
+\index{setSourceAlpha@{setSourceAlpha}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setSourceAlpha()}{setSourceAlpha()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Source\+Alpha (\begin{DoxyParamCaption}\item[{float}]{new\+Val }\end{DoxyParamCaption})}
+
+
+
+set\+Source\+Alpha Set the source alpha value used for blending. gl\+Enable(\+GL\+\_\+\+BLEND) and gl\+Blendfunc calls are required! 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Val} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a1ab28a7a363508c57024fbbd67c30481}\label{class_g_l_e_s_renderer_a1ab28a7a363508c57024fbbd67c30481}} 
+\index{GLESRenderer@{GLESRenderer}!setSpecularColor@{setSpecularColor}}
+\index{setSpecularColor@{setSpecularColor}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setSpecularColor()}{setSpecularColor()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Specular\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}}}]{new\+Val }\end{DoxyParamCaption})}
+
+Set the color for specular lighting. Defaults to white.
+
+Set the color for specular lighting. \mbox{\Hypertarget{class_g_l_e_s_renderer_a83f1e3ddcb613eea7e74fa6ce4289350}\label{class_g_l_e_s_renderer_a83f1e3ddcb613eea7e74fa6ce4289350}} 
+\index{GLESRenderer@{GLESRenderer}!setTextureEnabled@{setTextureEnabled}}
+\index{setTextureEnabled@{setTextureEnabled}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setTextureEnabled()}{setTextureEnabled()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Texture\+Enabled (\begin{DoxyParamCaption}\item[{bool}]{new\+Val }\end{DoxyParamCaption})}
+
+Set the texture flag. Defaults to false.
+
+Set the texture flag. \mbox{\Hypertarget{class_g_l_e_s_renderer_a9715cb674cb2fb4ae0cf13052f063336}\label{class_g_l_e_s_renderer_a9715cb674cb2fb4ae0cf13052f063336}} 
+\index{GLESRenderer@{GLESRenderer}!setViewport@{setViewport}}
+\index{setViewport@{setViewport}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{setViewport()}{setViewport()}}
+{\footnotesize\ttfamily void GLESRenderer\+::set\+Viewport (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{w,  }\item[{int}]{h }\end{DoxyParamCaption})}
+
+Set viewport Viewport coordinates must be given as GL-\/viewport coordinates, where lower left is (0,0).
+
+Set viewport \mbox{\Hypertarget{class_g_l_e_s_renderer_a06300bcac50a10f5ef947012a2050f6c}\label{class_g_l_e_s_renderer_a06300bcac50a10f5ef947012a2050f6c}} 
+\index{GLESRenderer@{GLESRenderer}!sourceAlpha@{sourceAlpha}}
+\index{sourceAlpha@{sourceAlpha}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{sourceAlpha()}{sourceAlpha()}}
+{\footnotesize\ttfamily float GLESRenderer\+::source\+Alpha (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+source\+Alpha The present source alpha value for blending 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a8d8a2bac71c26f834b7ce7983204e870}\label{class_g_l_e_s_renderer_a8d8a2bac71c26f834b7ce7983204e870}} 
+\index{GLESRenderer@{GLESRenderer}!transform@{transform}}
+\index{transform@{transform}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{transform()}{transform()}}
+{\footnotesize\ttfamily void GLESRenderer\+::transform (\begin{DoxyParamCaption}\item[{const QMatrix4x4 \&}]{transformation }\end{DoxyParamCaption})}
+
+
+
+transform Multiplies mv\+Matrix with transformation 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transformation} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_g_l_e_s_renderer_a252caaa926c2e86312b219454492ffe0}\label{class_g_l_e_s_renderer_a252caaa926c2e86312b219454492ffe0}} 
+\index{GLESRenderer@{GLESRenderer}!translate@{translate}}
+\index{translate@{translate}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{translate()}{translate()}}
+{\footnotesize\ttfamily void GLESRenderer\+::translate (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{v }\end{DoxyParamCaption})}
+
+Translates mv\+Matrix by v \mbox{\Hypertarget{class_g_l_e_s_renderer_a8be3d2a634d0fe1e13fb7b97673eefab}\label{class_g_l_e_s_renderer_a8be3d2a634d0fe1e13fb7b97673eefab}} 
+\index{GLESRenderer@{GLESRenderer}!unProjectViewportPoint@{unProjectViewportPoint}}
+\index{unProjectViewportPoint@{unProjectViewportPoint}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{unProjectViewportPoint()}{unProjectViewportPoint()}}
+{\footnotesize\ttfamily QVector3D GLESRenderer\+::un\+Project\+Viewport\+Point (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{v\+Win }\end{DoxyParamCaption})}
+
+Uses viewport and matrix settings to reverse the vertex transformation chain. v\+Win x,y and z are the coordinates in window coordinates. Lower left of viewport is winX = 0, winY = 0. Use winZ = 0.\+0 for a point on near clipping plane and winZ = 1.\+0 for a point on far clipping plane. This function assumes, that the vertex shader computes gl\+\_\+positon as v $\ast$ mvp\+Matrix. Use a custom shader reverse function, if this is not true. Returns coordinate in object space.
+
+Uses viewport and matrix settings to reverse the vertex transformation chain. WinX, winY, winZ are the coordinates in window coordinates. Lower left of viewport is winX = 0, winY = 0. Use winZ = 0.\+0 for a point on near clipping plane and winZ = 1.\+0 for a point on far clipping plane. This function assumes, that the vertex shader computes gl\+\_\+positon as v $\ast$ mvp\+Matrix. Use a custom shader reverse function, if this is not true. Returns coordinate in object space. \mbox{\Hypertarget{class_g_l_e_s_renderer_a36440b34ef23691928cb033a55c9c6f9}\label{class_g_l_e_s_renderer_a36440b34ef23691928cb033a55c9c6f9}} 
+\index{GLESRenderer@{GLESRenderer}!viewportToClip@{viewportToClip}}
+\index{viewportToClip@{viewportToClip}!GLESRenderer@{GLESRenderer}}
+\doxysubsubsection{\texorpdfstring{viewportToClip()}{viewportToClip()}}
+{\footnotesize\ttfamily QVector3D GLESRenderer\+::viewport\+To\+Clip (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{v\+Win }\end{DoxyParamCaption})}
+
+Performs inverse viewport transform. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/gl/glesrenderer.\+h\item 
+src/gl/glesrenderer.\+cpp\end{DoxyCompactItemize}

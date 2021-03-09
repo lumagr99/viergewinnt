@@ -4,19 +4,13 @@
 #include "gltoken.h"
 
 /**
- * @brief The GLTokenRed class
- *
- * Objekte der Klasse stellen ein rotes Token des Vier Gewinnt Spiels dar.
- *
+ * @brief Rotes Token des Vier Gewinnt Spiels.
  */
 class GLTokenRed : public GLToken {
 
 public:
     /**
-     * @brief GLTokenRed
-     *
-     * Erstellt und Initialisiert ein neues GLTokenRed-Objekt.
-     *
+     * @brief Konstruktor. Erstellt und Initialisiert ein neues GLTokenRed-Objekt.
      * @param name Name des Objekts.
      * @param textureFile Texturdatei des Objekts.
      */
@@ -24,9 +18,7 @@ public:
 
 private:
     /**
-     * @brief m_textureFile
-     *
-     * Texturdatei des Tokens.
+     * @brief Texturdatei.
      */
     QString m_textureFile;
 };

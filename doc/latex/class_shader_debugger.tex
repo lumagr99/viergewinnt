@@ -1,0 +1,115 @@
+\hypertarget{class_shader_debugger}{}\doxysection{Shader\+Debugger Class Reference}
+\label{class_shader_debugger}\index{ShaderDebugger@{ShaderDebugger}}
+
+
+A simple debugging tool for uniforms passed to a shader.  
+
+
+
+
+{\ttfamily \#include $<$shaderdebugger.\+h$>$}
+
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_shader_debugger_af7f777abe3673cac6a93b301ef539913}\label{class_shader_debugger_af7f777abe3673cac6a93b301ef539913}} 
+static void {\bfseries set\+Enabled} (bool new\+Val)
+\item 
+static void \mbox{\hyperlink{class_shader_debugger_abe24abd2ac69db02f63c2fb4fc829080}{debug\+Uniforms}} (int program\+Id)
+\item 
+static void \mbox{\hyperlink{class_shader_debugger_a45249372f2e0c1e5bda7d200bb0dbfa8}{debug\+Matrix4x4}} (const QMatrix4x4 \&m, const QString \&caption=\char`\"{}QMatrix4x4\char`\"{})
+\begin{DoxyCompactList}\small\item\em debug\+Matrix4x4 Send debug output to stderr. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_shader_debugger_a6fd11ef28da124fd558f329d55629ee8}{debug\+Matrix3x3}} (const QMatrix3x3 \&m, const QString \&caption=\char`\"{}QMatrix3x3\char`\"{})
+\begin{DoxyCompactList}\small\item\em debug\+Matrix3x3 Send debug output to stderr. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_shader_debugger_a457fa04849102556e946cafdf9ea553e}{debug\+Vector4D}} (const QVector4D \&v, const QString \&caption=\char`\"{}QVector4D\char`\"{})
+\begin{DoxyCompactList}\small\item\em debug\+Vector4D Send debug output to stderr. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{class_shader_debugger_afd6536a3c6c74c4b6af32ad128ba50d0}{debug\+Vector3D}} (const QVector3D \&v, const QString \&caption=\char`\"{}QVector3D\char`\"{})
+\begin{DoxyCompactList}\small\item\em debug\+Vector4D Send debug output to stderr. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A simple debugging tool for uniforms passed to a shader. 
+
+There is no way to get the values of variables inside a shader, therefore you have to look at the variables, before they are passed to the shader. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_shader_debugger_a6fd11ef28da124fd558f329d55629ee8}\label{class_shader_debugger_a6fd11ef28da124fd558f329d55629ee8}} 
+\index{ShaderDebugger@{ShaderDebugger}!debugMatrix3x3@{debugMatrix3x3}}
+\index{debugMatrix3x3@{debugMatrix3x3}!ShaderDebugger@{ShaderDebugger}}
+\doxysubsubsection{\texorpdfstring{debugMatrix3x3()}{debugMatrix3x3()}}
+{\footnotesize\ttfamily void Shader\+Debugger\+::debug\+Matrix3x3 (\begin{DoxyParamCaption}\item[{const QMatrix3x3 \&}]{m,  }\item[{const QString \&}]{caption = {\ttfamily \char`\"{}QMatrix3x3\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+debug\+Matrix3x3 Send debug output to stderr. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The matrix \\
+\hline
+{\em caption} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_shader_debugger_a45249372f2e0c1e5bda7d200bb0dbfa8}\label{class_shader_debugger_a45249372f2e0c1e5bda7d200bb0dbfa8}} 
+\index{ShaderDebugger@{ShaderDebugger}!debugMatrix4x4@{debugMatrix4x4}}
+\index{debugMatrix4x4@{debugMatrix4x4}!ShaderDebugger@{ShaderDebugger}}
+\doxysubsubsection{\texorpdfstring{debugMatrix4x4()}{debugMatrix4x4()}}
+{\footnotesize\ttfamily void Shader\+Debugger\+::debug\+Matrix4x4 (\begin{DoxyParamCaption}\item[{const QMatrix4x4 \&}]{m,  }\item[{const QString \&}]{caption = {\ttfamily \char`\"{}QMatrix4x4\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+debug\+Matrix4x4 Send debug output to stderr. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The matrix \\
+\hline
+{\em caption} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_shader_debugger_abe24abd2ac69db02f63c2fb4fc829080}\label{class_shader_debugger_abe24abd2ac69db02f63c2fb4fc829080}} 
+\index{ShaderDebugger@{ShaderDebugger}!debugUniforms@{debugUniforms}}
+\index{debugUniforms@{debugUniforms}!ShaderDebugger@{ShaderDebugger}}
+\doxysubsubsection{\texorpdfstring{debugUniforms()}{debugUniforms()}}
+{\footnotesize\ttfamily void Shader\+Debugger\+::debug\+Uniforms (\begin{DoxyParamCaption}\item[{int}]{program\+Id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Works on GLES platforms only. \mbox{\Hypertarget{class_shader_debugger_afd6536a3c6c74c4b6af32ad128ba50d0}\label{class_shader_debugger_afd6536a3c6c74c4b6af32ad128ba50d0}} 
+\index{ShaderDebugger@{ShaderDebugger}!debugVector3D@{debugVector3D}}
+\index{debugVector3D@{debugVector3D}!ShaderDebugger@{ShaderDebugger}}
+\doxysubsubsection{\texorpdfstring{debugVector3D()}{debugVector3D()}}
+{\footnotesize\ttfamily void Shader\+Debugger\+::debug\+Vector3D (\begin{DoxyParamCaption}\item[{const QVector3D \&}]{v,  }\item[{const QString \&}]{caption = {\ttfamily \char`\"{}QVector3D\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+debug\+Vector4D Send debug output to stderr. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The vector \\
+\hline
+{\em caption} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_shader_debugger_a457fa04849102556e946cafdf9ea553e}\label{class_shader_debugger_a457fa04849102556e946cafdf9ea553e}} 
+\index{ShaderDebugger@{ShaderDebugger}!debugVector4D@{debugVector4D}}
+\index{debugVector4D@{debugVector4D}!ShaderDebugger@{ShaderDebugger}}
+\doxysubsubsection{\texorpdfstring{debugVector4D()}{debugVector4D()}}
+{\footnotesize\ttfamily void Shader\+Debugger\+::debug\+Vector4D (\begin{DoxyParamCaption}\item[{const QVector4D \&}]{v,  }\item[{const QString \&}]{caption = {\ttfamily \char`\"{}QVector4D\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+debug\+Vector4D Send debug output to stderr. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The vector \\
+\hline
+{\em caption} & \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/gl/shaderdebugger.\+h\item 
+src/gl/shaderdebugger.\+cpp\end{DoxyCompactItemize}
