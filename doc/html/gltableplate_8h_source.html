@@ -28,7 +28,7 @@
    <div id="projectname">ConnectFour
    &#160;<span id="projectnumber">1.0</span>
    </div>
-   <div id="projectbrief">Ein Vier Gewinnt Spiel mit OpenGL und QML</div>
+   <div id="projectbrief">Implementierung eines Vier Gewinnt Spies mit OpenGL und QMLl</div>
   </td>
  </tr>
  </tbody>
@@ -95,17 +95,26 @@ $(document).ready(function(){initNavTree('gltableplate_8h_source.html',''); init
 <div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="class_g_l_table_plate.html">    9</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_g_l_table_plate.html">GLTablePlate</a> : <span class="keyword">public</span> <a class="code" href="class_g_l_body.html">GLBody</a> {</div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_g_l_table_plate.html#a7becb17747c733b43eaf42217b96964a">GLTablePlate</a>(<span class="keyword">const</span> QString&amp; name, <span class="keywordtype">float</span> radius = 1.0f, <span class="keyword">const</span> <a class="code" href="class_g_l_color_rgba.html">GLColorRgba</a>&amp; color = GLColorRgba::clBlue, <span class="keyword">const</span> QString textureFile = <span class="stringliteral">&quot;:/textures/Table.png&quot;</span>);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_g_l_table_plate.html#a5cbe7dd50b28d6b3bd88336608a4c550">~GLTablePlate</a>() Q_DECL_OVERRIDE;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;};</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_g_l_table_plate.html#ae5a0fed67f13270a5d51d215dcdbc8a9">   15</a></span>&#160;    <span class="keyword">static</span> constexpr GLfloat <a class="code" href="class_g_l_table_plate.html#ae5a0fed67f13270a5d51d215dcdbc8a9">WIDTH</a> = 16.0f;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_g_l_table_plate.html#a4a5af3cd29fdfe17a51191e159e845d3">   20</a></span>&#160;    <span class="keyword">static</span> constexpr GLfloat <a class="code" href="class_g_l_table_plate.html#a4a5af3cd29fdfe17a51191e159e845d3">HEIGHT</a> = 0.4f;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_g_l_table_plate.html#a47041ff1254b19b30df420ee3bbd9a15">   25</a></span>&#160;    <span class="keyword">static</span> constexpr GLfloat <a class="code" href="class_g_l_table_plate.html#a47041ff1254b19b30df420ee3bbd9a15">DEPTH</a> = 16.0f;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// GLTABLEPLATE_H</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keyword">explicit</span> <a class="code" href="class_g_l_table_plate.html#a7becb17747c733b43eaf42217b96964a">GLTablePlate</a>(<span class="keyword">const</span> QString&amp; name, <span class="keywordtype">float</span> radius = 1.0f, <span class="keyword">const</span> <a class="code" href="class_g_l_color_rgba.html">GLColorRgba</a>&amp; color = GLColorRgba::clBlue, <span class="keyword">const</span> QString textureFile = <span class="stringliteral">&quot;:/textures/Table.png&quot;</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="class_g_l_table_plate.html#a5cbe7dd50b28d6b3bd88336608a4c550">~GLTablePlate</a>() Q_DECL_OVERRIDE;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// GLTABLEPLATE_H</span></div>
 <div class="ttc" id="aclass_g_l_body_html"><div class="ttname"><a href="class_g_l_body.html">GLBody</a></div><div class="ttdoc">A 3D body that uses a GLESRenderer for drawing and GLPoint objects for defining its surface.</div><div class="ttdef"><b>Definition:</b> glbody.h:44</div></div>
 <div class="ttc" id="aclass_g_l_color_rgba_html"><div class="ttname"><a href="class_g_l_color_rgba.html">GLColorRgba</a></div><div class="ttdoc">The GlColorRgba class is a convenience class to replace QVector4D for color variables.</div><div class="ttdef"><b>Definition:</b> glcolorrgba.h:8</div></div>
 <div class="ttc" id="aclass_g_l_table_plate_html"><div class="ttname"><a href="class_g_l_table_plate.html">GLTablePlate</a></div><div class="ttdoc">Tischplatte des Vier Gewinnt Spiels.</div><div class="ttdef"><b>Definition:</b> gltableplate.h:9</div></div>
+<div class="ttc" id="aclass_g_l_table_plate_html_a47041ff1254b19b30df420ee3bbd9a15"><div class="ttname"><a href="class_g_l_table_plate.html#a47041ff1254b19b30df420ee3bbd9a15">GLTablePlate::DEPTH</a></div><div class="ttdeci">static constexpr GLfloat DEPTH</div><div class="ttdoc">Tiefe der Tischplatte.</div><div class="ttdef"><b>Definition:</b> gltableplate.h:25</div></div>
+<div class="ttc" id="aclass_g_l_table_plate_html_a4a5af3cd29fdfe17a51191e159e845d3"><div class="ttname"><a href="class_g_l_table_plate.html#a4a5af3cd29fdfe17a51191e159e845d3">GLTablePlate::HEIGHT</a></div><div class="ttdeci">static constexpr GLfloat HEIGHT</div><div class="ttdoc">Höhe der Tischplatte.</div><div class="ttdef"><b>Definition:</b> gltableplate.h:20</div></div>
 <div class="ttc" id="aclass_g_l_table_plate_html_a5cbe7dd50b28d6b3bd88336608a4c550"><div class="ttname"><a href="class_g_l_table_plate.html#a5cbe7dd50b28d6b3bd88336608a4c550">GLTablePlate::~GLTablePlate</a></div><div class="ttdeci">virtual ~GLTablePlate() Q_DECL_OVERRIDE</div><div class="ttdoc">Destruktor. Löscht das Texturobjekt der Tischplatte.</div><div class="ttdef"><b>Definition:</b> gltableplate.cpp:10</div></div>
 <div class="ttc" id="aclass_g_l_table_plate_html_a7becb17747c733b43eaf42217b96964a"><div class="ttname"><a href="class_g_l_table_plate.html#a7becb17747c733b43eaf42217b96964a">GLTablePlate::GLTablePlate</a></div><div class="ttdeci">GLTablePlate(const QString &amp;name, float radius=1.0f, const GLColorRgba &amp;color=GLColorRgba::clBlue, const QString textureFile=&quot;:/textures/Table.png&quot;)</div><div class="ttdoc">Konstruktor. Erstellt und Initialisiert ein neues GLTablePlate-Objekt.</div><div class="ttdef"><b>Definition:</b> gltableplate.cpp:4</div></div>
+<div class="ttc" id="aclass_g_l_table_plate_html_ae5a0fed67f13270a5d51d215dcdbc8a9"><div class="ttname"><a href="class_g_l_table_plate.html#ae5a0fed67f13270a5d51d215dcdbc8a9">GLTablePlate::WIDTH</a></div><div class="ttdeci">static constexpr GLfloat WIDTH</div><div class="ttdoc">Breite der Tischplatte.</div><div class="ttdef"><b>Definition:</b> gltableplate.h:15</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

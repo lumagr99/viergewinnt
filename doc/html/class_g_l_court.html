@@ -28,7 +28,7 @@
    <div id="projectname">ConnectFour
    &#160;<span id="projectnumber">1.0</span>
    </div>
-   <div id="projectbrief">Ein Vier Gewinnt Spiel mit OpenGL und QML</div>
+   <div id="projectbrief">Implementierung eines Vier Gewinnt Spies mit OpenGL und QMLl</div>
   </td>
  </tr>
  </tbody>
@@ -112,7 +112,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a12882cebc67f78ae9befdf2fba9946cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Konstruktor. Erstellt und Initialisiert ein neues GLCourt-Objekt.  <a href="class_g_l_court.html#a12882cebc67f78ae9befdf2fba9946cc">More...</a><br /></td></tr>
 <tr class="separator:a12882cebc67f78ae9befdf2fba9946cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aca753c255ae8e6eac547cb2795910ec7"><td class="memItemLeft" align="right" valign="top"><a id="aca753c255ae8e6eac547cb2795910ec7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#aca753c255ae8e6eac547cb2795910ec7">~GLCourt</a> () Q_DECL_OVERRIDE</td></tr>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#aca753c255ae8e6eac547cb2795910ec7">~GLCourt</a> () Q_DECL_OVERRIDE</td></tr>
 <tr class="memdesc:aca753c255ae8e6eac547cb2795910ec7"><td class="mdescLeft">&#160;</td><td class="mdescRight">~Destruktor. Löscht das Texturobjekt des Spielfelds. <br /></td></tr>
 <tr class="separator:aca753c255ae8e6eac547cb2795910ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90ff11bbc28ff26ea12963a96a3df62a"><td class="memItemLeft" align="right" valign="top">QVector3D&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#a90ff11bbc28ff26ea12963a96a3df62a">fieldToPosition</a> (const QPoint &amp;field) const</td></tr>
@@ -124,12 +124,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa935db385b50d3b610830e280fafb040"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#aa935db385b50d3b610830e280fafb040">getColumnByPosition</a> (const QVector3D &amp;position) const</td></tr>
 <tr class="memdesc:aa935db385b50d3b610830e280fafb040"><td class="mdescLeft">&#160;</td><td class="mdescRight">Berechnet die der übergebenen Position nächsten Spalte.  <a href="class_g_l_court.html#aa935db385b50d3b610830e280fafb040">More...</a><br /></td></tr>
 <tr class="separator:aa935db385b50d3b610830e280fafb040"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a148681e151b8b5b9a0bacc36286ae3f1"><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#a148681e151b8b5b9a0bacc36286ae3f1">getFreeField</a> (int column)</td></tr>
-<tr class="memdesc:a148681e151b8b5b9a0bacc36286ae3f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bestimmt die erste freie Position in einer Spalte. Die erste freie Position wird dabei von unten bestimmt.  <a href="class_g_l_court.html#a148681e151b8b5b9a0bacc36286ae3f1">More...</a><br /></td></tr>
-<tr class="separator:a148681e151b8b5b9a0bacc36286ae3f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1bf649218e687fd99a5ace2119ccd178"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#a1bf649218e687fd99a5ace2119ccd178">setField</a> (Player player, QPoint field)</td></tr>
-<tr class="memdesc:a1bf649218e687fd99a5ace2119ccd178"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setzt das übergebene Feld für den übergebenen Spieler.  <a href="class_g_l_court.html#a1bf649218e687fd99a5ace2119ccd178">More...</a><br /></td></tr>
-<tr class="separator:a1bf649218e687fd99a5ace2119ccd178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4854730d4a81d0287d74686b5bcaa32e"><td class="memItemLeft" align="right" valign="top">QPoint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#a4854730d4a81d0287d74686b5bcaa32e">getFreeField</a> (GLint column)</td></tr>
+<tr class="memdesc:a4854730d4a81d0287d74686b5bcaa32e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bestimmt die erste freie Position in einer Spalte. Die erste freie Position wird dabei von unten bestimmt.  <a href="class_g_l_court.html#a4854730d4a81d0287d74686b5bcaa32e">More...</a><br /></td></tr>
+<tr class="separator:a4854730d4a81d0287d74686b5bcaa32e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48e33bfe260e609d616c0a0ccfee34f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#a48e33bfe260e609d616c0a0ccfee34f6">setField</a> (Player player, const QPoint &amp;field)</td></tr>
+<tr class="memdesc:a48e33bfe260e609d616c0a0ccfee34f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setzt das übergebene Feld für den übergebenen Spieler.  <a href="class_g_l_court.html#a48e33bfe260e609d616c0a0ccfee34f6">More...</a><br /></td></tr>
+<tr class="separator:a48e33bfe260e609d616c0a0ccfee34f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adb2174f8af908b6410be5db2e03f9f72"><td class="memItemLeft" align="right" valign="top">Player&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#adb2174f8af908b6410be5db2e03f9f72">checkWin</a> ()</td></tr>
 <tr class="memdesc:adb2174f8af908b6410be5db2e03f9f72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Überprüft, ob einer der Spieler gewonnen hat.  <a href="class_g_l_court.html#adb2174f8af908b6410be5db2e03f9f72">More...</a><br /></td></tr>
 <tr class="separator:adb2174f8af908b6410be5db2e03f9f72"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -299,26 +299,26 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>showNormals</b> (bool
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:a3ee24c103b7db48e067a2c199731f040"><td class="memItemLeft" align="right" valign="top"><a id="a3ee24c103b7db48e067a2c199731f040"></a>
-static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#a3ee24c103b7db48e067a2c199731f040">ROWS</a> = 6</td></tr>
-<tr class="memdesc:a3ee24c103b7db48e067a2c199731f040"><td class="mdescLeft">&#160;</td><td class="mdescRight">Anzahl der Zeilen des Spielfelds. <br /></td></tr>
-<tr class="separator:a3ee24c103b7db48e067a2c199731f040"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37e9c6ec9b591a780460c5fddb03a82e"><td class="memItemLeft" align="right" valign="top"><a id="a37e9c6ec9b591a780460c5fddb03a82e"></a>
-static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#a37e9c6ec9b591a780460c5fddb03a82e">COLUMNS</a> = 7</td></tr>
-<tr class="memdesc:a37e9c6ec9b591a780460c5fddb03a82e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Anzahl der Spalten des Spielfelds. <br /></td></tr>
-<tr class="separator:a37e9c6ec9b591a780460c5fddb03a82e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a68575d87a8323c7e3fdaa3f1ca8b971c"><td class="memItemLeft" align="right" valign="top"><a id="a68575d87a8323c7e3fdaa3f1ca8b971c"></a>
-static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#a68575d87a8323c7e3fdaa3f1ca8b971c">WIDTH</a> = 10.0f</td></tr>
-<tr class="memdesc:a68575d87a8323c7e3fdaa3f1ca8b971c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Breite des Spielfelds. <br /></td></tr>
-<tr class="separator:a68575d87a8323c7e3fdaa3f1ca8b971c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a81ca2dfc4b82fbffada1e3e86ed7418a"><td class="memItemLeft" align="right" valign="top"><a id="a81ca2dfc4b82fbffada1e3e86ed7418a"></a>
-static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#a81ca2dfc4b82fbffada1e3e86ed7418a">HEIGHT</a> = 8.5f</td></tr>
-<tr class="memdesc:a81ca2dfc4b82fbffada1e3e86ed7418a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Höhe des Spielfelds. <br /></td></tr>
-<tr class="separator:a81ca2dfc4b82fbffada1e3e86ed7418a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abfb3d70357c12f52b9c95846a5e69ecc"><td class="memItemLeft" align="right" valign="top"><a id="abfb3d70357c12f52b9c95846a5e69ecc"></a>
-static constexpr float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#abfb3d70357c12f52b9c95846a5e69ecc">DEPTH</a> = 0.65f</td></tr>
-<tr class="memdesc:abfb3d70357c12f52b9c95846a5e69ecc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tiefe des Spielfelds. <br /></td></tr>
-<tr class="separator:abfb3d70357c12f52b9c95846a5e69ecc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18b8e813a11c18ab32cd78d47df9b1c4"><td class="memItemLeft" align="right" valign="top"><a id="a18b8e813a11c18ab32cd78d47df9b1c4"></a>
+static constexpr GLint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#a18b8e813a11c18ab32cd78d47df9b1c4">ROWS</a> = 6</td></tr>
+<tr class="memdesc:a18b8e813a11c18ab32cd78d47df9b1c4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Anzahl der Zeilen des Spielfelds. <br /></td></tr>
+<tr class="separator:a18b8e813a11c18ab32cd78d47df9b1c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ab5cb2b335d8cd8a971cf54def87597"><td class="memItemLeft" align="right" valign="top"><a id="a5ab5cb2b335d8cd8a971cf54def87597"></a>
+static constexpr GLint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#a5ab5cb2b335d8cd8a971cf54def87597">COLUMNS</a> = 7</td></tr>
+<tr class="memdesc:a5ab5cb2b335d8cd8a971cf54def87597"><td class="mdescLeft">&#160;</td><td class="mdescRight">Anzahl der Spalten des Spielfelds. <br /></td></tr>
+<tr class="separator:a5ab5cb2b335d8cd8a971cf54def87597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ace2d20ad85b57aa48c9ce396be507818"><td class="memItemLeft" align="right" valign="top"><a id="ace2d20ad85b57aa48c9ce396be507818"></a>
+static constexpr GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#ace2d20ad85b57aa48c9ce396be507818">WIDTH</a> = 10.0f</td></tr>
+<tr class="memdesc:ace2d20ad85b57aa48c9ce396be507818"><td class="mdescLeft">&#160;</td><td class="mdescRight">Breite des Spielfelds. <br /></td></tr>
+<tr class="separator:ace2d20ad85b57aa48c9ce396be507818"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae20afe3a55180c23d504f802386996d3"><td class="memItemLeft" align="right" valign="top"><a id="ae20afe3a55180c23d504f802386996d3"></a>
+static constexpr GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#ae20afe3a55180c23d504f802386996d3">HEIGHT</a> = 8.5f</td></tr>
+<tr class="memdesc:ae20afe3a55180c23d504f802386996d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Höhe des Spielfelds. <br /></td></tr>
+<tr class="separator:ae20afe3a55180c23d504f802386996d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1176aeddcfd0700f91368c678223bf2"><td class="memItemLeft" align="right" valign="top"><a id="aa1176aeddcfd0700f91368c678223bf2"></a>
+static constexpr GLfloat&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_g_l_court.html#aa1176aeddcfd0700f91368c678223bf2">DEPTH</a> = 0.65f</td></tr>
+<tr class="memdesc:aa1176aeddcfd0700f91368c678223bf2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tiefe des Spielfelds. <br /></td></tr>
+<tr class="separator:aa1176aeddcfd0700f91368c678223bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
@@ -507,6 +507,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_textureEnabled</b><
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">GLCourt::GLCourt </td>
@@ -538,6 +541,11 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_textureEnabled</b><
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Konstruktor. Erstellt und Initialisiert ein neues GLCourt-Objekt. </p>
@@ -656,8 +664,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_textureEnabled</b><
 
 </div>
 </div>
-<a id="a148681e151b8b5b9a0bacc36286ae3f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a148681e151b8b5b9a0bacc36286ae3f1">&#9670;&nbsp;</a></span>getFreeField()</h2>
+<a id="a4854730d4a81d0287d74686b5bcaa32e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4854730d4a81d0287d74686b5bcaa32e">&#9670;&nbsp;</a></span>getFreeField()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -665,7 +673,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_textureEnabled</b><
         <tr>
           <td class="memname">QPoint GLCourt::getFreeField </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">GLint&#160;</td>
           <td class="paramname"><em>column</em></td><td>)</td>
           <td></td>
         </tr>
@@ -703,8 +711,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_textureEnabled</b><
 
 </div>
 </div>
-<a id="a1bf649218e687fd99a5ace2119ccd178"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1bf649218e687fd99a5ace2119ccd178">&#9670;&nbsp;</a></span>setField()</h2>
+<a id="a48e33bfe260e609d616c0a0ccfee34f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48e33bfe260e609d616c0a0ccfee34f6">&#9670;&nbsp;</a></span>setField()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -718,7 +726,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>m_textureEnabled</b><
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">QPoint&#160;</td>
+          <td class="paramtype">const QPoint &amp;&#160;</td>
           <td class="paramname"><em>field</em>&#160;</td>
         </tr>
         <tr>

@@ -21,7 +21,7 @@ Inheritance diagram for GLCourt\+:\begin{figure}[H]
 \mbox{\hyperlink{class_g_l_court_a12882cebc67f78ae9befdf2fba9946cc}{GLCourt}} (const QString \&name, float radius=1.\+0f, const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&color=GLColor\+Rgba\+::cl\+Blue, const QString texture\+File=\char`\"{}\+:/textures/Court.\+png\char`\"{})
 \begin{DoxyCompactList}\small\item\em Konstruktor. Erstellt und Initialisiert ein neues GLCourt-\/\+Objekt. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_g_l_court_aca753c255ae8e6eac547cb2795910ec7}\label{class_g_l_court_aca753c255ae8e6eac547cb2795910ec7}} 
-\mbox{\hyperlink{class_g_l_court_aca753c255ae8e6eac547cb2795910ec7}{$\sim$\+GLCourt}} () Q\+\_\+\+DECL\+\_\+\+OVERRIDE
+virtual \mbox{\hyperlink{class_g_l_court_aca753c255ae8e6eac547cb2795910ec7}{$\sim$\+GLCourt}} () Q\+\_\+\+DECL\+\_\+\+OVERRIDE
 \begin{DoxyCompactList}\small\item\em $\sim$\+Destruktor. Löscht das Texturobjekt des Spielfelds. \end{DoxyCompactList}\item 
 QVector3D \mbox{\hyperlink{class_g_l_court_a90ff11bbc28ff26ea12963a96a3df62a}{field\+To\+Position}} (const QPoint \&field) const
 \begin{DoxyCompactList}\small\item\em Gibt die Position des übergebenen Feldes als QVector3D zurück. \end{DoxyCompactList}\item 
@@ -29,9 +29,9 @@ QVector3D \mbox{\hyperlink{class_g_l_court_a5732cce3e04d9c8d0a5d3af6907801a9}{ca
 \begin{DoxyCompactList}\small\item\em Berechnet die nächste Einfügeposition für das übergebene Token. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{class_g_l_court_aa935db385b50d3b610830e280fafb040}{get\+Column\+By\+Position}} (const QVector3D \&position) const
 \begin{DoxyCompactList}\small\item\em Berechnet die der übergebenen Position nächsten Spalte. \end{DoxyCompactList}\item 
-QPoint \mbox{\hyperlink{class_g_l_court_a148681e151b8b5b9a0bacc36286ae3f1}{get\+Free\+Field}} (int column)
+QPoint \mbox{\hyperlink{class_g_l_court_a4854730d4a81d0287d74686b5bcaa32e}{get\+Free\+Field}} (GLint column)
 \begin{DoxyCompactList}\small\item\em Bestimmt die erste freie Position in einer Spalte. Die erste freie Position wird dabei von unten bestimmt. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_g_l_court_a1bf649218e687fd99a5ace2119ccd178}{set\+Field}} (Player player, QPoint field)
+void \mbox{\hyperlink{class_g_l_court_a48e33bfe260e609d616c0a0ccfee34f6}{set\+Field}} (Player player, const QPoint \&field)
 \begin{DoxyCompactList}\small\item\em Setzt das übergebene Feld für den übergebenen Spieler. \end{DoxyCompactList}\item 
 Player \mbox{\hyperlink{class_g_l_court_adb2174f8af908b6410be5db2e03f9f72}{check\+Win}} ()
 \begin{DoxyCompactList}\small\item\em Überprüft, ob einer der Spieler gewonnen hat. \end{DoxyCompactList}\item 
@@ -40,20 +40,20 @@ bool \mbox{\hyperlink{class_g_l_court_aea3edace9776184140182e156b547db7}{is\+Ful
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_g_l_court_a3ee24c103b7db48e067a2c199731f040}\label{class_g_l_court_a3ee24c103b7db48e067a2c199731f040}} 
-static constexpr int \mbox{\hyperlink{class_g_l_court_a3ee24c103b7db48e067a2c199731f040}{ROWS}} = 6
+\mbox{\Hypertarget{class_g_l_court_a18b8e813a11c18ab32cd78d47df9b1c4}\label{class_g_l_court_a18b8e813a11c18ab32cd78d47df9b1c4}} 
+static constexpr GLint \mbox{\hyperlink{class_g_l_court_a18b8e813a11c18ab32cd78d47df9b1c4}{ROWS}} = 6
 \begin{DoxyCompactList}\small\item\em Anzahl der Zeilen des Spielfelds. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_g_l_court_a37e9c6ec9b591a780460c5fddb03a82e}\label{class_g_l_court_a37e9c6ec9b591a780460c5fddb03a82e}} 
-static constexpr int \mbox{\hyperlink{class_g_l_court_a37e9c6ec9b591a780460c5fddb03a82e}{COLUMNS}} = 7
+\mbox{\Hypertarget{class_g_l_court_a5ab5cb2b335d8cd8a971cf54def87597}\label{class_g_l_court_a5ab5cb2b335d8cd8a971cf54def87597}} 
+static constexpr GLint \mbox{\hyperlink{class_g_l_court_a5ab5cb2b335d8cd8a971cf54def87597}{COLUMNS}} = 7
 \begin{DoxyCompactList}\small\item\em Anzahl der Spalten des Spielfelds. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_g_l_court_a68575d87a8323c7e3fdaa3f1ca8b971c}\label{class_g_l_court_a68575d87a8323c7e3fdaa3f1ca8b971c}} 
-static constexpr float \mbox{\hyperlink{class_g_l_court_a68575d87a8323c7e3fdaa3f1ca8b971c}{WIDTH}} = 10.\+0f
+\mbox{\Hypertarget{class_g_l_court_ace2d20ad85b57aa48c9ce396be507818}\label{class_g_l_court_ace2d20ad85b57aa48c9ce396be507818}} 
+static constexpr GLfloat \mbox{\hyperlink{class_g_l_court_ace2d20ad85b57aa48c9ce396be507818}{WIDTH}} = 10.\+0f
 \begin{DoxyCompactList}\small\item\em Breite des Spielfelds. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_g_l_court_a81ca2dfc4b82fbffada1e3e86ed7418a}\label{class_g_l_court_a81ca2dfc4b82fbffada1e3e86ed7418a}} 
-static constexpr float \mbox{\hyperlink{class_g_l_court_a81ca2dfc4b82fbffada1e3e86ed7418a}{HEIGHT}} = 8.\+5f
+\mbox{\Hypertarget{class_g_l_court_ae20afe3a55180c23d504f802386996d3}\label{class_g_l_court_ae20afe3a55180c23d504f802386996d3}} 
+static constexpr GLfloat \mbox{\hyperlink{class_g_l_court_ae20afe3a55180c23d504f802386996d3}{HEIGHT}} = 8.\+5f
 \begin{DoxyCompactList}\small\item\em Höhe des Spielfelds. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_g_l_court_abfb3d70357c12f52b9c95846a5e69ecc}\label{class_g_l_court_abfb3d70357c12f52b9c95846a5e69ecc}} 
-static constexpr float \mbox{\hyperlink{class_g_l_court_abfb3d70357c12f52b9c95846a5e69ecc}{DEPTH}} = 0.\+65f
+\mbox{\Hypertarget{class_g_l_court_aa1176aeddcfd0700f91368c678223bf2}\label{class_g_l_court_aa1176aeddcfd0700f91368c678223bf2}} 
+static constexpr GLfloat \mbox{\hyperlink{class_g_l_court_aa1176aeddcfd0700f91368c678223bf2}{DEPTH}} = 0.\+65f
 \begin{DoxyCompactList}\small\item\em Tiefe des Spielfelds. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Additional Inherited Members}
 
@@ -84,7 +84,7 @@ Mithilfe der Methode field\+To\+Position lassen sich Feldposition auf Vektoren a
 \index{GLCourt@{GLCourt}!GLCourt@{GLCourt}}
 \index{GLCourt@{GLCourt}!GLCourt@{GLCourt}}
 \doxysubsubsection{\texorpdfstring{GLCourt()}{GLCourt()}}
-{\footnotesize\ttfamily GLCourt\+::\+GLCourt (\begin{DoxyParamCaption}\item[{const QString \&}]{name,  }\item[{float}]{radius = {\ttfamily 1.0f},  }\item[{const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&}]{color = {\ttfamily GLColorRgba\+:\+:clBlue},  }\item[{const QString}]{texture\+File = {\ttfamily \char`\"{}\+:/textures/Court.png\char`\"{}} }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily GLCourt\+::\+GLCourt (\begin{DoxyParamCaption}\item[{const QString \&}]{name,  }\item[{float}]{radius = {\ttfamily 1.0f},  }\item[{const \mbox{\hyperlink{class_g_l_color_rgba}{GLColor\+Rgba}} \&}]{color = {\ttfamily GLColorRgba\+:\+:clBlue},  }\item[{const QString}]{texture\+File = {\ttfamily \char`\"{}\+:/textures/Court.png\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
 
 
 
@@ -173,11 +173,11 @@ Berechnet die der übergebenen Position nächsten Spalte.
 \begin{DoxyReturn}{Returns}
 Spalte. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_g_l_court_a148681e151b8b5b9a0bacc36286ae3f1}\label{class_g_l_court_a148681e151b8b5b9a0bacc36286ae3f1}} 
+\mbox{\Hypertarget{class_g_l_court_a4854730d4a81d0287d74686b5bcaa32e}\label{class_g_l_court_a4854730d4a81d0287d74686b5bcaa32e}} 
 \index{GLCourt@{GLCourt}!getFreeField@{getFreeField}}
 \index{getFreeField@{getFreeField}!GLCourt@{GLCourt}}
 \doxysubsubsection{\texorpdfstring{getFreeField()}{getFreeField()}}
-{\footnotesize\ttfamily QPoint GLCourt\+::get\+Free\+Field (\begin{DoxyParamCaption}\item[{int}]{column }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily QPoint GLCourt\+::get\+Free\+Field (\begin{DoxyParamCaption}\item[{GLint}]{column }\end{DoxyParamCaption})}
 
 
 
@@ -204,11 +204,11 @@ erste freie Position.
 \begin{DoxyReturn}{Returns}
 true, falls ja, false sonst. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_g_l_court_a1bf649218e687fd99a5ace2119ccd178}\label{class_g_l_court_a1bf649218e687fd99a5ace2119ccd178}} 
+\mbox{\Hypertarget{class_g_l_court_a48e33bfe260e609d616c0a0ccfee34f6}\label{class_g_l_court_a48e33bfe260e609d616c0a0ccfee34f6}} 
 \index{GLCourt@{GLCourt}!setField@{setField}}
 \index{setField@{setField}!GLCourt@{GLCourt}}
 \doxysubsubsection{\texorpdfstring{setField()}{setField()}}
-{\footnotesize\ttfamily void GLCourt\+::set\+Field (\begin{DoxyParamCaption}\item[{Player}]{player,  }\item[{QPoint}]{field }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void GLCourt\+::set\+Field (\begin{DoxyParamCaption}\item[{Player}]{player,  }\item[{const QPoint \&}]{field }\end{DoxyParamCaption})}
 
 
 

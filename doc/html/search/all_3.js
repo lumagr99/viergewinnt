@@ -6,7 +6,7 @@ var searchData=
   ['debugvector3d_28',['debugVector3D',['../class_shader_debugger.html#afd6536a3c6c74c4b6af32ad128ba50d0',1,'ShaderDebugger']]],
   ['debugvector4d_29',['debugVector4D',['../class_shader_debugger.html#a457fa04849102556e946cafdf9ea553e',1,'ShaderDebugger']]],
   ['deleterenderer_30',['deleteRenderer',['../class_g_l_item.html#a88da6fcb94651b2d45bda9527d7e64c9',1,'GLItem']]],
-  ['depth_31',['DEPTH',['../class_g_l_court.html#abfb3d70357c12f52b9c95846a5e69ecc',1,'GLCourt']]],
+  ['depth_31',['DEPTH',['../class_g_l_court.html#aa1176aeddcfd0700f91368c678223bf2',1,'GLCourt::DEPTH()'],['../class_g_l_table_plate.html#a47041ff1254b19b30df420ee3bbd9a15',1,'GLTablePlate::DEPTH()']]],
   ['descentanimation_32',['descentAnimation',['../class_connect_four.html#ad335df7ac4f5c32d8524ce18fabef026',1,'ConnectFour']]],
   ['deselecttoken_33',['deselectToken',['../class_connect_four.html#a0f27e07334ef47b8520a3a957049defa',1,'ConnectFour']]],
   ['destroytextureobjects_34',['destroyTextureObjects',['../class_g_l_body.html#a84129218a5f712aaff781f3516d59f91',1,'GLBody::destroyTextureObjects()'],['../class_g_l_item.html#aa4466034e62a99d65a4b81c980e11216',1,'GLItem::destroyTextureObjects()']]],

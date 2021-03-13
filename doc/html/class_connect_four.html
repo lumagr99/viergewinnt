@@ -28,7 +28,7 @@
    <div id="projectname">ConnectFour
    &#160;<span id="projectnumber">1.0</span>
    </div>
-   <div id="projectbrief">Ein Vier Gewinnt Spiel mit OpenGL und QML</div>
+   <div id="projectbrief">Implementierung eines Vier Gewinnt Spies mit OpenGL und QMLl</div>
   </td>
  </tr>
  </tbody>
@@ -94,7 +94,7 @@ $(document).ready(function(){initNavTree('class_connect_four.html',''); initResi
 </div><!--header-->
 <div class="contents">
 
-<p>Die ConnectFour-Klasse enthält die Spiellogik für ein Vier Gewinnt Spiel. Die Klasse enthält die Tischplatte, das Spielbrett und die 42 Spieltoken.  
+<p>Die ConnectFour-Klasse enthält die Spiellogik für ein Vier Gewinnt Spiel.  
  <a href="class_connect_four.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="connectfour_8h_source.html">connectfour.h</a>&gt;</code></p>
@@ -182,7 +182,8 @@ static constexpr GLint&#160;</td><td class="memItemRight" valign="bottom"><a cla
 <tr class="separator:a7bc3a3e4aca58c6d1851d29c7970e17b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Die ConnectFour-Klasse enthält die Spiellogik für ein Vier Gewinnt Spiel. Die Klasse enthält die Tischplatte, das Spielbrett und die 42 Spieltoken. </p>
+<div class="textblock"><p>Die ConnectFour-Klasse enthält die Spiellogik für ein Vier Gewinnt Spiel. </p>
+<p>Die Klasse enthält die Tischplatte, das Spielbrett und die 42 Spieltoken.</p>
 <p>Die draw-Methode zeichnet die enthaltenen Objekte und benötigt einen aktiven OpenGL-Kontext. Über die Methode selectToken kann ein Token ausgewählt und anschließend mit der Methode moveToken bewegt werden. Mithilfe der Methode deselectToken kann das ausgewählte Token deselektiert werden.</p>
 <p>Das Spiel startet mit dem im Konstruktor übergebenen Spieler. Bei Spielende wird ein gameOver Signal mit Gewinnerfarbe emittiert.</p>
 <p>Bei folgenden Aktionen wird ein soundRequested Signal mit dem Dateinamen der abzuspielenden Datei emittiert:</p><ul>
