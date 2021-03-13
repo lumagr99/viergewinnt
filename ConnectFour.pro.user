@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.14.0, 2021-03-09T20:35:39. -->
+<!-- Written by QtCreator 4.14.0, 2021-03-11T14:06:00. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -81,13 +81,13 @@
      <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/game</value>
     </valuelist>
     <valuelist type="QVariantList" key="ClangTools.SelectedFiles">
-     <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/gl/glmouseray.cpp</value>
-     <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/main.cpp</value>
      <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/gl/gltoken.cpp</value>
-     <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/gl/gltokengreen.cpp</value>
-     <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/gl/glcourt.cpp</value>
-     <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/gl/gltableplate.cpp</value>
      <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/gl/gltokenred.cpp</value>
+     <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/gl/glcourt.cpp</value>
+     <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/main.cpp</value>
+     <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/gl/glmouseray.cpp</value>
+     <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/gl/gltokengreen.cpp</value>
+     <value type="QString">C:/Users/Julian/Documents/ConnectFour/src/gl/gltableplate.cpp</value>
     </valuelist>
     <valuelist type="QVariantList" key="ClangTools.SuppressedDiagnostics"/>
     <value type="bool" key="ClangTools.UseGlobalSettings">true</value>

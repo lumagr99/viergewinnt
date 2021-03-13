@@ -49,7 +49,7 @@ int GLCourt::getColumnByPosition(const QVector3D& position) const
     return (position.x() + WIDTH / 2) / (WIDTH / COLUMNS);
 }
 
-QPoint GLCourt::getFreeField(int column)
+QPoint GLCourt::getFreeField(GLint column)
 {
     //Unten beginnen
     for (int row = ROWS - 1; row >= 0; row--) {
@@ -60,7 +60,7 @@ QPoint GLCourt::getFreeField(int column)
     return QPoint(-1, -1);
 }
 
-void GLCourt::setField(Player player, QPoint field)
+void GLCourt::setField(Player player, const QPoint& field)
 {
     int row = field.x();
     int col = field.y();

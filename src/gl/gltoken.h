@@ -24,12 +24,12 @@ public:
     /**
      * @brief Höhe eines Tokens.
      */
-    static constexpr float HEIGHT = 0.325f;
+    static constexpr GLfloat HEIGHT = 0.325f;
 
     /**
      * @brief Radius eines Tokens.
      */
-    static constexpr float RADIUS = 0.650f;
+    static constexpr GLfloat RADIUS = 0.650f;
 
     /**
      * @brief Erstellt und Initialisiert ein neues GLToken-Objekt.

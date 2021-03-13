@@ -39,27 +39,27 @@ public:
     /**
      * @brief Anzahl der Zeilen des Spielfelds.
      */
-    static constexpr int ROWS = 6;
+    static constexpr GLint ROWS = 6;
 
     /**
      * @brief Anzahl der Spalten des Spielfelds.
      */
-    static constexpr int COLUMNS = 7;
+    static constexpr GLint COLUMNS = 7;
 
     /**
      * @brief Breite des Spielfelds.
      */
-    static constexpr float WIDTH = 10.0f;
+    static constexpr GLfloat WIDTH = 10.0f;
 
     /**
      * @brief Höhe des Spielfelds.
      */
-    static constexpr float HEIGHT = 8.5f;
+    static constexpr GLfloat HEIGHT = 8.5f;
 
     /**
      * @brief Tiefe des Spielfelds.
      */
-    static constexpr float DEPTH = 0.65f;
+    static constexpr GLfloat DEPTH = 0.65f;
 
     /**
      * @brief Konstruktor. Erstellt und Initialisiert ein neues GLCourt-Objekt.
@@ -68,13 +68,13 @@ public:
      * @param color Farbe des Objekts.
      * @param textureFile Texturdatei des Objekts.
      */
-    GLCourt(const QString& name, float radius = 1.0f, const GLColorRgba& color = GLColorRgba::clBlue,
+    explicit GLCourt(const QString& name, float radius = 1.0f, const GLColorRgba& color = GLColorRgba::clBlue,
         const QString textureFile = ":/textures/Court.png");
 
     /**
      * @brief ~Destruktor. Löscht das Texturobjekt des Spielfelds.
      */
-    ~GLCourt() Q_DECL_OVERRIDE;
+    virtual ~GLCourt() Q_DECL_OVERRIDE;
 
     /**
      * @brief Gibt die Position des übergebenen Feldes als QVector3D zurück.
@@ -105,14 +105,14 @@ public:
      * @param column Spalte deren erste freie Position bestimmt werden soll.
      * @return erste freie Position.
      */
-    QPoint getFreeField(int column);
+    QPoint getFreeField(GLint column);
 
     /**
      * @brief Setzt das übergebene Feld für den übergebenen Spieler.
      * @param player Spieler dessen Token am übergebenen Feld ist.
      * @param field Feld das gesetzt werden soll.
      */
-    void setField(Player player, QPoint field);
+    void setField(Player player, const QPoint& field);
 
     /**
      * @brief Überprüft, ob einer der Spieler gewonnen hat.

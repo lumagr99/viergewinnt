@@ -10,6 +10,21 @@ class GLTablePlate : public GLBody {
 
 public:
     /**
+     * @brief Breite der Tischplatte.
+     */
+    static constexpr GLfloat WIDTH = 16.0f;
+
+    /**
+     * @brief Höhe der Tischplatte.
+     */
+    static constexpr GLfloat HEIGHT = 0.4f;
+
+    /**
+     * @brief Tiefe der Tischplatte.
+     */
+    static constexpr GLfloat DEPTH = 16.0f;
+
+    /**
      * @brief Konstruktor. Erstellt und Initialisiert ein neues GLTablePlate-Objekt.
      * @param name Name des Objekts.
      * @param radius Radius des Objekts.

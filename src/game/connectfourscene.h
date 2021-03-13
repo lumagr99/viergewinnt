@@ -11,7 +11,9 @@
 #include "connectfour.h"
 
 /**
- * @brief Die ConnectFourScene-Klasse ist abgeleitet von GLItem. Die Klasse verarbeitet Mauseingaben für
+ * @brief Szene des Vier Gewinnt Spiels.
+ *
+ * Die ConnectFourScene-Klasse ist abgeleitet von GLItem. Die Klasse verarbeitet Mauseingaben für
  * das Vier Gewinnt Spiel. Die Eingaben werden in m_mouseNear, m_mouseFar und m_lastIntersection gespeichert.
  * Mithilfe der Flags m_mousePressReceived, m_mousePositionChangedReceived und m_mouseReleaseReceived findet
  * anschließend eine Verarbeitung in der Methode doSynchronizeThreads statt.

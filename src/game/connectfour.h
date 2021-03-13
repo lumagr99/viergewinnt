@@ -20,6 +20,7 @@ class ConnectFourScene;
 
 /**
  * @brief Die ConnectFour-Klasse enthält die Spiellogik für ein Vier Gewinnt Spiel.
+ *
  * Die Klasse enthält die Tischplatte, das Spielbrett und die 42 Spieltoken.
  *
  * Die draw-Methode zeichnet die enthaltenen Objekte und benötigt einen aktiven OpenGL-Kontext.

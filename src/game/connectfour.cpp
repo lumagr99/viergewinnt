@@ -1,6 +1,8 @@
 #include "connectfour.h"
 #include "connectfourscene.h"
 
+#include <math.h>
+
 ConnectFour::ConnectFour(ConnectFourScene* scene, Player player)
     : m_scene(scene)
     , m_player(player)
@@ -94,6 +96,7 @@ void ConnectFour::draw(GLESRenderer* renderer)
 
 bool ConnectFour::selectToken(const QVector3D& nearPoint, const QVector3D& farPoint, const QVector3D& camera)
 {
+    //Token des entsprechenden Spielers überprüfen
     if (m_player == Player::RedPlayer) {
         for (auto& token : m_redTokens) {
             checkForSelection(nearPoint, farPoint, camera, token);
@@ -106,7 +109,7 @@ bool ConnectFour::selectToken(const QVector3D& nearPoint, const QVector3D& farPo
     if (m_selectedToken != nullptr) {
         m_lastDistance = START_DISTANCE;
 
-        //Sound abspielen, wenn das Token bewegbar ist
+        //Sound nur abspielen, wenn das Token bewegbar ist
         if (m_selectedToken->isMovable()) {
             emit soundReqeuest(soundFileNames[TokenSelected]);
         }
@@ -164,18 +167,38 @@ void ConnectFour::moveToken(const QVector3D& vMove)
         return;
     }
 
-    //Neue Position berechnen und verhindern, dass der Spielstein auf die Gegnerseite bewegt wird
+    //Neue Position berechnen und verhindern, dass der Spielstein zu ungültigen Positionen bewegt wird
+    //z.B. andere Spielfeldseite, von der Tischplatte
     QVector3D newPos = m_selectedToken->getCenter() + vMove;
+
+    qDebug() << newPos;
+
     QVector3D vz = v_Zero;
-    GLfloat z = newPos.z();
-    if (m_player == Player::RedPlayer && newPos.z() < 0.0f) {
-        vz = v_Z * z;
+    if (m_player == Player::RedPlayer) {
+        if (newPos.z() < 0.0f) {
+            vz = v_Z * newPos.z();
+        } else if (newPos.z() > (GLTablePlate::DEPTH / 2) - GLToken::RADIUS) {
+            vz = v_Z * (newPos.z() - (GLTablePlate::DEPTH / 2) + GLToken::RADIUS);
+        }
     }
 
-    if (m_player == Player::GreenPlayer && newPos.z() > 0.0f) {
-        vz = v_Z * z;
+    if (m_player == Player::GreenPlayer) {
+        if (newPos.z() > 0.0f) {
+            vz = v_Z * newPos.z();
+        } else if (newPos.z() < (-GLTablePlate::DEPTH / 2) + GLToken::RADIUS) {
+            vz = v_Z * (newPos.z() + (GLTablePlate::DEPTH / 2) - GLToken::RADIUS);
+        }
     }
-    m_selectedToken->move(vMove - vz);
+
+    //Token nicht über den X-Rand der Tischplatte bewegen
+    QVector3D vx = v_Zero;
+    if (newPos.x() > (GLTablePlate::WIDTH / 2) - GLToken::RADIUS) {
+        vx = v_X * (newPos.x() - (GLTablePlate::WIDTH / 2) + GLToken::RADIUS);
+    } else if (newPos.x() < (-GLTablePlate::WIDTH / 2) + GLToken::RADIUS) {
+        vx = v_X * (newPos.x() + (GLTablePlate::WIDTH / 2) - GLToken::RADIUS);
+    }
+
+    m_selectedToken->move(vMove - vz - vx);
 
     //Kollisionserkennung Spielfeld
     if (m_selectedToken->isColliding(m_court)) {
@@ -262,6 +285,7 @@ void ConnectFour::descentAnimation()
             m_descendingToken->move(-v_Y * m_descentMoveStep);
             m_animationStep++;
         } else {
+            //Animation fertig
             m_descentMoveStep = 0.0f;
             m_animateDescent = false;
             m_descendingToken = nullptr;
@@ -278,6 +302,7 @@ void ConnectFour::jumpUpAnimation()
             m_selectedToken->move(v_Y * m_jumpMoveStep);
             m_animationStep++;
         } else {
+            //Animation fertig
             m_selectedToken->setMovable(true);
             m_selectedToken->setRotated(true);
             m_animateJumpUp = false;
@@ -295,6 +320,7 @@ void ConnectFour::jumpDownAnimation()
             m_selectedToken->move(-v_Y * m_jumpMoveStep);
             m_animationStep++;
         } else {
+            //Animation fertig
             m_selectedToken->setMovable(true);
             m_selectedToken->setRotated(false);
             m_animateJumpDown = false;
